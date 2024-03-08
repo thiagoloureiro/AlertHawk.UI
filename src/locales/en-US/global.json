@@ -33,5 +33,6 @@
     "about":{
         "text": "About",
         "checkProjectOn": "Check project on "
-    }
+    },
+    "pageNotFound": "Page Not Found"
 }

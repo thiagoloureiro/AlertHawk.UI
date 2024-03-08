@@ -33,5 +33,6 @@
     "about":{
         "text":"Hakkında",
         "checkProjectOn": "Check project on "
-    }
+    },
+    "pageNotFound": "Sayfa Bulunamadı"
 }

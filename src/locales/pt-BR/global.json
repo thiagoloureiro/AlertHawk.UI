@@ -33,5 +33,6 @@
     "about":{
         "text":"Sobre",
         "checkProjectOn" : "Repositório do projeto no "
-    }
+    },
+    "pageNotFound": "Página não encontrada"
 }
