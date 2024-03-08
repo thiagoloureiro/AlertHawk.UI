@@ -1,6 +1,7 @@
 import { IRoute } from "../interfaces/IRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import NotFound from "../pages/NotFound/NotFound";
+import Settings from "../pages/Settings/Settings";
 import ProtectedRoute from "./ProtectedRoute";
 
 const appRoutes: IRoute[] = [
@@ -9,6 +10,14 @@ const appRoutes: IRoute[] = [
     element: (
       <ProtectedRoute>
         <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/settings",
+    element: (
+      <ProtectedRoute>
+        <Settings />
       </ProtectedRoute>
     ),
   },

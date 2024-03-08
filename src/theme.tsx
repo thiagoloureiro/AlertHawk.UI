@@ -200,6 +200,38 @@ const getTheme = (mode: "light" | "dark") =>
           },
         },
       },
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            color: mode === "dark" ? "#ffffff" : "#001e3c",
+            "&.Mui-selected": {
+              backgroundColor: "rgba(0, 188, 212, 0.08)",
+            },
+          },
+        },
+      },
+      MuiAutocomplete: {
+        styleOverrides: {
+          root: {
+            "& .MuiAutocomplete-input": {
+              borderRadius: "30px",
+            },
+          },
+          inputRoot: {
+            paddingLeft: "18px",
+          },
+        },
+      },
+      MuiSelect: {
+        styleOverrides: {
+          root: {
+            borderRadius: "30px",
+          },
+          select: {
+            paddingLeft: "20px",
+          },
+        },
+      },
     },
   });
 

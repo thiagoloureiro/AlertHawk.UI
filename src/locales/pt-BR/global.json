@@ -1,0 +1,25 @@
+{
+    "settings":{
+        "text": "Configurações",
+        "general": {
+            "text": "Geral",
+            "language": "Idioma",
+            "applicationLanguageHasBeenChanged":"O idioma do aplicativo foi alterado",
+            "displayTimezone": "Fuso horário exibido",
+            "timezoneSettingsHaveBeenChanged":"As configurações de fuso horário foram alteradas",
+            "searchEngineVisibility" : "Visibilidade nos mecanismos de pesquisa",
+            "allowSearchEngineIndexing":"Permitir Indexação",
+            "indexingHasBeenEnabled":"A indexação foi ativada",
+            "preventSearchEnginesFromIndexing":"Desativar a Indexação",
+            "indexingHasBeenDisabled":"A indexação foi desativada",
+            "theme":"Tema",
+            "light":"Claro",
+            "lightThemeHasBeenEnabled":"O tema claro foi ativado",
+            "dark":"Escuro",
+            "darkThemeHasBeenEnabled":"O tema escuro foi ativado"
+        }
+    },
+    "about":{
+        "text":"Sobre"
+    }
+}

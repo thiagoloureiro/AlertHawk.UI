@@ -1,0 +1,25 @@
+{
+    "settings":{
+        "text": "Settings",
+        "general": {
+            "text": "General",
+            "language": "Language",
+            "applicationLanguageHasBeenChanged":"Application language has been changed",
+            "displayTimezone": "Display Timezone",
+            "timezoneSettingsHaveBeenChanged":"Timezone settings have been changed",
+            "searchEngineVisibility" : "Search Engine Visibility",
+            "allowSearchEngineIndexing":"Allow search engine indexing",
+            "indexingHasBeenEnabled":"Indexing has been enabled",
+            "preventSearchEnginesFromIndexing":"Prevent search engines from indexing",
+            "indexingHasBeenDisabled":"Indexing has been disabled",
+            "theme":"Theme",
+            "light":"Light",
+            "lightThemeHasBeenEnabled":"Light theme has been enabled",
+            "dark":"Dark",
+            "darkThemeHasBeenEnabled":"Dark theme has been enabled"
+        }
+    },
+    "about":{
+        "text":"About"
+    }
+}

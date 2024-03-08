@@ -1,0 +1,25 @@
+{
+    "settings":{
+        "text": "Ayarlar",
+        "general": {
+            "text": "Genel",
+            "language": "Dil",
+            "applicationLanguageHasBeenChanged":"Uygulama dili değiştirildi",
+            "displayTimezone": "Gösterilen Saat Dilimi",
+            "timezoneSettingsHaveBeenChanged":"Saat dilimi ayarları değiştirildi",
+            "searchEngineVisibility" : "Arama Motoru Görünürlüğü",
+            "allowSearchEngineIndexing":"Arama motoru indekslemesine izin ver",
+            "indexingHasBeenEnabled":"Arama motoru indekslemesi etkinleştirildi",
+            "preventSearchEnginesFromIndexing":"Arama motoru indekslemesini engelle",
+            "indexingHasBeenDisabled":"Arama motoru indekslemesi devre dışı bırakıldı",
+            "theme":"Tema",
+            "light":"Açık",
+            "lightThemeHasBeenEnabled":"Açık tema aktifleştirildi",
+            "dark":"Koyu",
+            "darkThemeHasBeenEnabled":"Koyu tema aktifleştirildi"
+        }
+    },
+    "about":{
+        "text":"Hakkında"
+    }
+}

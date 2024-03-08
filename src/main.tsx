@@ -7,6 +7,9 @@ import "./index.css";
 import { MsalProvider } from "@azure/msal-react";
 import { msalConfig } from "./config/authConfig";
 import { PublicClientApplication } from "@azure/msal-browser";
+import { SnackbarProvider } from "notistack";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n.ts";
 
 const msalInstance = new PublicClientApplication(msalConfig);
 
@@ -14,7 +17,18 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <StoreProvider store={store}>
       <MsalProvider instance={msalInstance}>
-        <App />
+        <I18nextProvider i18n={i18n}>
+          <SnackbarProvider
+            autoHideDuration={3000}
+            maxSnack={3}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          >
+            <App />
+          </SnackbarProvider>
+        </I18nextProvider>
       </MsalProvider>
     </StoreProvider>
   </React.StrictMode>
