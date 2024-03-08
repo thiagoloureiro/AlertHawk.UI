@@ -2,6 +2,14 @@
     "header":{
         "logout": "Çıkış yap"
     },
+    "sidebar":{
+        "monitorList": "Monitor Listesi",
+        "monitorManagement": "Monitor Yönetimi",
+        "notificationManagement": "Bildirim Yönetimi",
+        "monitorAlert": "Monitor Alarmı",
+        "users": "Kullanıcılar",
+        "settings": "Ayarlar"
+    },
     "settings":{
         "text": "Ayarlar",
         "general": {

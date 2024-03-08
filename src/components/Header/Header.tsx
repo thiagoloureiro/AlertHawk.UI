@@ -75,9 +75,9 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
           <div
             style={
               isAuthenticated && isOpen
-                ? { marginRight: "300px" }
+                ? { marginRight: "330px" }
                 : isAuthenticated && !isOpen
-                ? { marginRight: "50px" }
+                ? { marginRight: "80px" }
                 : {}
             }
           ></div>

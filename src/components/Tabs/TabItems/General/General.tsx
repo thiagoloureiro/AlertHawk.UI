@@ -38,7 +38,7 @@ const options = momentTZ.tz.names().map((timezone) => {
 const languageOptions = [
   { code: "en-US", text: "English" },
   { code: "de-DE", text: "Deutsch" },
-  { code: "pl-pL", text: "Polski" },
+  { code: "pl-PL", text: "Polski" },
   { code: "pt-BR", text: "Português (Brasil)" },
   { code: "tr-TR", text: "Türkçe" },
 ];

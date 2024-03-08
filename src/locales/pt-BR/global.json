@@ -2,6 +2,14 @@
     "header":{
         "logout": "Deslogar"
     },
+    "sidebar":{
+        "monitorList": "Lista de Monitores",
+        "monitorManagement": "Gerenciamento de Monitores",
+        "notificationManagement": "Gerenciamento de Notificações",
+        "monitorAlert": "Alerta do Monitor",
+        "users": "Usuários",
+        "settings": "Configurações"
+    },
     "settings":{
         "text": "Configurações",
         "general": {

@@ -2,6 +2,14 @@
     "header":{
         "logout": "Ausloggen"
     },
+    "sidebar":{
+        "monitorList": "Monitor-Liste",
+        "monitorManagement": "Monitor-Management",
+        "notificationManagement": "Benachrichtigungsmanagement",
+        "monitorAlert": "Monitor-Alarm",
+        "users": "Benutzer",
+        "settings": "Einstellungen"
+    },
     "settings":{
         "text": "Einstellungen",
         "general": {
@@ -23,6 +31,7 @@
         }
     },
     "about": {
-        "text":"Über"
+        "text":"Über",
+        "checkProjectOn": "Check project on"
     }
 }

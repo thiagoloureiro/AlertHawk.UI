@@ -2,6 +2,14 @@
     "header":{
         "logout": "Logout"
     },
+    "sidebar":{
+        "monitorList": "Monitor List",
+        "monitorManagement": "Monitor Management",
+        "notificationManagement": "Notification Management",
+        "monitorAlert": "Monitor Alert",
+        "users": "Users",
+        "settings": "Settings"
+    },
     "settings":{
         "text": "Settings",
         "general": {
@@ -23,6 +31,7 @@
         }
     },
     "about":{
-        "text":"About"
+        "text": "About",
+        "checkProjectOn": "Check project on"
     }
 }

@@ -23,13 +23,14 @@ import {
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import { useStoreState } from "../../hooks";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface ISidebarProps {
   isOpen: boolean;
   onToggle: () => void;
 }
 
-const drawerWidth = 310;
+const drawerWidth = 340;
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -83,31 +84,8 @@ interface IMenuItem {
   icon: React.ReactNode;
 }
 
-const menuItems: IMenuItem[] = [
-  { text: "Monitor List", pathname: "/", icon: <MonitorHeartOutlinedIcon /> },
-  {
-    text: "Monitor Management",
-    pathname: "/monitor-management",
-    icon: <AddToQueueOutlinedIcon />,
-  },
-  {
-    text: "Notification Management",
-    pathname: "/notification-management",
-    icon: <AddAlertOutlinedIcon />,
-  },
-  {
-    text: "Monitor Alert",
-    pathname: "/monitor-alert",
-    icon: <ErrorOutlineOutlinedIcon />,
-  },
-  { text: "Users", pathname: "/users", icon: <PeopleAltOutlinedIcon /> },
-];
-
-const secondMenuItems: IMenuItem[] = [
-  { text: "Settings", pathname: "/settings", icon: <SettingsOutlinedIcon /> },
-];
-
 const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
+  const { t } = useTranslation("global");
   let location = useLocation();
   const [selectedItem, setSelectedItem] = useState<IMenuItem | null>(null);
   const { isDarkMode } = useStoreState((state) => state.app);
@@ -129,6 +107,42 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
     setSelectedItem(item);
     navigate(item.pathname);
   };
+
+  const menuItems: IMenuItem[] = [
+    {
+      text: t("sidebar.monitorList"),
+      pathname: "/",
+      icon: <MonitorHeartOutlinedIcon />,
+    },
+    {
+      text: t("sidebar.monitorManagement"),
+      pathname: "/monitor-management",
+      icon: <AddToQueueOutlinedIcon />,
+    },
+    {
+      text: t("sidebar.notificationManagement"),
+      pathname: "/notification-management",
+      icon: <AddAlertOutlinedIcon />,
+    },
+    {
+      text: t("sidebar.monitorAlert"),
+      pathname: "/monitor-alert",
+      icon: <ErrorOutlineOutlinedIcon />,
+    },
+    {
+      text: t("sidebar.users"),
+      pathname: "/users",
+      icon: <PeopleAltOutlinedIcon />,
+    },
+  ];
+
+  const secondMenuItems: IMenuItem[] = [
+    {
+      text: t("settings.text"),
+      pathname: "/settings",
+      icon: <SettingsOutlinedIcon />,
+    },
+  ];
 
   return (
     <Drawer variant="permanent" open={isOpen}>

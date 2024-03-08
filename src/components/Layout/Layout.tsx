@@ -54,7 +54,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
                   height: "100%",
                   py: "20px",
                   paddingRight: "20px",
-                  paddingLeft: isSidebarOpen ? "330px" : "80px",
+                  paddingLeft: isSidebarOpen ? "360px" : "110px",
                 }
               : { width: "100%", height: "100%", py: "10px" }
           }
