@@ -31,6 +31,7 @@
         }
     },
     "about":{
-        "text":"Hakkında"
+        "text":"Hakkında",
+        "checkProjectOn": "Check project on "
     }
 }

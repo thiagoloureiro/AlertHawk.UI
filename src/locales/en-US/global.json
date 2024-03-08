@@ -32,6 +32,6 @@
     },
     "about":{
         "text": "About",
-        "checkProjectOn": "Check project on"
+        "checkProjectOn": "Check project on "
     }
 }

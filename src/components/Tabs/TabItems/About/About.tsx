@@ -40,7 +40,7 @@ const About: FC<IAboutProps> = () => {
         </Typography>
 
         <Typography variant="subtitle2" fontSize={14}>
-          Check project on{" "}
+          {t("about.checkProjectOn")}
           <a
             target="_blank"
             rel="noopener noreferrer"
