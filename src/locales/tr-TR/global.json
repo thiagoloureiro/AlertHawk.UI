@@ -1,4 +1,7 @@
 {
+    "header":{
+        "logout": "Çıkış yap"
+    },
     "settings":{
         "text": "Ayarlar",
         "general": {

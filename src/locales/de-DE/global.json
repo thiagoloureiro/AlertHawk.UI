@@ -1,4 +1,7 @@
 {
+    "header":{
+        "logout": "Ausloggen"
+    },
     "settings":{
         "text": "Einstellungen",
         "general": {

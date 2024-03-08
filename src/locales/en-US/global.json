@@ -1,4 +1,7 @@
 {
+    "header":{
+        "logout": "Logout"
+    },
     "settings":{
         "text": "Settings",
         "general": {

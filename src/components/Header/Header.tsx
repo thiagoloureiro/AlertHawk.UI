@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { useIsAuthenticated } from "@azure/msal-react";
 import { Logout, Settings } from "@mui/icons-material";
 import logo from "./logo.png";
+import { useTranslation } from "react-i18next";
 
 interface IHeaderProps {
   title: string;
@@ -23,6 +24,7 @@ interface IHeaderProps {
 }
 
 const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
+  const { t } = useTranslation("global");
   const isAuthenticated: boolean = useIsAuthenticated();
   const { isDarkMode } = useStoreState((state) => state.app);
   const { setIsDarkMode } = useStoreActions((action) => action.app);
@@ -199,7 +201,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
               sx={{ fill: isDarkMode ? "white" : "black" }}
             />
           </ListItemIcon>
-          Settings
+          {t("settings.text")}
         </MenuItem>
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
@@ -208,7 +210,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
               sx={{ fill: isDarkMode ? "white" : "black" }}
             />
           </ListItemIcon>
-          Logout
+          {t("header.logout")}
         </MenuItem>
       </Menu>
     </>
