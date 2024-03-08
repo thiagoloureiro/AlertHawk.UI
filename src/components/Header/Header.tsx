@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 import { useIsAuthenticated } from "@azure/msal-react";
 import { Logout, Settings } from "@mui/icons-material";
 import logo from "./logo.png";
-import { Helmet, HelmetProvider } from "react-helmet-async";
 
 interface IHeaderProps {
   title: string;
@@ -47,11 +46,6 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
 
   return (
     <>
-      <HelmetProvider>
-        <Helmet>
-          <title>AlertHawk | Dashboard</title>
-        </Helmet>
-      </HelmetProvider>
       <Box
         component="header"
         sx={{
