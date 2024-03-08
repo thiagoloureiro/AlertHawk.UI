@@ -5,7 +5,7 @@
     "sidebar":{
         "monitorList": "Lista de Monitores",
         "monitorManagement": "Gerenciamento de Monitores",
-        "notificationManagement": "Gerenciamento de Notificações",
+        "notificationManagement": "Notificações",
         "monitorAlert": "Alerta do Monitor",
         "users": "Usuários",
         "settings": "Configurações"
