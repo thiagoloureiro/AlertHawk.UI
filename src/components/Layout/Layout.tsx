@@ -6,15 +6,13 @@ import Sidebar from "../Sidebar/Sidebar";
 import { useIsAuthenticated } from "@azure/msal-react";
 import { useStoreActions, useStoreState } from "../../hooks";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-
 interface ILayoutProps {
   children: ReactNode;
 }
 
 const Layout: FC<ILayoutProps> = ({ children }) => {
-  const { isSidebarOpen, isSearchEngineIndexingAllowed } = useStoreState(
-    (state) => state.app
-  );
+  const { isSidebarOpen, isSearchEngineIndexingAllowed, isSmallScreen } =
+    useStoreState((state) => state.app);
   const { setIsSidebarOpen } = useStoreActions((action) => action.app);
 
   const isAuthenticated: boolean = useIsAuthenticated();
@@ -30,7 +28,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
           {isSearchEngineIndexingAllowed ? (
             <meta name="robots" content="index, follow" />
           ) : (
-            <meta name="robots" content="noindex, noindex" />
+            <meta name="robots" content="noindex, nofollow" />
           )}
         </Helmet>
       </HelmetProvider>
@@ -54,7 +52,11 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
                   height: "100%",
                   py: "20px",
                   paddingRight: "20px",
-                  paddingLeft: isSidebarOpen ? "360px" : "110px",
+                  paddingLeft: isSidebarOpen
+                    ? "360px"
+                    : isSmallScreen
+                    ? "80px"
+                    : "110px",
                 }
               : { width: "100%", height: "100%", py: "10px" }
           }

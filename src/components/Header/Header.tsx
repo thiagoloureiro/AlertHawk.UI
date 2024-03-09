@@ -9,6 +9,7 @@ import {
   MenuItem,
   Divider,
   ListItemIcon,
+  Hidden,
 } from "@mui/material";
 import { CustomSwitch } from "../Icons/MaterialUISwitch";
 import { useStoreActions, useStoreState } from "../../hooks";
@@ -26,7 +27,7 @@ interface IHeaderProps {
 const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
   const { t } = useTranslation("global");
   const isAuthenticated: boolean = useIsAuthenticated();
-  const { isDarkMode } = useStoreState((state) => state.app);
+  const { isDarkMode, isSmallScreen } = useStoreState((state) => state.app);
   const { setIsDarkMode } = useStoreActions((action) => action.app);
   const theme = useTheme();
   const { user } = useStoreState((actions) => actions.user);
@@ -90,9 +91,9 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
               textDecoration: "none",
             }}
           >
-            <img src={logo} alt="logo" width={70} />
+            <img src={logo} alt="logo" width={isSmallScreen ? 50 : 70} />
             <Typography
-              variant="h5"
+              variant={isSmallScreen ? "h6" : "h5"}
               fontWeight={700}
               style={{
                 color: isDarkMode
@@ -110,7 +111,9 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
           alignItems="center"
           spacing={3}
         >
-          <CustomSwitch checked={isDarkMode} onChange={toggleDarkTheme} />
+          <Hidden smDown>
+            <CustomSwitch checked={isDarkMode} onChange={toggleDarkTheme} />
+          </Hidden>
           {isAuthenticated && (
             <Avatar
               onClick={handleClick}

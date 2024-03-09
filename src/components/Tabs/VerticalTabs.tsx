@@ -4,6 +4,7 @@ import TabPanel from "./TabPanel";
 import General from "./TabItems/General/General";
 import About from "./TabItems/About/About";
 import { useTranslation } from "react-i18next";
+import { useStoreState } from "../../hooks";
 
 interface IVerticalTabs {}
 
@@ -15,6 +16,8 @@ function a11yProps(index: number) {
 }
 
 const VerticalTabs: FC<IVerticalTabs> = () => {
+  const { isSmallScreen } = useStoreState((state) => state.app);
+
   const { t } = useTranslation("global");
   const [value, setValue] = useState<number>(0);
 
@@ -24,32 +27,49 @@ const VerticalTabs: FC<IVerticalTabs> = () => {
   };
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        bgcolor: "background.paper",
-        display: "flex",
-        height: "100%",
-      }}
-    >
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={handleChange}
-        aria-label="Vertical tabs example"
-        sx={{ width: "200px" }}
-      >
-        <Tab label={t("settings.general.text")} {...a11yProps(0)} />
-        <Tab label={t("about.text")} {...a11yProps(1)} />
-      </Tabs>
-      <TabPanel value={value} index={0}>
-        <General />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <About />
-      </TabPanel>
-    </Box>
+    <>
+      {!isSmallScreen ? (
+        <Box
+          sx={{
+            flexGrow: 1,
+            bgcolor: "background.paper",
+            display: "flex",
+            height: "100%",
+          }}
+        >
+          <Tabs
+            orientation={"vertical"}
+            variant="scrollable"
+            value={value}
+            onChange={handleChange}
+            sx={{ width: "200px" }}
+          >
+            <Tab label={t("settings.general.text")} {...a11yProps(0)} />
+            <Tab label={t("about.text")} {...a11yProps(1)} />
+          </Tabs>
+          <TabPanel value={value} index={0}>
+            <General />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <About />
+          </TabPanel>
+        </Box>
+      ) : (
+        <Box sx={{ width: "100%" }}>
+          <Tabs value={value} onChange={handleChange}>
+            <Tab label={t("settings.general.text")} {...a11yProps(0)} />
+            <Tab label={t("about.text")} {...a11yProps(1)} />
+          </Tabs>
+
+          <TabPanel value={value} index={0}>
+            <General />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <About />
+          </TabPanel>
+        </Box>
+      )}
+    </>
   );
 };
 

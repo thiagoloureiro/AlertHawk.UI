@@ -8,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
   Tooltip,
+  Hidden,
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import {
@@ -147,13 +148,15 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
   return (
     <Drawer variant="permanent" open={isOpen}>
       <DrawerHeader>
-        <IconButton onClick={onToggle}>
-          {!isOpen ? (
-            <ChevronRightIcon sx={{ fill: isDarkMode ? "white" : "black" }} />
-          ) : (
-            <ChevronLeftIcon sx={{ fill: isDarkMode ? "white" : "black" }} />
-          )}
-        </IconButton>
+        <Hidden smDown>
+          <IconButton onClick={onToggle}>
+            {!isOpen ? (
+              <ChevronRightIcon sx={{ fill: isDarkMode ? "white" : "black" }} />
+            ) : (
+              <ChevronLeftIcon sx={{ fill: isDarkMode ? "white" : "black" }} />
+            )}
+          </IconButton>
+        </Hidden>
       </DrawerHeader>
       <List sx={{ p: 0 }}>
         {menuItems.map((item, key) => (

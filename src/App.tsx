@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import {
   AuthenticatedTemplate,
   UnauthenticatedTemplate,
@@ -6,14 +6,28 @@ import {
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import appRoutes from "./router/Routes";
 import getTheme from "./theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { useStoreState } from "./hooks";
+import { CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
+import { useStoreActions, useStoreState } from "./hooks";
 import Login from "./pages/Login/Login";
 
 const App: FC<{}> = () => {
   const { isDarkMode } = useStoreState((state) => state.app);
+  const { setIsSmallScreen, setIsMediumScreen } = useStoreActions(
+    (action) => action.app
+  );
 
   const theme = getTheme(isDarkMode ? "dark" : "light");
+
+  const isSmallScreenMediaQuery = useMediaQuery(theme.breakpoints.down("md"));
+  const isMediumScreenMediaQuery = useMediaQuery(theme.breakpoints.down("lg"));
+
+  useEffect(() => {
+    setIsSmallScreen(isSmallScreenMediaQuery);
+  }, [isSmallScreenMediaQuery, setIsSmallScreen]);
+
+  useEffect(() => {
+    setIsMediumScreen(isMediumScreenMediaQuery);
+  }, [isMediumScreenMediaQuery, setIsMediumScreen]);
 
   return (
     <ThemeProvider theme={theme}>
