@@ -10,6 +10,11 @@
         "users": "Usuários",
         "settings": "Configurações"
     },
+    "dashboard": {
+        "text": "Dashboard",
+        "search":"Buscar",
+        "noResultFoundFor":"Nenhum resultado encontrado"
+    },
     "settings":{
         "text": "Configurações",
         "general": {

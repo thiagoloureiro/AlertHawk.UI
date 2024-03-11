@@ -10,6 +10,11 @@
         "users": "Users",
         "settings": "Settings"
     },
+    "dashboard": {
+        "text": "Dashboard",
+        "search":"Search",
+        "noResultFoundFor":"No result found"
+    },
     "settings":{
         "text": "Settings",
         "general": {

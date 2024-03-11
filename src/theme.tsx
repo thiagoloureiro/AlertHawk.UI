@@ -19,6 +19,12 @@ const getTheme = (mode: "light" | "dark") =>
               "800": "#00838f",
               "900": "#006064",
             },
+            secondary: {
+              light: "#757575",
+              main: "#f5f5f5",
+              dark: "#e3e3e3",
+              contrastText: "#000",
+            },
             danger: {
               "50": "#ffebee",
               "100": "#ffcdd2",
@@ -68,6 +74,12 @@ const getTheme = (mode: "light" | "dark") =>
               "700": "#0097a7",
               "800": "#00838f",
               "900": "#006064",
+            },
+            secondary: {
+              light: "#bdbdbd",
+              main: "#4f4f4f",
+              dark: "#424242",
+              contrastText: "#fff",
             },
             success: {
               "50": "#f1f8e9",
@@ -120,6 +132,16 @@ const getTheme = (mode: "light" | "dark") =>
             "& .MuiOutlinedInput-input": {
               paddingLeft: "20px",
             },
+          },
+        },
+      },
+      MuiOutlinedInput: {
+        styleOverrides: {
+          root: {
+            borderRadius: "30px",
+          },
+          input: {
+            paddingLeft: "8px",
           },
         },
       },
@@ -229,6 +251,21 @@ const getTheme = (mode: "light" | "dark") =>
           },
           select: {
             paddingLeft: "20px",
+          },
+        },
+      },
+      MuiCssBaseline: {
+        styleOverrides: {
+          body: {
+            backgroundColor: mode === "light" ? "#fafafa" : null,
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            boxShadow: "none",
+            borderRadius: "12px",
           },
         },
       },

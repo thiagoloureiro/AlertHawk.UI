@@ -3,10 +3,11 @@ import { FC, useEffect, useState } from "react";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { loginRequest } from "../config/authConfig";
 import logging from "../utils/logging";
-import { useStoreActions } from "../hooks";
+import { useStoreActions, useStoreState } from "../hooks";
 import { resetStore } from "../store";
 import Layout from "../components/Layout/Layout";
 import { ClipLoader } from "react-spinners";
+import { Environment } from "../enums/Enums";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -21,14 +22,11 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const navigate: NavigateFunction = useNavigate();
   const { instance } = useMsal();
 
-  // const { user } = useStoreState((actions) => actions.user);
+  const { user } = useStoreState((actions) => actions.user);
   const { thunkGetUser } = useStoreActions((actions) => actions.user);
-  // const { thunkGetRoles } = useStoreActions((actions) => actions.roles);
-  // const { thunkGetCountries } = useStoreActions((actions) => actions.countries);
-  // const { thunkGetProjects } = useStoreActions((actions) => actions.projects);
-  // const { thunkGetSupportRoles } = useStoreActions(
-  //   (actions) => actions.supportRoles
-  // );
+  const { thunkGetMonitorGroupListByUser } = useStoreActions(
+    (actions) => actions.monitor
+  );
 
   useEffect(() => {
     if (isAuthenticated && !sessionStorage.getItem("jwtToken")) {
@@ -74,18 +72,17 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     }
   }, [email]);
 
-  // useEffect(() => {
-  //   const fetchAppData = async () => {
-  //     await thunkGetRoles();
-  //     await thunkGetCountries();
-  //     await thunkGetProjects();
-  //   };
-  //   if (user?.token) {
-  //     setTimeout(() => {
-  //       fetchAppData();
-  //     }, 100);
-  //   }
-  // }, [user?.token]);
+  useEffect(() => {
+    const fetchAppData = async () => {
+      await thunkGetMonitorGroupListByUser(Environment.Production);
+    };
+
+    if (user !== null) {
+      setTimeout(() => {
+        fetchAppData();
+      }, 100);
+    }
+  }, [user]);
 
   // useEffect(() => {
   //   const fetchSupportRolesData = async () => {

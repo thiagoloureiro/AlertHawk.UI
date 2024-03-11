@@ -32,7 +32,6 @@ const VerticalTabs: FC<IVerticalTabs> = () => {
         <Box
           sx={{
             flexGrow: 1,
-            bgcolor: "background.paper",
             display: "flex",
             height: "100%",
           }}

@@ -33,11 +33,10 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
         </Helmet>
       </HelmetProvider>
       <Box
-        height={"100vh"}
+        minHeight={"100vh"}
         display="flex"
         flexDirection="column"
         alignItems="center"
-        justifyContent="space-between"
       >
         <Header title={"AlertHawk"} isOpen={isSidebarOpen} />
         {isAuthenticated && (
@@ -49,9 +48,9 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
             isAuthenticated
               ? {
                   width: "100%",
-                  height: "100%",
                   py: "20px",
                   paddingRight: "20px",
+                  minHeight: "calc(100vh - 130px)",
                   paddingLeft: isSidebarOpen
                     ? "360px"
                     : isSmallScreen

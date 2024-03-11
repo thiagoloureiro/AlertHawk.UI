@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { CustomSwitch } from "../Icons/MaterialUISwitch";
 import { useStoreActions, useStoreState } from "../../hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useIsAuthenticated } from "@azure/msal-react";
 import { Logout, Settings } from "@mui/icons-material";
 import logo from "./logo.png";
@@ -31,6 +31,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
   const { setIsDarkMode } = useStoreActions((action) => action.app);
   const theme = useTheme();
   const { user } = useStoreState((actions) => actions.user);
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -197,7 +198,12 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
           </Stack>
         </Stack>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            navigate("/settings");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <Settings
               fontSize="small"

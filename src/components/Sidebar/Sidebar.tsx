@@ -75,7 +75,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "flex-end",
-  padding: "15px 10px",
+  padding: "20px 10px",
   ...theme.mixins.toolbar,
 }));
 
@@ -146,7 +146,15 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
   ];
 
   return (
-    <Drawer variant="permanent" open={isOpen}>
+    <Drawer
+      variant="permanent"
+      open={isOpen}
+      sx={{
+        "& .MuiDrawer-paper": {
+          backgroundColor: !isDarkMode ? "#fafafa" : "inherit",
+        },
+      }}
+    >
       <DrawerHeader>
         <Hidden smDown>
           <IconButton onClick={onToggle}>

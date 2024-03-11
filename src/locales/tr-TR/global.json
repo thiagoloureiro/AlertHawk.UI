@@ -10,6 +10,11 @@
         "users": "Kullanıcılar",
         "settings": "Ayarlar"
     },
+    "dashboard": {
+        "text": "Panel",
+        "search": "Ara",
+        "noResultFoundFor":"Sonuç bulunamadı"
+    },
     "settings":{
         "text": "Ayarlar",
         "general": {

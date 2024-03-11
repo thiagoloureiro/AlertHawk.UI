@@ -15,6 +15,7 @@ const Footer: FC<IFooterProps> = ({ title, isYearVisible = true }) => {
         alignItems: "center",
         justifyContent: "center",
         height: "50px",
+        py: 2,
       }}
     >
       <small>

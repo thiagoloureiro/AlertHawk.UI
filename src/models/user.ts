@@ -18,7 +18,6 @@ const defaultUserState: IUser = {
   email: null,
   username: null,
   isAdmin: false,
-  token: undefined,
 };
 
 const user: IUserModel = {

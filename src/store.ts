@@ -12,6 +12,7 @@ const store = createStore<StoreModel>(
 
 export const resetStore = () => {
   store.getActions().app.setResetApp();
+  store.getActions().monitor.setResetMonitor();
 };
 
 export default store;

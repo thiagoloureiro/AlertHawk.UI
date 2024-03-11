@@ -8,11 +8,13 @@ const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
   get: (url: string, headers?: AxiosHeaders) =>
-    axiosInstance.get(url, { headers }).then(responseBody),
+    axiosInstance.auth.get(url, { headers }).then(responseBody),
   post: (url: string, body?: Object, headers?: AxiosHeaders, config?: Object) =>
-    axiosInstance.post(url, body, { headers, ...config }).then(responseBody),
+    axiosInstance.auth
+      .post(url, body, { headers, ...config })
+      .then(responseBody),
   put: (url: string, body: Object, headers?: AxiosHeaders) =>
-    axiosInstance.put(url, body, { headers }).then(responseBody),
+    axiosInstance.auth.put(url, body, { headers }).then(responseBody),
 };
 
 const UserService = {

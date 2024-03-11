@@ -33,7 +33,7 @@ const Login: FC<{}> = () => {
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
-          height: "100%",
+          minHeight: "calc(100vh - 170px)",
         }}
       >
         <Form description="AlertHawk is a self-hosted monitoring tool that allows you keep track of service uptime" />

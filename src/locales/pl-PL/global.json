@@ -10,6 +10,11 @@
         "users": "Użytkownicy",
         "settings": "Ustawienia"
     },
+    "dashboard": {
+        "text": "Pulpit",
+        "search":"Szukaj",
+        "noResultFoundFor":"Nic nie znaleziono"
+    },
     "settings":{
         "text": "Ustawienia",
         "general": {
