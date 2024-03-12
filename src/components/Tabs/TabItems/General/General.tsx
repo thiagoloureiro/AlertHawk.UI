@@ -36,11 +36,16 @@ const options = momentTZ.tz.names().map((timezone) => {
 });
 
 const languageOptions = [
-  { code: "en-US", text: "English" },
+  { code: "zh-CN", text: "Chinese" },
   { code: "de-DE", text: "Deutsch" },
+  { code: "en-US", text: "English" },
+  { code: "it-IT", text: "Italian" },
+  { code: "jp-JP", text: "Japanese" },
+  { code: "ko-KR", text: "Korean" },
   { code: "pl-PL", text: "Polski" },
   { code: "pt-BR", text: "Português (Brasil)" },
-  { code: "tr-TR", text: "Türkçe" },
+  { code: "es-ES", text: "Spanish" },
+  { code: "tr-TR", text: "Türkçe" }
 ];
 
 const General: FC<IGeneralProps> = () => {

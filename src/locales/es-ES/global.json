@@ -1,0 +1,48 @@
+{
+    "header":{
+        "logout": "Cerrar sesión"
+    },
+    "sidebar":{
+        "monitorList": "Lista de Monitoreo",
+        "monitorManagement": "Gestión de Monitoreo",
+        "notificationManagement": "Gestión de Notificaciones",
+        "monitorAlert": "Alerta de Monitoreo",
+        "users": "Usuarios",
+        "settings": "Configuraciones"
+    },
+    "dashboard": {
+        "text": "Tablero",
+        "search":"Buscar",
+        "noResultFoundFor":"No se encontraron resultados para",
+        "resume":"Reanudar",
+        "pause":"Pausar",
+        "edit":"Editar",
+        "delete":"Eliminar",
+        "serviceDown": "Servicio No Disponible"
+    },
+    "settings":{
+        "text": "Configuraciones",
+        "general": {
+            "text": "General",
+            "language": "Idioma",
+            "applicationLanguageHasBeenChanged":"El idioma de la aplicación ha sido cambiado",
+            "displayTimezone": "Zona Horaria de Visualización",
+            "timezoneSettingsHaveBeenChanged":"La configuración de la zona horaria ha sido cambiada",
+            "searchEngineVisibility" : "Visibilidad del Motor de Búsqueda",
+            "allowSearchEngineIndexing":"Permitir indexación de motores de búsqueda",
+            "indexingHasBeenEnabled":"La indexación ha sido habilitada",
+            "preventSearchEnginesFromIndexing":"Prevenir que los motores de búsqueda indexen",
+            "indexingHasBeenDisabled":"La indexación ha sido deshabilitada",
+            "theme":"Tema",
+            "light":"Claro",
+            "lightThemeHasBeenEnabled":"El tema claro ha sido habilitado",
+            "dark":"Oscuro",
+            "darkThemeHasBeenEnabled":"El tema oscuro ha sido habilitado"
+        }
+    },
+    "about":{
+        "text": "Acerca de",
+        "checkProjectOn": "Ver proyecto en "
+    },
+    "pageNotFound": "Página No Encontrada"
+}

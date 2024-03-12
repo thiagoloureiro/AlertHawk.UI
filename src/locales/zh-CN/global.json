@@ -1,0 +1,48 @@
+{
+    "header":{
+        "logout": "登出"
+    },
+    "sidebar":{
+        "monitorList": "监控列表",
+        "monitorManagement": "监控管理",
+        "notificationManagement": "通知管理",
+        "monitorAlert": "监控警报",
+        "users": "用户",
+        "settings": "设置"
+    },
+    "dashboard": {
+        "text": "仪表板",
+        "search":"搜索",
+        "noResultFoundFor":"未找到结果",
+        "resume":"继续",
+        "pause":"暂停",
+        "edit":"编辑",
+        "delete":"删除",
+        "serviceDown": "服务已停止"
+    },
+    "settings":{
+        "text": "设置",
+        "general": {
+            "text": "常规",
+            "language": "语言",
+            "applicationLanguageHasBeenChanged":"应用语言已更改",
+            "displayTimezone": "显示时区",
+            "timezoneSettingsHaveBeenChanged":"时区设置已更改",
+            "searchEngineVisibility" : "搜索引擎可见性",
+            "allowSearchEngineIndexing":"允许搜索引擎索引",
+            "indexingHasBeenEnabled":"索引已启用",
+            "preventSearchEnginesFromIndexing":"防止搜索引擎索引",
+            "indexingHasBeenDisabled":"索引已禁用",
+            "theme":"主题",
+            "light":"明亮",
+            "lightThemeHasBeenEnabled":"已启用明亮主题",
+            "dark":"暗黑",
+            "darkThemeHasBeenEnabled":"已启用暗黑主题"
+        }
+    },
+    "about":{
+        "text": "关于",
+        "checkProjectOn": "在以下位置检查项目 "
+    },
+    "pageNotFound": "页面未找到"
+}

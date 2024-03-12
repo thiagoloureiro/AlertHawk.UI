@@ -1,0 +1,48 @@
+{
+    "header":{
+        "logout": "Esci"
+    },
+    "sidebar":{
+        "monitorList": "Lista Monitor",
+        "monitorManagement": "Gestione Monitor",
+        "notificationManagement": "Gestione Notifiche",
+        "monitorAlert": "Avviso Monitor",
+        "users": "Utenti",
+        "settings": "Impostazioni"
+    },
+    "dashboard": {
+        "text": "Dashboard",
+        "search":"Cerca",
+        "noResultFoundFor":"Nessun risultato trovato per",
+        "resume":"Riprendi",
+        "pause":"Pausa",
+        "edit":"Modifica",
+        "delete":"Elimina",
+        "serviceDown": "Servizio Non Disponibile"
+    },
+    "settings":{
+        "text": "Impostazioni",
+        "general": {
+            "text": "Generali",
+            "language": "Lingua",
+            "applicationLanguageHasBeenChanged":"La lingua dell'applicazione è stata cambiata",
+            "displayTimezone": "Fuso Orario Visualizzato",
+            "timezoneSettingsHaveBeenChanged":"Le impostazioni del fuso orario sono state modificate",
+            "searchEngineVisibility" : "Visibilità del Motore di Ricerca",
+            "allowSearchEngineIndexing":"Consenti l'indicizzazione del motore di ricerca",
+            "indexingHasBeenEnabled":"L'indicizzazione è stata abilitata",
+            "preventSearchEnginesFromIndexing":"Impedisci agli motori di ricerca di indicizzare",
+            "indexingHasBeenDisabled":"L'indicizzazione è stata disabilitata",
+            "theme":"Tema",
+            "light":"Chiaro",
+            "lightThemeHasBeenEnabled":"Il tema chiaro è stato abilitato",
+            "dark":"Scuro",
+            "darkThemeHasBeenEnabled":"Il tema scuro è stato abilitato"
+        }
+    },
+    "about":{
+        "text": "Informazioni",
+        "checkProjectOn": "Verifica progetto su "
+    },
+    "pageNotFound": "Pagina Non Trovata"
+}

@@ -6,8 +6,13 @@ import global_pl from "./locales/pl-PL/global.json";
 import global_tr from "./locales/tr-TR/global.json";
 import global_de from "./locales/de-DE/global.json";
 import global_pt from "./locales/pt-BR/global.json";
+import global_it from "./locales/it-IT/global.json";
+import global_es from "./locales/es-ES/global.json";
+import global_kr from "./locales/ko-KR/global.json";
+import global_jp from "./locales/jp-JP/global.json";
+import global_cn from "./locales/zh-CN/global.json";
 
-const supportedLngs: string[] = ["en-US", "de-DE", "tr-TR", "pl-PL", "pt-BR"];
+const supportedLngs: string[] = ["en-US", "de-DE", "tr-TR", "pl-PL", "pt-BR", "es-ES","it-IT","ko-KR","jp-JP","zh-CN"];
 
 i18n
   .use(initReactI18next)
@@ -39,6 +44,21 @@ i18n
       },
       "pt-BR": {
         global: global_pt,
+      },
+      "es-ES": {
+        global: global_es,
+      },
+      "it-IT": {
+        global: global_it,
+      },
+      "ko-KR": {
+        global: global_kr,
+      },
+      "jp-JP": {
+        global: global_jp,
+      },
+      "zh-cn": {
+        global: global_cn,
       },
     },
   });
