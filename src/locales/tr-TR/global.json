@@ -17,7 +17,8 @@
         "resume":"Devam et",
         "pause":"Durdur",
         "edit":"Düzenle",
-        "delete":"Sil"
+        "delete":"Sil",
+        "serviceDown": "Servise Ulaşılamadı"
     },
     "settings":{
         "text": "Ayarlar",

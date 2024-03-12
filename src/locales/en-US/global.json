@@ -17,7 +17,8 @@
         "resume":"Resume",
         "pause":"Pause",
         "edit":"Edit",
-        "delete":"Delete"
+        "delete":"Delete",
+        "serviceDown": "Service Down"
     },
     "settings":{
         "text": "Settings",

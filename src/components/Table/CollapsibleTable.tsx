@@ -6,11 +6,15 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import CollapsibleTableRow from "./CollapsibleTableRow";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { useTranslation } from "react-i18next";
-import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
+import {
+  IMonitorGroupListByUser,
+  IMonitorGroupListByUserItem,
+} from "../../interfaces/IMonitorGroupListByUser";
+import { showSnackbar } from "../../utils/snackbarHelper";
 
 interface ICollapsibleTable {
   monitors: IMonitorGroupListByUser[];
@@ -34,6 +38,23 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   const filteredMonitorGroups = monitors.filter((monitor) =>
     monitor.name.toLowerCase().includes(searchText.trim().toLowerCase())
   );
+
+  const [downServices, setDownServices] = useState<
+    IMonitorGroupListByUserItem[]
+  >([]);
+
+  useEffect(() => {
+    const downServices = monitors.flatMap((monitorGroup) =>
+      monitorGroup.monitors.filter((monitor) => !monitor.status)
+    );
+    setDownServices(downServices);
+  }, [monitors]);
+
+  useEffect(() => {
+    downServices.forEach((service) => {
+      showSnackbar(`${t("dashboard.serviceDown")} - ${service.name}`, "error");
+    });
+  }, [downServices]);
 
   return (
     <TableContainer component={Card}>

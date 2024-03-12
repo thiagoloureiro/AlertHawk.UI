@@ -19,8 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <MsalProvider instance={msalInstance}>
         <I18nextProvider i18n={i18n}>
           <SnackbarProvider
+            preventDuplicate
             autoHideDuration={3000}
-            maxSnack={1}
+            maxSnack={3}
             anchorOrigin={{
               vertical: "bottom",
               horizontal: "right",

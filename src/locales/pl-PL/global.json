@@ -17,7 +17,8 @@
         "resume":"Kontynuuj",
         "pause":"Wstrzymaj",
         "edit":"Edytuj",
-        "delete":"Usuń"
+        "delete":"Usuń",
+        "serviceDown": "Serwis Niedostępny"
     },
     "settings":{
         "text": "Ustawienia",
