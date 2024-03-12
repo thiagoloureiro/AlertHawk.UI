@@ -12,7 +12,10 @@ import {
 import { FC, Fragment, useState } from "react";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
+import {
+  IMonitorGroupListByUser,
+  IMonitorGroupListByUserItem,
+} from "../../interfaces/IMonitorGroupListByUser";
 
 interface ICollapsibleTableRowProps {
   monitorGroup: IMonitorGroupListByUser;
@@ -123,31 +126,13 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   };
 
   const renderOverallStatusChip = () => {
-    const anyPaused = monitorGroup.monitors.some((monitor) => monitor.paused);
-    const anyNotPaused = monitorGroup.monitors.some(
-      (monitor) => !monitor.paused
-    );
+    const anyDown = monitorGroup.monitors.some((monitor) => !monitor.status);
 
-    if (anyPaused && anyNotPaused) {
+    if (anyDown) {
       return (
         <Chip
-          label={"Partially running"}
-          color="success"
-          size="medium"
-          sx={{
-            p: "5px 15px",
-            "& .MuiChip-label": {
-              color: "#fff",
-              fontWeight: 700,
-            },
-          }}
-        />
-      );
-    } else if (anyPaused) {
-      return (
-        <Chip
-          label={"Stopped!"}
-          color="warning"
+          label={"Down"}
+          color="error"
           size="medium"
           sx={{
             p: "5px 15px",
@@ -161,8 +146,60 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     } else {
       return (
         <Chip
-          label={"Running"}
+          label={"Up"}
           color="success"
+          size="medium"
+          sx={{
+            p: "5px 15px",
+            "& .MuiChip-label": {
+              color: "#fff",
+              fontWeight: 700,
+            },
+          }}
+        />
+      );
+    }
+  };
+
+  const calculateAverageUptime = (monitors: IMonitorGroupListByUserItem[]) => {
+    let totalUptime = 0;
+    let totalMonitors = 0;
+
+    monitors.forEach((monitor) => {
+      totalUptime += monitor.monitorStatusDashboard?.uptime24Hrs ?? 0;
+      totalMonitors++;
+    });
+
+    return totalMonitors === 0 ? 0 : totalUptime / totalMonitors;
+  };
+
+  const renderParentStatusChip = () => {
+    const allRunning = monitorGroup.monitors.every((monitor) => monitor.status);
+
+    if (allRunning) {
+      return (
+        <Chip
+          label={
+            calculateAverageUptime(monitorGroup.monitors).toFixed(2) + " %"
+          }
+          color="success"
+          size="medium"
+          sx={{
+            p: "5px 15px",
+            "& .MuiChip-label": {
+              color: "#fff",
+              fontWeight: 700,
+            },
+          }}
+        />
+      );
+    } else {
+      return (
+        <Chip
+          label={
+            calculateAverageUptime(monitorGroup.monitors).toFixed(2) + " %"
+          }
+          color="error"
           size="medium"
           sx={{
             p: "5px 15px",
@@ -206,33 +243,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {monitorGroup.monitors.some((monitor) => !monitor.status) ? (
-            <Chip
-              label={"Down"}
-              color="error"
-              size="medium"
-              sx={{
-                p: "5px 15px",
-                "& .MuiChip-label": {
-                  color: "#fff",
-                  fontWeight: 700,
-                },
-              }}
-            />
-          ) : (
-            <Chip
-              label={"Up"}
-              color="success"
-              size="medium"
-              sx={{
-                p: "5px 15px",
-                "& .MuiChip-label": {
-                  color: "#fff",
-                  fontWeight: 700,
-                },
-              }}
-            />
-          )}
+          {renderParentStatusChip()}
         </TableCell>
         <TableCell>{monitorGroup.name}</TableCell>
         <TableCell
@@ -280,27 +291,12 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                             : {}
                         }
                       >
-                        {monitor.monitorStatusDashboard.uptime24Hrs === 100 ? (
+                        {monitor.monitorStatusDashboard?.uptime24Hrs !== 0 ? (
                           <Chip
                             label={
-                              monitor.monitorStatusDashboard.uptime24Hrs + " %"
+                              monitor.monitorStatusDashboard?.uptime24Hrs + " %"
                             }
                             color="success"
-                            size="medium"
-                            sx={{
-                              p: "5px 15px",
-                              "& .MuiChip-label": {
-                                color: "#fff",
-                                fontWeight: 700,
-                              },
-                            }}
-                          />
-                        ) : monitor.monitorStatusDashboard.uptime24Hrs === 0 ? (
-                          <Chip
-                            label={
-                              monitor.monitorStatusDashboard.uptime24Hrs + " %"
-                            }
-                            color="error"
                             size="medium"
                             sx={{
                               p: "5px 15px",
@@ -313,9 +309,9 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                         ) : (
                           <Chip
                             label={
-                              monitor.monitorStatusDashboard.uptime24Hrs + " %"
+                              monitor.monitorStatusDashboard?.uptime24Hrs + " %"
                             }
-                            color="warning"
+                            color="error"
                             size="medium"
                             sx={{
                               p: "5px 15px",
@@ -350,7 +346,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                           }}
                         >
                           {renderUptimeBoxes(
-                            monitor.monitorStatusDashboard.uptime24Hrs,
+                            monitor.monitorStatusDashboard?.uptime24Hrs ?? 0,
                             monitor.status
                           )}
                         </Box>

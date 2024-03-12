@@ -10,6 +10,7 @@ import {
   Divider,
   ListItemIcon,
   Hidden,
+  Tooltip,
 } from "@mui/material";
 import { CustomSwitch } from "../Icons/MaterialUISwitch";
 import { useStoreActions, useStoreState } from "../../hooks";
@@ -18,6 +19,9 @@ import { useIsAuthenticated } from "@azure/msal-react";
 import { Logout, Settings } from "@mui/icons-material";
 import logo from "./logo.png";
 import { useTranslation } from "react-i18next";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 
 interface IHeaderProps {
   title: string;
@@ -28,6 +32,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
   const { t } = useTranslation("global");
   const isAuthenticated: boolean = useIsAuthenticated();
   const { isDarkMode, isSmallScreen } = useStoreState((state) => state.app);
+  const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
   const { setIsDarkMode } = useStoreActions((action) => action.app);
   const theme = useTheme();
   const { user } = useStoreState((actions) => actions.user);
@@ -106,6 +111,95 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
             </Typography>
           </Link>
         </Box>
+        <Stack
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={6}
+          sx={{ userSelect: "none" }}
+        >
+          <Tooltip title="Up" placement="bottom" arrow>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
+              }}
+            >
+              <Typography
+                variant="h6"
+                color="success.main"
+                component="div"
+                fontWeight={700}
+              >
+                {monitorGroupListByUser.reduce((totalCount, group) => {
+                  return (
+                    totalCount +
+                    group.monitors.reduce((groupCount, monitor) => {
+                      return groupCount + (monitor.status ? 1 : 0);
+                    }, 0)
+                  );
+                }, 0)}
+              </Typography>
+              <CheckCircleIcon sx={{ color: "success.main", fontSize: 28 }} />
+            </Box>
+          </Tooltip>
+          <Tooltip title="Down" placement="bottom" arrow>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
+              }}
+            >
+              <Typography
+                variant="h6"
+                color="error.main"
+                component="div"
+                fontWeight={700}
+              >
+                {monitorGroupListByUser.reduce((totalCount, group) => {
+                  return (
+                    totalCount +
+                    group.monitors.reduce((groupCount, monitor) => {
+                      return groupCount + (monitor.status ? 0 : 1);
+                    }, 0)
+                  );
+                }, 0)}
+              </Typography>
+              <CancelIcon sx={{ color: "error.main", fontSize: 28 }} />
+            </Box>
+          </Tooltip>
+          <Tooltip title="Paused" placement="bottom" arrow>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 1,
+              }}
+            >
+              <Typography
+                variant="h6"
+                color="text.secondary"
+                component="div"
+                fontWeight={700}
+              >
+                {monitorGroupListByUser.reduce((totalCount, group) => {
+                  return (
+                    totalCount +
+                    group.monitors.reduce((groupCount, monitor) => {
+                      return groupCount + (monitor.paused ? 1 : 0);
+                    }, 0)
+                  );
+                }, 0)}
+              </Typography>
+              <PauseCircleFilledIcon sx={{ fontSize: 28 }} />
+            </Box>
+          </Tooltip>
+        </Stack>
         <Stack
           direction="row"
           justifyContent="center"

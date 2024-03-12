@@ -13,7 +13,11 @@
     "dashboard": {
         "text": "Panel",
         "search": "Ara",
-        "noResultFoundFor":"Sonuç bulunamadı"
+        "noResultFoundFor":"Sonuç bulunamadı",
+        "resume":"Devam et",
+        "pause":"Durdur",
+        "edit":"Düzenle",
+        "delete":"Sil"
     },
     "settings":{
         "text": "Ayarlar",

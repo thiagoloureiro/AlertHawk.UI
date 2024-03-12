@@ -44,14 +44,6 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
           },
         }}
       >
-        {/* <TableHead>
-          <TableRow>
-            <TableCell />
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell>Calories</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead> */}
         <TableBody>
           {filteredMonitorGroups.length > 0 ? (
             filteredMonitorGroups.map((monitorGroup, index) => (

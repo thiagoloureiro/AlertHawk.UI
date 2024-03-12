@@ -13,7 +13,11 @@
     "dashboard": {
         "text": "Pulpit",
         "search":"Szukaj",
-        "noResultFoundFor":"Nic nie znaleziono"
+        "noResultFoundFor":"Nic nie znaleziono",
+        "resume":"Kontynuuj",
+        "pause":"Wstrzymaj",
+        "edit":"Edytuj",
+        "delete":"Usuń"
     },
     "settings":{
         "text": "Ustawienia",

@@ -13,7 +13,11 @@
     "dashboard": {
         "text": "Dashboard",
         "search":"Search",
-        "noResultFoundFor":"No result found"
+        "noResultFoundFor":"No result found",
+        "resume":"Resume",
+        "pause":"Pause",
+        "edit":"Edit",
+        "delete":"Delete"
     },
     "settings":{
         "text": "Settings",

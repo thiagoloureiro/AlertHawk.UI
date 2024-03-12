@@ -16,6 +16,7 @@ import {
   IMonitorGroupListByUser,
   IMonitorGroupListByUserItem,
 } from "../../../interfaces/IMonitorGroupListByUser";
+import { useTranslation } from "react-i18next";
 
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
@@ -26,6 +27,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   selectedMonitorGroup,
   selectedMonitorItem,
 }) => {
+  const { t } = useTranslation("global");
   const { isDarkMode } = useStoreState((state) => state.app);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
@@ -57,7 +59,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
               onClick={handleResumePauseBtn}
             >
               <Box sx={{ display: "flex", alignItems: "center" }}>
-                {isPaused ? "Resume" : "Pause"}
+                {isPaused ? t("dashboard.resume") : t("dashboard.pause")}
               </Box>
             </Button>
             <Button
@@ -65,7 +67,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
               startIcon={<EditNoteIcon />}
               onClick={handleEditBtn}
             >
-              Edit
+              {t("dashboard.edit")}
             </Button>
             <Button
               aria-label="delete"
@@ -74,7 +76,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
               }
               color="error"
             >
-              Delete
+              {t("dashboard.delete")}
             </Button>
           </ButtonGroup>
           {/* <Typography
