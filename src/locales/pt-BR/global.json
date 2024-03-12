@@ -18,7 +18,7 @@
         "pause":"Pausar",
         "edit":"Editar",
         "delete":"Apagar",
-        "serviceDown": "O serviço parece estar inoperante"
+        "serviceDown": "Serviço Inoperante"
     },
     "settings":{
         "text": "Configurações",
