@@ -51,8 +51,13 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   }, [monitors]);
 
   useEffect(() => {
-    downServices.forEach((service) => {
-      showSnackbar(`${t("dashboard.serviceDown")} - ${service.name}`, "error");
+    downServices.forEach((service, index) => {
+      setTimeout(() => {
+        showSnackbar(
+          `${t("dashboard.serviceDown")} - ${service.name}`,
+          "error"
+        );
+      }, index * 500);
     });
   }, [downServices]);
 
