@@ -111,95 +111,97 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
             </Typography>
           </Link>
         </Box>
-        <Stack
-          direction="row"
-          justifyContent="center"
-          alignItems="center"
-          spacing={6}
-          sx={{ userSelect: "none" }}
-        >
-          <Tooltip title="Up" placement="bottom" arrow>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 1,
-              }}
-            >
-              <Typography
-                variant="h6"
-                color="success.main"
-                component="div"
-                fontWeight={700}
+        {isAuthenticated && (
+          <Stack
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            spacing={6}
+            sx={{ userSelect: "none" }}
+          >
+            <Tooltip title="Up" placement="bottom" arrow>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 1,
+                }}
               >
-                {monitorGroupListByUser.reduce((totalCount, group) => {
-                  return (
-                    totalCount +
-                    group.monitors.reduce((groupCount, monitor) => {
-                      return groupCount + (monitor.status ? 1 : 0);
-                    }, 0)
-                  );
-                }, 0)}
-              </Typography>
-              <CheckCircleIcon sx={{ color: "success.main", fontSize: 28 }} />
-            </Box>
-          </Tooltip>
-          <Tooltip title="Down" placement="bottom" arrow>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 1,
-              }}
-            >
-              <Typography
-                variant="h6"
-                color="error.main"
-                component="div"
-                fontWeight={700}
+                <Typography
+                  variant="h6"
+                  color="success.main"
+                  component="div"
+                  fontWeight={700}
+                >
+                  {monitorGroupListByUser.reduce((totalCount, group) => {
+                    return (
+                      totalCount +
+                      group.monitors.reduce((groupCount, monitor) => {
+                        return groupCount + (monitor.status ? 1 : 0);
+                      }, 0)
+                    );
+                  }, 0)}
+                </Typography>
+                <CheckCircleIcon sx={{ color: "success.main", fontSize: 28 }} />
+              </Box>
+            </Tooltip>
+            <Tooltip title="Down" placement="bottom" arrow>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 1,
+                }}
               >
-                {monitorGroupListByUser.reduce((totalCount, group) => {
-                  return (
-                    totalCount +
-                    group.monitors.reduce((groupCount, monitor) => {
-                      return groupCount + (monitor.status ? 0 : 1);
-                    }, 0)
-                  );
-                }, 0)}
-              </Typography>
-              <CancelIcon sx={{ color: "error.main", fontSize: 28 }} />
-            </Box>
-          </Tooltip>
-          <Tooltip title="Paused" placement="bottom" arrow>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: 1,
-              }}
-            >
-              <Typography
-                variant="h6"
-                color="text.secondary"
-                component="div"
-                fontWeight={700}
+                <Typography
+                  variant="h6"
+                  color="error.main"
+                  component="div"
+                  fontWeight={700}
+                >
+                  {monitorGroupListByUser.reduce((totalCount, group) => {
+                    return (
+                      totalCount +
+                      group.monitors.reduce((groupCount, monitor) => {
+                        return groupCount + (monitor.status ? 0 : 1);
+                      }, 0)
+                    );
+                  }, 0)}
+                </Typography>
+                <CancelIcon sx={{ color: "error.main", fontSize: 28 }} />
+              </Box>
+            </Tooltip>
+            <Tooltip title="Paused" placement="bottom" arrow>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  gap: 1,
+                }}
               >
-                {monitorGroupListByUser.reduce((totalCount, group) => {
-                  return (
-                    totalCount +
-                    group.monitors.reduce((groupCount, monitor) => {
-                      return groupCount + (monitor.paused ? 1 : 0);
-                    }, 0)
-                  );
-                }, 0)}
-              </Typography>
-              <PauseCircleFilledIcon sx={{ fontSize: 28 }} />
-            </Box>
-          </Tooltip>
-        </Stack>
+                <Typography
+                  variant="h6"
+                  color="text.secondary"
+                  component="div"
+                  fontWeight={700}
+                >
+                  {monitorGroupListByUser.reduce((totalCount, group) => {
+                    return (
+                      totalCount +
+                      group.monitors.reduce((groupCount, monitor) => {
+                        return groupCount + (monitor.paused ? 1 : 0);
+                      }, 0)
+                    );
+                  }, 0)}
+                </Typography>
+                <PauseCircleFilledIcon sx={{ fontSize: 28 }} />
+              </Box>
+            </Tooltip>
+          </Stack>
+        )}
         <Stack
           direction="row"
           justifyContent="center"
