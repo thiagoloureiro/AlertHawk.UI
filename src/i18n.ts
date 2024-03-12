@@ -57,7 +57,7 @@ i18n
       "jp-JP": {
         global: global_jp,
       },
-      "zh-cn": {
+      "zh-CN": {
         global: global_cn,
       },
     },
