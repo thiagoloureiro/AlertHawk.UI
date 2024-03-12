@@ -46,16 +46,19 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       >
         <TableBody>
           {filteredMonitorGroups.length > 0 ? (
-            filteredMonitorGroups.map((monitorGroup, index) => (
-              <CollapsibleTableRow
-                key={monitorGroup.id}
-                monitorGroup={monitorGroup}
-                isSelected={selectedRowIndex === index}
-                selectedChildRowIndex={selectedChildRowIndex}
-                onRowClick={() => handleRowClick(index)}
-                handleChildRowClick={handleChildRowClick}
-              />
-            ))
+            filteredMonitorGroups
+              .slice()
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((monitorGroup, index) => (
+                <CollapsibleTableRow
+                  key={monitorGroup.id}
+                  monitorGroup={monitorGroup}
+                  isSelected={selectedRowIndex === index}
+                  selectedChildRowIndex={selectedChildRowIndex}
+                  onRowClick={() => handleRowClick(index)}
+                  handleChildRowClick={handleChildRowClick}
+                />
+              ))
           ) : (
             <TableRow>
               <TableCell>
