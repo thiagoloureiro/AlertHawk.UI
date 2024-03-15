@@ -62,5 +62,14 @@
         "text": "About",
         "checkProjectOn": "Check project on "
     },
-    "pageNotFound": "Page Not Found"
+    "pageNotFound": "Page Not Found",
+    "Users":{
+        "text": "Users",
+        "userName": "User Name",
+        "email": "Email",
+        "isAdmin": "Is Admin",	
+        "actions": "Actions",
+        "true": "Yes",	
+        "false": "No"
+    }
 }
