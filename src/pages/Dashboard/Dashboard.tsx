@@ -24,7 +24,7 @@ interface IDashboardProps {}
 
 const Dashboard: FC<IDashboardProps> = ({}) => {
   const { t } = useTranslation("global");
-
+  const { isSidebarOpen } = useStoreState((state) => state.app);
   const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
@@ -84,7 +84,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
         </Helmet>
       </HelmetProvider>
       <Grid container spacing={4}>
-        <Grid item xs={12} lg={5}>
+        <Grid item xs={12} lg={isSidebarOpen ? 6 : 5}>
           <Card>
             <CardContent>
               <Stack
@@ -146,7 +146,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} lg={7}>
+        <Grid item xs={12} lg={isSidebarOpen ? 6 : 7}>
           {selectedMonitorGroup !== null || selectedMonitorItem !== null ? (
             <SelectedMonitorDetails
               selectedMonitorGroup={selectedMonitorGroup}
