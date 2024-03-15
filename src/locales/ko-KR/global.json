@@ -37,7 +37,8 @@
         "monitorAgentsInAfrica":"아프리카의 에이전트 모니터링",
         "monitorAgentsInNorthAmerica":"북미 지역 에이전트 모니터링",
         "monitorAgentsInLatinAmerica":"라틴 아메리카의 에이전트 모니터링",
-        "monitorAgentsInOceania":"오세아니아의 에이전트 모니터링"
+        "monitorAgentsInOceania":"오세아니아의 에이전트 모니터링",
+        "version": "버전"
     },
     "monitorManagement":{
         "text": "모니터 관리"

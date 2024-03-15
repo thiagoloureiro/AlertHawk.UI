@@ -5,4 +5,5 @@ export interface IAgent {
   isMaster: boolean;
   listTasks: number;
   monitorRegion: number;
+  version: string;
 }

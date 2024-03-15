@@ -37,7 +37,8 @@
         "monitorAgentsInAfrica": "Agenci Monitorujący w Afryce",
         "monitorAgentsInNorthAmerica": "Agenci Monitorujący w Ameryce Północnej",
         "monitorAgentsInLatinAmerica": "Agenci Monitorujący w Ameryce Łacińskiej",
-        "monitorAgentsInOceania": "Agenci Monitorujący w Oceanii"
+        "monitorAgentsInOceania": "Agenci Monitorujący w Oceanii",
+        "version": "Wersja"
     },
     "monitorManagement":{
         "text": "Zarządzanie Monitorami"

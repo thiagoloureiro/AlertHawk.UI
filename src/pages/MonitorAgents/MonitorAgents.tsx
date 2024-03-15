@@ -285,6 +285,10 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
                             <b>{t("monitorAgents.location")}: </b>{" "}
                             {getContinentName(agent.monitorRegion)}
                           </Typography>
+                          <Typography variant="body2">
+                            <b>{t("monitorAgents.version")}: </b>{" "}
+                            {agent.version}
+                          </Typography>
                         </Box>
                       </CardContent>
                     </Card>

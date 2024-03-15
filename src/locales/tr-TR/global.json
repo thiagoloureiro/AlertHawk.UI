@@ -37,7 +37,8 @@
         "monitorAgentsInAfrica": "Afrika'daki Görev Yöneticileri",
         "monitorAgentsInNorthAmerica": "Kuzey Amerika'daki Görev Yöneticileri",
         "monitorAgentsInLatinAmerica": "Latin Amerika'daki Görev Yöneticileri",
-        "monitorAgentsInOceania": "Okyanusya'daki Görev Yöneticileri"
+        "monitorAgentsInOceania": "Okyanusya'daki Görev Yöneticileri",
+        "version": "Versiyon"
     },
     "monitorManagement":{
         "text": "Monitör Yönetimi"

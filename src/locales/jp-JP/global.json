@@ -37,7 +37,8 @@
         "monitorAgentsInAfrica":"「アフリカのモニターエージェント」",
         "monitorAgentsInNorthAmerica":"「北米のモニターエージェント」",
         "monitorAgentsInLatinAmerica": "ラテンアメリカのエージェントを監視する",
-        "monitorAgentsInOceania": "オセニアのモニターエージェント"
+        "monitorAgentsInOceania": "オセニアのモニターエージェント",
+        "version": "バージョン"
     },
     "monitorManagement":{
         "text": "モニター管理"

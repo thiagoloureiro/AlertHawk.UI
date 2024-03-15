@@ -107,6 +107,10 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
                     <CancelIcon sx={{ color: "secondary.light", ml: 1 }} />
                   )}
                 </Box>
+                <Typography variant="body2">
+                  <b>{t("monitorAgents.version")}: </b>{" "}
+                  {agent.version}
+                </Typography>
               </Box>
             </CardContent>
           </Card>

@@ -37,7 +37,8 @@
         "monitorAgentsInAfrica":"监控非洲的代理商",
         "monitorAgentsInNorthAmerica":"北美地区的监控代理",
         "monitorAgentsInLatinAmerica": "监控拉丁美洲的代理商",
-        "monitorAgentsInOceania":"监控奥塞尼亚的代理商"
+        "monitorAgentsInOceania":"监控奥塞尼亚的代理商",
+        "version": "版本"
     },
     "monitorManagement":{
         "text": "监控管理"
