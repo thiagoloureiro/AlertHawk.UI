@@ -20,6 +20,9 @@
         "delete":"Usuń",
         "serviceDown": "Serwis Niedostępny"
     },
+    "monitorManagement":{
+        "text": "Zarządzanie Monitorami"
+    },
     "settings":{
         "text": "Ustawienia",
         "general": {

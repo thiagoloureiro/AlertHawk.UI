@@ -22,11 +22,10 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const navigate: NavigateFunction = useNavigate();
   const { instance } = useMsal();
 
-  const { user } = useStoreState((actions) => actions.user);
+  const { user } = useStoreState((state) => state.user);
   const { thunkGetUser } = useStoreActions((actions) => actions.user);
-  const { thunkGetMonitorGroupListByUser } = useStoreActions(
-    (actions) => actions.monitor
-  );
+  const { thunkGetMonitorGroupListByUser, thunkGetMonitorAgents } =
+    useStoreActions((actions) => actions.monitor);
 
   useEffect(() => {
     if (isAuthenticated && !sessionStorage.getItem("jwtToken")) {
@@ -75,6 +74,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   useEffect(() => {
     const fetchAppData = async () => {
       await thunkGetMonitorGroupListByUser(Environment.Production);
+      await thunkGetMonitorAgents();
     };
 
     if (user !== null) {

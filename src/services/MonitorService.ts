@@ -5,6 +5,7 @@ import { AxiosHeaders } from "../interfaces/axios/IAxiosHeaders";
 import { Environment } from "../enums/Enums";
 import { IMonitorGroupListByUser } from "../interfaces/IMonitorGroupListByUser";
 import { IMonitor } from "../interfaces/IMonitor";
+import { IAgent } from "../interfaces/IAgent";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -31,6 +32,11 @@ const MonitorService = {
   ): Promise<IMonitorGroupListByUser[]> =>
     await requests.get(
       `MonitorGroup/monitorGroupListByUser/${id}`,
+      appendOptionalHeaders(headers)
+    ),
+  getMonitorAgents: async (headers?: AxiosHeaders): Promise<IAgent[]> =>
+    await requests.get(
+      "Monitor/allMonitorAgents",
       appendOptionalHeaders(headers)
     ),
 };

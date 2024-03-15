@@ -20,6 +20,9 @@
         "delete":"Löschen",
         "serviceDown": "Der Service scheint ausgefallen zu sein"
     },
+    "monitorManagement":{
+        "text": "Monitor-Management"
+    },
     "settings":{
         "text": "Einstellungen",
         "general": {

@@ -5,6 +5,7 @@ import { StoreModel } from ".";
 import { getStatusFromError } from "../utils/errorHandler";
 import { IMonitorGroupListByUser } from "../interfaces/IMonitorGroupListByUser";
 import MonitorService from "../services/MonitorService";
+import { IAgent } from "../interfaces/IAgent";
 
 export interface IMonitorModel {
   monitorGroupListByUser: IMonitorGroupListByUser[];
@@ -17,12 +18,16 @@ export interface IMonitorModel {
     StoreModel,
     Promise<Status>
   >;
+  agents: IAgent[];
+  setAgents: Action<IMonitorModel, IAgent[]>;
+  thunkGetMonitorAgents: Thunk<IMonitorModel, void, any, StoreModel>;
 }
 
 const monitor: IMonitorModel = {
   monitorGroupListByUser: [],
   setResetMonitor: action((state) => {
     state.monitorGroupListByUser = [];
+    state.agents = [];
   }),
   setMonitorGroupListByUser: action((state, payload) => {
     state.monitorGroupListByUser = payload;
@@ -44,6 +49,24 @@ const monitor: IMonitorModel = {
       }
     }
   ),
+  agents: [],
+  setAgents: action((state, payload) => {
+    state.agents = payload;
+  }),
+  thunkGetMonitorAgents: thunk(async (actions, _, { getStoreActions }) => {
+    try {
+      getStoreActions().app.setIsLoading(true);
+      const agents = await MonitorService.getMonitorAgents();
+      actions.setAgents(agents);
+      return Status.Success;
+    } catch (err: any) {
+      logging.error(err);
+      actions.setAgents([]);
+      return getStatusFromError(err);
+    } finally {
+      getStoreActions().app.setIsLoading(false);
+    }
+  }),
 };
 
 export default monitor;

@@ -20,6 +20,9 @@
         "delete":"Sil",
         "serviceDown": "Servise Ulaşılamadı"
     },
+    "monitorManagement":{
+        "text": "Monitör Yönetimi"
+    },
     "settings":{
         "text": "Ayarlar",
         "general": {

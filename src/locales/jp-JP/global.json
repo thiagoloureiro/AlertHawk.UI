@@ -20,6 +20,9 @@
         "delete":"削除",
         "serviceDown": "サービスダウン"
     },
+    "monitorManagement":{
+        "text": "モニター管理"
+    },
     "settings":{
         "text": "設定",
         "general": {

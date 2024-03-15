@@ -20,6 +20,9 @@
         "delete":"Apagar",
         "serviceDown": "Serviço Inoperante"
     },
+    "monitorManagement":{
+        "text": "Gerenciamento de Monitores"
+    },
     "settings":{
         "text": "Configurações",
         "general": {

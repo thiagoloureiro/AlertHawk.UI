@@ -20,6 +20,9 @@
         "delete":"删除",
         "serviceDown": "服务已停止"
     },
+    "monitorManagement":{
+        "text": "监控管理"
+    },
     "settings":{
         "text": "设置",
         "general": {

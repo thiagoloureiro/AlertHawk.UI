@@ -1,5 +1,6 @@
 import { IRoute } from "../interfaces/IRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import MonitorManagement from "../pages/MonitorManagement/MonitorManagement";
 import NotFound from "../pages/NotFound/NotFound";
 import Settings from "../pages/Settings/Settings";
 import ProtectedRoute from "./ProtectedRoute";
@@ -10,6 +11,14 @@ const appRoutes: IRoute[] = [
     element: (
       <ProtectedRoute>
         <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/monitor-management",
+    element: (
+      <ProtectedRoute>
+        <MonitorManagement />
       </ProtectedRoute>
     ),
   },
