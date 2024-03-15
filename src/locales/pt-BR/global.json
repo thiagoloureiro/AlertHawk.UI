@@ -31,7 +31,7 @@
         "hostname": "Nome do Host",
         "numberOfMonitors": "Número de Monitores",
         "master": "Master",
-        "localização": "Localização",
+        "location": "Localização",
         "monitorAgentsInEurope": "Monitorar Agentes na Europa",
         "monitorAgentsInAsia": "Monitorar Agentes na Ásia",
         "monitorAgentsInAfrica": "Monitorar Agentes na África",
