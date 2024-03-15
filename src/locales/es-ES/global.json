@@ -17,13 +17,20 @@
     "dashboard": {
         "text": "Tablero",
         "search":"Buscar",
-        "noResultFoundFor":"No se encontraron resultados para",
+        "noResultFoundFor":"No se encontraron resultados",
         "resume":"Reanudar",
-        "pause":"Pausar",
+        "pause":"Pausa",
         "edit":"Editar",
         "delete":"Eliminar",
-        "serviceDown": "Servicio No Disponible"
-    },
+        "serviceDown": "Servicio Fuera de Línea",
+        "metric": "Métrica",
+        "uptime": "Tiempo de Actividad",
+        "hours": "Horas",
+        "days": "Días",
+        "months": "Meses",
+        "certificateexpiration":"Vencimiento del Certificado",
+        "response":"Respuesta (Promedio)"
+    },    
     "monitorAgents":{
         "text": "Agentes Monitor",
         "totalNumberOfMonitorAgents" : "Número Total de Agentes de Monitorización",
@@ -37,7 +44,8 @@
         "monitorAgentsInAfrica": "Agentes de Monitorización en África",
         "monitorAgentsInNorthAmerica": "Agentes de Monitorización en Norteamérica",
         "monitorAgentsInLatinAmerica": "Agentes de Monitorización en Latinoamérica",
-        "monitorAgentsInOceania": "Agentes de Monitorización en Oceanía"
+        "monitorAgentsInOceania": "Agentes de Monitorización en Oceanía",
+        "version": "Versión"
     },
     "monitorManagement":{
         "text": "Gestión de Monitores"

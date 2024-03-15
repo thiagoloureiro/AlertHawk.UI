@@ -16,13 +16,20 @@
     },
     "dashboard": {
         "text": "ダッシュボード",
-        "search":"検索",
-        "noResultFoundFor":"結果が見つかりません",
-        "resume":"再開",
-        "pause":"一時停止",
-        "edit":"編集",
-        "delete":"削除",
-        "serviceDown": "サービスダウン"
+        "search": "検索",
+        "noResultFoundFor": "結果が見つかりません",
+        "resume": "再開",
+        "pause": "一時停止",
+        "edit": "編集",
+        "delete": "削除",
+        "serviceDown": "サービス停止",
+        "metric": "メトリック",
+        "uptime": "稼働時間",
+        "hours": "時間",
+        "days": "日",
+        "months": "月",
+        "certificateexpiration": "証明書の有効期限",
+        "response": "応答（平均）"
     },
     "monitorAgents":{
         "text": "モニターエージェント",

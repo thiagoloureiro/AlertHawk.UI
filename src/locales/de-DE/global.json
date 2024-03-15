@@ -16,13 +16,20 @@
     },
     "dashboard": {
         "text": "Dashboard",
-        "search":"Suchen",
-        "noResultFoundFor":"Kein Ergebnis gefunden",
-        "resume":"Fortsetzen",
-        "pause":"Pausieren",
-        "edit":"Bearbeiten",
-        "delete":"Löschen",
-        "serviceDown": "Der Service scheint ausgefallen zu sein"
+        "search": "Suche",
+        "noResultFoundFor": "Keine Ergebnisse gefunden",
+        "resume": "Fortsetzen",
+        "pause": "Pause",
+        "edit": "Bearbeiten",
+        "delete": "Löschen",
+        "serviceDown": "Dienst nicht verfügbar",
+        "metric": "Metrik",
+        "uptime": "Betriebszeit",
+        "hours": "Stunden",
+        "days": "Tage",
+        "months": "Monate",
+        "certificateexpiration": "Zertifikatsablauf",
+        "response": "Antwort (Durchschnitt)"
     },
     "monitorAgents":{
         "text": "Monitor-Agenten",

@@ -309,8 +309,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(24 hours)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(24 {t("dashboard.hours")})</Typography>
                   <Typography variant="subtitle1">
                     {calculateAverageUptime(
                       selectedMonitorGroup.monitors,
@@ -327,8 +327,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(7 days)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(7 {t("dashboard.days")})</Typography>
                   <Typography variant="subtitle1">
                     {calculateAverageUptime(
                       selectedMonitorGroup.monitors,
@@ -345,8 +345,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(30 days)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(30 {t("dashboard.days")})</Typography>
                   <Typography variant="subtitle1">
                     {calculateAverageUptime(
                       selectedMonitorGroup.monitors,
@@ -363,8 +363,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(3 months)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(3 {t("dashboard.months")})</Typography>
                   <Typography variant="subtitle1">
                     {calculateAverageUptime(
                       selectedMonitorGroup.monitors,
@@ -381,8 +381,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(6 months)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(6 {t("dashboard.months")})</Typography>
                   <Typography variant="subtitle1">
                     {calculateAverageUptime(
                       selectedMonitorGroup.monitors,
@@ -489,8 +489,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(24 hours)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(24 {t("dashboard.hours")})</Typography>
                   <Typography variant="subtitle1">
                     {selectedMonitorItem.monitorStatusDashboard[
                       selectedMetric
@@ -508,8 +508,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(7 days)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(7 {t("dashboard.days")})</Typography>
                   <Typography variant="subtitle1">
                     {selectedMonitorItem.monitorStatusDashboard.uptime7Days ??
                       "N/A"}
@@ -525,8 +525,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(30 days)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(30 {t("dashboard.days")})</Typography>
                   <Typography variant="subtitle1">
                     {selectedMonitorItem.monitorStatusDashboard.uptime30Days ??
                       "N/A"}
@@ -542,8 +542,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(3 months)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(3 {t("dashboard.months")})</Typography>
                   <Typography variant="subtitle1">
                     {selectedMonitorItem.monitorStatusDashboard.uptime3Months ??
                       "N/A"}
@@ -559,8 +559,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Uptime</Typography>
-                  <Typography variant="body2">(6 months)</Typography>
+                  <Typography variant="h6">{t("dashboard.uptime")}</Typography>
+                  <Typography variant="body2">(6 {t("dashboard.months")})</Typography>
                   <Typography variant="subtitle1">
                     {selectedMonitorItem.monitorStatusDashboard.uptime6Months ??
                       "N/A"}
@@ -588,7 +588,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Response</Typography>
+                  <Typography variant="h6">{t("dashboard.response")}</Typography>
                   <Typography variant="subtitle1">
                     {selectedMonitorItem.monitorStatusDashboard.responseTime +
                       " ms"}
@@ -602,7 +602,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     justifyContent: "center",
                   }}
                 >
-                  <Typography variant="h6">Certificate Expiration</Typography>
+                  <Typography variant="h6">{t("dashboard.certificateexpiration")}</Typography>
                   <Typography variant="subtitle1">
                     {selectedMonitorItem.monitorStatusDashboard.certExpDays +
                       " days"}

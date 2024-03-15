@@ -15,14 +15,21 @@
         "settings": "Ayarlar"
     },
     "dashboard": {
-        "text": "Panel",
+        "text": "Kontrol Paneli",
         "search": "Ara",
-        "noResultFoundFor":"Sonuç bulunamadı",
-        "resume":"Devam et",
-        "pause":"Durdur",
-        "edit":"Düzenle",
-        "delete":"Sil",
-        "serviceDown": "Servise Ulaşılamadı"
+        "noResultFoundFor": "Sonuç bulunamadı",
+        "resume": "Devam Et",
+        "pause": "Duraklat",
+        "edit": "Düzenle",
+        "delete": "Sil",
+        "serviceDown": "Servis Dışı",
+        "metric": "Metrik",
+        "uptime": "Çalışma Süresi",
+        "hours": "Saat",
+        "days": "Gün",
+        "months": "Ay",
+        "certificateexpiration": "Sertifika Sonu",
+        "response": "Yanıt (Ortalama)"
     },
     "monitorAgents":{
         "text": "Monitör Görev Yöneticileri",

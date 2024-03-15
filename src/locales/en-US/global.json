@@ -22,7 +22,14 @@
         "pause":"Pause",
         "edit":"Edit",
         "delete":"Delete",
-        "serviceDown": "Service Down"
+        "serviceDown": "Service Down",
+        "metric": "Metric",
+        "uptime": "Uptime",
+        "hours": "Hours",
+        "days": "Days",
+        "months": "Months",
+        "certificateexpiration":"Certificate Expiration",
+        "response":"Response (Avg)"
     },
     "monitorAgents":{
         "text": "Monitor Agents",

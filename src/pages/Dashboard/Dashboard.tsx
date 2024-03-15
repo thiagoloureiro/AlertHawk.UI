@@ -117,7 +117,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
               >
                 <div>
                   <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
-                    <InputLabel id="metric-selection-label">Metric</InputLabel>
+                    <InputLabel id="metric-selection-label">{t("dashboard.metric")}</InputLabel>
                     <Select
                       labelId="metric-selection-label"
                       id="metric-selection"

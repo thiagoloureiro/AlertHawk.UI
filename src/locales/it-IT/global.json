@@ -16,13 +16,20 @@
     },
     "dashboard": {
         "text": "Dashboard",
-        "search":"Cerca",
-        "noResultFoundFor":"Nessun risultato trovato per",
-        "resume":"Riprendi",
-        "pause":"Pausa",
-        "edit":"Modifica",
-        "delete":"Elimina",
-        "serviceDown": "Servizio Non Disponibile"
+        "search": "Ricerca",
+        "noResultFoundFor": "Nessun risultato trovato",
+        "resume": "Riprendi",
+        "pause": "Pausa",
+        "edit": "Modifica",
+        "delete": "Elimina",
+        "serviceDown": "Servizio non disponibile",
+        "metric": "Metrica",
+        "uptime": "Tempo di attività",
+        "hours": "Ore",
+        "days": "Giorni",
+        "months": "Mesi",
+        "certificateexpiration": "Scadenza del certificato",
+        "response": "Risposta (Media)"
     },
     "monitorAgents":{
         "text": "Agenti di Monitoraggio",

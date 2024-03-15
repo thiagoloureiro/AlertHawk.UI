@@ -15,14 +15,21 @@
         "settings": "Ustawienia"
     },
     "dashboard": {
-        "text": "Pulpit",
-        "search":"Szukaj",
-        "noResultFoundFor":"Nic nie znaleziono",
-        "resume":"Kontynuuj",
-        "pause":"Wstrzymaj",
-        "edit":"Edytuj",
-        "delete":"Usuń",
-        "serviceDown": "Serwis Niedostępny"
+        "text": "Panel",
+        "search": "Szukaj",
+        "noResultFoundFor": "Nie znaleziono wyników",
+        "resume": "Wznów",
+        "pause": "Wstrzymaj",
+        "edit": "Edytuj",
+        "delete": "Usuń",
+        "serviceDown": "Usługa niedostępna",
+        "metric": "Metryka",
+        "uptime": "Czas pracy",
+        "hours": "Godziny",
+        "days": "Dni",
+        "months": "Miesiące",
+        "certificateexpiration": "Wygaśnięcie certyfikatu",
+        "response": "Odpowiedź (średnia)"
     },
     "monitorAgents":{
         "text": "Agenci Monitorujący",

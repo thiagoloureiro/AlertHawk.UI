@@ -15,14 +15,21 @@
         "settings": "设置"
     },
     "dashboard": {
-        "text": "仪表板",
-        "search":"搜索",
-        "noResultFoundFor":"未找到结果",
-        "resume":"继续",
-        "pause":"暂停",
-        "edit":"编辑",
-        "delete":"删除",
-        "serviceDown": "服务已停止"
+        "text": "仪表盘",
+        "search": "搜索",
+        "noResultFoundFor": "未找到结果",
+        "resume": "恢复",
+        "pause": "暂停",
+        "edit": "编辑",
+        "delete": "删除",
+        "serviceDown": "服务停止",
+        "metric": "度量",
+        "uptime": "正常运行时间",
+        "hours": "小时",
+        "days": "天",
+        "months": "月",
+        "certificateexpiration": "证书到期",
+        "response": "响应（平均）"
     },
     "monitorAgents":{
         "text": "监控代理",
