@@ -24,7 +24,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          pt: 1,
+          pt: "11px",
           pb: 1,
           px: 2,
         }}
@@ -36,6 +36,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
           variant="contained"
           color="primary"
           onClick={() => setSelectedContinent(null)}
+          sx={{ color: "#fff" }}
         >
           Go Back
         </Button>
