@@ -23,6 +23,12 @@ interface ICollapsibleTable {
   selectedChildRowIndex: number | null;
   handleRowClick: (monitorId: number) => void;
   handleChildRowClick: (childMonitorId: number) => void;
+  selectedMetric:
+    | "uptime24Hrs"
+    | "uptime7Days"
+    | "uptime30Days"
+    | "uptime3Months"
+    | "uptime6Months";
 }
 
 const CollapsibleTable: FC<ICollapsibleTable> = ({
@@ -32,6 +38,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   handleChildRowClick,
   selectedRowIndex,
   selectedChildRowIndex,
+  selectedMetric,
 }) => {
   const { t } = useTranslation("global");
 
@@ -75,14 +82,15 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
             filteredMonitorGroups
               .slice()
               .sort((a, b) => a.name.localeCompare(b.name))
-              .map((monitorGroup, index) => (
+              .map((monitorGroup) => (
                 <CollapsibleTableRow
                   key={monitorGroup.id}
                   monitorGroup={monitorGroup}
-                  isSelected={selectedRowIndex === index}
+                  isSelected={selectedRowIndex === monitorGroup.id}
                   selectedChildRowIndex={selectedChildRowIndex}
-                  onRowClick={() => handleRowClick(index)}
+                  onRowClick={() => handleRowClick(monitorGroup.id)}
                   handleChildRowClick={handleChildRowClick}
+                  selectedMetric={selectedMetric}
                 />
               ))
           ) : (

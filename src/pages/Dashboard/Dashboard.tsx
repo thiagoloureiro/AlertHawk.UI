@@ -5,7 +5,11 @@ import {
   CardContent,
   FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
   OutlinedInput,
+  Select,
+  SelectChangeEvent,
   Stack,
 } from "@mui/material";
 import { Helmet, HelmetProvider } from "react-helmet-async";
@@ -30,6 +34,25 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
   const [selectedChildRowIndex, setSelectedChildRowIndex] = useState<
     number | null
   >(null);
+  const [selectedMetric, setSelectedMetric] = useState<
+    | "uptime24Hrs"
+    | "uptime7Days"
+    | "uptime30Days"
+    | "uptime3Months"
+    | "uptime6Months"
+  >("uptime24Hrs");
+
+  const handleChange = (event: SelectChangeEvent<string>) => {
+    setSelectedMetric(
+      event.target.value as
+        | "uptime24Hrs"
+        | "uptime7Days"
+        | "uptime30Days"
+        | "uptime3Months"
+        | "uptime6Months"
+    );
+  };
+
   const [selectedMonitorGroup, setSelectedMonitorGroup] =
     useState<IMonitorGroupListByUser | null>(null);
   const [selectedMonitorItem, setSelectedMonitorItem] =
@@ -56,7 +79,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
   useEffect(() => {
     setSelectedMonitorGroup(
       selectedRowIndex !== null
-        ? monitorGroupListByUser[selectedRowIndex]
+        ? monitorGroupListByUser.find((x) => x.id === selectedRowIndex) ?? null
         : null
     );
   }, [selectedRowIndex, monitorGroupListByUser]);
@@ -92,6 +115,24 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                 alignItems="center"
                 marginBottom={4}
               >
+                <div>
+                  <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
+                    <InputLabel id="metric-selection-label">Metric</InputLabel>
+                    <Select
+                      labelId="metric-selection-label"
+                      id="metric-selection"
+                      value={selectedMetric}
+                      label="Metric"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="uptime24Hrs">24 Hours</MenuItem>
+                      <MenuItem value="uptime7Days">7 Days</MenuItem>
+                      <MenuItem value="uptime30Days">30 Days</MenuItem>
+                      <MenuItem value="uptime3Months">3 Months</MenuItem>
+                      <MenuItem value="uptime6Months">6 Months</MenuItem>
+                    </Select>
+                  </FormControl>
+                </div>
                 <div>
                   <FormControl fullWidth>
                     <OutlinedInput
@@ -130,6 +171,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                   handleChildRowClick={handleChildRowClick}
                   selectedRowIndex={selectedRowIndex}
                   selectedChildRowIndex={selectedChildRowIndex}
+                  selectedMetric={selectedMetric}
                 />
               </Box>
             </CardContent>
@@ -140,6 +182,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
             <SelectedMonitorDetails
               selectedMonitorGroup={selectedMonitorGroup}
               selectedMonitorItem={selectedMonitorItem}
+              selectedMetric={selectedMetric}
             />
           ) : null}
         </Grid>

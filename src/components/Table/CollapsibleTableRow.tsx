@@ -23,6 +23,12 @@ interface ICollapsibleTableRowProps {
   selectedChildRowIndex: number | null;
   onRowClick: () => void;
   handleChildRowClick: (childMonitorId: number) => void;
+  selectedMetric:
+    | "uptime24Hrs"
+    | "uptime7Days"
+    | "uptime30Days"
+    | "uptime3Months"
+    | "uptime6Months";
 }
 
 const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
@@ -31,6 +37,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   selectedChildRowIndex,
   onRowClick,
   handleChildRowClick,
+  selectedMetric,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -167,7 +174,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     let totalMonitors = 0;
 
     monitors.forEach((monitor) => {
-      totalUptime += monitor.monitorStatusDashboard?.uptime24Hrs ?? 0;
+      totalUptime += monitor.monitorStatusDashboard[selectedMetric] ?? 0;
       totalMonitors++;
     });
 
@@ -292,10 +299,12 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                             : {}
                         }
                       >
-                        {monitor.monitorStatusDashboard?.uptime24Hrs !== 0 ? (
+                        {monitor.monitorStatusDashboard[selectedMetric] !==
+                        0 ? (
                           <Chip
                             label={
-                              monitor.monitorStatusDashboard?.uptime24Hrs + " %"
+                              monitor.monitorStatusDashboard[selectedMetric] +
+                              " %"
                             }
                             color="success"
                             size="medium"
@@ -310,7 +319,8 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                         ) : (
                           <Chip
                             label={
-                              monitor.monitorStatusDashboard?.uptime24Hrs + " %"
+                              monitor.monitorStatusDashboard[selectedMetric] +
+                              " %"
                             }
                             color="error"
                             size="medium"
@@ -347,7 +357,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                           }}
                         >
                           {renderUptimeBoxes(
-                            monitor.monitorStatusDashboard?.uptime24Hrs ?? 0,
+                            monitor.monitorStatusDashboard[selectedMetric] ?? 0,
                             monitor.status
                           )}
                         </Box>

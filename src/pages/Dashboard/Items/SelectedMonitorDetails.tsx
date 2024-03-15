@@ -18,15 +18,23 @@ import {
   IMonitorGroupListByUserItem,
 } from "../../../interfaces/IMonitorGroupListByUser";
 import { useTranslation } from "react-i18next";
+import logging from "../../../utils/logging";
 
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
   selectedMonitorItem: IMonitorGroupListByUserItem | null;
+  selectedMetric:
+    | "uptime24Hrs"
+    | "uptime7Days"
+    | "uptime30Days"
+    | "uptime3Months"
+    | "uptime6Months";
 }
 
 const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   selectedMonitorGroup,
   selectedMonitorItem,
+  selectedMetric,
 }) => {
   const { t } = useTranslation("global");
   const { isDarkMode } = useStoreState((state) => state.app);
@@ -126,6 +134,29 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
     return boxes;
   };
 
+  const calculateAverageUptime = (
+    monitors: IMonitorGroupListByUserItem[],
+    metric:
+      | "uptime24Hrs"
+      | "uptime7Days"
+      | "uptime30Days"
+      | "uptime3Months"
+      | "uptime6Months" = selectedMetric
+  ) => {
+    let totalUptime = 0;
+    let totalMonitors = 0;
+
+    monitors.forEach((monitor) => {
+      totalUptime += monitor.monitorStatusDashboard[metric] ?? 0;
+      totalMonitors++;
+    });
+    logging.info(selectedMonitorGroup);
+    logging.info(totalUptime);
+    logging.info(totalMonitors);
+
+    return totalMonitors === 0 ? 0 : totalUptime / totalMonitors;
+  };
+
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
       <Typography variant="h5" px={2} sx={{ marginBottom: "-10px" }}>
@@ -187,6 +218,176 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
           </Button>
         </ButtonGroup>
       </Box>
+      {selectedMonitorGroup !== null && (
+        <>
+          <Card>
+            <CardContent>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  px: 6,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 1,
+                  }}
+                >
+                  {renderUptimeBoxes(
+                    calculateAverageUptime(selectedMonitorGroup.monitors) ?? 0,
+                    selectedMonitorGroup.monitors.every((x) => x.status)
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {selectedMonitorGroup.monitors.every((x) => x.status) ? (
+                    <Chip
+                      label={"Up"}
+                      color="success"
+                      sx={{
+                        borderRadius: "56px",
+                        p: "30px 30px",
+                        "& .MuiChip-label": {
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: 36,
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Chip
+                      label={"Down"}
+                      color="error"
+                      sx={{
+                        borderRadius: "56px",
+                        p: "30px 30px",
+                        "& .MuiChip-label": {
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: 36,
+                        },
+                      }}
+                    />
+                  )}
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
+          <Card>
+            <CardContent>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-around",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography variant="h6">Uptime</Typography>
+                  <Typography variant="body2">(24 hours)</Typography>
+                  <Typography variant="subtitle1">
+                    {calculateAverageUptime(
+                      selectedMonitorGroup.monitors,
+                      "uptime24Hrs"
+                    ).toFixed(2)}
+                    {" %"}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography variant="h6">Uptime</Typography>
+                  <Typography variant="body2">(7 days)</Typography>
+                  <Typography variant="subtitle1">
+                    {calculateAverageUptime(
+                      selectedMonitorGroup.monitors,
+                      "uptime7Days"
+                    ).toFixed(2)}
+                    {" %"}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography variant="h6">Uptime</Typography>
+                  <Typography variant="body2">(30 days)</Typography>
+                  <Typography variant="subtitle1">
+                    {calculateAverageUptime(
+                      selectedMonitorGroup.monitors,
+                      "uptime30Days"
+                    ).toFixed(2)}
+                    {" %"}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography variant="h6">Uptime</Typography>
+                  <Typography variant="body2">(3 months)</Typography>
+                  <Typography variant="subtitle1">
+                    {calculateAverageUptime(
+                      selectedMonitorGroup.monitors,
+                      "uptime3Months"
+                    ).toFixed(2)}
+                    {" %"}
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography variant="h6">Uptime</Typography>
+                  <Typography variant="body2">(6 months)</Typography>
+                  <Typography variant="subtitle1">
+                    {calculateAverageUptime(
+                      selectedMonitorGroup.monitors,
+                      "uptime6Months"
+                    ).toFixed(2)}
+                    {" %"}
+                  </Typography>
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
+        </>
+      )}
       {selectedMonitorItem !== null && (
         <>
           <Card>
@@ -208,8 +409,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   }}
                 >
                   {renderUptimeBoxes(
-                    selectedMonitorItem.monitorStatusDashboard?.uptime24Hrs ??
-                      0,
+                    selectedMonitorItem.monitorStatusDashboard[
+                      selectedMetric
+                    ] ?? 0,
                     selectedMonitorItem.status
                   )}
                 </Box>
@@ -274,10 +476,12 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   <Typography variant="h6">Uptime</Typography>
                   <Typography variant="body2">(24 hours)</Typography>
                   <Typography variant="subtitle1">
-                    {selectedMonitorItem.monitorStatusDashboard.uptime24Hrs ??
-                      "N/A"}
-                    {selectedMonitorItem.monitorStatusDashboard.uptime24Hrs &&
-                      "%"}
+                    {selectedMonitorItem.monitorStatusDashboard[
+                      selectedMetric
+                    ] ?? "N/A"}
+                    {selectedMonitorItem.monitorStatusDashboard[
+                      selectedMetric
+                    ] && "%"}
                   </Typography>
                 </Box>
                 <Box
