@@ -11,8 +11,7 @@ interface ILayoutProps {
 }
 
 const Layout: FC<ILayoutProps> = ({ children }) => {
-  const { isSidebarOpen, isSearchEngineIndexingAllowed, isSmallScreen } =
-    useStoreState((state) => state.app);
+  const { isSidebarOpen, isSmallScreen } = useStoreState((state) => state.app);
   const { setIsSidebarOpen } = useStoreActions((action) => action.app);
 
   const isAuthenticated: boolean = useIsAuthenticated();
@@ -25,11 +24,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
     <>
       <HelmetProvider>
         <Helmet>
-          {isSearchEngineIndexingAllowed ? (
-            <meta name="robots" content="index, follow" />
-          ) : (
-            <meta name="robots" content="noindex, nofollow" />
-          )}
+          <meta name="robots" content="noindex, nofollow" />
         </Helmet>
       </HelmetProvider>
       <Box

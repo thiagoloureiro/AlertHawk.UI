@@ -11,8 +11,6 @@ export interface IAppModel {
   setIsSidebarOpen: Action<IAppModel, boolean>;
   selectedDisplayTimezone: string;
   setSelectedDisplayTimezone: Action<IAppModel, string>;
-  isSearchEngineIndexingAllowed: boolean;
-  setIsSearchEngineIndexingAllowed: Action<IAppModel, boolean>;
   isSmallScreen: boolean;
   setIsSmallScreen: Action<IAppModel, boolean>;
   isMediumScreen: boolean;
@@ -23,7 +21,6 @@ const defaultAppState = {
   isLoading: false,
   isDarkMode: false,
   isSidebarOpen: false,
-  isSearchEngineIndexingAllowed: false,
   isSmallScreen: false,
   isMediumScreen: false,
   selectedDisplayTimezone: momentTZ.tz.guess(),
@@ -48,10 +45,6 @@ const app: IAppModel = {
   selectedDisplayTimezone: defaultAppState.selectedDisplayTimezone,
   setSelectedDisplayTimezone: action((state, payload) => {
     state.selectedDisplayTimezone = payload;
-  }),
-  isSearchEngineIndexingAllowed: defaultAppState.isSearchEngineIndexingAllowed,
-  setIsSearchEngineIndexingAllowed: action((state, payload) => {
-    state.isSearchEngineIndexingAllowed = payload;
   }),
   isSmallScreen: defaultAppState.isSidebarOpen,
   setIsSmallScreen: action((state, payload) => {

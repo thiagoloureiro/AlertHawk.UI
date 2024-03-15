@@ -50,11 +50,9 @@ const General: FC<IGeneralProps> = () => {
   const { isDarkMode, selectedDisplayTimezone } = useStoreState(
     (state) => state.app
   );
-  const {
-    setSelectedDisplayTimezone,
-    setIsSearchEngineIndexingAllowed,
-    setIsDarkMode,
-  } = useStoreActions((action) => action.app);
+  const { setSelectedDisplayTimezone, setIsDarkMode } = useStoreActions(
+    (action) => action.app
+  );
 
   const theme = getTheme(isDarkMode ? "dark" : "light");
 
