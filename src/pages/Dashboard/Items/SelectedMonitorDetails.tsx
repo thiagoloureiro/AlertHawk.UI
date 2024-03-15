@@ -19,7 +19,7 @@ import {
 } from "../../../interfaces/IMonitorGroupListByUser";
 import { useTranslation } from "react-i18next";
 import logging from "../../../utils/logging";
-
+import { getMetricName } from "../../../utils/metricParser";
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
   selectedMonitorItem: IMonitorGroupListByUserItem | null;
@@ -221,7 +221,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       {selectedMonitorGroup !== null && (
         <>
           <Card>
-            <CardContent>
+            <CardContent sx={{ position: "relative" }}>
               <Box
                 sx={{
                   display: "flex",
@@ -257,11 +257,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       color="success"
                       sx={{
                         borderRadius: "56px",
-                        p: "30px 30px",
+                        p: "20px 20px",
                         "& .MuiChip-label": {
                           color: "#fff",
                           fontWeight: 700,
-                          fontSize: 36,
+                          fontSize: 24,
                         },
                       }}
                     />
@@ -271,17 +271,25 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       color="error"
                       sx={{
                         borderRadius: "56px",
-                        p: "30px 30px",
+                        p: "20px 20px",
                         "& .MuiChip-label": {
                           color: "#fff",
                           fontWeight: 700,
-                          fontSize: 36,
+                          fontSize: 24,
                         },
                       }}
                     />
                   )}
                 </Box>
               </Box>
+              <Typography
+                variant="subtitle2"
+                color="secondary.light"
+                px={4}
+                sx={{ position: "absolute", left: "30px", bottom: "5px" }}
+              >
+                {getMetricName(selectedMetric)}
+              </Typography>
             </CardContent>
           </Card>
           <Card>
@@ -391,7 +399,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       {selectedMonitorItem !== null && (
         <>
           <Card>
-            <CardContent>
+            <CardContent sx={{ position: "relative" }}>
               <Box
                 sx={{
                   display: "flex",
@@ -429,11 +437,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       color="success"
                       sx={{
                         borderRadius: "56px",
-                        p: "30px 30px",
+                        p: "20px 20px",
                         "& .MuiChip-label": {
                           color: "#fff",
                           fontWeight: 700,
-                          fontSize: 36,
+                          fontSize: 24,
                         },
                       }}
                     />
@@ -443,17 +451,25 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       color="error"
                       sx={{
                         borderRadius: "56px",
-                        p: "30px 30px",
+                        p: "20px 20px",
                         "& .MuiChip-label": {
                           color: "#fff",
                           fontWeight: 700,
-                          fontSize: 36,
+                          fontSize: 24,
                         },
                       }}
                     />
                   )}
                 </Box>
               </Box>
+              <Typography
+                variant="subtitle2"
+                color="secondary.light"
+                px={4}
+                sx={{ position: "absolute", left: "30px", bottom: "5px" }}
+              >
+                {getMetricName(selectedMetric)}
+              </Typography>
             </CardContent>
           </Card>
           <Card>
