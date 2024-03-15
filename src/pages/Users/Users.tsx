@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Grid, Table, TableBody, TableCell, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Card, CardContent, Grid, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useStoreActions, useStoreState } from "../../hooks";
