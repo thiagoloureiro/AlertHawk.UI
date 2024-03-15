@@ -269,7 +269,9 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
                                 sx={{ color: "success.main", ml: 1 }}
                               />
                             ) : (
-                              <CancelIcon sx={{ color: "error.main", ml: 1 }} />
+                              <CancelIcon
+                                sx={{ color: "secondary.light", ml: 1 }}
+                              />
                             )}
                           </Box>
                           <Typography variant="body2">

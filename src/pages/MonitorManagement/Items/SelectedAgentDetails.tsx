@@ -80,7 +80,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
                   {agent.isMaster ? (
                     <CheckCircleIcon sx={{ color: "success.main", ml: 1 }} />
                   ) : (
-                    <CancelIcon sx={{ color: "error.main", ml: 1 }} />
+                    <CancelIcon sx={{ color: "secondary.light", ml: 1 }} />
                   )}
                 </Box>
               </Box>
