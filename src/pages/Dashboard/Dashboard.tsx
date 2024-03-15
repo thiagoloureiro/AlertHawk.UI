@@ -8,7 +8,6 @@ import {
   OutlinedInput,
   Stack,
 } from "@mui/material";
-// import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useTranslation } from "react-i18next";
 import CollapsibleTable from "../../components/Table/CollapsibleTable";
@@ -93,16 +92,6 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                 alignItems="center"
                 marginBottom={4}
               >
-                <div>
-                  {/* <Button
-                    size="large"
-                    variant="contained"
-                    startIcon={<AddOutlinedIcon sx={{ color: "#fff" }} />}
-                    sx={{ color: "white" }}
-                  >
-                    Add New Monitor
-                  </Button> */}
-                </div>
                 <div>
                   <FormControl fullWidth>
                     <OutlinedInput

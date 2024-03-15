@@ -5,6 +5,7 @@ import {
   ButtonGroup,
   Card,
   CardContent,
+  Chip,
   Typography,
 } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -38,6 +39,91 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
   const handleEditBtn = () => {
     setIsEditMode(!isEditMode);
+  };
+
+  const renderUptimeBoxes = (uptimePercentage: number, status: boolean) => {
+    const totalBoxes = 24;
+    const greenBoxes = Math.floor((uptimePercentage / 100) * totalBoxes);
+    const redBoxes = totalBoxes - greenBoxes;
+
+    const boxes = [];
+
+    if (status) {
+      const greenEndIndex = Math.floor((greenBoxes + redBoxes) / 2);
+      for (let i = 0; i < greenBoxes; i++) {
+        boxes.push(
+          <Box
+            key={i}
+            sx={{
+              backgroundColor: "success.main",
+              width: "8px",
+              height: "25px",
+              borderRadius: "56px",
+              transition: "all 0.2s ease-in-out",
+              ":hover": {
+                transform: "scale(1.4)",
+              },
+            }}
+          />
+        );
+        if (i === greenEndIndex - 1) {
+          for (let j = 0; j < redBoxes; j++) {
+            boxes.push(
+              <Box
+                key={i + j + 1}
+                sx={{
+                  backgroundColor: "error.main",
+                  width: "8px",
+                  height: "25px",
+                  borderRadius: "56px",
+                  transition: "all 0.2s ease-in-out",
+                  ":hover": {
+                    transform: "scale(1.4)",
+                  },
+                }}
+              />
+            );
+          }
+        }
+      }
+    } else {
+      for (let i = 0; i < greenBoxes; i++) {
+        boxes.push(
+          <Box
+            key={i}
+            sx={{
+              backgroundColor: "success.main",
+              width: "8px",
+              height: "25px",
+              borderRadius: "56px",
+              transition: "all 0.2s ease-in-out",
+              ":hover": {
+                transform: "scale(1.4)",
+              },
+            }}
+          />
+        );
+      }
+      for (let i = 0; i < redBoxes; i++) {
+        boxes.push(
+          <Box
+            key={i + greenBoxes}
+            sx={{
+              backgroundColor: "error.main",
+              width: "8px",
+              height: "25px",
+              borderRadius: "56px",
+              transition: "all 0.2s ease-in-out",
+              ":hover": {
+                transform: "scale(1.4)",
+              },
+            }}
+          />
+        );
+      }
+    }
+
+    return boxes;
   };
 
   return (
@@ -78,23 +164,74 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
             {t("dashboard.delete")}
           </Button>
         </ButtonGroup>
-        {/* <Typography
-                  component="div"
-                  variant="h5"
-                  sx={{
-                    fontSize: 48,
-                    backgroundColor: "success.main",
-                    padding: "10px 20px",
-                    minWidth: "150px",
-                    textAlign: "center",
-                    borderRadius: "56px",
-                  }}
-                >
-                  Up
-                </Typography> */}
       </Box>
       {selectedMonitorItem !== null && (
         <>
+          <Card>
+            <CardContent>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  px: 6,
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: 1,
+                  }}
+                >
+                  {renderUptimeBoxes(
+                    selectedMonitorItem.monitorStatusDashboard?.uptime24Hrs ??
+                      0,
+                    selectedMonitorItem.status
+                  )}
+                </Box>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  {selectedMonitorItem.status ? (
+                    <Chip
+                      label={"Up"}
+                      color="success"
+                      sx={{
+                        borderRadius: "56px",
+                        p: "30px 30px",
+                        "& .MuiChip-label": {
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: 36,
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Chip
+                      label={"Down"}
+                      color="error"
+                      sx={{
+                        borderRadius: "56px",
+                        p: "30px 30px",
+                        "& .MuiChip-label": {
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: 36,
+                        },
+                      }}
+                    />
+                  )}
+                </Box>
+              </Box>
+            </CardContent>
+          </Card>
           <Card>
             <CardContent>
               <Box
