@@ -6,6 +6,7 @@
         "monitorList": "Lista Monitor",
         "monitorManagement": "Gestione Monitor",
         "notificationManagement": "Gestione Notifiche",
+        "monitorAgents":"Agenti di Monitoraggio",
         "monitorAlert": "Avviso Monitor",
         "users": "Utenti",
         "settings": "Impostazioni"

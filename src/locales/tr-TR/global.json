@@ -5,6 +5,7 @@
     "sidebar":{
         "monitorList": "Monitor Listesi",
         "monitorManagement": "Monitor Yönetimi",
+        "monitorAgents":"Monitor Agents",
         "notificationManagement": "Bildirim Yönetimi",
         "monitorAlert": "Monitor Alarmı",
         "users": "Kullanıcılar",

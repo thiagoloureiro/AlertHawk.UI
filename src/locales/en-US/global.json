@@ -5,6 +5,7 @@
     "sidebar":{
         "monitorList": "Monitor List",
         "monitorManagement": "Monitor Management",
+        "monitorAgents":"Monitor Agents",
         "notificationManagement": "Notification Management",
         "monitorAlert": "Monitor Alert",
         "users": "Users",
