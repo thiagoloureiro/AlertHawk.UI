@@ -20,6 +20,9 @@
         "delete":"删除",
         "serviceDown": "服务已停止"
     },
+    "monitorAgents":{
+        "text": "Monitor Agents"
+    },
     "monitorManagement":{
         "text": "监控管理"
     },

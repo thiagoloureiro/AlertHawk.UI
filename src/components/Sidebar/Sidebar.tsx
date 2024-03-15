@@ -116,8 +116,8 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       icon: <MonitorHeartOutlinedIcon />,
     },
     {
-      text: t("sidebar.monitorManagement"),
-      pathname: "/monitor-management",
+      text: t("sidebar.monitorAgents"),
+      pathname: "/monitor-agents",
       icon: <AddToQueueOutlinedIcon />,
     },
     {

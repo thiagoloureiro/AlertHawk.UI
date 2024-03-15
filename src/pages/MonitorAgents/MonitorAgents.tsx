@@ -14,9 +14,9 @@ export interface IExtendedAgent extends IAgent {
   name: string;
 }
 
-interface IMonitorManagementProps {}
+interface IMonitorAgentsProps {}
 
-const MonitorManagement: FC<IMonitorManagementProps> = () => {
+const MonitorAgents: FC<IMonitorAgentsProps> = () => {
   const { t } = useTranslation("global");
   const [selectedContinent, setSelectedContinent] = useState<string | null>(
     null
@@ -154,7 +154,7 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>AlertHawk | {t("monitorManagement.text")}</title>
+          <title>AlertHawk | {t("monitorAgents.text")}</title>
         </Helmet>
       </HelmetProvider>
       <Grid container spacing={4}>
@@ -189,7 +189,7 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
           {selectedContinent === null ? (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
               <Typography variant="h5" p={2}>
-                {t("monitorManagement.text")}
+                {t("monitorAgents.text")}
               </Typography>
               <Card>
                 <CardContent>
@@ -287,6 +287,7 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
           ) : (
             <SelectedAgentDetails
               selectedContinent={selectedContinent}
+              setSelectedContinent={setSelectedContinent}
               selectedAgentsPerContinent={extendedAgents}
             />
           )}
@@ -296,4 +297,4 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
   );
 };
 
-export default MonitorManagement;
+export default MonitorAgents;

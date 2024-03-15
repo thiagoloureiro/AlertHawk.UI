@@ -20,6 +20,9 @@
         "delete":"Usuń",
         "serviceDown": "Serwis Niedostępny"
     },
+    "monitorAgents":{
+        "text": "Monitor Agents"
+    },
     "monitorManagement":{
         "text": "Zarządzanie Monitorami"
     },

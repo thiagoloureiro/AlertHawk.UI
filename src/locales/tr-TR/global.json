@@ -20,6 +20,9 @@
         "delete":"Sil",
         "serviceDown": "Servise Ulaşılamadı"
     },
+    "monitorAgents":{
+        "text": "Monitor Agents"
+    },
     "monitorManagement":{
         "text": "Monitör Yönetimi"
     },

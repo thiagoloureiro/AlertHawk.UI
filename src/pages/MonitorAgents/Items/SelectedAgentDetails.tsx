@@ -1,25 +1,45 @@
 import { FC, useState } from "react";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { IExtendedAgent } from "../MonitorManagement";
+import { IExtendedAgent } from "../MonitorAgents";
 
 interface ISelectedAgentDetailsProps {
   selectedAgentsPerContinent: IExtendedAgent[];
   selectedContinent: string;
+  setSelectedContinent: (val: string | null) => void;
 }
 
 const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
   selectedAgentsPerContinent,
   selectedContinent,
+  setSelectedContinent,
 }) => {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-      <Typography variant="h5" p={2}>
-        Monitor Agents in {" " + selectedContinent}
-      </Typography>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          pt: 1,
+          pb: 1,
+          px: 2,
+        }}
+      >
+        <Typography variant="h5">
+          Monitor Agents in {" " + selectedContinent}
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => setSelectedContinent(null)}
+        >
+          Go Back
+        </Button>
+      </Box>
       <Card>
         <CardContent>
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

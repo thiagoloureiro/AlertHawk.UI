@@ -20,6 +20,9 @@
         "delete":"Delete",
         "serviceDown": "Service Down"
     },
+    "monitorAgents":{
+        "text": "Monitor Agents"
+    },
     "monitorManagement":{
         "text": "Monitor Management"
     },

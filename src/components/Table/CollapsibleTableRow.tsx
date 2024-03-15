@@ -42,8 +42,9 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   };
 
   const renderUptimeBoxes = (uptimePercentage: number, status: boolean) => {
-    const greenBoxes = Math.floor(uptimePercentage / 10);
-    const redBoxes = 10 - greenBoxes;
+    const totalBoxes = 12;
+    const greenBoxes = Math.floor((uptimePercentage / 100) * totalBoxes);
+    const redBoxes = totalBoxes - greenBoxes;
 
     const boxes = [];
 
