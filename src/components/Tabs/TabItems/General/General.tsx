@@ -2,12 +2,8 @@ import {
   Autocomplete,
   Box,
   FormControl,
-  FormControlLabel,
-  FormLabel,
   InputLabel,
   MenuItem,
-  Radio,
-  RadioGroup,
   Select,
   SelectChangeEvent,
   Stack,
@@ -45,14 +41,15 @@ const languageOptions = [
   { code: "pl-PL", text: "Polski" },
   { code: "pt-BR", text: "Português (Brasil)" },
   { code: "es-ES", text: "Spanish" },
-  { code: "tr-TR", text: "Türkçe" }
+  { code: "tr-TR", text: "Türkçe" },
 ];
 
 const General: FC<IGeneralProps> = () => {
   const { t, i18n } = useTranslation("global");
 
-  const { isDarkMode, selectedDisplayTimezone, isSearchEngineIndexingAllowed } =
-    useStoreState((state) => state.app);
+  const { isDarkMode, selectedDisplayTimezone } = useStoreState(
+    (state) => state.app
+  );
   const {
     setSelectedDisplayTimezone,
     setIsSearchEngineIndexingAllowed,
@@ -94,20 +91,6 @@ const General: FC<IGeneralProps> = () => {
       t("settings.general.timezoneSettingsHaveBeenChanged"),
       "success"
     );
-  };
-
-  const handleSearchEngineRadioButtonChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const val: string = event.target.value;
-
-    setIsSearchEngineIndexingAllowed(val === "true" ? true : false);
-
-    if (val === "true") {
-      showSnackbar(t("settings.general.indexingHasBeenEnabled"), "success");
-    } else {
-      showSnackbar(t("settings.general.indexingHasBeenDisabled"), "warning");
-    }
   };
 
   const isOptionEqualToValue = (option: any, value: any) => {
@@ -192,35 +175,6 @@ const General: FC<IGeneralProps> = () => {
             />
           )}
         />
-        <FormControl>
-          <FormLabel
-            id="search-engine-indexing"
-            sx={
-              isDarkMode
-                ? { mb: 1, color: grey[300] }
-                : { mb: 1, color: grey[700] }
-            }
-          >
-            {t("settings.general.searchEngineVisibility")}
-          </FormLabel>
-          <RadioGroup
-            aria-labelledby="search-engine-indexing"
-            name="search-engine-indexing"
-            value={isSearchEngineIndexingAllowed}
-            onChange={handleSearchEngineRadioButtonChange}
-          >
-            <FormControlLabel
-              value={true}
-              control={<Radio />}
-              label={t("settings.general.allowSearchEngineIndexing")}
-            />
-            <FormControlLabel
-              value={false}
-              control={<Radio />}
-              label={t("settings.general.preventSearchEnginesFromIndexing")}
-            />
-          </RadioGroup>
-        </FormControl>
         <Box sx={{ width: "100%" }}>
           <Typography
             variant="body1"
