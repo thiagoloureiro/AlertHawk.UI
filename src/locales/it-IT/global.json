@@ -69,5 +69,14 @@
         "text": "Informazioni",
         "checkProjectOn": "Verifica progetto su "
     },
-    "pageNotFound": "Pagina Non Trovata"
+    "pageNotFound": "Pagina Non Trovata",
+    "users": {
+        "text": "Utenti",
+        "userName": "Nome utente",
+        "email": "Email",
+        "isAdmin": "Amministratore",
+        "actions": "Azioni",
+        "true": "Sì",
+        "false": "No"
+    }    
 }

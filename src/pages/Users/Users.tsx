@@ -32,23 +32,23 @@ const Users: FC<IUsersProps> = () => {
     const headerCells: readonly IHeaderCell[] = [
         {
             id: 'userName',
-            label: t("Users.userName"),
+            label: t("users.userName"),
             sortable: false
         },
         {
             id: 'Email',
-            label: t("Users.email"),
+            label: t("users.email"),
             sortable: true
         },
         {
             id: 'isAdmin',
-            label: t("Users.isAdmin"),
+            label: t("users.isAdmin"),
             width: '220px',
             sortable: true
         },
         {
             id: 'Actions',
-            label: t("Users.actions"),
+            label: t("users.actions"),
             sortable: true
         }
     ];
@@ -57,7 +57,7 @@ const Users: FC<IUsersProps> = () => {
         <>
             <HelmetProvider>
                 <Helmet>
-                    <title>AlertHawk | {t("Users.text")}</title>
+                    <title>AlertHawk | {t("users.text")}</title>
                 </Helmet>
             </HelmetProvider>
             <Grid container spacing={4}>
@@ -89,7 +89,7 @@ const Users: FC<IUsersProps> = () => {
                                                 <TableRow key={i}>
                                                     <TableCell>{_user.username}</TableCell>
                                                     <TableCell>{_user.email}</TableCell>
-                                                    <TableCell>{_user.isAdmin ? t("Users.true") : t("Users.false")}</TableCell>
+                                                    <TableCell>{_user.isAdmin ? t("users.true") : t("users.false")}</TableCell>
                                                     <TableCell>...</TableCell>
                                                 </TableRow>
                                             ))}

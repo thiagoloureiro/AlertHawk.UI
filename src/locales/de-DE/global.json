@@ -69,5 +69,14 @@
         "text":"Über",
         "checkProjectOn": "Projekt-Repository auf "
     },
-    "pageNotFound": "Seite nicht gefunden"
+    "pageNotFound": "Seite nicht gefunden",
+    "users": {
+        "text": "Benutzer",
+        "userName": "Benutzername",
+        "email": "E-Mail",
+        "isAdmin": "Administrator",
+        "actions": "Aktionen",
+        "true": "Ja",
+        "false": "Nein"
+    }    
 }

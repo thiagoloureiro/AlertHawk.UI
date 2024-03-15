@@ -69,5 +69,14 @@
         "text":"Hakkında",
         "checkProjectOn": "Check project on "
     },
-    "pageNotFound": "Sayfa Bulunamadı"
+    "pageNotFound": "Sayfa Bulunamadı",
+    "users": {
+        "text": "Kullanıcılar",
+        "userName": "Kullanıcı Adı",
+        "email": "E-posta",
+        "isAdmin": "Yönetici",
+        "actions": "Eylemler",
+        "true": "Evet",
+        "false": "Hayır"
+    }    
 }

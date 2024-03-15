@@ -69,5 +69,14 @@
         "text": "について",
         "checkProjectOn": "プロジェクトをチェックする"
     },
-    "pageNotFound": "ページが見つかりません"
+    "pageNotFound": "ページが見つかりません",
+    "users": {
+        "text": "ユーザー",
+        "userName": "ユーザー名",
+        "email": "メール",
+        "isAdmin": "管理者",
+        "actions": "アクション",
+        "true": "はい",
+        "false": "いいえ"
+    }    
 }

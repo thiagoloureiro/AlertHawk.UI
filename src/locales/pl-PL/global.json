@@ -69,5 +69,14 @@
         "text" : "O projekcie",
         "checkProjectOn" : "Sprawdź projekt na "
     },
-    "pageNotFound": "Nie znaleziono strony"
+    "pageNotFound": "Nie znaleziono strony",
+    "users": {
+        "text": "Użytkownicy",
+        "userName": "Nazwa użytkownika",
+        "email": "E-mail",
+        "isAdmin": "Administrator",
+        "actions": "Akcje",
+        "true": "Tak",
+        "false": "Nie"
+    }    
 }

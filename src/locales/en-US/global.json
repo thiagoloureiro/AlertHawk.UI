@@ -70,11 +70,11 @@
         "checkProjectOn": "Check project on "
     },
     "pageNotFound": "Page Not Found",
-    "Users":{
+    "users":{
         "text": "Users",
-        "userName": "User Name",
+        "userName": "User",
         "email": "Email",
-        "isAdmin": "Is Admin",	
+        "isAdmin": "Administrator",	
         "actions": "Actions",
         "true": "Yes",	
         "false": "No"
