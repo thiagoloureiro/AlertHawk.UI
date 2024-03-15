@@ -115,7 +115,7 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
         } else if (region === "South America") {
           cx = "32%";
           cy = "72%";
-        } else if (region === "Ocenia") {
+        } else if (region === "Oceania") {
           cx = "85%";
           cy = "76%";
         }
