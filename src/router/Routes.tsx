@@ -3,6 +3,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import MonitorAgents from "../pages/MonitorAgents/MonitorAgents";
 import NotFound from "../pages/NotFound/NotFound";
 import Settings from "../pages/Settings/Settings";
+import Users from "../pages/Users/Users";
 import ProtectedRoute from "./ProtectedRoute";
 
 const appRoutes: IRoute[] = [
@@ -21,6 +22,13 @@ const appRoutes: IRoute[] = [
         <MonitorAgents />
       </ProtectedRoute>
     ),
+  },  {
+    path: "/users",
+    element: (
+      <ProtectedRoute>
+        <Users />
+      </ProtectedRoute>
+    )
   },
   {
     path: "/settings",
