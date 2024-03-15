@@ -5,7 +5,8 @@ export interface IMonitorGroupListByUserItem {
   monitorTypeId: number;
   name: string;
   heartBeatInterval: number;
-  urlToCheck: string;
+  urlToCheck: string | null;
+  monitorTcp: string | null;
   retries: number;
   status: boolean;
   daysToExpireCert: number;

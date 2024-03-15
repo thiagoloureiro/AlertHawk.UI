@@ -134,7 +134,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       {selectedMonitorItem !== null && (
         <Box px={2}>
           <a
-            href={selectedMonitorItem.urlToCheck}
+            href={
+              selectedMonitorItem.urlToCheck ??
+              selectedMonitorItem.monitorTcp ??
+              "#"
+            }
             style={{
               fontWeight: 700,
               color: isDarkMode ? "#00bcd4" : "#0097a7",
@@ -142,7 +146,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
             target="_blank"
             rel="noopener noreferrer"
           >
-            {selectedMonitorItem.urlToCheck}
+            {selectedMonitorItem.urlToCheck ??
+              selectedMonitorItem.monitorTcp ??
+              "N/A"}
           </a>
         </Box>
       )}
