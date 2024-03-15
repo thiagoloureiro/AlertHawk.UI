@@ -128,9 +128,25 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
-      <Typography variant="h5" px={2}>
+      <Typography variant="h5" px={2} sx={{ marginBottom: "-10px" }}>
         {selectedMonitorGroup?.name || selectedMonitorItem?.name}
       </Typography>
+      {selectedMonitorItem !== null && (
+        <Box px={2}>
+          <a
+            href={selectedMonitorItem.urlToCheck}
+            style={{
+              fontWeight: 700,
+              color: isDarkMode ? "#00bcd4" : "#0097a7",
+            }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {selectedMonitorItem.urlToCheck}
+          </a>
+        </Box>
+      )}
+
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2, px: 2 }}>
         <ButtonGroup
           variant="contained"
