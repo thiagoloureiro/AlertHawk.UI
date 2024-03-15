@@ -200,7 +200,10 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
                       {agents.length === 0 ? (
                         "No monitor agents found"
                       ) : (
-                        <b>Total Number of Monitor Agents: {agents.length}</b>
+                        <b>
+                          {t("monitorAgents.totalNumberOfMonitorAgents")}:{" "}
+                          {agents.length}
+                        </b>
                       )}
                     </Typography>
                     <Typography variant="body1">
@@ -208,7 +211,9 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
                         "No monitor agents found"
                       ) : (
                         <>
-                          <b>Total Number of Running Monitors:</b>{" "}
+                          <b>
+                            {t("monitorAgents.totalNumberofRunningMonitors")}:
+                          </b>{" "}
                           {agents.reduce(
                             (total, agent) => total + agent.listTasks,
                             0
@@ -255,14 +260,16 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
                           }}
                         >
                           <Typography variant="body2">
-                            <b>Hostname: </b> {agent.hostname}
+                            <b>{t("monitorAgents.hostname")}: </b>{" "}
+                            {agent.hostname}
                           </Typography>
                           <Typography variant="body2">
-                            <b>Number of Monitors: </b> {agent.listTasks}
+                            <b>{t("monitorAgents.numberOfMonitors")}: </b>{" "}
+                            {agent.listTasks}
                           </Typography>
                           <Box sx={{ display: "flex", alignItems: "center" }}>
                             <Typography variant="body2">
-                              <b>Master:</b>
+                              <b>{t("monitorAgents.master")}:</b>
                             </Typography>
                             {agent.isMaster ? (
                               <CheckCircleIcon
@@ -275,7 +282,7 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
                             )}
                           </Box>
                           <Typography variant="body2">
-                            <b>Location: </b>{" "}
+                            <b>{t("monitorAgents.location")}: </b>{" "}
                             {getContinentName(agent.monitorRegion)}
                           </Typography>
                         </Box>

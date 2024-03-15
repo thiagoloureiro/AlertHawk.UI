@@ -1,4 +1,7 @@
 {
+    "general":{
+        "goBack":"戻る"
+    },
     "header":{
         "logout": "ログアウト"
     },
@@ -22,7 +25,19 @@
         "serviceDown": "サービスダウン"
     },
     "monitorAgents":{
-        "text": "Monitor Agents"
+        "text": "モニターエージェント",
+        "totalNumberOfMonitorAgents" : "モニターエージェントの総数",
+        "totalNumberofRunningMonitors": "実行中のモニターの総数",
+        "hostname": "ホスト名",
+        "numberOfMonitors": "モニター数",
+        "マスター": "マスター",
+        "location": "場所",
+        "monitorAgentsInEurope": "ヨーロッパのモニターエージェント",
+        "monitorAgentsInAsia": "アジアのモニターエージェント",
+        "monitorAgentsInAfrica":"「アフリカのモニターエージェント」",
+        "monitorAgentsInNorthAmerica":"「北米のモニターエージェント」",
+        "monitorAgentsInLatinAmerica": "ラテンアメリカのエージェントを監視する",
+        "monitorAgentsInOcenia": "オセニアのモニターエージェント"
     },
     "monitorManagement":{
         "text": "モニター管理"

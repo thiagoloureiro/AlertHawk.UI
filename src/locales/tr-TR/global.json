@@ -1,4 +1,7 @@
 {
+    "general":{
+        "goBack":"Geri Dön"
+    },
     "header":{
         "logout": "Çıkış yap"
     },
@@ -22,7 +25,19 @@
         "serviceDown": "Servise Ulaşılamadı"
     },
     "monitorAgents":{
-        "text": "Monitor Agents"
+        "text": "Monitör Görev Yöneticileri",
+        "totalNumberOfMonitorAgents" : "Toplam Görev Yöneticisi Sayısı",
+        "totalNumberofRunningMonitors": "Toplam Çalışan Monitör Sayısı",
+        "hostname": "Ana bilgisayar adı",
+        "numberOfMonitors": "Monitör Sayısı",
+        "master": "Master",
+        "location": "Konum",
+        "monitorAgentsInEurope": "Avrupa'daki Görev Yöneticileri",
+        "monitorAgentsInAsia": "Asya'daki Görev Yöneticileri",
+        "monitorAgentsInAfrica": "Afrika'daki Görev Yöneticileri",
+        "monitorAgentsInNorthAmerica": "Kuzey Amerika'daki Görev Yöneticileri",
+        "monitorAgentsInLatinAmerica": "Latin Amerika'daki Görev Yöneticileri",
+        "monitorAgentsInOcenia": "Okyanusya'daki Görev Yöneticileri"
     },
     "monitorManagement":{
         "text": "Monitör Yönetimi"

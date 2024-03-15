@@ -1,4 +1,7 @@
 {
+    "general":{
+        "goBack":"返回"
+    },
     "header":{
         "logout": "登出"
     },
@@ -22,7 +25,19 @@
         "serviceDown": "服务已停止"
     },
     "monitorAgents":{
-        "text": "Monitor Agents"
+        "text": "监控代理",
+        "totalNumberOfMonitorAgents" : "监控代理总数",
+        "totalNumberofRunningMonitors":"正在运行的监控程序总数",
+        "hostname":"主机名",
+        "numberOfMonitors":"监视器数量",
+        "master": "主机",
+        "location": "位置",
+        "monitorAgentsInEurope": "欧洲的监控代理",
+        "monitorAgentsInAsia":"亚洲的监控代理",
+        "monitorAgentsInAfrica":"监控非洲的代理商",
+        "monitorAgentsInNorthAmerica":"北美地区的监控代理",
+        "monitorAgentsInLatinAmerica": "监控拉丁美洲的代理商",
+        "monitorAgentsInOcenia":"监控奥塞尼亚的代理商"
     },
     "monitorManagement":{
         "text": "监控管理"

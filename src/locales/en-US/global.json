@@ -1,4 +1,7 @@
 {
+    "general":{
+        "goBack":"Go Back"
+    },
     "header":{
         "logout": "Logout"
     },
@@ -22,7 +25,19 @@
         "serviceDown": "Service Down"
     },
     "monitorAgents":{
-        "text": "Monitor Agents"
+        "text": "Monitor Agents",
+        "totalNumberOfMonitorAgents" :"Total Number of Monitor Agents",
+        "totalNumberofRunningMonitors":"Total Number of Running Monitors",
+        "hostname":"Hostname",
+        "numberOfMonitors":"Number of Monitors",
+        "master":"Master",
+        "location":"Location",
+        "monitorAgentsInEurope":"Monitor Agents in Europe",
+        "monitorAgentsInAsia":"Monitor Agents in Asia",
+        "monitorAgentsInAfrica":"Monitor Agents in Africa",
+        "monitorAgentsInNorthAmerica":"Monitor Agents in North America",
+        "monitorAgentsInLatinAmerica":"Monitor Agents in Latin America",
+        "monitorAgentsInOcenia":"Monitor Agents in Ocenia"
     },
     "monitorManagement":{
         "text": "Monitor Management"

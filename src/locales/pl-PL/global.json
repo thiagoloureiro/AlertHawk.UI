@@ -1,4 +1,7 @@
 {
+    "general":{
+        "goBack":"Powrót"
+    },
     "header":{
         "logout": "Wyloguj się"
     },
@@ -22,7 +25,19 @@
         "serviceDown": "Serwis Niedostępny"
     },
     "monitorAgents":{
-        "text": "Monitor Agents"
+        "text": "Agenci Monitorujący",
+        "totalNumberOfMonitorAgents" : "Całkowita Liczba Agentów Monitorujących",
+        "totalNumberofRunningMonitors" : "Całkowita Liczba Uruchomionych Monitorów",
+        "hostname": "Nazwa Hosta",
+        "numberOfMonitors": "Liczba Monitorów",
+        "master": "Master",
+        "location": "Lokalizacja",
+        "monitorAgentsInEurope": "Agenci Monitorujący w Europie",
+        "monitorAgentsInAsia": "Agenci Monitorujący w Azji",
+        "monitorAgentsInAfrica": "Agenci Monitorujący w Afryce",
+        "monitorAgentsInNorthAmerica": "Agenci Monitorujący w Ameryce Północnej",
+        "monitorAgentsInLatinAmerica": "Agenci Monitorujący w Ameryce Łacińskiej",
+        "monitorAgentsInOcenia": "Agenci Monitorujący w Ocenia"
     },
     "monitorManagement":{
         "text": "Zarządzanie Monitorami"

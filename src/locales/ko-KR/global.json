@@ -1,4 +1,7 @@
 {
+    "general":{
+        "goBack":"뒤로 가기"
+    },
     "header":{
         "logout": "로그아웃"
     },
@@ -22,7 +25,19 @@
         "serviceDown": "서비스 다운"
     },
     "monitorAgents":{
-        "text": "Monitor Agents"
+        "text": "모니터 에이전트",
+        "totalNumberOfMonitorAgents":"총 모니터 에이전트 수",
+        "totalNumberofRunningMonitors":"실행 중인 모니터의 총 개수",
+        "hostname":"호스트 이름",
+        "numberOfMonitors":"모니터 수",
+        "master":"마스터",
+        "location":"위치",
+        "monitorAgentsInEurope":"유럽 내 모니터 에이전트",
+        "monitorAgentsInAsia":"아시아의 모니터 에이전트",
+        "monitorAgentsInAfrica":"아프리카의 에이전트 모니터링",
+        "monitorAgentsInNorthAmerica":"북미 지역 에이전트 모니터링",
+        "monitorAgentsInLatinAmerica":"라틴 아메리카의 에이전트 모니터링",
+        "monitorAgentsInOcenia":"오세아니아의 에이전트 모니터링"
     },
     "monitorManagement":{
         "text": "모니터 관리"

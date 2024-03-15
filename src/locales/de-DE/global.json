@@ -1,4 +1,7 @@
 {
+    "general":{
+        "goBack":"Zurück"
+    },
     "header":{
         "logout": "Ausloggen"
     },
@@ -22,7 +25,19 @@
         "serviceDown": "Der Service scheint ausgefallen zu sein"
     },
     "monitorAgents":{
-        "text": "Monitor-Agenten"
+        "text": "Monitor-Agenten",
+        "totalNumberOfMonitorAgents" : "Gesamtzahl der Monitor-Agenten",
+        "totalNumberofRunningMonitors": "Gesamtzahl der laufenden Monitore",
+        "hostname": "Hostname",
+        "numberOfMonitors": "Anzahl der Monitore",
+        "master": "Master",
+        "Standort": "Standort",
+        "monitorAgentsInEurope": "Überwachungsagenten in Europa",
+        "monitorAgentsInAsia": "Überwachungsagenten in Asien",
+        "monitorAgentsInAfrica": "Agenten in Afrika",
+        "monitorAgentsInNorthAmerica": "Agenten in Nordamerika",
+        "monitorAgentsInLatinAmerica": "Agenten in Lateinamerika",
+        "monitorAgentsInOcenia": "Agenten in Ocenia"
     },
     "monitorManagement":{
         "text": "Monitor-Management"

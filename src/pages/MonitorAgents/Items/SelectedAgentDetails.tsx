@@ -3,6 +3,7 @@ import { Box, Button, Card, CardContent, Typography } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { IExtendedAgent } from "../MonitorAgents";
+import { useTranslation } from "react-i18next";
 
 interface ISelectedAgentDetailsProps {
   selectedAgentsPerContinent: IExtendedAgent[];
@@ -15,6 +16,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
   selectedContinent,
   setSelectedContinent,
 }) => {
+  const { t } = useTranslation("global");
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   return (
@@ -30,7 +32,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
         }}
       >
         <Typography variant="h5">
-          Monitor Agents in {" " + selectedContinent}
+          {t(`monitorAgents.monitorAgentsIn${selectedContinent}`)}
         </Typography>
         <Button
           variant="contained"
@@ -38,7 +40,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
           onClick={() => setSelectedContinent(null)}
           sx={{ color: "#fff" }}
         >
-          Go Back
+          {t("general.goBack")}
         </Button>
       </Box>
       <Card>
@@ -49,7 +51,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
                 "No monitors running in this region"
               ) : (
                 <>
-                  <b>Total Number of Running Monitors:</b>{" "}
+                  <b>{t("monitorAgents.totalNumberofRunningMonitors")}:</b>{" "}
                   {selectedAgentsPerContinent.reduce(
                     (total, agent) => total + agent.listTasks,
                     0
@@ -89,14 +91,15 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
             <CardContent>
               <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <Typography variant="body2">
-                  <b>Hostname: </b> {agent.hostname}
+                  <b>{t("monitorAgents.hostname")}: </b> {agent.hostname}
                 </Typography>
                 <Typography variant="body2">
-                  <b>Number of Monitors: </b> {agent.listTasks}
+                  <b>{t("monitorAgents.numberOfMonitors")}: </b>{" "}
+                  {agent.listTasks}
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Typography variant="body2">
-                    <b>Master:</b>
+                    <b>{t("monitorAgents.master")}:</b>
                   </Typography>
                   {agent.isMaster ? (
                     <CheckCircleIcon sx={{ color: "success.main", ml: 1 }} />
