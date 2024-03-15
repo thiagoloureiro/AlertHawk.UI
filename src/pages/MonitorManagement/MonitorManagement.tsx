@@ -26,6 +26,7 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
   );
   const { agents } = useStoreState((state) => state.monitor);
   const { isSidebarOpen } = useStoreState((state) => state.app);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
   const [extendedAgents, setExtendedAgents] = useState<IExtendedAgent[]>([]);
   const cardItemRef = useRef<HTMLDivElement>(null);
@@ -199,7 +200,7 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
                       {agents.length === 0 ? (
                         "No monitor agents found"
                       ) : (
-                        <>Total Number of Monitor Agents: {agents.length}</>
+                        <b>Total Number of Monitor Agents: {agents.length}</b>
                       )}
                     </Typography>
                     <Typography variant="body1">
@@ -207,7 +208,7 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
                         "No monitor agents found"
                       ) : (
                         <>
-                          Total Number of Running Monitors:{" "}
+                          <b>Total Number of Running Monitors:</b>{" "}
                           {agents.reduce(
                             (total, agent) => total + agent.listTasks,
                             0
@@ -237,8 +238,14 @@ const MonitorManagement: FC<IMonitorManagementProps> = () => {
                 }}
               >
                 {agents.length > 0 &&
-                  agents.map((agent, key) => (
-                    <Card key={key} sx={{ my: 2 }}>
+                  agents.map((agent, index) => (
+                    <Card
+                      key={index}
+                      sx={{ my: 2 }}
+                      onMouseOver={() => setHoveredCard(index)}
+                      onMouseOut={() => setHoveredCard(null)}
+                      raised={hoveredCard === index}
+                    >
                       <CardContent>
                         <Box
                           sx={{
