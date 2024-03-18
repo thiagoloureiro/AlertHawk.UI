@@ -10,6 +10,8 @@ import { IAgent } from "../interfaces/IAgent";
 export interface IMonitorModel {
   monitorGroupListByUser: IMonitorGroupListByUser[];
   setMonitorGroupListByUser: Action<IMonitorModel, IMonitorGroupListByUser[]>;
+  monitorGroupList: IMonitorGroupListByUser[];
+  setMonitorGroupList: Action<IMonitorModel, IMonitorGroupListByUser[]>;
   setResetMonitor: Action<IMonitorModel>;
   thunkGetMonitorGroupListByUser: Thunk<
     IMonitorModel,
@@ -39,10 +41,13 @@ const monitor: IMonitorModel = {
         getStoreActions().app.setIsLoading(true);
         const response = await MonitorService.getMonitorGroupListByUser(id);
         actions.setMonitorGroupListByUser(response);
+        const monitorGroupList = await MonitorService.getMonitorGroupList(id);
+        actions.setMonitorGroupList(monitorGroupList);
         return Status.Success;
       } catch (err: any) {
         logging.error(err);
         actions.setMonitorGroupListByUser([]);
+        actions.setMonitorGroupList([]);
         return getStatusFromError(err);
       } finally {
         getStoreActions().app.setIsLoading(false);
@@ -66,6 +71,10 @@ const monitor: IMonitorModel = {
     } finally {
       getStoreActions().app.setIsLoading(false);
     }
+  }),
+  monitorGroupList: [],
+  setMonitorGroupList:  action((state, payload) => {
+    state.monitorGroupList = payload;
   }),
 };
 
