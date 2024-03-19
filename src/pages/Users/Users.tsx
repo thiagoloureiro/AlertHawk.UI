@@ -127,11 +127,19 @@ const Users: FC<IUsersProps> = () => {
         setAvailableMonitorGroups(availableMonitorGroups);
     };
     const handleSubmit = async () => {
-        console.log('submit', availableMonitorGroups, 'availableMonitorGroups', assignedMonitorGroups, 'assignedMonitorGroups');
-        const convertedAssignedMonitorGroups: IUserMonitorGroup[] = assignedMonitorGroups.map(group => ({
-            userId: userId,
-            groupMonitorId: group.id
-        }));
+        var convertedAssignedMonitorGroups: IUserMonitorGroup[] = [];
+        if (assignedMonitorGroups.length == 0) {
+            convertedAssignedMonitorGroups = [{
+                userId: userId,
+                groupMonitorId: 0
+            }];
+        }
+        else {
+            convertedAssignedMonitorGroups = assignedMonitorGroups.map(group => ({
+                userId: userId,
+                groupMonitorId: group.id
+            }));
+        }
         await UserService.updateMonitorGroup(convertedAssignedMonitorGroups);
         setOpen(false);
 
