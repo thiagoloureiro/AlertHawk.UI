@@ -9,6 +9,8 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
 import { IUserMonitorGroup } from "../../interfaces/IUserMonitorGroup";
 import UserService from "../../services/UserService";
+import { IUser } from "../../interfaces/IUser";
+import MonitorService from "../../services/MonitorService";
 
 interface IUsersProps { }
 
@@ -22,42 +24,68 @@ interface IHeaderCell {
 
 const Users: FC<IUsersProps> = () => {
     const { t } = useTranslation("global");
-    const { users, userMonitorGroups } = useStoreState((state) => state.user);
-    const { monitorGroupListByUser, monitorGroupList } = useStoreState((state) => state.monitor);
-    const { thunkGetAllUsers, thunkGetUserMonitorGroups } = useStoreActions((state) => state.user);
+    const [users, setUsers] = useState<IUser[]>([])
+    const { monitorGroupList } = useStoreState((state) => state.monitor);
     const [open, setOpen] = useState(false);
     const [availableMonitorGroups, setAvailableMonitorGroups] = useState<IMonitorGroupListByUser[]>([]);
     const [assignedMonitorGroups, setAssignedMonitorGroups] = useState<IMonitorGroupListByUser[]>([]);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [userId, setUserId] = useState<string>('');
     const openMenu = Boolean(anchorEl);
-    const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
+   
     const handleMenuClose = () => {
         setAnchorEl(null);
     };
 
     useEffect(() => {
         const fetchData = async () => {
-            await thunkGetAllUsers();
+            var response = await UserService.getAll();
+            response =  response.slice().sort((a, b) => {
+                if (a.username! < b.username!) {
+                    return -1;
+                }
+                if (a.username! > b.username!) {
+                    return 1;
+                }
+                return 0;
+            });
+            setUsers(response);
         };
         if (users.length == 0) {
             fetchData();
         }
-
     }, [users]);
 
-    const handleClickOpen = (id: string) => {
-        setOpen(true);
-        setUserId(id);
-        console.log(id, 'idxx', userMonitorGroups, 'userMonitorGroups', users, 'users')
-        if (userMonitorGroups.length == 0 || !userMonitorGroups.some(s => s.userId != id)) {
-            thunkGetUserMonitorGroups(id);
-            setAssignedMonitorGroups(monitorGroupListByUser);
-            setAvailableMonitorGroups(monitorGroupList.filter(x => !monitorGroupListByUser?.some(y => y.id === x.id)));
-        }
+    const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>, userId: string) => {
+        setAnchorEl(event.currentTarget);
+        setUserId(userId);
+    };
 
+    const handleClickOpen = async () => {
+        setOpen(true);
+        var responseGroupListByUser = await UserService.getUserMonitorGroups(userId);
+        var convertedResponseGroupListByUser = monitorGroupList.filter(x => responseGroupListByUser.map(y => y.groupMonitorId).includes(x.id));
+        convertedResponseGroupListByUser = convertedResponseGroupListByUser.slice().sort((a, b) => {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        });
+        setAssignedMonitorGroups(convertedResponseGroupListByUser);
+        var filtredList = monitorGroupList.filter(x => !convertedResponseGroupListByUser?.some(y => y.id === x.id));
+        filtredList =  filtredList.slice().sort((a, b) => {
+            if (a.name < b.name) {
+                return -1;
+            }
+            if (a.name > b.name) {
+                return 1;
+            }
+            return 0;
+        });
+        setAvailableMonitorGroups(filtredList);
         handleMenuClose();
     };
     const handleAddSelectItem = (id: number) => {
@@ -72,18 +100,20 @@ const Users: FC<IUsersProps> = () => {
         setAssignedMonitorGroups(assignedMonitorGroups.filter(x => x.id !== id));
         setAvailableMonitorGroups(availableMonitorGroups);
     };
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log('submit', availableMonitorGroups, 'availableMonitorGroups', assignedMonitorGroups, 'assignedMonitorGroups');
         const convertedAssignedMonitorGroups: IUserMonitorGroup[] = assignedMonitorGroups.map(group => ({
             userId: userId,
             groupMonitorId: group.id
         }));
-        UserService.updateMonitorGroup(convertedAssignedMonitorGroups);
+        await UserService.updateMonitorGroup(convertedAssignedMonitorGroups);
         setOpen(false);
 
     }
     const handleClose = () => {
         setOpen(false);
+        setAvailableMonitorGroups([]);
+        setAssignedMonitorGroups([]);
 
     };
     const headerCells: readonly IHeaderCell[] = [
@@ -148,11 +178,11 @@ const Users: FC<IUsersProps> = () => {
                                                     <TableCell>{_user.email}</TableCell>
                                                     <TableCell>{_user.isAdmin ? t("users.true") : t("users.false")}</TableCell>
                                                     <TableCell>
-                                                        <IconButton aria-label="more" onClick={handleMenuClick}>
+                                                        <IconButton aria-label="more" onClick={(event) => handleMenuClick(event, _user.id!)}>
                                                             <MoreVertIcon />
                                                         </IconButton>
                                                         <Menu
-                                                            id="basic-menu"
+                                                            id={`menu-${_user.id}`}
                                                             anchorEl={anchorEl}
                                                             open={openMenu}
                                                             onClose={handleMenuClose}
@@ -161,7 +191,7 @@ const Users: FC<IUsersProps> = () => {
                                                             }}
                                                         >
                                                             {/* <MenuItem onClick={handleClickOpen}>Edit</MenuItem> */}
-                                                            <MenuItem onClick={() => handleClickOpen(_user.id!)}>Monitor Groups + {_user.id}</MenuItem>
+                                                            <MenuItem onClick={() => handleClickOpen()}>Monitor Groups</MenuItem>
                                                         </Menu>
 
                                                     </TableCell>
