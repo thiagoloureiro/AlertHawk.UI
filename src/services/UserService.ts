@@ -3,6 +3,7 @@ import axiosInstance from "../config/axios";
 import { IUser } from "../interfaces/IUser";
 import appendOptionalHeaders from "../utils/axiosHelper";
 import { AxiosHeaders } from "../interfaces/axios/IAxiosHeaders";
+import { IUserMonitorGroup } from "../interfaces/IUserMonitorGroup";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -25,6 +26,10 @@ const UserService = {
     await requests.get(`user/${email}`, appendOptionalHeaders(headers)),
   getAll: async (headers?: AxiosHeaders): Promise<IUser[]> =>
     await requests.get('user/getAll', appendOptionalHeaders(headers)),
+  getUserMonitorGroups: async (id: string, headers?: AxiosHeaders): Promise<IUserMonitorGroup[]> =>
+    await requests.get(`usersMonitorGroup/GetAllByUserId/${id}`, appendOptionalHeaders(headers)),
+  updateMonitorGroup: async (request: IUserMonitorGroup[], headers?: AxiosHeaders): Promise<IUserMonitorGroup> =>
+    await requests.post('usersMonitorGroup/create', request, appendOptionalHeaders(headers)),
 };
 
 export default UserService;

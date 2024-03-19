@@ -5,6 +5,7 @@ import logging from "../utils/logging";
 import { Status } from "../enums/Enums";
 import { StoreModel } from ".";
 import { getStatusFromError } from "../utils/errorHandler";
+import { IUserMonitorGroup } from "../interfaces/IUserMonitorGroup";
 
 export interface IUserModel {
   user: IUser | null;
@@ -63,7 +64,7 @@ const user: IUserModel = {
   }),
   setUsers: action((state, payload) => {
     state.users = payload;
-  }),
+  })
 };
 
 export default user;
