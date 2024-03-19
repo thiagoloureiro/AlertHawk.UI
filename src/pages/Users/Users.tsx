@@ -14,13 +14,16 @@ import {
     ListItemText,
     Menu,
     MenuItem,
+    Snackbar,
     Stack,
     Table,
     TableBody,
     TableCell,
     TableHead,
-    TableRow
+    TableRow,
 } from "@mui/material";
+import Alert from '@mui/material/Alert';
+
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useStoreState } from "../../hooks";
@@ -54,6 +57,7 @@ const Users: FC<IUsersProps> = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [userId, setUserId] = useState<string>('');
     const openMenu = Boolean(anchorEl);
+    const [openAlert, setOpenAlert] = useState(false);
 
     const handleMenuClose = () => {
         setAnchorEl(null);
@@ -81,6 +85,10 @@ const Users: FC<IUsersProps> = () => {
             }
         }
     }, [users]);
+
+    const handleCloseAlert = () => {
+        setOpenAlert(false);
+    };
 
     const handleMenuClick = (event: React.MouseEvent<HTMLButtonElement>, userId: string) => {
         setAnchorEl(event.currentTarget);
@@ -141,6 +149,7 @@ const Users: FC<IUsersProps> = () => {
             }));
         }
         await UserService.updateMonitorGroup(convertedAssignedMonitorGroups);
+        setOpenAlert(true);
         setOpen(false);
 
     }
@@ -271,7 +280,7 @@ const Users: FC<IUsersProps> = () => {
                                             >
                                                 <div style={{ width: '40%', height: '100%' }}>
                                                     <List key="availabe" sx={{ bgcolor: 'background.paper', paddingLeft: '10px' }}>
-                                                        {availableMonitorGroups != null && availableMonitorGroups.map((value: IMonitorGroupListByUser) => (
+                                                        {availableMonitorGroups.length > 0 ? (availableMonitorGroups.map((value: IMonitorGroupListByUser) => (
                                                             <ListItem
                                                                 key={value.id}
                                                                 disableGutters
@@ -280,7 +289,18 @@ const Users: FC<IUsersProps> = () => {
                                                             >
                                                                 <ListItemText primary={`${value.name}`} />
                                                             </ListItem>
-                                                        ))}
+                                                        ))) : (
+                                                            <ListItem
+
+                                                            >
+                                                                <ListItemText >
+
+                                                                    {t("users.noResultFoundFor")}
+
+                                                                </ListItemText>
+                                                            </ListItem>
+
+                                                        )}
                                                     </List>
                                                 </div>
                                                 <div>
@@ -289,8 +309,8 @@ const Users: FC<IUsersProps> = () => {
                                                 </div>
                                                 <div style={{ width: '40%', height: '100%' }}>
                                                     <List key="assigned" sx={{ bgcolor: 'background.paper', paddingLeft: '10px' }}>
-                                                        {
-                                                            assignedMonitorGroups != null && assignedMonitorGroups.map((value: IMonitorGroupListByUser) => (
+                                                        {assignedMonitorGroups.length > 0 ? (
+                                                            assignedMonitorGroups.map((value: IMonitorGroupListByUser) => (
                                                                 <ListItem
                                                                     key={value.id}
                                                                     disableGutters
@@ -299,7 +319,18 @@ const Users: FC<IUsersProps> = () => {
                                                                 >
                                                                     <ListItemText primary={` ${value.name}`} />
                                                                 </ListItem>
-                                                            ))}
+                                                            ))) : (
+                                                            <ListItem
+
+                                                            >
+                                                                <ListItemText >
+
+                                                                    {t("users.noResultFoundFor")}
+
+                                                                </ListItemText>
+                                                            </ListItem>
+
+                                                        )}
                                                     </List>
                                                 </div>
                                             </Stack>
@@ -313,6 +344,12 @@ const Users: FC<IUsersProps> = () => {
                             <Button type="submit">Save</Button>
                         </DialogActions>
                     </Dialog>
+                    <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert} anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} // Alinhar à direita
+                    >
+                        <Alert onClose={handleCloseAlert} severity="success" elevation={6} variant="filled">
+                            {t("users.monitorConfirmation")}
+                        </Alert>
+                    </Snackbar>
                 </>
             )}
         </>

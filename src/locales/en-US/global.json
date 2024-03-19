@@ -78,6 +78,8 @@
         "isAdmin": "Administrator",	
         "actions": "Actions",
         "true": "Yes",	
-        "false": "No"
+        "false": "No",
+        "noResultFoundFor":"No result found",
+        "monitorConfirmation":"Monitor groups has been changed"
     }
 }
