@@ -41,7 +41,7 @@ const monitor: IMonitorModel = {
         getStoreActions().app.setIsLoading(true);
         const response = await MonitorService.getMonitorGroupListByUser(id);
         actions.setMonitorGroupListByUser(response);
-        const monitorGroupList = await MonitorService.getMonitorGroupList(id);
+        const monitorGroupList = await MonitorService.getMonitorGroupList();
         actions.setMonitorGroupList(monitorGroupList);
         return Status.Success;
       } catch (err: any) {
