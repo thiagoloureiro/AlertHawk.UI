@@ -29,7 +29,8 @@
         "days": "Gün",
         "months": "Ay",
         "certificateexpiration": "Sertifika Sonu",
-        "response": "Yanıt (Ortalama)"
+        "response": "Yanıt (Ortalama)",
+        "certificateIsAboutToExpireFor": "Sertifika süresi dolmak üzere"
     },
     "monitorAgents":{
         "text": "Monitör Görev Yöneticileri",

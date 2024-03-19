@@ -50,11 +50,26 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
     IMonitorGroupListByUserItem[]
   >([]);
 
+  const [certificateExpirationList, setCertificateExpirationList] = useState<
+    IMonitorGroupListByUserItem[]
+  >([]);
+
   useEffect(() => {
     const downServices = monitors.flatMap((monitorGroup) =>
       monitorGroup.monitors.filter((monitor) => !monitor.status)
     );
+    const certificateExpirationList = monitors.flatMap((monitorGroup) =>
+      monitorGroup.monitors
+        .filter(
+          (monitor) =>
+            monitor.urlToCheck?.startsWith("https") &&
+            monitor.daysToExpireCert <= 30
+        )
+        .sort((a, b) => b.daysToExpireCert - a.daysToExpireCert)
+    );
+    console.log(certificateExpirationList);
     setDownServices(downServices);
+    setCertificateExpirationList(certificateExpirationList);
   }, [monitors]);
 
   useEffect(() => {
@@ -67,6 +82,36 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       }, index * 500);
     });
   }, [downServices]);
+
+  useEffect(() => {
+    if (certificateExpirationList.length > 3) {
+      certificateExpirationList.slice(0, 3).forEach((service, index) => {
+        setTimeout(() => {
+          showSnackbar(
+            `${t("dashboard.certificateIsAboutToExpireFor")} - ${
+              service.name
+            } [${service.daysToExpireCert} ${t(
+              "dashboard.days"
+            ).toLowerCase()}]`,
+            "warning"
+          );
+        }, index * 500);
+      });
+    } else {
+      certificateExpirationList.forEach((service, index) => {
+        setTimeout(() => {
+          showSnackbar(
+            `${t("dashboard.certificateIsAboutToExpireFor")} - ${
+              service.name
+            } [${service.daysToExpireCert} ${t(
+              "dashboard.days"
+            ).toLowerCase()}]`,
+            "warning"
+          );
+        }, index * 500);
+      });
+    }
+  }, [certificateExpirationList]);
 
   return (
     <TableContainer component={Card}>

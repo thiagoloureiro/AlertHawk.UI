@@ -29,7 +29,8 @@
         "days": "日",
         "months": "月",
         "certificateexpiration": "証明書の有効期限",
-        "response": "応答（平均）"
+        "response": "応答（平均）",
+        "certificateIsAboutToExpireFor": "証明書の有効期限が切れる"
     },
     "monitorAgents":{
         "text": "モニターエージェント",

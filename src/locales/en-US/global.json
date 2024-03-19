@@ -29,7 +29,8 @@
         "days": "Days",
         "months": "Months",
         "certificateexpiration":"Certificate Expiration",
-        "response":"Response (Avg)"
+        "response":"Response (Avg)",
+        "certificateIsAboutToExpireFor":"Certificate is about to expire for"
     },
     "monitorAgents":{
         "text": "Monitor Agents",
