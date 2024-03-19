@@ -81,5 +81,15 @@
         "false": "No",
         "noResultFoundFor":"No result found",
         "monitorConfirmation":"Monitor groups has been changed"
+    },
+    "monitorAlerts": {
+        "text": "Monitor Alerts",
+        "noResultFoundFor":"No result found",
+        "monitorAlerts":"Monitor Alerts",
+        "timeStamp":"Time Stamp",
+        "monitorName": "Monitor Name",
+        "message": "Message",
+        "screenshot":"Screenshot"
+        
     }
 }

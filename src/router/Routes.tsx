@@ -4,6 +4,7 @@ import MonitorAgents from "../pages/MonitorAgents/MonitorAgents";
 import NotFound from "../pages/NotFound/NotFound";
 import Settings from "../pages/Settings/Settings";
 import Users from "../pages/Users/Users";
+import MonitorAlerts from "../pages/MonitorAlerts/MonitorAlerts";
 import ProtectedRoute from "./ProtectedRoute";
 
 const appRoutes: IRoute[] = [
@@ -28,6 +29,22 @@ const appRoutes: IRoute[] = [
     element: (
       <ProtectedRoute>
         <Users />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/monitor-alert/:id",
+    element: (
+      <ProtectedRoute>
+        <MonitorAlerts />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/monitor-alert",
+    element: (
+      <ProtectedRoute>
+        <MonitorAlerts />
       </ProtectedRoute>
     ),
   },
