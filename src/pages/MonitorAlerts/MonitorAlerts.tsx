@@ -28,7 +28,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                 if (id) {
                     setMonitorId(parseInt(id));
                 }
-                const response = await MonitorAlertService.get(monitorId);
+                const response = id ? await MonitorAlertService.get(parseInt(id)) : await MonitorAlertService.get(monitorId);
                 setMonitorAlerts(response);
 
             } catch (error) {
