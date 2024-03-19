@@ -32,7 +32,9 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
         }}
       >
         <Typography variant="h5">
-          {t(`monitorAgents.monitorAgentsIn${selectedContinent}`)}
+          {t(
+            `monitorAgents.monitorAgentsIn${selectedContinent.replace(" ", "")}`
+          )}
         </Typography>
         <Button
           variant="contained"
@@ -108,8 +110,7 @@ const SelectedAgentDetails: FC<ISelectedAgentDetailsProps> = ({
                   )}
                 </Box>
                 <Typography variant="body2">
-                  <b>{t("monitorAgents.version")}: </b>{" "}
-                  {agent.version}
+                  <b>{t("monitorAgents.version")}: </b> {agent.version}
                 </Typography>
               </Box>
             </CardContent>

@@ -22,13 +22,14 @@ const appRoutes: IRoute[] = [
         <MonitorAgents />
       </ProtectedRoute>
     ),
-  },  {
+  },
+  {
     path: "/users",
     element: (
       <ProtectedRoute>
         <Users />
       </ProtectedRoute>
-    )
+    ),
   },
   {
     path: "/settings",

@@ -29,7 +29,8 @@
         "days": "Días",
         "months": "Meses",
         "certificateexpiration":"Vencimiento del Certificado",
-        "response":"Respuesta (Promedio)"
+        "response":"Respuesta (Promedio)",
+        "certificateIsAboutToExpireFor": "El certificado está a punto de expirar para"
     },    
     "monitorAgents":{
         "text": "Agentes Monitor",

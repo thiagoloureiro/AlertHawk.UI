@@ -29,7 +29,8 @@
         "days": "Giorni",
         "months": "Mesi",
         "certificateexpiration": "Scadenza del certificato",
-        "response": "Risposta (Media)"
+        "response": "Risposta (Media)",
+        "certificateIsAboutToExpireFor": "Il certificato sta per scadere per"
     },
     "monitorAgents":{
         "text": "Agenti di Monitoraggio",

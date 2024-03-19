@@ -12,14 +12,14 @@ import UserService from "../../services/UserService";
 import { IUser } from "../../interfaces/IUser";
 import MonitorService from "../../services/MonitorService";
 
-interface IUsersProps { }
+interface IUsersProps {}
 
 interface IHeaderCell {
-    id: string;
-    label: string;
-    width?: string;
-    sortable: boolean;
-    align?: "left" | "center" | "right" | "justify" | "inherit"
+  id: string;
+  label: string;
+  width?: string;
+  sortable: boolean;
+  align?: "left" | "center" | "right" | "justify" | "inherit";
 }
 
 const Users: FC<IUsersProps> = () => {
@@ -276,7 +276,9 @@ const Users: FC<IUsersProps> = () => {
                 </DialogActions>
             </Dialog>
         </>
-    );
+      )}
+    </>
+  );
 };
 
 export default Users;

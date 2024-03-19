@@ -91,6 +91,7 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
   const [selectedItem, setSelectedItem] = useState<IMenuItem | null>(null);
   const { isDarkMode } = useStoreState((state) => state.app);
   const navigate = useNavigate();
+  const { user } = useStoreState((state) => state.user);
 
   useEffect(() => {
     setSelectedItem(
@@ -130,12 +131,15 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       pathname: "/monitor-alert",
       icon: <ErrorOutlineOutlinedIcon />,
     },
-    {
+  ];
+
+  if (user?.isAdmin) {
+    menuItems.push({
       text: t("sidebar.users"),
       pathname: "/users",
       icon: <PeopleAltOutlinedIcon />,
-    },
-  ];
+    });
+  }
 
   const secondMenuItems: IMenuItem[] = [
     {

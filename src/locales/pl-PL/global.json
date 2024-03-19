@@ -29,7 +29,8 @@
         "days": "Dni",
         "months": "Miesiące",
         "certificateexpiration": "Wygaśnięcie certyfikatu",
-        "response": "Odpowiedź (średnia)"
+        "response": "Odpowiedź (średnia)",
+        "certificateIsAboutToExpireFor" : "Certyfikat wkrótce wygaśnie"
     },
     "monitorAgents":{
         "text": "Agenci Monitorujący",

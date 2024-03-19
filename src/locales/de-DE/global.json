@@ -29,7 +29,8 @@
         "days": "Tage",
         "months": "Monate",
         "certificateexpiration": "Zertifikatsablauf",
-        "response": "Antwort (Durchschnitt)"
+        "response": "Antwort (Durchschnitt)",
+        "certificateIsAboutToExpireFor": "Das Zertifikat läuft in Kürze ab für"
     },
     "monitorAgents":{
         "text": "Monitor-Agenten",
