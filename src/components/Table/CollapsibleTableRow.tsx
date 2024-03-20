@@ -16,6 +16,7 @@ import {
   IMonitorGroupListByUser,
   IMonitorGroupListByUserItem,
 } from "../../interfaces/IMonitorGroupListByUser";
+import { useStoreState } from "../../hooks";
 
 interface ICollapsibleTableRowProps {
   monitorGroup: IMonitorGroupListByUser;
@@ -40,6 +41,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   selectedMetric,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const { isDarkMode } = useStoreState((state) => state.app);
 
   const handleIconButtonClick = (
     event: React.MouseEvent<HTMLButtonElement>
@@ -134,7 +136,26 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   };
 
   const renderOverallStatusChip = () => {
-    const anyDown = monitorGroup.monitors.some((monitor) => !monitor.status);
+    const monitors = monitorGroup.monitors;
+
+    if (monitors.length === 0) {
+      return (
+        <Chip
+          label={"N/A"}
+          size="medium"
+          color="secondary"
+          sx={{
+            p: "5px 15px",
+            "& .MuiChip-label": {
+              color: isDarkMode ? "#fff" : "#676767",
+              fontWeight: 700,
+            },
+          }}
+        />
+      );
+    }
+
+    const anyDown = monitors.some((monitor) => !monitor.status);
 
     if (anyDown) {
       return (
@@ -182,14 +203,31 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   };
 
   const renderParentStatusChip = () => {
-    const allRunning = monitorGroup.monitors.every((monitor) => monitor.status);
+    const monitors = monitorGroup.monitors;
+
+    if (monitors.length === 0) {
+      return (
+        <Chip
+          label={"N/A"}
+          size="medium"
+          color="secondary"
+          sx={{
+            p: "5px 15px",
+            "& .MuiChip-label": {
+              color: isDarkMode ? "#fff" : "#676767",
+              fontWeight: 700,
+            },
+          }}
+        />
+      );
+    }
+
+    const allRunning = monitors.every((monitor) => monitor.status);
 
     if (allRunning) {
       return (
         <Chip
-          label={
-            calculateAverageUptime(monitorGroup.monitors).toFixed(2) + " %"
-          }
+          label={calculateAverageUptime(monitorGroup.monitors) + " %"}
           color="success"
           size="medium"
           sx={{

@@ -30,7 +30,8 @@
         "months": "Mesi",
         "certificateexpiration": "Scadenza del certificato",
         "response": "Risposta (Media)",
-        "certificateIsAboutToExpireFor": "Il certificato sta per scadere per"
+        "certificateIsAboutToExpireFor": "Il certificato sta per scadere per",
+        "environment": "Environment"
     },
     "monitorAgents":{
         "text": "Agenti di Monitoraggio",

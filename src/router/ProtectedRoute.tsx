@@ -7,7 +7,6 @@ import { useStoreActions, useStoreState } from "../hooks";
 import { resetStore } from "../store";
 import Layout from "../components/Layout/Layout";
 import { ClipLoader } from "react-spinners";
-import { Environment } from "../enums/Enums";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -22,6 +21,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const navigate: NavigateFunction = useNavigate();
   const { instance } = useMsal();
 
+  const { selectedEnvironment } = useStoreState((state) => state.app);
   const { user } = useStoreState((state) => state.user);
   const { thunkGetUser } = useStoreActions((actions) => actions.user);
   const { thunkGetMonitorGroupListByUser, thunkGetMonitorAgents } =
@@ -73,7 +73,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
 
   useEffect(() => {
     const fetchAppData = async () => {
-      await thunkGetMonitorGroupListByUser(Environment.Production);
+      await thunkGetMonitorGroupListByUser(selectedEnvironment);
       await thunkGetMonitorAgents();
     };
 
@@ -82,7 +82,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
         fetchAppData();
       }, 100);
     }
-  }, [user]);
+  }, [user, selectedEnvironment]);
 
   // useEffect(() => {
   //   const fetchSupportRolesData = async () => {

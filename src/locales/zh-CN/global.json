@@ -29,7 +29,8 @@
         "days": "天",
         "months": "月",
         "certificateexpiration": "证书到期",
-        "response": "响应（平均）"
+        "response": "响应（平均）",
+        "environment": "Environment"
     },
     "monitorAgents":{
         "text": "监控代理",

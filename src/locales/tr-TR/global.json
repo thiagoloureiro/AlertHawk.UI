@@ -30,7 +30,8 @@
         "months": "Ay",
         "certificateexpiration": "Sertifika Sonu",
         "response": "Yanıt (Ortalama)",
-        "certificateIsAboutToExpireFor": "Sertifika süresi dolmak üzere"
+        "certificateIsAboutToExpireFor": "Sertifika süresi dolmak üzere",
+        "environment": "Environment"
     },
     "monitorAgents":{
         "text": "Monitör Görev Yöneticileri",

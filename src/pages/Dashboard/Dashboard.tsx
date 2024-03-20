@@ -17,18 +17,22 @@ import { useTranslation } from "react-i18next";
 import CollapsibleTable from "../../components/Table/CollapsibleTable";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import SelectedMonitorDetails from "./Items/SelectedMonitorDetails";
-import { useStoreState } from "../../hooks";
+import { useStoreActions, useStoreState } from "../../hooks";
 import {
   IMonitorGroupListByUser,
   IMonitorGroupListByUserItem,
 } from "../../interfaces/IMonitorGroupListByUser";
+import { Environment } from "../../enums/Enums";
 
 interface IDashboardProps {}
 
 const Dashboard: FC<IDashboardProps> = ({}) => {
   const { t } = useTranslation("global");
-  const { isSidebarOpen } = useStoreState((state) => state.app);
+  const { isSidebarOpen, selectedEnvironment } = useStoreState(
+    (state) => state.app
+  );
   const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
+  const { setSelectedEnvironment } = useStoreActions((action) => action.app);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
   const [selectedChildRowIndex, setSelectedChildRowIndex] = useState<
@@ -41,8 +45,15 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     | "uptime3Months"
     | "uptime6Months"
   >("uptime24Hrs");
+  // const [selectedEnvironment, setSelectedEnvironment] = useState<number | "">(
+  //   ""
+  // );
 
-  const handleChange = (event: SelectChangeEvent<string>) => {
+  const handleEnvironmentChange = (event: SelectChangeEvent<number>) => {
+    setSelectedEnvironment(event.target.value as number);
+  };
+
+  const handleMetricChange = (event: SelectChangeEvent<string>) => {
     setSelectedMetric(
       event.target.value as
         | "uptime24Hrs"
@@ -115,7 +126,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                 alignItems="center"
                 marginBottom={4}
               >
-                <div>
+                <Box>
                   <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
                     <InputLabel id="metric-selection-label">
                       {t("dashboard.metric")}
@@ -125,7 +136,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                       id="metric-selection"
                       value={selectedMetric}
                       label="Metric"
-                      onChange={handleChange}
+                      onChange={handleMetricChange}
                     >
                       <MenuItem value="uptime24Hrs">
                         24 {t("dashboard.hours")}
@@ -144,7 +155,36 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                       </MenuItem>
                     </Select>
                   </FormControl>
-                </div>
+                </Box>
+                <Box>
+                  <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
+                    <InputLabel id="environment-selection-label">
+                      {t("dashboard.environment")}
+                    </InputLabel>
+                    <Select
+                      labelId="environment-selection-label"
+                      id="environment-selection"
+                      value={selectedEnvironment}
+                      label="Environment"
+                      onChange={handleEnvironmentChange}
+                    >
+                      {(
+                        Object.keys(Environment) as Array<
+                          keyof typeof Environment
+                        >
+                      )
+                        .filter((key) => !isNaN(Number(Environment[key])))
+                        .map((key) => (
+                          <MenuItem
+                            key={Environment[key]}
+                            value={Environment[key]}
+                          >
+                            {key}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Box>
                 <div>
                   <FormControl fullWidth>
                     <OutlinedInput

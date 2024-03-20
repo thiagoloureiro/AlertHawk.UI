@@ -67,7 +67,6 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
         )
         .sort((a, b) => b.daysToExpireCert - a.daysToExpireCert)
     );
-    console.log(certificateExpirationList);
     setDownServices(downServices);
     setCertificateExpirationList(certificateExpirationList);
   }, [monitors]);

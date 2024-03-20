@@ -1,5 +1,6 @@
 import { Action, action } from "easy-peasy";
 import momentTZ from "moment-timezone";
+import { Environment } from "../enums/Enums";
 
 export interface IAppModel {
   isLoading: boolean;
@@ -15,6 +16,8 @@ export interface IAppModel {
   setIsSmallScreen: Action<IAppModel, boolean>;
   isMediumScreen: boolean;
   setIsMediumScreen: Action<IAppModel, boolean>;
+  selectedEnvironment: Environment;
+  setSelectedEnvironment: Action<IAppModel, Environment>;
 }
 
 const defaultAppState = {
@@ -24,6 +27,7 @@ const defaultAppState = {
   isSmallScreen: false,
   isMediumScreen: false,
   selectedDisplayTimezone: momentTZ.tz.guess(),
+  selectedEnvironment: Environment.Production,
 };
 
 const app: IAppModel = {
@@ -53,6 +57,10 @@ const app: IAppModel = {
   isMediumScreen: defaultAppState.isSidebarOpen,
   setIsMediumScreen: action((state, payload) => {
     state.isMediumScreen = payload;
+  }),
+  selectedEnvironment: defaultAppState.selectedEnvironment,
+  setSelectedEnvironment: action((state, payload) => {
+    state.selectedEnvironment = payload;
   }),
 };
 
