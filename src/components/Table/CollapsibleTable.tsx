@@ -88,11 +88,9 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       certificateExpirationList.slice(0, 3).forEach((service, index) => {
         setTimeout(() => {
           showSnackbar(
-            `${t("dashboard.certificateIsAboutToExpireFor")} - ${
-              service.name
-            } [${service.daysToExpireCert} ${t(
-              "dashboard.days"
-            ).toLowerCase()}]`,
+            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${
+              service.daysToExpireCert
+            } ${t("dashboard.days").toLowerCase()}]`,
             "warning"
           );
         }, index * 500);
@@ -101,11 +99,9 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       certificateExpirationList.forEach((service, index) => {
         setTimeout(() => {
           showSnackbar(
-            `${t("dashboard.certificateIsAboutToExpireFor")} - ${
-              service.name
-            } [${service.daysToExpireCert} ${t(
-              "dashboard.days"
-            ).toLowerCase()}]`,
+            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${
+              service.daysToExpireCert
+            } ${t("dashboard.days").toLowerCase()}]`,
             "warning"
           );
         }, index * 500);
