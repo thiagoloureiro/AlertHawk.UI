@@ -74,13 +74,24 @@
         "checkProjectOn": "Projekt-Repository auf "
     },
     "pageNotFound": "Seite nicht gefunden",
-    "users": {
+    "users":{
         "text": "Benutzer",
         "userName": "Benutzername",
         "email": "E-Mail",
-        "isAdmin": "Administrator",
+        "isAdmin": "Administrator",	
         "actions": "Aktionen",
-        "true": "Ja",
-        "false": "Nein"
-    }    
+        "true": "Ja",	
+        "false": "Nein",
+        "noResultFoundFor":"Keine Ergebnisse gefunden",
+        "monitorConfirmation":"Überwachungsgruppen wurden geändert"
+    },
+    "monitorAlerts": {
+        "text": "Monitor-Benachrichtigungen",
+        "noResultFoundFor":"Keine Ergebnisse gefunden",
+        "monitorAlerts":"Monitor-Benachrichtigungen",
+        "timeStamp":"Zeitstempel",
+        "monitorName": "Monitor-Name",
+        "message": "Nachricht",
+        "screenshot":"Screenshot"
+    }
 }
