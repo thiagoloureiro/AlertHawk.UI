@@ -117,7 +117,9 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
               >
                 <div>
                   <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
-                    <InputLabel id="metric-selection-label">{t("dashboard.metric")}</InputLabel>
+                    <InputLabel id="metric-selection-label">
+                      {t("dashboard.metric")}
+                    </InputLabel>
                     <Select
                       labelId="metric-selection-label"
                       id="metric-selection"
@@ -125,11 +127,21 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                       label="Metric"
                       onChange={handleChange}
                     >
-                      <MenuItem value="uptime24Hrs">24 Hours</MenuItem>
-                      <MenuItem value="uptime7Days">7 Days</MenuItem>
-                      <MenuItem value="uptime30Days">30 Days</MenuItem>
-                      <MenuItem value="uptime3Months">3 Months</MenuItem>
-                      <MenuItem value="uptime6Months">6 Months</MenuItem>
+                      <MenuItem value="uptime24Hrs">
+                        24 {t("dashboard.hours")}
+                      </MenuItem>
+                      <MenuItem value="uptime7Days">
+                        7 {t("dashboard.days")}
+                      </MenuItem>
+                      <MenuItem value="uptime30Days">
+                        30 {t("dashboard.days")}
+                      </MenuItem>
+                      <MenuItem value="uptime3Months">
+                        3 {t("dashboard.months")}
+                      </MenuItem>
+                      <MenuItem value="uptime6Months">
+                        6 {t("dashboard.months")}
+                      </MenuItem>
                     </Select>
                   </FormControl>
                 </div>
