@@ -82,5 +82,14 @@
         "actions": "Acciones",
         "true": "Sí",
         "false": "No"
-    }    
+    },
+    "monitorAlerts": {
+        "text": "Alertas de Monitoreo",
+        "noResultFoundFor":"No se encontraron resultados",
+        "monitorAlerts":"Alertas de Monitoreo",
+        "timeStamp":"Sello de tiempo",
+        "monitorName": "Nombre del Monitor",
+        "message": "Mensaje",
+        "screenshot":"Captura de pantalla"
+    }
 }

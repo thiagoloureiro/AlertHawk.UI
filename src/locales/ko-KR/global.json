@@ -82,5 +82,14 @@
         "actions": "동작",
         "true": "예",
         "false": "아니오"
-    }    
+    },
+    "monitorAlerts": {
+        "text": "모니터 경고",
+        "noResultFoundFor":"결과가 없습니다",
+        "monitorAlerts":"모니터 경고",
+        "timeStamp":"타임 스탬프",
+        "monitorName": "모니터 이름",
+        "message": "메시지",
+        "screenshot":"스크린샷"
+    }
 }

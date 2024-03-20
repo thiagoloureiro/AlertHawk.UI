@@ -82,5 +82,14 @@
         "actions": "アクション",
         "true": "はい",
         "false": "いいえ"
-    }    
+    },
+    "monitorAlerts": {
+        "text": "モニターアラート",
+        "noResultFoundFor":"結果が見つかりませんでした",
+        "monitorAlerts":"モニターアラート",
+        "timeStamp":"タイムスタンプ",
+        "monitorName": "モニター名",
+        "message": "メッセージ",
+        "screenshot":"スクリーンショット"
+    }
 }

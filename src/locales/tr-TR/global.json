@@ -82,5 +82,14 @@
         "actions": "Eylemler",
         "true": "Evet",
         "false": "Hayır"
-    }    
+    },
+    "monitorAlerts": {
+        "text": "Monitör Uyarıları",
+        "noResultFoundFor":"Sonuç bulunamadı",
+        "monitorAlerts":"Monitör Uyarıları",
+        "timeStamp":"Zaman Damgası",
+        "monitorName": "Monitör Adı",
+        "message": "Mesaj",
+        "screenshot":"Ekran Görüntüsü"
+    }
 }

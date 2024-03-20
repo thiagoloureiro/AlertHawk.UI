@@ -72,5 +72,25 @@
         "text": "关于",
         "checkProjectOn": "在以下位置检查项目 "
     },
-    "pageNotFound": "页面未找到"
+    "pageNotFound": "页面未找到",
+    "users":{
+        "text": "用户",
+        "userName": "用户名",
+        "email": "电子邮件",
+        "isAdmin": "管理员",
+        "actions": "操作",
+        "true": "是",
+        "false": "否",
+        "noResultFoundFor":"未找到结果",
+        "monitorConfirmation":"监控组已更改"
+    },
+    "monitorAlerts": {
+        "text": "监控警报",
+        "noResultFoundFor":"未找到结果",
+        "monitorAlerts":"监控警报",
+        "timeStamp":"时间戳",
+        "monitorName": "监控名称",
+        "message": "消息",
+        "screenshot":"屏幕截图"
+    }
 }
