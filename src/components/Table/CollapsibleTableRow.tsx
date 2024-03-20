@@ -227,7 +227,9 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     if (allRunning) {
       return (
         <Chip
-          label={calculateAverageUptime(monitorGroup.monitors) + " %"}
+          label={
+            calculateAverageUptime(monitorGroup.monitors).toFixed(2) + " %"
+          }
           color="success"
           size="medium"
           sx={{
@@ -344,7 +346,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                               monitor.monitorStatusDashboard[selectedMetric] +
                               " %"
                             }
-                            color="success"
+                            color={monitor.status ? "success" : "error"}
                             size="medium"
                             sx={{
                               p: "5px 15px",
