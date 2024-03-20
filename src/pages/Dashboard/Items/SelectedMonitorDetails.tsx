@@ -12,6 +12,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import PauseIcon from "@mui/icons-material/Pause";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import DeleteIcon from "@mui/icons-material/Delete";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { useStoreState } from "../../../hooks";
 import {
   IMonitorGroupListByUser,
@@ -19,16 +20,18 @@ import {
 } from "../../../interfaces/IMonitorGroupListByUser";
 import { useTranslation } from "react-i18next";
 import { getMetricName } from "../../../utils/metricParser";
+import { useNavigate } from "react-router-dom";
+
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
   selectedMonitorItem: IMonitorGroupListByUserItem | null;
   selectedMetric:
-    | "uptime1Hr"
-    | "uptime24Hrs"
-    | "uptime7Days"
-    | "uptime30Days"
-    | "uptime3Months"
-    | "uptime6Months";
+  | "uptime1Hr"
+  | "uptime24Hrs"
+  | "uptime7Days"
+  | "uptime30Days"
+  | "uptime3Months"
+  | "uptime6Months";
 }
 
 const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
@@ -36,13 +39,20 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   selectedMonitorItem,
   selectedMetric,
 }) => {
+
   const { t } = useTranslation("global");
   const { isDarkMode } = useStoreState((state) => state.app);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleResumePauseBtn = () => {
+    console.log(selectedMonitorGroup, selectedMonitorItem);
     setIsPaused(!isPaused);
+  };
+  const handleAlarmBtn = () => {
+    console.log(selectedMonitorItem)
+    navigate(`/monitor-alert/${selectedMonitorItem?.id}`);	
   };
 
   const handleEditBtn = () => {
@@ -199,12 +209,21 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
             </Box>
           </Button>
           <Button
-            aria-label="edit"
+            aria-label=""
             startIcon={<EditNoteIcon />}
             onClick={handleEditBtn}
           >
             {t("dashboard.edit")}
           </Button>
+          {selectedMonitorItem !== null && (
+            <Button
+              aria-label=""
+              startIcon={<NotificationsIcon />}
+              onClick={handleAlarmBtn}
+            >
+              {t("dashboard.alarm")}
+            </Button>
+          )}
           <Button
             aria-label="delete"
             startIcon={
@@ -241,7 +260,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   ) : (
                     renderUptimeBoxes(
                       calculateAverageUptime(selectedMonitorGroup.monitors) ??
-                        0,
+                      0,
                       selectedMonitorGroup.monitors.every((x) => x.status)
                     )
                   )}
@@ -339,9 +358,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     {selectedMonitorGroup.monitors.length === 0
                       ? "N/A"
                       : calculateAverageUptime(
-                          selectedMonitorGroup.monitors,
-                          "uptime24Hrs"
-                        ).toFixed(2) + " %"}
+                        selectedMonitorGroup.monitors,
+                        "uptime24Hrs"
+                      ).toFixed(2) + " %"}
                   </Typography>
                 </Box>
                 <Box
@@ -360,9 +379,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     {selectedMonitorGroup.monitors.length === 0
                       ? "N/A"
                       : calculateAverageUptime(
-                          selectedMonitorGroup.monitors,
-                          "uptime7Days"
-                        ).toFixed(2) + " %"}
+                        selectedMonitorGroup.monitors,
+                        "uptime7Days"
+                      ).toFixed(2) + " %"}
                   </Typography>
                 </Box>
                 <Box
@@ -381,9 +400,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     {selectedMonitorGroup.monitors.length === 0
                       ? "N/A"
                       : calculateAverageUptime(
-                          selectedMonitorGroup.monitors,
-                          "uptime30Days"
-                        ).toFixed(2) + " %"}
+                        selectedMonitorGroup.monitors,
+                        "uptime30Days"
+                      ).toFixed(2) + " %"}
                   </Typography>
                 </Box>
                 <Box
@@ -402,9 +421,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     {selectedMonitorGroup.monitors.length === 0
                       ? "N/A"
                       : calculateAverageUptime(
-                          selectedMonitorGroup.monitors,
-                          "uptime3Months"
-                        ).toFixed(2) + " %"}
+                        selectedMonitorGroup.monitors,
+                        "uptime3Months"
+                      ).toFixed(2) + " %"}
                   </Typography>
                 </Box>
                 <Box
@@ -423,9 +442,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     {selectedMonitorGroup.monitors.length === 0
                       ? "N/A"
                       : calculateAverageUptime(
-                          selectedMonitorGroup.monitors,
-                          "uptime6Months"
-                        ).toFixed(2) + " %"}
+                        selectedMonitorGroup.monitors,
+                        "uptime6Months"
+                      ).toFixed(2) + " %"}
                   </Typography>
                 </Box>
               </Box>
@@ -455,7 +474,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                 >
                   {renderUptimeBoxes(
                     selectedMonitorItem.monitorStatusDashboard[
-                      selectedMetric
+                    selectedMetric
                     ] ?? 0,
                     selectedMonitorItem.status
                   )}
