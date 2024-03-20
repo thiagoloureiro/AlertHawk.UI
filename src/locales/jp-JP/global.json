@@ -25,6 +25,7 @@
         "serviceDown": "サービス停止",
         "metric": "メトリック",
         "uptime": "稼働時間",
+        "hour": "時",
         "hours": "時間",
         "days": "日",
         "months": "月",

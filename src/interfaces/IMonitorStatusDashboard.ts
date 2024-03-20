@@ -1,5 +1,6 @@
 export interface IMonitorStatusDashboard {
   monitorId: number;
+  uptime1Hr?: number;
   uptime24Hrs?: number;
   uptime7Days?: number;
   uptime30Days?: number;

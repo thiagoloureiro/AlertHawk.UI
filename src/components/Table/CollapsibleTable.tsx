@@ -24,6 +24,7 @@ interface ICollapsibleTable {
   handleRowClick: (monitorId: number) => void;
   handleChildRowClick: (childMonitorId: number) => void;
   selectedMetric:
+    | "uptime1Hr"
     | "uptime24Hrs"
     | "uptime7Days"
     | "uptime30Days"
@@ -121,6 +122,8 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
           [`& .${tableCellClasses.root}`]: {
             borderBottom: "none",
           },
+          minHeight:
+            filteredMonitorGroups.length === 0 ? "calc(100vh - 130px)" : "",
         }}
       >
         <TableBody>
@@ -142,7 +145,10 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
           ) : (
             <TableRow>
               <TableCell>
-                <Typography variant="body2" sx={{ textAlign: "center" }}>
+                <Typography
+                  variant="body2"
+                  sx={{ textAlign: "center", pb: "180px" }}
+                >
                   {t("dashboard.noResultFoundFor")}
                 </Typography>
               </TableCell>

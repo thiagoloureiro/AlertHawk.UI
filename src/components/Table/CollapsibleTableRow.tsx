@@ -25,6 +25,7 @@ interface ICollapsibleTableRowProps {
   onRowClick: () => void;
   handleChildRowClick: (childMonitorId: number) => void;
   selectedMetric:
+    | "uptime1Hr"
     | "uptime24Hrs"
     | "uptime7Days"
     | "uptime30Days"

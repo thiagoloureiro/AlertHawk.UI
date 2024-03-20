@@ -25,6 +25,7 @@
         "serviceDown": "Service Down",
         "metric": "Metric",
         "uptime": "Uptime",
+        "hour": "Hour",
         "hours": "Hours",
         "days": "Days",
         "months": "Months",

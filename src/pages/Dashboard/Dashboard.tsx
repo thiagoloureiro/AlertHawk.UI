@@ -39,6 +39,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     number | null
   >(null);
   const [selectedMetric, setSelectedMetric] = useState<
+    | "uptime1Hr"
     | "uptime24Hrs"
     | "uptime7Days"
     | "uptime30Days"
@@ -138,6 +139,9 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                       label="Metric"
                       onChange={handleMetricChange}
                     >
+                      <MenuItem value="uptime1Hr">
+                        1 {t("dashboard.hour")}
+                      </MenuItem>
                       <MenuItem value="uptime24Hrs">
                         24 {t("dashboard.hours")}
                       </MenuItem>

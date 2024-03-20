@@ -25,6 +25,7 @@
         "serviceDown": "服务停止",
         "metric": "度量",
         "uptime": "正常运行时间",
+        "hour": "小时",
         "hours": "小时",
         "days": "天",
         "months": "月",

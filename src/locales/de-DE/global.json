@@ -25,6 +25,7 @@
         "serviceDown": "Dienst nicht verfügbar",
         "metric": "Metrik",
         "uptime": "Betriebszeit",
+        "hour": "Stunde",
         "hours": "Stunden",
         "days": "Tage",
         "months": "Monate",

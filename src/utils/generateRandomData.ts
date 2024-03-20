@@ -18,6 +18,7 @@ const generateRandomMonitorData = (count: number): IMonitor[] => {
       monitorEnvironment: faker.number.int(),
       monitorStatusDashboard: {
         monitorId: faker.number.int(),
+        uptime1Hr: faker.number.int({ min: 80, max: 100 }),
         uptime24Hrs: faker.number.int({ min: 80, max: 100 }),
         uptime7Days: faker.number.int({ min: 80, max: 100 }),
         uptime30Days: faker.number.int({ min: 80, max: 100 }),

@@ -25,6 +25,7 @@
         "serviceDown": "서비스 다운",
         "metric": "지표",
         "uptime": "가동 시간",
+        "hour": "시간",
         "hours": "시간",
         "days": "일",
         "months": "개월",

@@ -1,5 +1,6 @@
 export const getMetricName = (
   metricKey:
+    | "uptime1Hr"
     | "uptime24Hrs"
     | "uptime7Days"
     | "uptime30Days"
@@ -7,6 +8,8 @@ export const getMetricName = (
     | "uptime6Months"
 ): string => {
   switch (metricKey) {
+    case "uptime1Hr":
+      return "1 Hours";
     case "uptime24Hrs":
       return "24 Hours";
     case "uptime7Days":

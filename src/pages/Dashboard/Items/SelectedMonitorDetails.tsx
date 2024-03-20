@@ -23,6 +23,7 @@ interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
   selectedMonitorItem: IMonitorGroupListByUserItem | null;
   selectedMetric:
+    | "uptime1Hr"
     | "uptime24Hrs"
     | "uptime7Days"
     | "uptime30Days"
@@ -136,6 +137,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   const calculateAverageUptime = (
     monitors: IMonitorGroupListByUserItem[],
     metric:
+      | "uptime1Hr"
       | "uptime24Hrs"
       | "uptime7Days"
       | "uptime30Days"

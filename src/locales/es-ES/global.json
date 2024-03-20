@@ -25,6 +25,7 @@
         "serviceDown": "Servicio Fuera de Línea",
         "metric": "Métrica",
         "uptime": "Actividad",
+        "hour": "Hora",
         "hours": "Horas",
         "days": "Días",
         "months": "Meses",
