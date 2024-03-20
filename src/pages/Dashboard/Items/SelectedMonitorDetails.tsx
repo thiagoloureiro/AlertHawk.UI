@@ -303,7 +303,12 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                 px={4}
                 sx={{ position: "absolute", left: "30px", bottom: "5px" }}
               >
-                {getMetricName(selectedMetric)}
+                {getMetricName(selectedMetric).split(" ")[0]}{" "}
+                {t(
+                  `dashboard.${getMetricName(selectedMetric)
+                    .split(" ")[1]
+                    .toLowerCase()}`
+                )}
               </Typography>
             </CardContent>
           </Card>
