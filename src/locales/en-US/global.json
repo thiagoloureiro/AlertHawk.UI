@@ -33,7 +33,7 @@
         "response":"Response (Avg)",
         "certificateIsAboutToExpireFor":"Certificate is about to expire for",
         "environment": "Environment",
-        "alarm": "Alarm"
+        "alarm": "Alerts"
     },
     "monitorAgents":{
         "text": "Monitor Agents",

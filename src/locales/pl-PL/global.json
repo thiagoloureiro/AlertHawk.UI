@@ -32,7 +32,8 @@
         "certificateexpiration": "Wygaśnięcie certyfikatu",
         "response": "Odpowiedź (średnia)",
         "certificateIsAboutToExpireFor" : "Certyfikat wkrótce wygaśnie",
-        "environment": "Environment"
+        "environment": "Środowisko",
+        "alarm": "Alerty"
     },
     "monitorAgents":{
         "text": "Agenci Monitorujący",

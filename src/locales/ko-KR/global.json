@@ -32,7 +32,8 @@
         "certificateexpiration": "인증서 만료",
         "response": "응답 (평균)",
         "certificateIsAboutToExpireFor": "다음에 대한 인증서가 곧 만료됩니다",
-        "environment": "Environment"
+        "environment": "환경",
+        "alarm": "알림"
     },
     "monitorAgents":{
         "text": "모니터 에이전트",

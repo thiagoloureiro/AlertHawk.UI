@@ -32,7 +32,8 @@
         "certificateexpiration": "Sertifika Sonu",
         "response": "Yanıt (Ortalama)",
         "certificateIsAboutToExpireFor": "Sertifika süresi dolmak üzere",
-        "environment": "Environment"
+        "environment": "Çevre",
+        "alarm": "Uyarılar"
     },
     "monitorAgents":{
         "text": "Monitör Görev Yöneticileri",

@@ -32,7 +32,8 @@
         "certificateexpiration": "Zertifikatsablauf",
         "response": "Antwort (Durchschnitt)",
         "certificateIsAboutToExpireFor": "Das Zertifikat läuft in Kürze ab für",
-        "environment": "Environment"
+        "environment": "Environment",
+        "alarm": "Warnungen"
     },
     "monitorAgents":{
         "text": "Monitor-Agenten",

@@ -32,7 +32,8 @@
         "certificateexpiration":"Vencimiento del Certificado",
         "response":"Respuesta (Promedio)",
         "certificateIsAboutToExpireFor": "El certificado está a punto de expirar para",
-        "environment": "Environment"
+        "environment": "Ambiente",
+        "alarm": "Alertas"
     },    
     "monitorAgents":{
         "text": "Agentes Monitor",
@@ -48,7 +49,7 @@
         "monitorAgentsInNorthAmerica": "Agentes de Monitorización en Norteamérica",
         "monitorAgentsInLatinAmerica": "Agentes de Monitorización en Latinoamérica",
         "monitorAgentsInOceania": "Agentes de Monitorización en Oceanía",
-        "version": "Versión"
+        "version": "Versión"   
     },
     "monitorManagement":{
         "text": "Gestión de Monitores"

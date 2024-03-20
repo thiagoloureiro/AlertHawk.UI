@@ -31,7 +31,8 @@
         "months": "月",
         "certificateexpiration": "证书到期",
         "response": "响应（平均）",
-        "environment": "Environment"
+        "environment": "环境",
+        "alarm": "警报"
     },
     "monitorAgents":{
         "text": "监控代理",
