@@ -74,14 +74,16 @@
         "checkProjectOn": "プロジェクトをチェックする"
     },
     "pageNotFound": "ページが見つかりません",
-    "users": {
+    "users":{
         "text": "ユーザー",
         "userName": "ユーザー名",
         "email": "メール",
-        "isAdmin": "管理者",
+        "isAdmin": "管理者",	
         "actions": "アクション",
-        "true": "はい",
-        "false": "いいえ"
+        "true": "はい",	
+        "false": "いいえ",
+        "noResultFoundFor":"結果が見つかりませんでした",
+        "monitorConfirmation":"モニターグループが変更されました"
     },
     "monitorAlerts": {
         "text": "モニターアラート",

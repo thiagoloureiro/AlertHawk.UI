@@ -74,14 +74,16 @@
         "checkProjectOn": "Ver proyecto en "
     },
     "pageNotFound": "Página No Encontrada",
-    "users": {
+    "users":{
         "text": "Usuarios",
-        "userName": "Nombre de usuario",
+        "userName": "Usuario",
         "email": "Correo electrónico",
-        "isAdmin": "Administrador",
+        "isAdmin": "Administrador",	
         "actions": "Acciones",
-        "true": "Sí",
-        "false": "No"
+        "true": "Sí",	
+        "false": "No",
+        "noResultFoundFor":"No se encontraron resultados",
+        "monitorConfirmation":"Los grupos de monitoreo han sido cambiados"
     },
     "monitorAlerts": {
         "text": "Alertas de Monitoreo",

@@ -74,14 +74,16 @@
         "checkProjectOn" : "Sprawdź projekt na "
     },
     "pageNotFound": "Nie znaleziono strony",
-    "users": {
+    "users":{
         "text": "Użytkownicy",
-        "userName": "Nazwa użytkownika",
-        "email": "E-mail",
-        "isAdmin": "Administrator",
+        "userName": "Użytkownik",
+        "email": "Email",
+        "isAdmin": "Administrator",	
         "actions": "Akcje",
-        "true": "Tak",
-        "false": "Nie"
+        "true": "Tak",	
+        "false": "Nie",
+        "noResultFoundFor":"Nie znaleziono wyników",
+        "monitorConfirmation":"Grupy monitorowania zostały zmienione"
     },
     "monitorAlerts": {
         "text": "Alerty Monitorowania",

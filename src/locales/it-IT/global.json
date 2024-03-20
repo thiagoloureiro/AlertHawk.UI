@@ -74,15 +74,18 @@
         "checkProjectOn": "Verifica progetto su "
     },
     "pageNotFound": "Pagina Non Trovata",
-    "users": {
+    "users":{
         "text": "Utenti",
-        "userName": "Nome utente",
+        "userName": "Utente",
         "email": "Email",
-        "isAdmin": "Amministratore",
+        "isAdmin": "Amministratore",	
         "actions": "Azioni",
-        "true": "Sì",
-        "false": "No"
-    },
+        "true": "Sì",	
+        "false": "No",
+        "noResultFoundFor":"Nessun risultato trovato",
+        "monitorConfirmation":"I gruppi di monitoraggio sono stati cambiati"
+    }
+    ,
     "monitorAlerts": {
         "text": "Avvisi Monitoraggio",
         "noResultFoundFor":"Nessun risultato trovato",

@@ -74,15 +74,18 @@
         "checkProjectOn" : "Repositório do projeto no "
     },
     "pageNotFound": "Página não encontrada",
-    "users": {
+    "users":{
         "text": "Usuários",
-        "userName": "Nome de usuário",
+        "userName": "Usuário",
         "email": "E-mail",
-        "isAdmin": "Administrador",
+        "isAdmin": "Administrador",	
         "actions": "Ações",
-        "true": "Sim",
-        "false": "Não"
-    },
+        "true": "Sim",	
+        "false": "Não",
+        "noResultFoundFor":"Nenhum resultado encontrado",
+        "monitorConfirmation":"Os grupos de monitoramento foram alterados"
+    }
+    ,
     "monitorAlerts": {
         "text": "Alertas de Monitoramento",
         "noResultFoundFor":"Nenhum resultado encontrado",

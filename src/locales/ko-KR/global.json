@@ -74,14 +74,16 @@
         "checkProjectOn": "프로젝트 확인"
     },
     "pageNotFound": "페이지를 찾을 수 없습니다",
-    "users": {
-        "text": "사용자",
-        "userName": "사용자 이름",
-        "email": "이메일",
-        "isAdmin": "관리자",
-        "actions": "동작",
-        "true": "예",
-        "false": "아니오"
+    "users":{
+        "text": "ユーザー",
+        "userName": "ユーザー名",
+        "email": "メール",
+        "isAdmin": "管理者",	
+        "actions": "アクション",
+        "true": "はい",	
+        "false": "いいえ",
+        "noResultFoundFor":"結果が見つかりませんでした",
+        "monitorConfirmation":"モニターグループが変更されました"
     },
     "monitorAlerts": {
         "text": "모니터 경고",

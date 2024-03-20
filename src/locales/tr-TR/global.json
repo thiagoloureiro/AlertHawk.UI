@@ -74,14 +74,16 @@
         "checkProjectOn": "Check project on "
     },
     "pageNotFound": "Sayfa Bulunamadı",
-    "users": {
+    "users":{
         "text": "Kullanıcılar",
-        "userName": "Kullanıcı Adı",
+        "userName": "Kullanıcı",
         "email": "E-posta",
-        "isAdmin": "Yönetici",
+        "isAdmin": "Yönetici",	
         "actions": "Eylemler",
-        "true": "Evet",
-        "false": "Hayır"
+        "true": "Evet",	
+        "false": "Hayır",
+        "noResultFoundFor":"Sonuç bulunamadı",
+        "monitorConfirmation":"İzleme grupları değiştirildi"
     },
     "monitorAlerts": {
         "text": "Monitör Uyarıları",
