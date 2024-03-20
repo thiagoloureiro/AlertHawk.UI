@@ -109,7 +109,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                         <TableRow key={alert.id}>
                           <TableCell>
                             {moment(alert.timeStamp).format(
-                              "MM/DD/YYYY HH:mm:ss"
+                              "DD/MM/YYYY HH:mm:ss"
                             )}
                           </TableCell>
                           <TableCell>{alert.monitorName}</TableCell>
