@@ -31,6 +31,7 @@
         "months": "月",
         "certificateexpiration": "证书到期",
         "response": "响应（平均）",
+        "certificateIsAboutToExpireFor": "证书即将过期",
         "environment": "环境",
         "alarm": "警报"
     },
