@@ -84,8 +84,7 @@
         "false": "Não",
         "noResultFoundFor":"Nenhum resultado encontrado",
         "monitorConfirmation":"Os grupos de monitoramento foram alterados"
-    }
-    ,
+    },
     "monitorAlerts": {
         "text": "Alertas de Monitoramento",
         "noResultFoundFor":"Nenhum resultado encontrado",
