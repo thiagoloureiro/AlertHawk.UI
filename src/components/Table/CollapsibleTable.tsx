@@ -42,8 +42,14 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
 }) => {
   const { t } = useTranslation("global");
 
-  const filteredMonitorGroups = monitors.filter((monitor) =>
-    monitor.name.toLowerCase().includes(searchText.trim().toLowerCase())
+  const filteredMonitorGroups = monitors.filter(
+    (monitor) =>
+      monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
+      monitor.monitors.some((childMonitor) =>
+        childMonitor.name
+          .toLowerCase()
+          .includes(searchText.trim().toLowerCase())
+      )
   );
 
   const [downServices, setDownServices] = useState<
