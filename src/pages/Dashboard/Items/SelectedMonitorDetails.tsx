@@ -315,9 +315,24 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                           },
                         }}
                       />
-                    ) : selectedMonitorGroup.monitors.every((x) => x.status) ? (
+                    ) : selectedMonitorGroup.monitors.some(x => x.status && x.paused) ? (
                       <Chip
-                        label={"Up"}
+                        label={t("dashboard.paused")}
+                        color="secondary"
+                        sx={{
+                          borderRadius: "56px",
+                          p: "20px 20px",
+                          "& .MuiChip-label": {
+                            color: "primary",
+                            fontWeight: 700,
+                            fontSize: 24,
+                          },
+                        }}
+                      />
+                    ) :
+                    selectedMonitorGroup.monitors.every((x) => x.status) ? (
+                      <Chip
+                        label={t("dashboard.up")}
                         color="success"
                         sx={{
                           borderRadius: "56px",
@@ -331,7 +346,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       />
                     ) : (
                       <Chip
-                        label={"Down"}
+                        label={t("dashboard.down")}
                         color="error"
                         sx={{
                           borderRadius: "56px",
@@ -515,9 +530,23 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       justifyContent: "center",
                     }}
                   >
-                    {selectedMonitorItem.status ? (
+                    {selectedMonitorItem.status ? (selectedMonitorItem.paused ? (
+                       <Chip
+                       label={t("dashboard.paused")}
+                       color="secondary"
+                       sx={{
+                         borderRadius: "56px",
+                         p: "20px 20px",
+                         "& .MuiChip-label": {
+                           color: "primary",
+                           fontWeight: 700,
+                           fontSize: 24,
+                         },
+                       }}
+                     />
+                    ) :(
                       <Chip
-                        label={"Up"}
+                        label={t("dashboard.up")}
                         color="success"
                         sx={{
                           borderRadius: "56px",
@@ -528,10 +557,10 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                             fontSize: 24,
                           },
                         }}
-                      />
+                      />)
                     ) : (
                       <Chip
-                        label={"Down"}
+                        label={t("dashboard.down")}
                         color="error"
                         sx={{
                           borderRadius: "56px",

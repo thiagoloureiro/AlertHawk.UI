@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor": "Сертификат скоро истечет для",
         "environment": "Окружение",
         "alarm": "Оповещения",
-        "pauseConfirmation": "Монитор был обновлен!"
+        "pauseConfirmation": "Монитор был обновлен!",
+        "up": "Вверх",
+        "down": "Вниз",
+        "paused": "Приостановлено"
     },
     "monitorAgents": {
         "text": "Агенты мониторинга",
