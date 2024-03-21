@@ -35,8 +35,8 @@
         "environment": "Середовище",
         "alarm": "Сповіщення",
         "pauseConfirmation": "Монітор був оновлений!",
-        "up": "Вгору",
-        "down": "Вниз",
+        "up": "Онлайн",
+        "down": "Офлайн",
         "paused": "Призупинено"
     },
     "monitorAgents": {

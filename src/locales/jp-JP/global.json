@@ -35,8 +35,8 @@
         "environment": "環境 ",
         "alarm": "アラート",
         "pauseConfirmation": "モニターが更新されました！",
-        "up": "上",
-        "down": "下",
+        "up": "オンライン",
+        "down": "オフライン",
         "paused": "一時停止"
     },
     "monitorAgents":{

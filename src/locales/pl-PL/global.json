@@ -35,8 +35,8 @@
         "environment": "Środowisko",
         "alarm": "Alerty",
         "pauseConfirmation": "Monitor został zaktualizowany!",
-        "up": "Góra",
-        "down": "Dół",
+        "up": "Online",
+        "down": "Offline",
         "paused": "Wstrzymane"	
     },
     "monitorAgents":{

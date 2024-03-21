@@ -35,8 +35,8 @@
         "environment": "Окружение",
         "alarm": "Оповещения",
         "pauseConfirmation": "Монитор был обновлен!",
-        "up": "Вверх",
-        "down": "Вниз",
+        "up": "Онлайн",
+        "down": "Не в сети",
         "paused": "Приостановлено"
     },
     "monitorAgents": {

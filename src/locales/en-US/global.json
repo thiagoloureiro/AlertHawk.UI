@@ -35,8 +35,8 @@
         "environment": "Environment",
         "alarm": "Alerts",
         "pauseConfirmation": "Monitor has been updated!",
-        "up": "Up",
-        "down": "Down",
+        "up": "Online",
+        "down": "Offline",
         "paused": "Paused"	
     },
     "monitorAgents":{

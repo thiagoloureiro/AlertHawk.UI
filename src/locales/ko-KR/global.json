@@ -35,8 +35,8 @@
         "environment": "환경",
         "alarm": "알림",
         "pauseConfirmation": "모니터가 업데이트되었습니다!",
-        "up": "위",
-        "down": "아래",
+        "up": "온라인",
+        "down": "오프라인",
         "paused": "일시 정지"
     },
     "monitorAgents":{

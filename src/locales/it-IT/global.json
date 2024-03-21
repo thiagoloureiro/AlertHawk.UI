@@ -35,8 +35,8 @@
         "environment": "Ambiente",
         "alarm": "Avvisi",
         "pauseConfirmation": "Il monitor è stato aggiornato!",
-        "up": "Su",
-        "down": "Giù",
+        "up": "Online",
+        "down": "Offline",
         "paused": "In pausa"	
     },
     "monitorAgents":{

@@ -35,8 +35,8 @@
         "environment": "Çevre",
         "alarm": "Uyarılar",
         "pauseConfirmation": "Monitör güncellendi!",
-        "up": "Yukarı",
-        "down": "Aşağı",
+        "up": "Çevrimiçi",
+        "down": "Çevrimdışı",
         "paused": "Duraklatıldı"
     },
     "monitorAgents":{

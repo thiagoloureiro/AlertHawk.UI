@@ -35,8 +35,8 @@
         "environment": "Ambiente",
         "alarm": "Alertas",
         "pauseConfirmation": "¡El monitor ha sido actualizado!",
-        "up": "Arriba",
-        "down": "Abajo",
+        "up": "En línea",
+        "down": "Desconectado",
         "paused": "Pausado"	
     },    
     "monitorAgents":{
