@@ -1,0 +1,98 @@
+{
+    "general": {
+        "goBack": "Назад"
+    },
+    "header": {
+        "logout": "Выйти"
+    },
+    "sidebar": {
+        "monitorList": "Список мониторов",
+        "monitorManagement": "Управление мониторами",
+        "monitorAgents": "Агенты мониторинга",
+        "notificationManagement": "Управление уведомлениями",
+        "monitorAlert": "Оповещения монитора",
+        "users": "Пользователи",
+        "settings": "Настройки"
+    },
+    "dashboard": {
+        "text": "Панель управления",
+        "search": "Поиск",
+        "noResultFoundFor": "Результат не найден",
+        "resume": "Возобновить",
+        "pause": "Пауза",
+        "edit": "Редактировать",
+        "delete": "Удалить",
+        "serviceDown": "Сервис недоступен",
+        "metric": "Метрика",
+        "uptime": "Аптайм",
+        "hour": "Час",
+        "hours": "Часов",
+        "days": "Дней",
+        "months": "Месяцев",
+        "certificateexpiration": "Срок действия сертификата истекает",
+        "response": "Ответ (средний)",
+        "certificateIsAboutToExpireFor": "Сертификат скоро истечет для",
+        "environment": "Окружение",
+        "alarm": "Оповещения",
+        "pauseConfirmation": "Монитор был обновлен!"
+    },
+    "monitorAgents": {
+        "text": "Агенты мониторинга",
+        "totalNumberOfMonitorAgents": "Общее количество агентов мониторинга",
+        "totalNumberofRunningMonitors": "Общее количество запущенных мониторов",
+        "hostname": "Имя хоста",
+        "numberOfMonitors": "Количество мониторов",
+        "master": "Мастер",
+        "location": "Местоположение",
+        "monitorAgentsInEurope": "Агенты мониторинга в Европе",
+        "monitorAgentsInAsia": "Агенты мониторинга в Азии",
+        "monitorAgentsInAfrica": "Агенты мониторинга в Африке",
+        "monitorAgentsInNorthAmerica": "Агенты мониторинга в Северной Америке",
+        "monitorAgentsInLatinAmerica": "Агенты мониторинга в Латинской Америке",
+        "monitorAgentsInOceania": "Агенты мониторинга в Океании",
+        "version": "Версия"
+    },
+    "monitorManagement": {
+        "text": "Управление мониторами"
+    },
+    "settings": {
+        "text": "Настройки",
+        "general": {
+            "text": "Общие",
+            "language": "Язык",
+            "applicationLanguageHasBeenChanged": "Язык приложения был изменен",
+            "displayTimezone": "Часовой пояс",
+            "timezoneSettingsHaveBeenChanged": "Настройки часового пояса были изменены",
+            "theme": "Тема",
+            "light": "Светлая",
+            "lightThemeHasBeenEnabled": "Светлая тема включена",
+            "dark": "Темная",
+            "darkThemeHasBeenEnabled": "Темная тема включена"
+        }
+    },
+    "about": {
+        "text": "О программе",
+        "checkProjectOn": "Проверить проект на "
+    },
+    "pageNotFound": "Страница не найдена",
+    "users": {
+        "text": "Пользователи",
+        "userName": "Имя пользователя",
+        "email": "Эл. почта",
+        "isAdmin": "Администратор",
+        "actions": "Действия",
+        "true": "Да",
+        "false": "Нет",
+        "noResultFoundFor": "Результат не найден",
+        "monitorConfirmation": "Группы мониторов были изменены"
+    },
+    "monitorAlerts": {
+        "text": "Оповещения монитора",
+        "noResultFoundFor": "Результат не найден",
+        "monitorAlerts": "Оповещения монитора",
+        "timeStamp": "Временная метка",
+        "monitorName": "Имя монитора",
+        "message": "Сообщение",
+        "screenshot": "Снимок экрана"
+    }
+}

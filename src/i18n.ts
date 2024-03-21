@@ -11,8 +11,10 @@ import global_es from "./locales/es-ES/global.json";
 import global_kr from "./locales/ko-KR/global.json";
 import global_jp from "./locales/jp-JP/global.json";
 import global_cn from "./locales/zh-CN/global.json";
+import global_ru from "./locales/ru-RU/global.json";
+import global_ua from "./locales/uk-UA/global.json";
 
-const supportedLngs: string[] = ["en-US", "de-DE", "tr-TR", "pl-PL", "pt-BR", "es-ES","it-IT","ko-KR","jp-JP","zh-CN"];
+const supportedLngs: string[] = ["en-US", "de-DE", "tr-TR", "pl-PL", "pt-BR", "es-ES","it-IT","ko-KR","jp-JP","zh-CN", "ru-RU", "uk-UA"];
 
 i18n
   .use(initReactI18next)
@@ -56,6 +58,12 @@ i18n
       },
       "jp-JP": {
         global: global_jp,
+      },
+      "ru-RU": {
+        global: global_ru,
+      },
+      "uk-UA": {
+        global: global_ua,
       },
       "zh-CN": {
         global: global_cn,
