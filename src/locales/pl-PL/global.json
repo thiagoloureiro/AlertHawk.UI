@@ -8,7 +8,7 @@
     "sidebar":{
         "monitorList": "Lista Monitorów",
         "monitorManagement": "Zarządzanie Monitorami",
-        "monitorAgents":"Monitor Agents",
+        "monitorAgents":"Monitoruj agentów",
         "notificationManagement": "Zarządzanie Powiadomieniami",
         "monitorAlert": "Alarm Monitora",
         "users": "Użytkownicy",

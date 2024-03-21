@@ -8,7 +8,7 @@
     "sidebar":{
         "monitorList": "Monitor Listesi",
         "monitorManagement": "Monitor Yönetimi",
-        "monitorAgents":"Monitor Agents",
+        "monitorAgents":"Aracıları İzleme",
         "notificationManagement": "Bildirim Yönetimi",
         "monitorAlert": "Monitor Alarmı",
         "users": "Kullanıcılar",

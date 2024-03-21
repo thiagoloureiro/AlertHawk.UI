@@ -8,7 +8,7 @@
     "sidebar":{
         "monitorList": "モニターリスト",
         "monitorManagement": "モニター管理",
-        "monitorAgents":"Monitor Agents",
+        "monitorAgents":"エージェントの監視",
         "notificationManagement": "通知管理",
         "monitorAlert": "モニターアラート",
         "users": "ユーザー",
