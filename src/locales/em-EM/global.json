@@ -1,0 +1,98 @@
+{
+    "general":{
+        "goBack":"🚶‍♂️🔙"
+    },
+    "header":{
+        "logout": "🚪"
+    },
+    "sidebar":{
+        "monitorList": "👀📜",
+        "monitorManagement": "👀🔧",
+        "monitorAgents":"👀👨‍💼",
+        "notificationManagement": "🔔🔧",
+        "monitorAlert": "👀🚨",
+        "users": "👥",
+        "settings": "🛠️"
+    },
+    "dashboard": {
+        "text": "📊👀",
+        "search":"🔍",
+        "noResultFoundFor":"❌🔍🔍",
+        "resume":"▶️",
+        "pause":"⏸️",
+        "edit":"✏️",
+        "delete":"❌",
+        "serviceDown": "❌🔌",
+        "metric": "📏",
+        "uptime": "⏱️🆙",
+        "hour": "🕛",
+        "hours": "🕐🕑",
+        "days": "📆",
+        "months": "📅",
+        "certificateexpiration":"📜🕰️",
+        "response":"📩 (🔢)",
+        "certificateIsAboutToExpireFor":"📜🔜🔚",
+        "environment": "🌍",
+        "alarm": "🚨",
+        "pauseConfirmation": "👀⏸️🔄️!"	
+    },
+    "monitorAgents":{
+        "text": "👀👨‍💼",
+        "totalNumberOfMonitorAgents" :"👨‍💼🔢👀👀",
+        "totalNumberofRunningMonitors":"👀🏃‍♂️🔢👀👀",
+        "hostname":"🏠📇",
+        "numberOfMonitors":"🔢👀👀",
+        "master":"👨‍🎓",
+        "location":"📍",
+        "monitorAgentsInEurope":"👀👨‍💼🏰🌍",
+        "monitorAgentsInAsia":"👀👨‍💼🏯🌏",
+        "monitorAgentsInAfrica":"👀👨‍💼🏝️🌍",
+        "monitorAgentsInNorthAmerica":"👀👨‍💼🏙️🌎",
+        "monitorAgentsInLatinAmerica":"👀👨‍💼🌎",
+        "monitorAgentsInOceania":"👀👨‍💼🏖️🌊",
+        "version":"🆚️"
+    },
+    "monitorManagement":{
+        "text": "👀🔧"
+    },
+    "settings":{
+        "text": "🛠️",
+        "general": {
+            "text": "🏢",
+            "language": "🗣️",
+            "applicationLanguageHasBeenChanged":"📱🗣️🔄️",
+            "displayTimezone": "⏰🌍",
+            "timezoneSettingsHaveBeenChanged":"⏰🌍🔄️",
+            "theme":"🎨",
+            "light":"💡",
+            "lightThemeHasBeenEnabled":"💡🎨🔄️",
+            "dark":"🌑",
+            "darkThemeHasBeenEnabled":"🌑🎨🔄️"
+        }
+    },
+    "about":{
+        "text": "📄",
+        "checkProjectOn": "🔍📄 "
+    },
+    "pageNotFound": "📄❌🔍",
+    "users":{
+        "text": "👥",
+        "userName": "👤",
+        "email": "📧",
+        "isAdmin": "👑",	
+        "actions": "⚙️",
+        "true": "✅",	
+        "false": "❌",
+        "noResultFoundFor":"❌🔍🔍",
+        "monitorConfirmation":"👀👥🔄️👥"
+    },
+    "monitorAlerts": {
+        "text": "👀🚨",
+        "noResultFoundFor":"❌🔍🔍",
+        "monitorAlerts":"👀🚨",
+        "timeStamp":"⏰🕰️",
+        "monitorName": "👀📇",
+        "message": "💬",
+        "screenshot":"🖼️"
+    }
+}

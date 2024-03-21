@@ -43,7 +43,8 @@ const languageOptions = [
   { code: "es-ES", text: "Español" },
   { code: "ru-RU", text: "Русский" },
   { code: "tr-TR", text: "Türkçe" },
-  { code: "uk-UA", text: "українська" }
+  { code: "uk-UA", text: "Українська" },
+  { code: "em-EM", text: "😀📅👌🔡👁️‍🗨️" }
 ];
 
 const General: FC<IGeneralProps> = () => {
