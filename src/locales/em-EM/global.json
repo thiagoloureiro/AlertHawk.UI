@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor":"📜🔜🔚",
         "environment": "🌍",
         "alarm": "🚨",
-        "pauseConfirmation": "👀⏸️🔄️!"	
+        "pauseConfirmation": "👀⏸️🔄️!",
+        "up": "⬆️",
+        "down": "⬇️",
+        "paused": "⏸️"
     },
     "monitorAgents":{
         "text": "👀👨‍💼",
