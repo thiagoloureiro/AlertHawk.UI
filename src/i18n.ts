@@ -15,7 +15,7 @@ import global_ru from "./locales/ru-RU/global.json";
 import global_ua from "./locales/uk-UA/global.json";
 import global_em from "./locales/em-EM/global.json";
 
-const supportedLngs: string[] = ["en-US", "de-DE", "tr-TR", "pl-PL", "pt-BR", "es-ES","it-IT","ko-KR","jp-JP","zh-CN", "ru-RU", "uk-UA"];
+const supportedLngs: string[] = ["en-US", "de-DE", "tr-TR", "pl-PL", "pt-BR", "es-ES","it-IT","ko-KR","jp-JP","zh-CN", "ru-RU", "uk-UA", "em-EM"];
 
 i18n
   .use(initReactI18next)
