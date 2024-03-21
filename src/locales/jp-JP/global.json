@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor": "証明書の有効期限が切れる",
         "environment": "環境 ",
         "alarm": "アラート",
-        "pauseConfirmation": "モニターが更新されました！"	
+        "pauseConfirmation": "モニターが更新されました！",
+        "up": "上",
+        "down": "下",
+        "paused": "一時停止"
     },
     "monitorAgents":{
         "text": "モニターエージェント",

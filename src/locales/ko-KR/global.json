@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor": "다음에 대한 인증서가 곧 만료됩니다",
         "environment": "환경",
         "alarm": "알림",
-        "pauseConfirmation": "모니터가 업데이트되었습니다!"	
+        "pauseConfirmation": "모니터가 업데이트되었습니다!",
+        "up": "위",
+        "down": "아래",
+        "paused": "일시 정지"
     },
     "monitorAgents":{
         "text": "모니터 에이전트",

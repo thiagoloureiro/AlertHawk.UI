@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor": "Сертифікат незабаром закінчиться для",
         "environment": "Середовище",
         "alarm": "Сповіщення",
-        "pauseConfirmation": "Монітор був оновлений!"
+        "pauseConfirmation": "Монітор був оновлений!",
+        "up": "Вгору",
+        "down": "Вниз",
+        "paused": "Призупинено"
     },
     "monitorAgents": {
         "text": "Агенти моніторингу",

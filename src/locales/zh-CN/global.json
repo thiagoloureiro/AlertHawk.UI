@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor": "证书即将过期",
         "environment": "环境",
         "alarm": "警报",
-        "pauseConfirmation": "监视器已更新！"	
+        "pauseConfirmation": "监视器已更新！",
+        "up": "上",
+        "down": "下",
+        "paused": "暂停"
     },
     "monitorAgents":{
         "text": "监控代理",

@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor":"Certificate is about to expire for",
         "environment": "Environment",
         "alarm": "Alerts",
-        "pauseConfirmation": "Monitor has been updated!"	
+        "pauseConfirmation": "Monitor has been updated!",
+        "up": "Up",
+        "down": "Down",
+        "paused": "Paused"	
     },
     "monitorAgents":{
         "text": "Monitor Agents",

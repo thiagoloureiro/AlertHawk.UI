@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor": "Das Zertifikat läuft in Kürze ab für",
         "environment": "Environment",
         "alarm": "Warnungen",
-        "pauseConfirmation": "Der Monitor wurde aktualisiert!"	
+        "pauseConfirmation": "Der Monitor wurde aktualisiert!",
+        "up": "Oben",
+        "down": "Unten",
+        "paused": "Angehalten"
     },
     "monitorAgents":{
         "text": "Monitor-Agenten",

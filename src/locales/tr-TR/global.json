@@ -34,7 +34,10 @@
         "certificateIsAboutToExpireFor": "Sertifika süresi dolmak üzere",
         "environment": "Çevre",
         "alarm": "Uyarılar",
-        "pauseConfirmation": "Monitör güncellendi!"	
+        "pauseConfirmation": "Monitör güncellendi!",
+        "up": "Yukarı",
+        "down": "Aşağı",
+        "paused": "Duraklatıldı"
     },
     "monitorAgents":{
         "text": "Monitör Görev Yöneticileri",
