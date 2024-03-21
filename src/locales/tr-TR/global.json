@@ -33,7 +33,8 @@
         "response": "Yanıt (Ortalama)",
         "certificateIsAboutToExpireFor": "Sertifika süresi dolmak üzere",
         "environment": "Çevre",
-        "alarm": "Uyarılar"
+        "alarm": "Uyarılar",
+        "pauseConfirmation": "Monitör güncellendi!"	
     },
     "monitorAgents":{
         "text": "Monitör Görev Yöneticileri",

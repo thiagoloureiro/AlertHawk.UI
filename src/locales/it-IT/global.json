@@ -33,7 +33,8 @@
         "response": "Risposta (Media)",
         "certificateIsAboutToExpireFor": "Il certificato sta per scadere per",
         "environment": "Ambiente",
-        "alarm": "Avvisi"
+        "alarm": "Avvisi",
+        "pauseConfirmation": "Il monitor è stato aggiornato!"	
     },
     "monitorAgents":{
         "text": "Agenti di Monitoraggio",

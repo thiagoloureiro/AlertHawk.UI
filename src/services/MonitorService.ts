@@ -39,13 +39,17 @@ const MonitorService = {
       "Monitor/allMonitorAgents",
       appendOptionalHeaders(headers)
     ),
-    getMonitorGroupList: async (
-      headers?: AxiosHeaders
-    ): Promise<IMonitorGroupListByUser[]> =>
-      await requests.get(
-        `MonitorGroup/monitorGroupList`,
-        appendOptionalHeaders(headers)
-      ),
+  getMonitorGroupList: async (
+    headers?: AxiosHeaders
+  ): Promise<IMonitorGroupListByUser[]> =>
+    await requests.get(
+      `MonitorGroup/monitorGroupList`,
+      appendOptionalHeaders(headers)
+    ),
+  pauseMonitor: async (id: number, paused: boolean, headers?: AxiosHeaders): Promise<void> =>
+    await requests.put(`Monitor/pauseMonitor/${id}/${paused}`, appendOptionalHeaders(headers)),
+  pauseGroupMonitor: async (id: number, paused: boolean, headers?: AxiosHeaders): Promise<void> =>
+    await requests.put(`Monitor/pauseMonitorByGroupId/${id}/${paused}`, appendOptionalHeaders(headers)),
 };
 
 export default MonitorService;

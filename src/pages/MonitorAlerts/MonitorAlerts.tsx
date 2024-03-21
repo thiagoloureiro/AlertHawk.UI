@@ -18,7 +18,7 @@ import {
 } from "@mui/material";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import logging from "../../utils/logging";
-interface IMonitorAlertsProps {}
+interface IMonitorAlertsProps { }
 interface IHeaderCell {
   id: string;
   label: string;
@@ -92,20 +92,21 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                   cursor: "pointer",
                 }}
               >
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      {headerCells.map((headerCell: IHeaderCell) => (
-                        <TableCell key={headerCell.id}>
-                          {headerCell.label}{" "}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  </TableHead>
+                {monitorAlerts.length > 0 ? (
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        {headerCells.map((headerCell: IHeaderCell) => (
+                          <TableCell key={headerCell.id}>
+                            {headerCell.label}{" "}
+                          </TableCell>
+                        ))}
+                      </TableRow>
+                    </TableHead>
 
-                  <TableBody>
-                    {monitorAlerts.length > 0 &&
-                      monitorAlerts.map((alert) => (
+                    <TableBody>
+
+                      {monitorAlerts.map((alert) => (
                         <TableRow key={alert.id}>
                           <TableCell>
                             {moment(alert.timeStamp).format(
@@ -131,8 +132,9 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                           </TableCell>
                         </TableRow>
                       ))}
-                  </TableBody>
-                </Table>
+                    </TableBody>
+                  </Table>
+                ) : (<p>{t("monitorAlerts.noResultFoundFor")}</p>)}
               </Box>
             </CardContent>
           </Card>

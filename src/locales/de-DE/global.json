@@ -33,7 +33,8 @@
         "response": "Antwort (Durchschnitt)",
         "certificateIsAboutToExpireFor": "Das Zertifikat läuft in Kürze ab für",
         "environment": "Environment",
-        "alarm": "Warnungen"
+        "alarm": "Warnungen",
+        "pauseConfirmation": "Der Monitor wurde aktualisiert!"	
     },
     "monitorAgents":{
         "text": "Monitor-Agenten",

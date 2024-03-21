@@ -33,7 +33,8 @@
         "response": "応答（平均）",
         "certificateIsAboutToExpireFor": "証明書の有効期限が切れる",
         "environment": "環境 ",
-        "alarm": "アラート"
+        "alarm": "アラート",
+        "pauseConfirmation": "モニターが更新されました！"	
     },
     "monitorAgents":{
         "text": "モニターエージェント",

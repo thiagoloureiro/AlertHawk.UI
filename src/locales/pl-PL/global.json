@@ -33,7 +33,8 @@
         "response": "Odpowiedź (średnia)",
         "certificateIsAboutToExpireFor" : "Certyfikat wkrótce wygaśnie",
         "environment": "Środowisko",
-        "alarm": "Alerty"
+        "alarm": "Alerty",
+        "pauseConfirmation": "Monitor został zaktualizowany!"	
     },
     "monitorAgents":{
         "text": "Agenci Monitorujący",
