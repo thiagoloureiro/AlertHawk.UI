@@ -1,3 +1,5 @@
+import { IHistoryData } from "./IHistoryData";
+
 export interface IMonitorStatusDashboard {
   monitorId: number;
   uptime1Hr?: number;
@@ -8,4 +10,5 @@ export interface IMonitorStatusDashboard {
   uptime6Months?: number;
   certExpDays: number;
   responseTime: number;
+  historyData: IHistoryData[];
 }
