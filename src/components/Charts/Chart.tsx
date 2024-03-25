@@ -91,10 +91,11 @@ const Chart: FC<IChartProps> = ({ data }) => {
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis
           tick={isDarkMode ? { fill: "#f5f5f5" } : {}}
+          fontSize={12}
           dataKey="name"
           tickFormatter={formatDateTick}
         />
-        <YAxis tick={isDarkMode ? { fill: "#f5f5f5" } : {}} />
+        <YAxis fontSize={12} tick={isDarkMode ? { fill: "#f5f5f5" } : {}} />
         {chartData.length > 0 && (
           <Tooltip
             formatter={formatTooltip}

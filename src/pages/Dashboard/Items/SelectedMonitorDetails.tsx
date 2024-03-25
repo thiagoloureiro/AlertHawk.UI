@@ -90,6 +90,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       }
     }
   });
+
   const handleEditBtn = () => {
     setIsEditMode(!isEditMode);
   };
@@ -199,6 +200,14 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
     return totalMonitors === 0 ? 0 : totalUptime / totalMonitors;
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await thunkGetMonitorGroupListByUser(selectedEnvironment);
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
