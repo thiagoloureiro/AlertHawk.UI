@@ -10,6 +10,7 @@ import {
 import { IHistoryData } from "../../interfaces/IHistoryData";
 import moment from "moment-timezone";
 import { useStoreState } from "../../hooks";
+
 interface IChartProps {
   data: IHistoryData[];
 }
@@ -20,9 +21,8 @@ const Chart: FC<IChartProps> = ({ data }) => {
   );
   const [chartData, setChartData] = useState<any[]>([]);
   const chartContainerRef = useRef<HTMLDivElement>(null);
-
   const [screenHeight, setScreenHeight] = useState<number>(window.innerHeight);
-  console.log(screenHeight);
+
   useEffect(() => {
     const handleResize = () => {
       if (chartContainerRef.current) {
@@ -60,6 +60,13 @@ const Chart: FC<IChartProps> = ({ data }) => {
     return moment(tick).format("HH:mm");
   };
 
+  const placeholderData = Array.from({ length: 60 })
+    .map((_, index) => ({
+      name: moment().subtract(index, "minutes").format("YYYY-MM-DD HH:mm:ss"),
+      responseTime: 0,
+    }))
+    .reverse();
+
   return (
     <div
       ref={chartContainerRef}
@@ -71,14 +78,15 @@ const Chart: FC<IChartProps> = ({ data }) => {
       <LineChart
         width={chartContainerRef.current?.clientWidth || 0}
         height={screenHeight / 4.8 > 180 ? screenHeight / 4.8 : 180}
-        data={chartData}
+        data={chartData.length > 0 ? chartData : placeholderData}
         margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
       >
         <Line
           type="monotone"
           dataKey="responseTime"
-          stroke="#26c6da"
+          stroke={chartData.length > 0 ? "#26c6da" : "transparent"}
           strokeWidth={3}
+          dot={chartData.length > 0 ? true : false}
         />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis
@@ -87,11 +95,13 @@ const Chart: FC<IChartProps> = ({ data }) => {
           tickFormatter={formatDateTick}
         />
         <YAxis tick={isDarkMode ? { fill: "#f5f5f5" } : {}} />
-        <Tooltip
-          formatter={formatTooltip}
-          contentStyle={{ backgroundColor: "rgba(255,255,255,0.8)" }}
-          labelStyle={{ color: "black" }}
-        />
+        {chartData.length > 0 && (
+          <Tooltip
+            formatter={formatTooltip}
+            contentStyle={{ backgroundColor: "rgba(255,255,255,0.8)" }}
+            labelStyle={{ color: "black" }}
+          />
+        )}
       </LineChart>
     </div>
   );
