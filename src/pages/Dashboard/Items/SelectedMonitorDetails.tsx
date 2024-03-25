@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Alert,
   Box,
@@ -53,23 +53,6 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
     (actions) => actions.monitor
   );
   const { selectedEnvironment } = useStoreState((state) => state.app);
-
-  const parentRef = useRef<HTMLDivElement>(null);
-
-  const [containerWidth, setContainerWidth] = useState<number>(0);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (parentRef.current) {
-        const width = parentRef.current.clientWidth - 32;
-        setContainerWidth(width);
-      }
-    };
-
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   const handleResumePauseBtn = async () => {
     if (selectedMonitorItem !== null) {
@@ -219,7 +202,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
         <Typography variant="h5" px={2} sx={{ marginBottom: "-10px" }}>
           {selectedMonitorGroup?.name || selectedMonitorItem?.name}
         </Typography>
@@ -786,10 +769,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                 </Box>
               </CardContent>
             </Card>
-            <Card ref={parentRef}>
+            <Card>
               <CardContent>
                 <Chart
-                  containerWidth={containerWidth}
                   data={selectedMonitorItem.monitorStatusDashboard.historyData}
                 />
               </CardContent>
