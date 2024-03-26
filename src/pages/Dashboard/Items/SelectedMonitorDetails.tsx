@@ -194,8 +194,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
     let totalMonitors = 0;
 
     monitors.forEach((monitor) => {
-      totalUptime += monitor.monitorStatusDashboard[metric] ?? 0;
-      totalMonitors++;
+      const uptime = monitor.monitorStatusDashboard[metric];
+      if (uptime !== 0) {
+        totalUptime += uptime ?? 0;
+        totalMonitors++;
+      }
     });
 
     return totalMonitors === 0 ? 0 : totalUptime / totalMonitors;

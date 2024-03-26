@@ -2,10 +2,15 @@ import { AxiosResponse } from "axios";
 import axiosInstance from "../config/axios";
 import appendOptionalHeaders from "../utils/axiosHelper";
 import { AxiosHeaders } from "../interfaces/axios/IAxiosHeaders";
-import { Environment } from "../enums/Enums";
 import { IMonitorGroupListByUser } from "../interfaces/IMonitorGroupListByUser";
-import { IMonitor, IMonitorHttp, IMonitorTcp, MonitorGroupItem } from "../interfaces/IMonitor";
+import {
+  IMonitor,
+  IMonitorHttp,
+  IMonitorTcp,
+  MonitorGroupItem,
+} from "../interfaces/IMonitor";
 import { IAgent } from "../interfaces/IAgent";
+import { Environment } from "../enums/Enums";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -46,16 +51,24 @@ const MonitorService = {
       `MonitorGroup/monitorGroupList`,
       appendOptionalHeaders(headers)
     ),
-  pauseMonitor: async (id: number, paused: boolean, headers?: AxiosHeaders): Promise<void> =>
-    await requests.put(`Monitor/pauseMonitor/${id}/${paused}`, appendOptionalHeaders(headers)),
-  pauseGroupMonitor: async (id: number, paused: boolean, headers?: AxiosHeaders): Promise<void> =>
-    await requests.put(`Monitor/pauseMonitorByGroupId/${id}/${paused}`, appendOptionalHeaders(headers)),
-  createHttpMonitor: async (monitor: IMonitorHttp, headers?: AxiosHeaders): Promise<void> =>
-    await requests.post(`Monitor/CreateMonitorHttp`, monitor, appendOptionalHeaders(headers)),
-    createTcpMonitor: async (monitor: IMonitorTcp, headers?: AxiosHeaders): Promise<void> =>
-    await requests.post(`Monitor/CreateMonitorTcp`, monitor, appendOptionalHeaders(headers)),
-    addMonitorToGroup: async (monitorGroupItem: MonitorGroupItem, headers?: AxiosHeaders): Promise<void> =>
-    await requests.post(`monitorGroup/addMonitorToGroup`, monitorGroupItem, appendOptionalHeaders(headers)),
+  pauseMonitor: async (
+    id: number,
+    paused: boolean,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.put(
+      `Monitor/pauseMonitor/${id}/${paused}`,
+      appendOptionalHeaders(headers)
+    ),
+  pauseGroupMonitor: async (
+    id: number,
+    paused: boolean,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.put(
+      `Monitor/pauseMonitorByGroupId/${id}/${paused}`,
+      appendOptionalHeaders(headers)
+    ),
 };
 
 export default MonitorService;

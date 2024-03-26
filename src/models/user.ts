@@ -2,9 +2,9 @@ import { Action, Thunk, action, thunk } from "easy-peasy";
 import { IUser } from "../interfaces/IUser";
 import UserService from "../services/UserService";
 import logging from "../utils/logging";
-import { Status } from "../enums/Enums";
 import { StoreModel } from ".";
 import { getStatusFromError } from "../utils/errorHandler";
+import { Status } from "../enums/Enums";
 export interface IUserModel {
   user: IUser | null;
   users: IUser[];
@@ -49,7 +49,7 @@ const user: IUserModel = {
     try {
       getStoreActions().app.setIsLoading(true);
       const users = await UserService.getAll();
-      users.sort((a, b) => (a.username ?? '').localeCompare(b.username ?? ''));
+      users.sort((a, b) => (a.username ?? "").localeCompare(b.username ?? ""));
       actions.setUsers(users);
       return Status.Success;
     } catch (err: any) {
@@ -62,7 +62,7 @@ const user: IUserModel = {
   }),
   setUsers: action((state, payload) => {
     state.users = payload;
-  })
+  }),
 };
 
 export default user;

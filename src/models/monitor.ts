@@ -1,11 +1,11 @@
 import { Action, Thunk, action, thunk } from "easy-peasy";
 import logging from "../utils/logging";
-import { Environment, Status } from "../enums/Enums";
 import { StoreModel } from ".";
 import { getStatusFromError } from "../utils/errorHandler";
 import { IMonitorGroupListByUser } from "../interfaces/IMonitorGroupListByUser";
 import MonitorService from "../services/MonitorService";
 import { IAgent } from "../interfaces/IAgent";
+import { Environment, Status } from "../enums/Enums";
 
 export interface IMonitorModel {
   monitorGroupListByUser: IMonitorGroupListByUser[];
