@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   FormControl,
@@ -23,16 +24,18 @@ import {
   IMonitorGroupListByUserItem,
 } from "../../interfaces/IMonitorGroupListByUser";
 import { Environment } from "../../enums/Enums";
+import AddNewMonitor from "./Forms/AddNewMonitor";
 
-interface IDashboardProps {}
+interface IDashboardProps { }
 
-const Dashboard: FC<IDashboardProps> = ({}) => {
+const Dashboard: FC<IDashboardProps> = ({ }) => {
   const { t } = useTranslation("global");
   const { isSidebarOpen, selectedEnvironment } = useStoreState(
     (state) => state.app
   );
-  const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
+  const { monitorGroupListByUser, addMonitorPainel } = useStoreState((state) => state.monitor);
   const { setSelectedEnvironment } = useStoreActions((action) => action.app);
+  const { setAddMonitorPainel } = useStoreActions((action) => action.monitor);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
   const [selectedChildRowIndex, setSelectedChildRowIndex] = useState<
@@ -57,11 +60,11 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
   const handleMetricChange = (event: SelectChangeEvent<string>) => {
     setSelectedMetric(
       event.target.value as
-        | "uptime24Hrs"
-        | "uptime7Days"
-        | "uptime30Days"
-        | "uptime3Months"
-        | "uptime6Months"
+      | "uptime24Hrs"
+      | "uptime7Days"
+      | "uptime30Days"
+      | "uptime3Months"
+      | "uptime6Months"
     );
   };
 
@@ -79,9 +82,11 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
   const handleRowClick = (index: number) => {
     setSelectedRowIndex(selectedRowIndex === index ? selectedRowIndex : index);
     setSelectedChildRowIndex(null);
+    setAddMonitorPainel(false);
   };
 
   const handleChildRowClick = (index: number) => {
+    setAddMonitorPainel(false);
     setSelectedChildRowIndex(
       selectedChildRowIndex === index ? selectedChildRowIndex : index
     );
@@ -100,15 +105,22 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     setSelectedMonitorItem(
       selectedChildRowIndex !== null
         ? monitorGroupListByUser.reduce((foundItem, parent) => {
-            if (foundItem) return foundItem;
-            const childItem = parent.monitors.find(
-              (child) => child.id === selectedChildRowIndex
-            );
-            return childItem ? childItem : foundItem;
-          }, null as IMonitorGroupListByUserItem | null)
+          if (foundItem) return foundItem;
+          const childItem = parent.monitors.find(
+            (child) => child.id === selectedChildRowIndex
+          );
+          return childItem ? childItem : foundItem;
+        }, null as IMonitorGroupListByUserItem | null)
         : null
     );
   }, [selectedChildRowIndex, monitorGroupListByUser]);
+
+  function handleAddNew(): void {
+    setSelectedMonitorItem(null);
+    setSelectedChildRowIndex(null);
+    setSelectedMonitorGroup(null);
+    setAddMonitorPainel(true);
+  }
 
   return (
     <>
@@ -200,6 +212,11 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                     />
                   </FormControl>
                 </div>
+                <div>
+                  <FormControl fullWidth>
+                    <Button color="primary" onClick={handleAddNew}>{t("dashboard.addNew")}</Button>
+                  </FormControl>
+                </div>
               </Stack>
               <Box
                 sx={{
@@ -241,6 +258,34 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
               selectedMetric={selectedMetric}
             />
           ) : null}
+
+          {
+            addMonitorPainel &&
+            <Card>
+              <CardContent>
+                <Box sx={{
+                  overflowY: "auto",
+                  maxHeight: "calc(100vh - 210px)",
+                  paddingRight: "16px",
+                  "&::-webkit-scrollbar": {
+                    width: "0.4em",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                    webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    backgroundColor: "secondary.main",
+                    outline: "1px solid secondary.main",
+                    borderRadius: "30px",
+                  },
+                }}>
+                  <AddNewMonitor/>
+                </Box>
+              </CardContent>
+            </Card>
+          }
+
         </Grid>
       </Grid>
     </>

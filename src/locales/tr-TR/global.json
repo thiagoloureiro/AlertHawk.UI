@@ -1,14 +1,14 @@
 {
-    "general":{
-        "goBack":"Geri Dön"
+    "general": {
+        "goBack": "Geri Dön"
     },
-    "header":{
+    "header": {
         "logout": "Çıkış yap"
     },
-    "sidebar":{
+    "sidebar": {
         "monitorList": "Monitor Listesi",
         "monitorManagement": "Monitor Yönetimi",
-        "monitorAgents":"Aracıları İzleme",
+        "monitorAgents": "Aracıları İzleme",
         "notificationManagement": "Bildirim Yönetimi",
         "monitorAlert": "Monitor Alarmı",
         "users": "Kullanıcılar",
@@ -37,11 +37,52 @@
         "pauseConfirmation": "Monitör güncellendi!",
         "up": "Çevrimiçi",
         "down": "Çevrimdışı",
-        "paused": "Duraklatıldı"
+        "paused": "Duraklatıldı",
+        "addNew": "Yeni ekle",
+        "addHttpForm": {
+            "success": "Monitör eklendi!",
+            "addNewMonitor": "Yeni Monitör Ekle",
+            "monitorType": "Monitör Türü",
+            "monitorName": "Monitör Adı",
+            "monitorGroup": "Monitör Grubu",
+            "urlToCheck": "Kontrol Edilecek URL",
+            "monitorRegion": "Monitör Bölgesi",
+            "monitorEnvironment": "Monitör Ortamı",
+            "checkCertificateExpiry": "Sertifika Süresini Kontrol Et",
+            "ignoreTLSSSL": "TLS SSL'yi Yoksay",
+            "httpMethod": "HTTP Metodu",
+            "retries": "Yeniden Denemeler",
+            "maxRedirects": "Maksimum Yönlendirmeler",
+            "heartbeatInterval": "Kalp Atışı Aralığı (Dakika)",
+            "timeout": "Zaman Aşımı (Saniye)",
+            "body": "Gövde",
+            "headers": "Başlıklar",
+            "addHeader": "Başlık Ekle",
+            "save": "Kaydet",
+            "yes": "Evet",
+            "no": "Hayır",
+            "port": "Bağlantı Noktası",
+            "ip": "IP",
+            "errors":{
+                "name": "Ad alanı gereklidir",
+                "url": "Geçersiz URL",
+                "region": "Bölge gereklidir",
+                "monitorEnvironment": "Ortam gereklidir",
+                "checkCertificateExpiry": "Sertifika Son Kullanma Tarihi kontrolü gereklidir",
+                "ignoreTLSSSL": "TLS SSL yoksayımı gereklidir",
+                "httpMethod": "HTTP Yöntemi gereklidir",
+                "retries": "Yeniden denemeler gereklidir",
+                "maxRedirects": "Maksimum Yönlendirmeler gereklidir",
+                "heartbeatInterval": "Kalp Atış Aralığı gereklidir",
+                "timeout": "Zaman Aşımı gereklidir",
+                "port": "Bağlantı Noktası gereklidir",
+                "ip": "IP gereklidir"
+            }
+        }
     },
-    "monitorAgents":{
+    "monitorAgents": {
         "text": "Monitör Görev Yöneticileri",
-        "totalNumberOfMonitorAgents" : "Toplam Görev Yöneticisi Sayısı",
+        "totalNumberOfMonitorAgents": "Toplam Görev Yöneticisi Sayısı",
         "totalNumberofRunningMonitors": "Toplam Çalışan Monitör Sayısı",
         "hostname": "Ana bilgisayar adı",
         "numberOfMonitors": "Monitör Sayısı",
@@ -55,47 +96,47 @@
         "monitorAgentsInOceania": "Okyanusya'daki Görev Yöneticileri",
         "version": "Versiyon"
     },
-    "monitorManagement":{
+    "monitorManagement": {
         "text": "Monitör Yönetimi"
     },
-    "settings":{
+    "settings": {
         "text": "Ayarlar",
         "general": {
             "text": "Genel",
             "language": "Dil",
-            "applicationLanguageHasBeenChanged":"Uygulama dili değiştirildi",
+            "applicationLanguageHasBeenChanged": "Uygulama dili değiştirildi",
             "displayTimezone": "Gösterilen Saat Dilimi",
-            "timezoneSettingsHaveBeenChanged":"Saat dilimi ayarları değiştirildi",
-            "theme":"Tema",
-            "light":"Açık",
-            "lightThemeHasBeenEnabled":"Açık tema aktifleştirildi",
-            "dark":"Koyu",
-            "darkThemeHasBeenEnabled":"Koyu tema aktifleştirildi"
+            "timezoneSettingsHaveBeenChanged": "Saat dilimi ayarları değiştirildi",
+            "theme": "Tema",
+            "light": "Açık",
+            "lightThemeHasBeenEnabled": "Açık tema aktifleştirildi",
+            "dark": "Koyu",
+            "darkThemeHasBeenEnabled": "Koyu tema aktifleştirildi"
         }
     },
-    "about":{
-        "text":"Hakkında",
+    "about": {
+        "text": "Hakkında",
         "checkProjectOn": "Check project on "
     },
     "pageNotFound": "Sayfa Bulunamadı",
-    "users":{
+    "users": {
         "text": "Kullanıcılar",
         "userName": "Kullanıcı",
         "email": "E-posta",
-        "isAdmin": "Yönetici",	
+        "isAdmin": "Yönetici",
         "actions": "Eylemler",
-        "true": "Evet",	
+        "true": "Evet",
         "false": "Hayır",
-        "noResultFoundFor":"Sonuç bulunamadı",
-        "monitorConfirmation":"İzleme grupları değiştirildi"
+        "noResultFoundFor": "Sonuç bulunamadı",
+        "monitorConfirmation": "İzleme grupları değiştirildi"
     },
     "monitorAlerts": {
         "text": "Monitör Uyarıları",
-        "noResultFoundFor":"Sonuç bulunamadı",
-        "monitorAlerts":"Monitör Uyarıları",
-        "timeStamp":"Zaman Damgası",
+        "noResultFoundFor": "Sonuç bulunamadı",
+        "monitorAlerts": "Monitör Uyarıları",
+        "timeStamp": "Zaman Damgası",
         "monitorName": "Monitör Adı",
         "message": "Mesaj",
-        "screenshot":"Ekran Görüntüsü"
+        "screenshot": "Ekran Görüntüsü"
     }
 }

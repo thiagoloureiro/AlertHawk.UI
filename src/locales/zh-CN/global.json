@@ -1,15 +1,15 @@
 {
-    "general":{
-        "goBack":"返回"
+    "general": {
+        "goBack": "返回"
     },
-    "header":{
+    "header": {
         "logout": "登出"
     },
-    "sidebar":{
+    "sidebar": {
         "monitorList": "监控列表",
         "monitorManagement": "监控管理",
         "notificationManagement": "通知管理",
-        "monitorAgents":"监控代理",
+        "monitorAgents": "监控代理",
         "monitorAlert": "监控警报",
         "users": "用户",
         "settings": "设置"
@@ -37,48 +37,89 @@
         "pauseConfirmation": "监视器已更新！",
         "up": "在线",
         "down": "离线",
-        "paused": "暂停"
+        "paused": "暂停",
+        "addNew": "添加新",
+        "addHttpForm": {
+            "success": "监视器已添加！",
+            "addNewMonitor": "添加新监视器",
+            "monitorType": "监视器类型",
+            "monitorName": "监视器名称",
+            "monitorGroup": "监视器组",
+            "urlToCheck": "要检查的网址",
+            "monitorRegion": "监视器区域",
+            "monitorEnvironment": "监视器环境",
+            "checkCertificateExpiry": "检查证书到期",
+            "ignoreTLSSSL": "忽略TLS SSL",
+            "httpMethod": "HTTP方法",
+            "retries": "重试次数",
+            "maxRedirects": "最大重定向次数",
+            "heartbeatInterval": "心跳间隔（分钟）",
+            "timeout": "超时（秒）",
+            "body": "主体",
+            "headers": "头部",
+            "addHeader": "添加头部",
+            "save": "保存",
+            "yes": "是",
+            "no": "否",
+            "port": "端口",
+            "ip": "IP",
+            "errors": {
+                "name": "名称为必填项",
+                "url": "无效的URL",
+                "region": "区域为必填项",
+                "monitorEnvironment": "环境为必填项",
+                "checkCertificateExpiry": "需要检查证书到期",
+                "ignoreTLSSSL": "需要忽略TLS SSL",
+                "httpMethod": "需要HTTP方法",
+                "retries": "需要重试",
+                "maxRedirects": "需要最大重定向次数",
+                "heartbeatInterval": "需要心跳间隔",
+                "timeout": "需要超时",
+                "port": "需要端口",
+                "ip": "需要IP"
+            }
+        }
     },
-    "monitorAgents":{
+    "monitorAgents": {
         "text": "监控代理",
-        "totalNumberOfMonitorAgents" : "监控代理总数",
-        "totalNumberofRunningMonitors":"正在运行的监控程序总数",
-        "hostname":"主机名",
-        "numberOfMonitors":"监视器数量",
+        "totalNumberOfMonitorAgents": "监控代理总数",
+        "totalNumberofRunningMonitors": "正在运行的监控程序总数",
+        "hostname": "主机名",
+        "numberOfMonitors": "监视器数量",
         "master": "主机",
         "location": "位置",
         "monitorAgentsInEurope": "欧洲的监控代理",
-        "monitorAgentsInAsia":"亚洲的监控代理",
-        "monitorAgentsInAfrica":"监控非洲的代理商",
-        "monitorAgentsInNorthAmerica":"北美地区的监控代理",
+        "monitorAgentsInAsia": "亚洲的监控代理",
+        "monitorAgentsInAfrica": "监控非洲的代理商",
+        "monitorAgentsInNorthAmerica": "北美地区的监控代理",
         "monitorAgentsInLatinAmerica": "监控拉丁美洲的代理商",
-        "monitorAgentsInOceania":"监控奥塞尼亚的代理商",
+        "monitorAgentsInOceania": "监控奥塞尼亚的代理商",
         "version": "版本"
     },
-    "monitorManagement":{
+    "monitorManagement": {
         "text": "监控管理"
     },
-    "settings":{
+    "settings": {
         "text": "设置",
         "general": {
             "text": "常规",
             "language": "语言",
-            "applicationLanguageHasBeenChanged":"应用语言已更改",
+            "applicationLanguageHasBeenChanged": "应用语言已更改",
             "displayTimezone": "显示时区",
-            "timezoneSettingsHaveBeenChanged":"时区设置已更改",
-            "theme":"主题",
-            "light":"明亮",
-            "lightThemeHasBeenEnabled":"已启用明亮主题",
-            "dark":"暗黑",
-            "darkThemeHasBeenEnabled":"已启用暗黑主题"
+            "timezoneSettingsHaveBeenChanged": "时区设置已更改",
+            "theme": "主题",
+            "light": "明亮",
+            "lightThemeHasBeenEnabled": "已启用明亮主题",
+            "dark": "暗黑",
+            "darkThemeHasBeenEnabled": "已启用暗黑主题"
         }
     },
-    "about":{
+    "about": {
         "text": "关于",
         "checkProjectOn": "在以下位置检查项目 "
     },
     "pageNotFound": "页面未找到",
-    "users":{
+    "users": {
         "text": "用户",
         "userName": "用户名",
         "email": "电子邮件",
@@ -86,16 +127,16 @@
         "actions": "操作",
         "true": "是",
         "false": "否",
-        "noResultFoundFor":"未找到结果",
-        "monitorConfirmation":"监控组已更改"
+        "noResultFoundFor": "未找到结果",
+        "monitorConfirmation": "监控组已更改"
     },
     "monitorAlerts": {
         "text": "监控警报",
-        "noResultFoundFor":"未找到结果",
-        "monitorAlerts":"监控警报",
-        "timeStamp":"时间戳",
+        "noResultFoundFor": "未找到结果",
+        "monitorAlerts": "监控警报",
+        "timeStamp": "时间戳",
         "monitorName": "监控名称",
         "message": "消息",
-        "screenshot":"屏幕截图"
+        "screenshot": "屏幕截图"
     }
 }

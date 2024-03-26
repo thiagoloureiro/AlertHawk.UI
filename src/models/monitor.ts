@@ -11,6 +11,8 @@ export interface IMonitorModel {
   monitorGroupListByUser: IMonitorGroupListByUser[];
   setMonitorGroupListByUser: Action<IMonitorModel, IMonitorGroupListByUser[]>;
   monitorGroupList: IMonitorGroupListByUser[];
+  addMonitorPainel: boolean;
+  setAddMonitorPainel: Action<IMonitorModel, boolean>;
   setMonitorGroupList: Action<IMonitorModel, IMonitorGroupListByUser[]>;
   setResetMonitor: Action<IMonitorModel>;
   thunkGetMonitorGroupListByUser: Thunk<
@@ -73,9 +75,13 @@ const monitor: IMonitorModel = {
     }
   }),
   monitorGroupList: [],
-  setMonitorGroupList:  action((state, payload) => {
+  setMonitorGroupList: action((state, payload) => {
     state.monitorGroupList = payload;
   }),
+  addMonitorPainel: false,
+  setAddMonitorPainel: action((state, payload) => {
+    state.addMonitorPainel = payload;
+  })
 };
 
 export default monitor;

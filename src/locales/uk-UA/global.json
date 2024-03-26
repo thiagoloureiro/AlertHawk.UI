@@ -37,7 +37,50 @@
         "pauseConfirmation": "Монітор був оновлений!",
         "up": "Онлайн",
         "down": "Офлайн",
-        "paused": "Призупинено"
+        "paused": "Призупинено",
+        "addNew": "Додати новий",
+        "addHttpForm": {
+            "success": "Монітор був доданий!",
+            "addNewMonitor": "Додати новий монітор",
+            "monitorType": "Тип монітора",
+            "monitorName": "Назва монітора",
+            "monitorGroup": "Група моніторів",
+            "urlToCheck": "URL для перевірки",
+            "monitorRegion": "Регіон монітора",
+            "monitorEnvironment": "Середовище моніторингу",
+            "checkCertificateExpiry": "Перевірити термін дії сертифіката",
+            "ignoreTLSSSL": "Ігнорувати TLS SSL",
+            "httpMethod": "Метод HTTP",
+            "retries": "Повтори",
+            "maxRedirects": "Максимальна кількість перенаправлень",
+            "heartbeatInterval": "Інтервал пульсації (хвилини)",
+            "timeout": "Тайм-аут (секунди)",
+            "body": "Тіло",
+            "headers": "Заголовки",
+            "addHeader": "Додати заголовок",
+            "save": "Зберегти",
+            "yes": "Так",
+            "no": "Ні",
+            "port": "Порт",
+            "ip": "IP",
+            "errors":{
+                "name": "Ім'я обов'язкове",
+                "url": "Неправильний URL",
+                "region": "Регіон обов'язковий",
+                "monitorEnvironment": "Середовище обов'язкове",
+                "checkCertificateExpiry": "Перевірка терміну дії сертифіката обов'язкова",
+                "ignoreTLSSSL": "Ігнорування TLS SSL обов'язкове",
+                "httpMethod": "Метод HTTP обов'язковий",
+                "retries": "Повтори обов'язкові",
+                "maxRedirects": "Максимальна кількість перенаправлень обов'язкова",
+                "heartbeatInterval": "Інтервал пульсації обов'язковий",
+                "timeout": "Тайм-аут обов'язковий",
+                "port": "Порт обов'язковий",
+                "ip": "IP обов'язковий"
+            }
+            
+        }
+        
     },
     "monitorAgents": {
         "text": "Агенти моніторингу",

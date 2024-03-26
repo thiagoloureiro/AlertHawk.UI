@@ -1,14 +1,14 @@
 {
-    "general":{
-        "goBack":"Zurück"
+    "general": {
+        "goBack": "Zurück"
     },
-    "header":{
+    "header": {
         "logout": "Ausloggen"
     },
-    "sidebar":{
+    "sidebar": {
         "monitorList": "Monitor-Liste",
         "monitorManagement": "Monitor-Management",
-        "monitorAgents":"Monitor-Agenten",
+        "monitorAgents": "Monitor-Agenten",
         "notificationManagement": "Benachrichtigungsmanagement",
         "monitorAlert": "Monitor-Alarm",
         "users": "Benutzer",
@@ -37,11 +37,54 @@
         "pauseConfirmation": "Der Monitor wurde aktualisiert!",
         "up": "Online",
         "down": "Offline",
-        "paused": "Angehalten"
+        "paused": "Angehalten",
+        "addNew": "Neu hinzufügen",
+        "addHttpForm": {
+            "success": "Monitor wurde hinzugefügt!",
+            "addNewMonitor": "Neuen Monitor hinzufügen",
+            "monitorType": "Monitor Typ",
+            "monitorName": "Monitor Name",
+            "monitorGroup": "Monitor Gruppe",
+            "urlToCheck": "URL zu überprüfen",
+            "monitorRegion": "Monitor Region",
+            "monitorEnvironment": "Monitor Umgebung",
+            "checkCertificateExpiry": "Zertifikatsablauf überprüfen",
+            "ignoreTLSSSL": "TLS SSL ignorieren",
+            "httpMethod": "HTTP Methode",
+            "retries": "Wiederholungen",
+            "maxRedirects": "Maximale Weiterleitungen",
+            "heartbeatInterval": "Herzschlag Intervall (Minuten)",
+            "timeout": "Zeitüberschreitung (Sekunden)",
+            "body": "Körper",
+            "headers": "Kopfzeilen",
+            "addHeader": "Kopfzeile hinzufügen",
+            "save": "Speichern",
+            "yes": "Ja",
+            "no": "Nein",
+            "port": "Port",
+            "ip": "IP",
+            "errors":{
+                "name": "Name ist erforderlich",
+                "url": "Ungültige URL",
+                "region": "Region ist erforderlich",
+                "monitorEnvironment": "Umgebung ist erforderlich",
+                "checkCertificateExpiry": "Überprüfung des Zertifikatablaufs ist erforderlich",
+                "ignoreTLSSSL": "TLS SSL ignorieren ist erforderlich",
+                "httpMethod": "HTTP-Methode ist erforderlich",
+                "retries": "Wiederholungen sind erforderlich",
+                "maxRedirects": "Maximale Weiterleitungen sind erforderlich",
+                "heartbeatInterval": "Herzfrequenzintervall ist erforderlich",
+                "timeout": "Timeout ist erforderlich",
+                "port": "Port ist erforderlich",
+                "ip": "IP ist erforderlich"
+            }
+            
+        }
+        
     },
-    "monitorAgents":{
+    "monitorAgents": {
         "text": "Monitor-Agenten",
-        "totalNumberOfMonitorAgents" : "Gesamtzahl der Monitor-Agenten",
+        "totalNumberOfMonitorAgents": "Gesamtzahl der Monitor-Agenten",
         "totalNumberofRunningMonitors": "Gesamtzahl der laufenden Monitore",
         "hostname": "Hostname",
         "numberOfMonitors": "Anzahl der Monitore",
@@ -55,47 +98,47 @@
         "monitorAgentsInOceania": "Agenten in Ozeanien",
         "version": "Ausführung"
     },
-    "monitorManagement":{
+    "monitorManagement": {
         "text": "Monitor-Management"
     },
-    "settings":{
+    "settings": {
         "text": "Einstellungen",
         "general": {
             "text": "Allgemein",
             "language": "Sprache",
-            "applicationLanguageHasBeenChanged":"Die Sprache der Anwendung wurde geändert",
+            "applicationLanguageHasBeenChanged": "Die Sprache der Anwendung wurde geändert",
             "displayTimezone": "Angezeigte Zeitzone",
-            "timezoneSettingsHaveBeenChanged":"Die Zeitzoneneinstellungen wurden geändert",
+            "timezoneSettingsHaveBeenChanged": "Die Zeitzoneneinstellungen wurden geändert",
             "theme": "Erscheinungsbild",
             "light": "Hell",
-            "lightThemeHasBeenEnabled":"Das Erscheinungsbild Hell wurde aktiviert",
+            "lightThemeHasBeenEnabled": "Das Erscheinungsbild Hell wurde aktiviert",
             "dark": "Dunkel",
-            "darkThemeHasBeenEnabled":"Das Erscheinungsbild Dunkel wurde aktiviert"
+            "darkThemeHasBeenEnabled": "Das Erscheinungsbild Dunkel wurde aktiviert"
         }
     },
     "about": {
-        "text":"Über",
+        "text": "Über",
         "checkProjectOn": "Projekt-Repository auf "
     },
     "pageNotFound": "Seite nicht gefunden",
-    "users":{
+    "users": {
         "text": "Benutzer",
         "userName": "Benutzername",
         "email": "E-Mail",
-        "isAdmin": "Administrator",	
+        "isAdmin": "Administrator",
         "actions": "Aktionen",
-        "true": "Ja",	
+        "true": "Ja",
         "false": "Nein",
-        "noResultFoundFor":"Keine Ergebnisse gefunden",
-        "monitorConfirmation":"Überwachungsgruppen wurden geändert"
+        "noResultFoundFor": "Keine Ergebnisse gefunden",
+        "monitorConfirmation": "Überwachungsgruppen wurden geändert"
     },
     "monitorAlerts": {
         "text": "Monitor-Benachrichtigungen",
-        "noResultFoundFor":"Keine Ergebnisse gefunden",
-        "monitorAlerts":"Monitor-Benachrichtigungen",
-        "timeStamp":"Zeitstempel",
+        "noResultFoundFor": "Keine Ergebnisse gefunden",
+        "monitorAlerts": "Monitor-Benachrichtigungen",
+        "timeStamp": "Zeitstempel",
         "monitorName": "Monitor-Name",
         "message": "Nachricht",
-        "screenshot":"Screenshot"
+        "screenshot": "Screenshot"
     }
 }

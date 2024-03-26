@@ -1,14 +1,14 @@
 {
-    "general":{
-        "goBack":"Powrót"
+    "general": {
+        "goBack": "Powrót"
     },
-    "header":{
+    "header": {
         "logout": "Wyloguj się"
     },
-    "sidebar":{
+    "sidebar": {
         "monitorList": "Lista Monitorów",
         "monitorManagement": "Zarządzanie Monitorami",
-        "monitorAgents":"Monitoruj agentów",
+        "monitorAgents": "Monitoruj agentów",
         "notificationManagement": "Zarządzanie Powiadomieniami",
         "monitorAlert": "Alarm Monitora",
         "users": "Użytkownicy",
@@ -31,18 +31,60 @@
         "months": "Miesiące",
         "certificateexpiration": "Wygaśnięcie certyfikatu",
         "response": "Odpowiedź (średnia)",
-        "certificateIsAboutToExpireFor" : "Certyfikat wkrótce wygaśnie",
+        "certificateIsAboutToExpireFor": "Certyfikat wkrótce wygaśnie",
         "environment": "Środowisko",
         "alarm": "Alerty",
         "pauseConfirmation": "Monitor został zaktualizowany!",
         "up": "Online",
         "down": "Offline",
-        "paused": "Wstrzymane"	
+        "paused": "Wstrzymane",
+        "addNew": "Dodaj nowy",
+        "addHttpForm": {
+            "success": "Monitor został dodany!",
+            "addNewMonitor": "Dodaj Nowy Monitor",
+            "monitorType": "Typ Monitora",
+            "monitorName": "Nazwa Monitora",
+            "monitorGroup": "Grupa Monitorów",
+            "urlToCheck": "URL do Sprawdzenia",
+            "monitorRegion": "Region Monitora",
+            "monitorEnvironment": "Środowisko Monitora",
+            "checkCertificateExpiry": "Sprawdź Wygaśnięcie Certyfikatu",
+            "ignoreTLSSSL": "Ignoruj TLS SSL",
+            "httpMethod": "Metoda HTTP",
+            "retries": "Ponowne Próby",
+            "maxRedirects": "Maksymalna Liczba Przekierowań",
+            "heartbeatInterval": "Interwał Bicia Serca (Minuty)",
+            "timeout": "Limit Czasu (Sekundy)",
+            "body": "Treść",
+            "headers": "Nagłówki",
+            "addHeader": "Dodaj Nagłówek",
+            "save": "Zapisz",
+            "yes": "Tak",
+            "no": "Nie",
+            "port": "Port",
+            "ip": "IP",
+            "errors":{
+                "name": "Nazwa jest wymagana",
+                "url": "Nieprawidłowy adres URL",
+                "region": "Region jest wymagany",
+                "monitorEnvironment": "Środowisko jest wymagane",
+                "checkCertificateExpiry": "Wymagana jest weryfikacja wygaśnięcia certyfikatu",
+                "ignoreTLSSSL": "Wymagane jest zignorowanie TLS SSL",
+                "httpMethod": "Wymagana jest metoda HTTP",
+                "retries": "Wymagane są próby",
+                "maxRedirects": "Wymagane jest maksymalna liczba przekierowań",
+                "heartbeatInterval": "Wymagany jest interwał bicza serca",
+                "timeout": "Wymagany jest limit czasu",
+                "port": "Wymagany jest port",
+                "ip": "Wymagany jest adres IP"
+            }
+        }
+        
     },
-    "monitorAgents":{
+    "monitorAgents": {
         "text": "Agenci Monitorujący",
-        "totalNumberOfMonitorAgents" : "Całkowita Liczba Agentów Monitorujących",
-        "totalNumberofRunningMonitors" : "Całkowita Liczba Uruchomionych Monitorów",
+        "totalNumberOfMonitorAgents": "Całkowita Liczba Agentów Monitorujących",
+        "totalNumberofRunningMonitors": "Całkowita Liczba Uruchomionych Monitorów",
         "hostname": "Nazwa Hosta",
         "numberOfMonitors": "Liczba Monitorów",
         "master": "Master",
@@ -55,47 +97,47 @@
         "monitorAgentsInOceania": "Agenci Monitorujący w Oceanii",
         "version": "Wersja"
     },
-    "monitorManagement":{
+    "monitorManagement": {
         "text": "Zarządzanie Monitorami"
     },
-    "settings":{
+    "settings": {
         "text": "Ustawienia",
         "general": {
             "text": "Ogólne",
             "language": "Język",
-            "applicationLanguageHasBeenChanged":"Język aplikacji został zmieniony",
+            "applicationLanguageHasBeenChanged": "Język aplikacji został zmieniony",
             "displayTimezone": "Wyświetlana Strefa Czasowa",
-            "timezoneSettingsHaveBeenChanged":"Ustawienia strefy czasowej zostały zmienione",
-            "theme":"Motyw",
-            "light":"Jasny",
-            "lightThemeHasBeenEnabled":"Motyw jasny został włączony",
-            "dark":"Ciemny",
-            "darkThemeHasBeenEnabled":"Motyw ciemny został włączony"
+            "timezoneSettingsHaveBeenChanged": "Ustawienia strefy czasowej zostały zmienione",
+            "theme": "Motyw",
+            "light": "Jasny",
+            "lightThemeHasBeenEnabled": "Motyw jasny został włączony",
+            "dark": "Ciemny",
+            "darkThemeHasBeenEnabled": "Motyw ciemny został włączony"
         }
     },
-    "about":{
-        "text" : "O projekcie",
-        "checkProjectOn" : "Sprawdź projekt na "
+    "about": {
+        "text": "O projekcie",
+        "checkProjectOn": "Sprawdź projekt na "
     },
     "pageNotFound": "Nie znaleziono strony",
-    "users":{
+    "users": {
         "text": "Użytkownicy",
         "userName": "Użytkownik",
         "email": "Email",
-        "isAdmin": "Administrator",	
+        "isAdmin": "Administrator",
         "actions": "Akcje",
-        "true": "Tak",	
+        "true": "Tak",
         "false": "Nie",
-        "noResultFoundFor":"Nie znaleziono wyników",
-        "monitorConfirmation":"Grupy monitorowania zostały zmienione"
+        "noResultFoundFor": "Nie znaleziono wyników",
+        "monitorConfirmation": "Grupy monitorowania zostały zmienione"
     },
     "monitorAlerts": {
         "text": "Alerty Monitorowania",
-        "noResultFoundFor":"Nie znaleziono wyników",
-        "monitorAlerts":"Alerty Monitorowania",
-        "timeStamp":"Znacznik czasu",
+        "noResultFoundFor": "Nie znaleziono wyników",
+        "monitorAlerts": "Alerty Monitorowania",
+        "timeStamp": "Znacznik czasu",
         "monitorName": "Nazwa Monitora",
         "message": "Wiadomość",
-        "screenshot":"Zrzut ekranu"
+        "screenshot": "Zrzut ekranu"
     }
 }

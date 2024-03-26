@@ -1,14 +1,14 @@
 {
-    "general":{
-        "goBack":"Voltar"
+    "general": {
+        "goBack": "Voltar"
     },
-    "header":{
+    "header": {
         "logout": "Deslogar"
     },
-    "sidebar":{
+    "sidebar": {
         "monitorList": "Lista de Monitores",
         "monitorManagement": "Gerenciamento de Monitores",
-        "monitorAgents":"Agentes de monitoramento",
+        "monitorAgents": "Agentes de monitoramento",
         "notificationManagement": "Notificações",
         "monitorAlert": "Alerta do Monitor",
         "users": "Usuários",
@@ -16,12 +16,12 @@
     },
     "dashboard": {
         "text": "Dashboard",
-        "search":"Buscar",
-        "noResultFoundFor":"Nenhum resultado encontrado",
-        "resume":"Retomar",
-        "pause":"Pausar",
-        "edit":"Editar",
-        "delete":"Apagar",
+        "search": "Buscar",
+        "noResultFoundFor": "Nenhum resultado encontrado",
+        "resume": "Retomar",
+        "pause": "Pausar",
+        "edit": "Editar",
+        "delete": "Apagar",
         "serviceDown": "Serviço Inoperante",
         "metric": "Métrica",
         "uptime": "Atividade",
@@ -30,18 +30,59 @@
         "days": "Dias",
         "months": "Meses",
         "certificateexpiration": "Expiração Certificado",
-        "response":"Resposta (Média)",
+        "response": "Resposta (Média)",
         "certificateIsAboutToExpireFor": "O certificado está prestes a expirar para",
         "environment": "Ambiente",
         "alarm": "Alertas",
         "pauseConfirmation": "O monitor foi atualizado!",
         "up": "Online",
         "down": "Offline",
-        "paused": "Pausado"	
+        "paused": "Pausado",
+        "addNew": "Adicionar novo",
+        "addHttpForm": {
+            "success": "O monitor foi adicionado!",
+            "addNewMonitor": "Adicionar Novo Monitor",
+            "monitorType": "Tipo de Monitor",
+            "monitorName": "Nome do Monitor",
+            "monitorGroup": "Grupo de Monitoramento",
+            "urlToCheck": "URL para Verificação",
+            "monitorRegion": "Região do Monitor",
+            "monitorEnvironment": "Ambiente do Monitoramento",
+            "checkCertificateExpiry": "Verificar Expiração do Certificado",
+            "ignoreTLSSSL": "Ignorar TLS SSL",
+            "httpMethod": "Método HTTP",
+            "retries": "Tentativas",
+            "maxRedirects": "Máximo de Redirecionamentos",
+            "heartbeatInterval": "Intervalo de Batimentos Cardíacos (Minutos)",
+            "timeout": "Tempo Limite (Segundos)",
+            "body": "Corpo",
+            "headers": "Cabeçalhos",
+            "addHeader": "Adicionar Cabeçalho",
+            "save": "Salvar",
+            "yes": "Sim",
+            "no": "Não",
+            "port": "Porta",
+            "ip": "IP",
+            "errors":{
+                "name": "O nome é obrigatório",
+                "url": "URL inválida",
+                "region": "Região é obrigatória",
+                "monitorEnvironment": "Ambiente é obrigatório",
+                "checkCertificateExpiry": "Verificação de expiração do certificado é obrigatória",
+                "ignoreTLSSSL": "Ignorar TLS SSL é obrigatório",
+                "httpMethod": "Método HTTP é obrigatório",
+                "retries": "Tentativas é obrigatório",
+                "maxRedirects": "Máximo de redirecionamentos é obrigatório",
+                "heartbeatInterval": "Intervalo de batimento cardíaco é obrigatório",
+                "timeout": "Tempo limite é obrigatório",
+                "port": "A porta é obrigatória",
+                "ip": "O IP é obrigatório"
+            }
+        }
     },
-    "monitorAgents":{
+    "monitorAgents": {
         "text": "Agentes de Monitoramento",
-        "totalNumberOfMonitorAgents" : "Número Total de Agentes de Monitoramento",
+        "totalNumberOfMonitorAgents": "Número Total de Agentes de Monitoramento",
         "totalNumberofRunningMonitors": "Número Total de Nonitores Em Execução",
         "hostname": "Nome do Host",
         "numberOfMonitors": "Número de Monitores",
@@ -55,47 +96,47 @@
         "monitorAgentsInOceania": "Monitorar Agentes na Oceania",
         "version": "Versão"
     },
-    "monitorManagement":{
+    "monitorManagement": {
         "text": "Gerenciamento de Monitores"
     },
-    "settings":{
+    "settings": {
         "text": "Configurações",
         "general": {
             "text": "Geral",
             "language": "Idioma",
-            "applicationLanguageHasBeenChanged":"O idioma do aplicativo foi alterado",
+            "applicationLanguageHasBeenChanged": "O idioma do aplicativo foi alterado",
             "displayTimezone": "Fuso horário exibido",
-            "timezoneSettingsHaveBeenChanged":"As configurações de fuso horário foram alteradas",
-            "theme":"Tema",
-            "light":"Claro",
-            "lightThemeHasBeenEnabled":"O tema claro foi ativado",
-            "dark":"Escuro",
-            "darkThemeHasBeenEnabled":"O tema escuro foi ativado"
+            "timezoneSettingsHaveBeenChanged": "As configurações de fuso horário foram alteradas",
+            "theme": "Tema",
+            "light": "Claro",
+            "lightThemeHasBeenEnabled": "O tema claro foi ativado",
+            "dark": "Escuro",
+            "darkThemeHasBeenEnabled": "O tema escuro foi ativado"
         }
     },
-    "about":{
-        "text":"Sobre",
-        "checkProjectOn" : "Repositório do projeto no "
+    "about": {
+        "text": "Sobre",
+        "checkProjectOn": "Repositório do projeto no "
     },
     "pageNotFound": "Página não encontrada",
-    "users":{
+    "users": {
         "text": "Usuários",
         "userName": "Usuário",
         "email": "E-mail",
-        "isAdmin": "Administrador",	
+        "isAdmin": "Administrador",
         "actions": "Ações",
-        "true": "Sim",	
+        "true": "Sim",
         "false": "Não",
-        "noResultFoundFor":"Nenhum resultado encontrado",
-        "monitorConfirmation":"Os grupos de monitoramento foram alterados"
+        "noResultFoundFor": "Nenhum resultado encontrado",
+        "monitorConfirmation": "Os grupos de monitoramento foram alterados"
     },
     "monitorAlerts": {
         "text": "Alertas de Monitoramento",
-        "noResultFoundFor":"Nenhum resultado encontrado",
-        "monitorAlerts":"Alertas de Monitoramento",
-        "timeStamp":"Carimbo de data/hora",
+        "noResultFoundFor": "Nenhum resultado encontrado",
+        "monitorAlerts": "Alertas de Monitoramento",
+        "timeStamp": "Carimbo de data/hora",
         "monitorName": "Nome do Monitor",
         "message": "Mensagem",
-        "screenshot":"Captura de Tela"
+        "screenshot": "Captura de Tela"
     }
 }
