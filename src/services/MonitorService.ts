@@ -69,6 +69,33 @@ const MonitorService = {
       `Monitor/pauseMonitorByGroupId/${id}/${paused}`,
       appendOptionalHeaders(headers)
     ),
+  createHttpMonitor: async (
+    monitor: IMonitorHttp,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      `Monitor/CreateMonitorHttp`,
+      monitor,
+      appendOptionalHeaders(headers)
+    ),
+  createTcpMonitor: async (
+    monitor: IMonitorTcp,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      `Monitor/CreateMonitorTcp`,
+      monitor,
+      appendOptionalHeaders(headers)
+    ),
+  addMonitorToGroup: async (
+    monitorGroupItem: MonitorGroupItem,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      `monitorGroup/addMonitorToGroup`,
+      monitorGroupItem,
+      appendOptionalHeaders(headers)
+    ),
 };
 
 export default MonitorService;
