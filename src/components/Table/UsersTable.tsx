@@ -101,7 +101,7 @@ const UsersTable: FC<IUsersTableProps> = ({
 
     const newPageCount = Math.ceil(filteredUsers.length / maxRowNumber);
 
-    if (currentPage > newPageCount) {
+    if (currentPage !== 1 && currentPage > newPageCount) {
       setCurrentPage(newPageCount);
     }
 
