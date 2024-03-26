@@ -89,15 +89,23 @@ const UsersTable: FC<IUsersTableProps> = ({
         user.email?.toLowerCase().includes(searchText.trim().toLowerCase())
     );
 
+    let filteredUsers;
     if (selectedRole !== "all") {
-      if (selectedRole === "admin") {
-        setFilteredUsers(filtered.filter((user) => user.isAdmin));
-      } else {
-        setFilteredUsers(filtered.filter((user) => !user.isAdmin));
-      }
+      filteredUsers =
+        selectedRole === "admin"
+          ? filtered.filter((user) => user.isAdmin)
+          : filtered.filter((user) => !user.isAdmin);
     } else {
-      setFilteredUsers(filtered);
+      filteredUsers = filtered;
     }
+
+    const newPageCount = Math.ceil(filteredUsers.length / maxRowNumber);
+
+    if (currentPage > newPageCount) {
+      setCurrentPage(newPageCount);
+    }
+
+    setFilteredUsers(filteredUsers);
   }, [users, searchText, selectedRole]);
 
   return (

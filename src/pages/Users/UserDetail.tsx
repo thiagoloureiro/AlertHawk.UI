@@ -124,6 +124,7 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
             width: 64,
             height: 64,
             fontSize: "3rem",
+            mb: 2,
           }}
         >
           {user?.username?.charAt(0).toUpperCase() ||
