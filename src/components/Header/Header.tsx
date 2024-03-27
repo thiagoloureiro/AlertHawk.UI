@@ -32,7 +32,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
   const { t } = useTranslation("global");
   const isAuthenticated: boolean = useIsAuthenticated();
   const { isDarkMode, isSmallScreen } = useStoreState((state) => state.app);
-  const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
+  const { stats } = useStoreState((state) => state.monitor);
   const { setIsDarkMode } = useStoreActions((action) => action.app);
   const theme = useTheme();
   const { user } = useStoreState((actions) => actions.user);
@@ -134,14 +134,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
                   component="div"
                   fontWeight={700}
                 >
-                  {monitorGroupListByUser.reduce((totalCount, group) => {
-                    return (
-                      totalCount +
-                      group.monitors.reduce((groupCount, monitor) => {
-                        return groupCount + (monitor.status ? 1 : 0);
-                      }, 0)
-                    );
-                  }, 0)}
+                  {stats.monitorUp}
                 </Typography>
                 <CheckCircleIcon sx={{ color: "success.main", fontSize: 28 }} />
               </Box>
@@ -161,14 +154,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
                   component="div"
                   fontWeight={700}
                 >
-                  {monitorGroupListByUser.reduce((totalCount, group) => {
-                    return (
-                      totalCount +
-                      group.monitors.reduce((groupCount, monitor) => {
-                        return groupCount + (monitor.status ? 0 : 1);
-                      }, 0)
-                    );
-                  }, 0)}
+                  {stats.monitorDown}
                 </Typography>
                 <CancelIcon sx={{ color: "error.main", fontSize: 28 }} />
               </Box>
@@ -188,14 +174,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
                   component="div"
                   fontWeight={700}
                 >
-                  {monitorGroupListByUser.reduce((totalCount, group) => {
-                    return (
-                      totalCount +
-                      group.monitors.reduce((groupCount, monitor) => {
-                        return groupCount + (monitor.paused ? 1 : 0);
-                      }, 0)
-                    );
-                  }, 0)}
+                  {stats.monitorPaused}
                 </Typography>
                 <PauseCircleFilledIcon sx={{ fontSize: 28 }} />
               </Box>
