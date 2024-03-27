@@ -115,12 +115,12 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
     );
   }, [selectedChildRowIndex, monitorGroupListByUser]);
 
-  function handleAddNew(): void {
-    setSelectedMonitorItem(null);
-    setSelectedChildRowIndex(null);
-    setSelectedMonitorGroup(null);
-    setAddMonitorPainel(true);
-  }
+  // function handleAddNew(): void {
+  //   setSelectedMonitorItem(null);
+  //   setSelectedChildRowIndex(null);
+  //   setSelectedMonitorGroup(null);
+  //   setAddMonitorPainel(true);
+  // }
 
   return (
     <>
