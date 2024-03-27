@@ -125,12 +125,17 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
           sx={{
             width: 64,
             height: 64,
-            fontSize: "3rem",
+            fontSize: "2.5rem",
             mb: 2,
           }}
         >
-          {user?.username?.charAt(0).toUpperCase() ||
-            user?.email?.charAt(0).toUpperCase()}
+          {user?.username
+            ?.split(" ")
+            .slice(0, 2)
+            .map((name) => name.charAt(0))
+            .join("")
+            .toUpperCase() ||
+            user?.email?.split(".")[0].charAt(0).toUpperCase()}
         </Avatar>
         <Box
           sx={{

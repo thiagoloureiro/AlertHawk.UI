@@ -38,8 +38,13 @@ const UsersTableRow: FC<IUsersTableRowProps> = ({
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Avatar sx={{ backgroundColor: "#424242", color: "#ffffff" }}>
-              {user?.username?.charAt(0).toUpperCase() ||
-                user?.email?.charAt(0).toUpperCase()}
+              {user?.username
+                ?.split(" ")
+                .slice(0, 2)
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase() ||
+                user?.email?.split(".")[0].charAt(0).toUpperCase()}
             </Avatar>
             <Box
               sx={{

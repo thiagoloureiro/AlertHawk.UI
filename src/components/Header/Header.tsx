@@ -220,7 +220,13 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
                 },
               }}
             >
-              {user?.username?.charAt(0) || user?.email?.charAt(0)}
+              {user?.username
+                ?.split(" ")
+                .slice(0, 2)
+                .map((name) => name.charAt(0))
+                .join("")
+                .toUpperCase() ||
+                user?.email?.split(".")[0].charAt(0).toUpperCase()}
             </Avatar>
           )}
         </Stack>
@@ -277,7 +283,13 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
               },
             }}
           >
-            {user?.username?.charAt(0) || user?.email?.charAt(0)}
+            {user?.username
+              ?.split(" ")
+              .slice(0, 2)
+              .map((name) => name.charAt(0))
+              .join("")
+              .toUpperCase() ||
+              user?.email?.split(".")[0].charAt(0).toUpperCase()}
           </Avatar>
           <Stack
             direction="column"
