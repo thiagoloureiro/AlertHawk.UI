@@ -130,7 +130,12 @@
         "true": "Ja",
         "false": "Nein",
         "noResultFoundFor": "Keine Ergebnisse gefunden",
-        "monitorConfirmation": "Überwachungsgruppen wurden geändert"
+        "monitorConfirmation": "Überwachungsgruppen wurden geändert",
+        "save": "Speichern",
+        "cancel": "Abbrechen",
+        "monitorGroups": "Monitor-Gruppen",
+        "role":"Rolle",
+        "all":"Alle"
     },
     "monitorAlerts": {
         "text": "Monitor-Benachrichtigungen",

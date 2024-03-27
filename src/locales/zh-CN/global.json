@@ -128,7 +128,12 @@
         "true": "是",
         "false": "否",
         "noResultFoundFor": "未找到结果",
-        "monitorConfirmation": "监控组已更改"
+        "monitorConfirmation": "监控组已更改",
+        "save": "保存",
+        "cancel": "取消",
+        "monitorGroups": "监控组",
+        "role": "角色",
+        "all": "全部"
     },
     "monitorAlerts": {
         "text": "监控警报",

@@ -128,7 +128,12 @@
         "true": "Evet",
         "false": "Hayır",
         "noResultFoundFor": "Sonuç bulunamadı",
-        "monitorConfirmation": "İzleme grupları değiştirildi"
+        "monitorConfirmation": "İzleme grupları değiştirildi",
+        "save": "Kaydet",
+        "cancel": "İptal",
+        "monitorGroups": "İzleme Grupları",
+        "role": "Rol",
+        "all": "Hepsi"
     },
     "monitorAlerts": {
         "text": "Monitör Uyarıları",

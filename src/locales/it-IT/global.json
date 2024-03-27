@@ -129,7 +129,12 @@
         "true": "Sì",
         "false": "No",
         "noResultFoundFor": "Nessun risultato trovato",
-        "monitorConfirmation": "I gruppi di monitoraggio sono stati cambiati"
+        "monitorConfirmation": "I gruppi di monitoraggio sono stati cambiati",
+        "save": "Salva",
+        "cancel": "Annulla",
+        "monitorGroups": "Gruppi di Monitoraggio",
+        "role": "Ruolo",
+        "all": "Tutti"
     },
     "monitorAlerts": {
         "text": "Avvisi Monitoraggio",

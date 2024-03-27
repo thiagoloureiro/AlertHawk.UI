@@ -16,6 +16,7 @@ import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUse
 import UserService from "../../services/UserService";
 import logging from "../../utils/logging";
 import { showSnackbar } from "../../utils/snackbarHelper";
+import { useTranslation } from "react-i18next";
 
 interface IUserDetailProps {
   user: IUser;
@@ -23,6 +24,7 @@ interface IUserDetailProps {
 }
 
 const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
+  const { t } = useTranslation("global");
   const { monitorGroupList } = useStoreState((state) => state.monitor);
   const [originalAssignedMonitorGroups, setOriginalAssignedMonitorGroups] =
     useState<IMonitorGroupListByUser[]>([]);
@@ -86,7 +88,7 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
 
       await UserService.updateMonitorGroup(convertedAssignedMonitorGroups);
 
-      showSnackbar("User monitor groups updated successfully", "success");
+      showSnackbar(t("users.monitorConfirmation"), "success");
       setOriginalAssignedMonitorGroups([...assignedMonitorGroups]);
     } catch (error) {
       showSnackbar("Something went wrong. Please try again later", "error");
@@ -166,7 +168,7 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
             }}
           >
             <Typography variant="body1" fontWeight={500} fontSize={16}>
-              Monitor Groups
+              {t("users.monitorGroups")}
             </Typography>
           </Box>
           <Box
@@ -226,7 +228,7 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
           color="secondary"
           onClick={() => handleUserSelection(null)}
         >
-          Cancel
+          {t("users.cancel")}
         </Button>
         <Button
           variant="contained"
@@ -251,7 +253,7 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
               }}
             />
           )}
-          Save
+          {t("users.save")}
         </Button>
       </Box>
     </Box>

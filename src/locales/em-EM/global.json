@@ -128,7 +128,12 @@
         "true": "✅",
         "false": "❌",
         "noResultFoundFor": "❌🔍🔍",
-        "monitorConfirmation": "👀👥🔄️👥"
+        "monitorConfirmation": "👀👥🔄️👥",
+        "save": "💾",
+        "cancel": "❌",
+        "monitorGroups": "🖥️",
+        "role":"👤",
+        "all":"👌"
     },
     "monitorAlerts": {
         "text": "👀🚨",

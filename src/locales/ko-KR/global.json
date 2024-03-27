@@ -128,7 +128,12 @@
         "true": "はい",
         "false": "いいえ",
         "noResultFoundFor": "結果が見つかりませんでした",
-        "monitorConfirmation": "モニターグループが変更されました"
+        "monitorConfirmation": "モニターグループが変更されました",
+        "save": "저장",
+        "cancel": "취소",
+        "monitorGroups": "모니터 그룹",
+        "role": "역할",
+        "all": "모두"
     },
     "monitorAlerts": {
         "text": "모니터 경고",

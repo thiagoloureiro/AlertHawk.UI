@@ -129,7 +129,12 @@
         "true": "Tak",
         "false": "Nie",
         "noResultFoundFor": "Nie znaleziono wyników",
-        "monitorConfirmation": "Grupy monitorowania zostały zmienione"
+        "monitorConfirmation": "Grupy monitorów zostały zmienione",
+        "save": "Zapisz",
+        "cancel": "Anuluj",
+        "monitorGroups": "Grupy Monitorów",
+        "role": "Rola",
+        "all": "Wszystkie"
     },
     "monitorAlerts": {
         "text": "Alerty Monitorowania",

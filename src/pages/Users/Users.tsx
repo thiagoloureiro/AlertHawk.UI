@@ -95,7 +95,9 @@ const Users: FC<IUsersProps> = () => {
                   >
                     <div style={{ width: "25%", minWidth: "100px" }}>
                       <FormControl fullWidth>
-                        <InputLabel id="role-select">Role</InputLabel>
+                        <InputLabel id="role-select">
+                          {t("users.role")}
+                        </InputLabel>
                         <Select
                           labelId="role-select"
                           id="role-select-dropdown"
@@ -104,9 +106,9 @@ const Users: FC<IUsersProps> = () => {
                           onChange={handleRoleChange}
                           size="small"
                         >
-                          <MenuItem value={"all"}>All</MenuItem>
+                          <MenuItem value={"all"}>{t("users.all")}</MenuItem>
                           <MenuItem value={"admin"}>Admin</MenuItem>
-                          <MenuItem value={"non-admin"}>Non-admin</MenuItem>
+                          <MenuItem value={"non-admin"}>Non-Admin</MenuItem>
                         </Select>
                       </FormControl>
                     </div>

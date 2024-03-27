@@ -129,7 +129,12 @@
         "true": "Yes",	
         "false": "No",
         "noResultFoundFor":"No result found",
-        "monitorConfirmation":"Monitor groups has been changed"
+        "monitorConfirmation":"Monitor groups has been changed",
+        "save": "Save",
+        "cancel": "Cancel",
+        "monitorGroups": "Monitor Groups",
+        "role":"Role",
+        "all":"All"
     },
     "monitorAlerts": {
         "text": "Monitor Alerts",

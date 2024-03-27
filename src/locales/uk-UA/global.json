@@ -130,7 +130,12 @@
         "true": "Так",
         "false": "Ні",
         "noResultFoundFor": "Результатів не знайдено",
-        "monitorConfirmation": "Групи моніторів були змінені"
+        "monitorConfirmation": "Групи моніторів були змінені",
+        "save": "Зберегти",
+        "cancel": "Скасувати",
+        "monitorGroups": "Групи моніторингу",
+        "role": "Роль",
+        "all": "Всі"
     },
     "monitorAlerts": {
         "text": "Оповіщення монітора",

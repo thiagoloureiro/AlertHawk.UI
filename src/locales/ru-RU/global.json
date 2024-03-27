@@ -128,7 +128,12 @@
         "true": "Да",
         "false": "Нет",
         "noResultFoundFor": "Результат не найден",
-        "monitorConfirmation": "Группы мониторов были изменены"
+        "monitorConfirmation": "Группы мониторов были изменены",
+        "save": "Сохранить",
+        "cancel": "Отменить",
+        "monitorGroups": "Группы мониторов",
+        "role": "Роль",
+        "all": "Все"
     },
     "monitorAlerts": {
         "text": "Оповещения монитора",
