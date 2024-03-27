@@ -79,12 +79,21 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
 
       setIsButtonDisabled(true);
 
-      const convertedAssignedMonitorGroups = assignedMonitorGroups.map(
-        (group) => ({
+      let convertedAssignedMonitorGroups: {
+        userId: string | null;
+        groupMonitorId: number;
+      }[] = [];
+
+      if (assignedMonitorGroups.length > 0) {
+        convertedAssignedMonitorGroups = assignedMonitorGroups.map((group) => ({
           userId: user.id,
           groupMonitorId: group.id,
-        })
-      );
+        }));
+      } else {
+        convertedAssignedMonitorGroups = [
+          { userId: user.id, groupMonitorId: 0 },
+        ];
+      }
 
       await UserService.updateMonitorGroup(convertedAssignedMonitorGroups);
 
