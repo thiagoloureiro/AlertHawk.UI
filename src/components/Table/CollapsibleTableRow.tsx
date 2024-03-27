@@ -337,102 +337,108 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
             <Box sx={{ margin: "4px 4px 4px 5%" }}>
               <Table size="medium" aria-label="monitors">
                 <TableBody>
-                  {monitorGroup.monitors.map((monitor) => (
-                    <TableRow
-                      key={monitor.id}
-                      sx={{
-                        cursor: "pointer",
-                        bgcolor:
-                          selectedChildRowIndex === monitor.id
-                            ? "secondary.main"
-                            : "inherit",
-                        userSelect: "none",
-                      }}
-                      onClick={() => handleChildRowClick(monitor.id)}
-                    >
-                      <TableCell
-                        component="th"
-                        scope="row"
-                        sx={
-                          selectedChildRowIndex === monitor.id
-                            ? {
-                                borderTopLeftRadius: "10px",
-                                borderBottomLeftRadius: "10px",
-                              }
-                            : {}
-                        }
+                  {monitorGroup.monitors
+                    .slice()
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((monitor) => (
+                      <TableRow
+                        key={monitor.id}
+                        sx={{
+                          cursor: "pointer",
+                          bgcolor:
+                            selectedChildRowIndex === monitor.id
+                              ? "secondary.main"
+                              : "inherit",
+                          userSelect: "none",
+                        }}
+                        onClick={() => handleChildRowClick(monitor.id)}
                       >
-                        {monitor.monitorStatusDashboard[selectedMetric] !==
-                        0 ? (
-                          <Chip
-                            label={
-                              monitor.monitorStatusDashboard[selectedMetric] +
-                              " %"
-                            }
-                            color={
-                              !monitor.status
-                                ? "error"
-                                : monitor.paused
-                                ? "secondary"
-                                : "success"
-                            }
-                            size="medium"
-                            sx={{
-                              p: "5px 15px",
-                              "& .MuiChip-label": {
-                                color: monitor.paused ? "primary" : "#fff",
-                                fontWeight: 700,
-                              },
-                            }}
-                          />
-                        ) : (
-                          <Chip
-                            label={
-                              monitor.monitorStatusDashboard[selectedMetric] +
-                              " %"
-                            }
-                            color="error"
-                            size="medium"
-                            sx={{
-                              p: "5px 15px",
-                              "& .MuiChip-label": {
-                                color: "#fff",
-                                fontWeight: 700,
-                              },
-                            }}
-                          />
-                        )}
-                      </TableCell>
-                      <TableCell>
-                        <Typography variant="body2">{monitor.name}</Typography>
-                      </TableCell>
-                      <TableCell
-                        align="right"
-                        sx={
-                          selectedChildRowIndex === monitor.id
-                            ? {
-                                borderTopRightRadius: "10px",
-                                borderBottomRightRadius: "10px",
-                              }
-                            : {}
-                        }
-                      >
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            gap: 1,
-                          }}
+                        <TableCell
+                          component="th"
+                          scope="row"
+                          sx={
+                            selectedChildRowIndex === monitor.id
+                              ? {
+                                  borderTopLeftRadius: "10px",
+                                  borderBottomLeftRadius: "10px",
+                                }
+                              : {}
+                          }
                         >
-                          {renderUptimeBoxes(
-                            monitor.monitorStatusDashboard[selectedMetric] ?? 0,
-                            monitor.status
+                          {monitor.monitorStatusDashboard[selectedMetric] !==
+                          0 ? (
+                            <Chip
+                              label={
+                                monitor.monitorStatusDashboard[selectedMetric] +
+                                " %"
+                              }
+                              color={
+                                !monitor.status
+                                  ? "error"
+                                  : monitor.paused
+                                  ? "secondary"
+                                  : "success"
+                              }
+                              size="medium"
+                              sx={{
+                                p: "5px 15px",
+                                "& .MuiChip-label": {
+                                  color: monitor.paused ? "primary" : "#fff",
+                                  fontWeight: 700,
+                                },
+                              }}
+                            />
+                          ) : (
+                            <Chip
+                              label={
+                                monitor.monitorStatusDashboard[selectedMetric] +
+                                " %"
+                              }
+                              color="error"
+                              size="medium"
+                              sx={{
+                                p: "5px 15px",
+                                "& .MuiChip-label": {
+                                  color: "#fff",
+                                  fontWeight: 700,
+                                },
+                              }}
+                            />
                           )}
-                        </Box>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="body2">
+                            {monitor.name}
+                          </Typography>
+                        </TableCell>
+                        <TableCell
+                          align="right"
+                          sx={
+                            selectedChildRowIndex === monitor.id
+                              ? {
+                                  borderTopRightRadius: "10px",
+                                  borderBottomRightRadius: "10px",
+                                }
+                              : {}
+                          }
+                        >
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                              gap: 1,
+                            }}
+                          >
+                            {renderUptimeBoxes(
+                              monitor.monitorStatusDashboard[selectedMetric] ??
+                                0,
+                              monitor.status
+                            )}
+                          </Box>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Box>
