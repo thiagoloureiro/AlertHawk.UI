@@ -1,0 +1,147 @@
+{
+    "general": {
+        "goBack": "वापस जाएं"
+    },
+    "header": {
+        "logout": "लॉग आउट"
+    },
+    "sidebar": {
+        "monitorList": "मॉनिटर सूची",
+        "monitorManagement": "मॉनिटर प्रबंधन",
+        "monitorAgents": "मॉनिटर एजेंट्स",
+        "notificationManagement": "सूचना प्रबंधन",
+        "monitorAlert": "मॉनिटर चेतावनी",
+        "users": "उपयोगकर्ता",
+        "settings": "सेटिंग्स"
+    },
+    "dashboard": {
+        "text": "डैशबोर्ड",
+        "search": "खोजें",
+        "noResultFoundFor": "कोई परिणाम नहीं मिला",
+        "resume": "पुनः आरंभ",
+        "pause": "रोकें",
+        "edit": "संपादित करें",
+        "delete": "हटाएं",
+        "serviceDown": "सेवा बंद",
+        "metric": "मैट्रिक",
+        "uptime": "अपटाइम",
+        "hour": "घंटा",
+        "hours": "घंटे",
+        "days": "दिन",
+        "months": "महीने",
+        "certificateexpiration": "प्रमाणपत्र समाप्ति",
+        "response": "प्रतिक्रिया (औसत)",
+        "certificateIsAboutToExpireFor": "प्रमाणपत्र समाप्त होने वाला है",
+        "environment": "पर्यावरण",
+        "alarm": "अलर्ट",
+        "pauseConfirmation": "मॉनिटर को अपडेट किया गया है!",
+        "up": "ऑनलाइन",
+        "down": "ऑफलाइन",
+        "paused": "रोका गया",
+        "addNew": "नया जोड़ें",
+        "addHttpForm": {
+            "success": "मॉनिटर जोड़ा गया है!",
+            "addNewMonitor": "नया मॉनिटर जोड़ें",
+            "monitorType": "मॉनिटर प्रकार",
+            "monitorName": "मॉनिटर नाम",
+            "monitorGroup": "मॉनिटर समूह",
+            "urlToCheck": "जांच के लिए URL",
+            "monitorRegion": "मॉनिटर क्षेत्र",
+            "monitorEnvironment": "मॉनिटर पर्यावरण",
+            "checkCertificateExpiry": "प्रमाणपत्र समाप्ति की जांच करें",
+            "ignoreTLSSSL": "TLS SSL को नजरअंदाज करें",
+            "httpMethod": "HTTP विधि",
+            "retries": "पुनः प्रयास",
+            "maxRedirects": "अधिकतम पुनर्निर्देशन",
+            "heartbeatInterval": "हार्टबीट अंतराल (मिनट)",
+            "timeout": "समय समाप्त (सेकंड)",
+            "body": "शरीर",
+            "headers": "हेडर्स",
+            "addHeader": "हेडर जोड़ें",
+            "save": "सहेजें",
+            "yes": "हां",
+            "no": "नहीं",
+            "port": "पोर्ट",
+            "ip": "आईपी",
+            "errors": {
+                "name": "नाम आवश्यक है",
+                "url": "अमान्य यूआरएल",
+                "region": "क्षेत्र आवश्यक है",
+                "monitorEnvironment": "पर्यावरण आवश्यक है",
+                "checkCertificateExpiry": "प्रमाणपत्र समाप्ति की जांच आवश्यक है",
+                "ignoreTLSSSL": "TLS SSL को नजरअंदाज करें आवश्यक है",
+                "httpMethod": "HTTP विधि आवश्यक है",
+                "retries": "पुनः प्रयास आवश्यक है",
+                "maxRedirects": "अधिकतम पुनर्निर्देशन आवश्यक है",
+                "heartbeatInterval": "हार्टबीट अंतराल आवश्यक है",
+                "timeout": "समय समाप्त आवश्यक है",
+                "port": "पोर्ट आवश्यक है",
+                "ip": "आईपी आवश्यक है"
+            }
+        }
+    },
+    "monitorAgents": {
+        "text": "मॉनिटर एजेंट्स",
+        "totalNumberOfMonitorAgents": "कुल मॉनिटर एजेंट की संख्या",
+        "totalNumberofRunningMonitors": "चल रहे मॉनिटरों की कुल संख्या",
+        "hostname": "होस्टनेम",
+        "numberOfMonitors": "मॉनिटरों की संख्या",
+        "master": "मास्टर",
+        "location": "स्थान",
+        "monitorAgentsInEurope": "यूरोप में मॉनिटर एजेंट्स",
+        "monitorAgentsInAsia": "एशिया में मॉनिटर एजेंट्स",
+        "monitorAgentsInAfrica": "अफ्रीका में मॉनिटर एजेंट्स",
+        "monitorAgentsInNorthAmerica": "उत्तरी अमेरिका में मॉनिटर एजेंट्स",
+        "monitorAgentsInLatinAmerica": "लैटिन अमेरिका में मॉनिटर एजेंट्स",
+        "monitorAgentsInOceania": "ओसेनिया में मॉनिटर एजेंट्स",
+        "version": "संस्करण"
+    },
+    "monitorManagement": {
+        "text": "मॉनिटर प्रबंधन"
+    },
+    "settings": {
+        "text": "सेटिंग्स",
+        "general": {
+            "text": "सामान्य",
+            "language": "भाषा",
+            "applicationLanguageHasBeenChanged": "एप्लिकेशन भाषा बदल गई है",
+            "displayTimezone": "समय क्षेत्र प्रदर्शित करें",
+            "timezoneSettingsHaveBeenChanged": "समय क्षेत्र सेटिंग्स बदल गई हैं",
+            "theme": "थीम",
+            "light": "प्रकाश",
+            "lightThemeHasBeenEnabled": "प्रकाशमान थीम सक्रिय की गई है",
+            "dark": "अंधेरा",
+            "darkThemeHasBeenEnabled": "डार्क थीम सक्रिय की गई है"
+        }
+    },
+    "about": {
+        "text": "के बारे में",
+        "checkProjectOn": "परियोजना की जांच करें "
+    },
+    "pageNotFound": "पृष्ठ नहीं मिला",
+    "users": {
+        "text": "उपयोगकर्ता",
+        "userName": "उपयोगकर्ता",
+        "email": "ईमेल",
+        "isAdmin": "प्रशासक",
+        "actions": "क्रियाएँ",
+        "true": "हाँ",
+        "false": "नहीं",
+        "noResultFoundFor": "कोई परिणाम नहीं मिला",
+        "monitorConfirmation": "मॉनिटर समूह बदल गए हैं",
+        "save": "सहेजें",
+        "cancel": "रद्द करें",
+        "monitorGroups": "मॉनिटर समूह",
+        "role": "भूमिका",
+        "all": "सभी"
+    },
+    "monitorAlerts": {
+        "text": "मॉनिटर चेतावनियाँ",
+        "noResultFoundFor": "कोई परिणाम नहीं मिला",
+        "monitorAlerts": "मॉनिटर चेतावनियाँ",
+        "timeStamp": "समय छाप",
+        "monitorName": "मॉनिटर नाम",
+        "message": "संदेश",
+        "screenshot": "स्क्रीनशॉट"
+    }
+}

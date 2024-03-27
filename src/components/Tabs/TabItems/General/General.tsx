@@ -38,6 +38,7 @@ const languageOptions = [
   { code: "it-IT", text: "Italiano" },
   { code: "jp-JP", text: "日本語" },
   { code: "ko-KR", text: "한국인" },
+  { code: "in-HI", text: "हिन्दी" },
   { code: "pl-PL", text: "Polski" },
   { code: "pt-BR", text: "Português (Brasil)" },
   { code: "es-ES", text: "Español" },
