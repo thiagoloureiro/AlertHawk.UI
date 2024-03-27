@@ -212,11 +212,11 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
                     />
                   </FormControl>
                 </div>
-                <div>
+                {/* <div>
                   <FormControl fullWidth>
                     <Button color="primary" onClick={handleAddNew}>{t("dashboard.addNew")}</Button>
                   </FormControl>
-                </div>
+                </div> */}
               </Stack>
               <Box
                 sx={{
