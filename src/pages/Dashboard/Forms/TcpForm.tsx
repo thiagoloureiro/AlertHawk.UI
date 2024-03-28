@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import MonitorService from '../../../services/MonitorService';
 import { showSnackbar } from '../../../utils/snackbarHelper';
 import { useTranslation } from 'react-i18next';
-import InputMask from 'react-input-mask';
 import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
 
 interface IAddTcpMonitorProps {
