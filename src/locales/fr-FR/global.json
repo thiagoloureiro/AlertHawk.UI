@@ -1,101 +1,152 @@
 {
-    "general": {
-        "goBack": "Retour"
+    "general":{
+        "goBack":"Retour"
     },
-    "header": {
+    "header":{
         "logout": "Déconnexion"
     },
-    "sidebar": {
-        "monitorList": "Liste des moniteurs",
-        "monitorManagement": "Gestion des moniteurs",
-        "monitorAgents": "Agents de moniteur",
-        "notificationManagement": "Gestion des notifications",
-        "monitorAlert": "Alerte de moniteur",
+    "sidebar":{
+        "monitorList": "Liste des Moniteurs",
+        "monitorManagement": "Gestion des Moniteurs",
+        "monitorAgents":"Agents de Surveillance",
+        "notificationManagement": "Gestion des Notifications",
+        "monitorAlert": "Alerte de Surveillance",
         "users": "Utilisateurs",
         "settings": "Paramètres"
     },
     "dashboard": {
-        "text": "Tableau de bord",
-        "search": "Recherche",
-        "noResultFoundFor": "Aucun résultat trouvé",
-        "resume": "Reprendre",
-        "pause": "Pause",
-        "edit": "Modifier",
-        "delete": "Supprimer",
-        "serviceDown": "Service interrompu",
+        "text": "Tableau de Bord",
+        "search":"Rechercher",
+        "noResultFoundFor":"Aucun résultat trouvé pour",
+        "resume":"Reprendre",
+        "pause":"Pause",
+        "edit":"Modifier",
+        "delete":"Supprimer",
+        "serviceDown": "Service Indisponible",
         "metric": "Métrique",
-        "uptime": "Temps de fonctionnement",
+        "uptime": "Disponibilité",
         "hour": "Heure",
         "hours": "Heures",
         "days": "Jours",
         "months": "Mois",
-        "certificateexpiration": "Expiration du certificat",
-        "response": "Réponse (moy.)",
-        "certificateIsAboutToExpireFor": "Le certificat va expirer pour",
+        "certificateexpiration":"Expiration du Certificat",
+        "response":"Réponse (Moyenne)",
+        "certificateIsAboutToExpireFor":"Le certificat est sur le point d'expirer pour",
         "environment": "Environnement",
         "alarm": "Alertes",
         "pauseConfirmation": "Le moniteur a été mis à jour !",
         "up": "En ligne",
         "down": "Hors ligne",
-        "paused": "En pause"
+        "paused": "En pause",
+        "addNew": "Ajouter",
+        "addHttpForm": {
+            "success": "Le moniteur a été ajouté !",
+            "addNewMonitor": "Ajouter un Nouveau Moniteur",
+            "monitorType": "Type de Moniteur",
+            "monitorName": "Nom du Moniteur",
+            "monitorGroup": "Groupe de Moniteurs",
+            "urlToCheck": "URL à Vérifier",
+            "monitorRegion": "Région du Moniteur",
+            "monitorEnvironment": "Environnement du Moniteur",
+            "checkCertificateExpiry": "Vérifier l'Expiration du Certificat",
+            "ignoreTLSSSL": "Ignorer TLS SSL",
+            "httpMethod": "Méthode HTTP",
+            "retries": "Tentatives",
+            "maxRedirects": "Redirections Maximales",
+            "heartbeatInterval": "Intervalle de Battement de Cœur (Minutes)",
+            "timeout": "Délai d'Attente (Secondes)",
+            "body": "Corps",
+            "headers": "En-têtes",
+            "addHeader": "Ajouter un En-tête",
+            "save": "Enregistrer",
+            "yes": "Oui",
+            "no": "Non",
+            "port": "Port",
+            "ip": "IP",
+            "addHeaders": "Ajouter des En-têtes",
+            "headerValue": "Valeur de l'En-tête",
+            "headerName":   "Nom de l'En-tête",
+            "fillThePreviusHeader":"Remplir l'en-tête précédent",
+            "errors":{
+                "name": "Le nom est requis",
+                "url": "URL invalide",
+                "region": "La région est requise",
+                "monitorEnvironment": "L'environnement est requis",
+                "checkCertificateExpiry": "Vérifier l'expiration du certificat est requis",
+                "ignoreTLSSSL": "Ignorer TLS SSL est requis",
+                "httpMethod": "La méthode HTTP est requise",
+                "retries": "Les tentatives sont requises",
+                "maxRedirects": "Les redirections maximales sont requises",
+                "heartbeatInterval": "L'intervalle de battement de cœur est requis",
+                "timeout": "Le délai d'attente est requis",
+                "port": "Le port est requis",
+                "ip": "L'IP est requis"
+
+            }
+        }
     },
-    "monitorAgents": {
-        "text": "Agents de moniteur",
-        "totalNumberOfMonitorAgents": "Nombre total d'agents de moniteur",
-        "totalNumberofRunningMonitors": "Nombre total de moniteurs en fonctionnement",
-        "hostname": "Nom d'hôte",
-        "numberOfMonitors": "Nombre de moniteurs",
-        "master": "Principal",
-        "location": "Emplacement",
-        "monitorAgentsInEurope": "Agents de moniteur en Europe",
-        "monitorAgentsInAsia": "Agents de moniteur en Asie",
-        "monitorAgentsInAfrica": "Agents de moniteur en Afrique",
-        "monitorAgentsInNorthAmerica": "Agents de moniteur en Amérique du Nord",
-        "monitorAgentsInLatinAmerica": "Agents de moniteur en Amérique Latine",
-        "monitorAgentsInOceania": "Agents de moniteur en Océanie",
-        "version": "Version"
+    "monitorAgents":{
+        "text": "Agents de Surveillance",
+        "totalNumberOfMonitorAgents" :"Nombre Total d'Agents de Surveillance",
+        "totalNumberofRunningMonitors":"Nombre Total de Moniteurs en Cours",
+        "hostname":"Nom de l'Hôte",
+        "numberOfMonitors":"Nombre de Moniteurs",
+        "master":"Maître",
+        "location":"Emplacement",
+        "monitorAgentsInEurope":"Agents de Surveillance en Europe",
+        "monitorAgentsInAsia":"Agents de Surveillance en Asie",
+        "monitorAgentsInAfrica":"Agents de Surveillance en Afrique",
+        "monitorAgentsInNorthAmerica":"Agents de Surveillance en Amérique du Nord",
+        "monitorAgentsInLatinAmerica":"Agents de Surveillance en Amérique Latine",
+        "monitorAgentsInOceania":"Agents de Surveillance en Océanie",
+        "version":"Version"
     },
-    "monitorManagement": {
-        "text": "Gestion des moniteurs"
+    "monitorManagement":{
+        "text": "Gestion des Moniteurs"
     },
-    "settings": {
+    "settings":{
         "text": "Paramètres",
         "general": {
             "text": "Général",
             "language": "Langue",
-            "applicationLanguageHasBeenChanged": "La langue de l'application a été changée",
-            "displayTimezone": "Fuseau horaire d'affichage",
-            "timezoneSettingsHaveBeenChanged": "Les paramètres de fuseau horaire ont été changés",
-            "theme": "Thème",
-            "light": "Clair",
-            "lightThemeHasBeenEnabled": "Le thème clair a été activé",
-            "dark": "Sombre",
-            "darkThemeHasBeenEnabled": "Le thème sombre a été activé"
+            "applicationLanguageHasBeenChanged":"La langue de l'application a été modifiée",
+            "displayTimezone": "Afficher le Fuseau Horaire",
+            "timezoneSettingsHaveBeenChanged":"Les paramètres de fuseau horaire ont été modifiés",
+            "theme":"Thème",
+            "light":"Clair",
+            "lightThemeHasBeenEnabled":"Le thème clair a été activé",
+            "dark":"Sombre",
+            "darkThemeHasBeenEnabled":"Le thème sombre a été activé"
         }
     },
-    "about": {
-        "text": "À propos",
-        "checkProjectOn": "Vérifier le projet sur"
+    "about":{
+        "text": "À Propos",
+        "checkProjectOn": "Vérifiez le projet sur "
     },
-    "pageNotFound": "Page non trouvée",
-    "users": {
+    "pageNotFound": "Page Non Trouvée",
+    "users":{
         "text": "Utilisateurs",
-        "userName": "Utilisateur",
+        "userName": "Nom d'Utilisateur",
         "email": "Email",
-        "isAdmin": "Administrateur",
+        "isAdmin": "Administrateur",	
         "actions": "Actions",
-        "true": "Oui",
+        "true": "Oui",	
         "false": "Non",
-        "noResultFoundFor": "Aucun résultat trouvé",
-        "monitorConfirmation": "Les groupes de moniteurs ont été changés"
+        "noResultFoundFor":"Aucun résultat trouvé",
+        "monitorConfirmation":"Les groupes de moniteurs ont été modifiés",
+        "save": "Enregistrer",
+        "cancel": "Annuler",
+        "monitorGroups": "Groupes de Moniteurs",
+        "role":"Rôle",
+        "all":"Tout"
     },
     "monitorAlerts": {
-        "text": "Alertes de moniteur",
-        "noResultFoundFor": "Aucun résultat trouvé",
-        "monitorAlerts": "Alertes de moniteur",
-        "timeStamp": "Horodatage",
-        "monitorName": "Nom du moniteur",
+        "text": "Alertes de Surveillance",
+        "noResultFoundFor":"Aucun résultat trouvé",
+        "monitorAlerts":"Alertes de Surveillance",
+        "timeStamp":"Horodatage",
+        "monitorName": "Nom du Moniteur",
         "message": "Message",
-        "screenshot": "Capture d'écran"
+        "screenshot":"Capture d'Écran"
     }
 }
