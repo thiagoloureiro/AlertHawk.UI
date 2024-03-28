@@ -63,6 +63,10 @@
             "no": "いいえ",
             "port": "ポート",
             "ip": "IP",
+            "addHeaders": "ヘッダーを追加",
+            "headerValue": "ヘッダー値",
+            "headerName": "ヘッダー名",
+            "fillThePreviusHeader": "前のヘッダーを入力してください",
             "errors": {
                 "name": "名前が必要です",
                 "url": "無効なURL",

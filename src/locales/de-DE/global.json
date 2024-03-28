@@ -63,7 +63,11 @@
             "no": "Nein",
             "port": "Port",
             "ip": "IP",
-            "errors":{
+            "addHeaders": "Header hinzufügen",
+            "headerValue": "Header-Wert",
+            "headerName": "Header-Name",
+            "fillThePreviusHeader": "Fülle den vorherigen Header aus",
+            "errors": {
                 "name": "Name ist erforderlich",
                 "url": "Ungültige URL",
                 "region": "Region ist erforderlich",
@@ -78,9 +82,7 @@
                 "port": "Port ist erforderlich",
                 "ip": "IP ist erforderlich"
             }
-            
         }
-        
     },
     "monitorAgents": {
         "text": "Monitor-Agenten",
@@ -134,8 +136,8 @@
         "save": "Speichern",
         "cancel": "Abbrechen",
         "monitorGroups": "Monitor-Gruppen",
-        "role":"Rolle",
-        "all":"Alle"
+        "role": "Rolle",
+        "all": "Alle"
     },
     "monitorAlerts": {
         "text": "Monitor-Benachrichtigungen",
