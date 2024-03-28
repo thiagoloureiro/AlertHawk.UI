@@ -1,5 +1,5 @@
-import {  useEffect, useState } from 'react';
-import { Box, TextField, Select, MenuItem, FormControl, InputLabel, Button, CircularProgress} from '@mui/material';
+import { useEffect, useState } from 'react';
+import { Box, TextField, Select, MenuItem, FormControl, InputLabel, Button, CircularProgress } from '@mui/material';
 import { useStoreActions, useStoreState } from '../../../hooks';
 import { Environment, MonitorHttpMethod, Region } from '../../../enums/Enums';
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import MonitorService from '../../../services/MonitorService';
 import { showSnackbar } from '../../../utils/snackbarHelper';
 import { useTranslation } from 'react-i18next';
 import DeleteForever from "@mui/icons-material/DeleteForever";
+import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
 interface IAddHttpMonitorProps {
     monitorTypeId: number;
     setMonitorPainelState: any;
@@ -39,13 +40,23 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId, setMonitorPai
 
     const { selectedEnvironment } = useStoreState((state) => state.app);
     const { thunkGetMonitorGroupListByUser, setAddMonitorPainel } = useStoreActions((actions) => actions.monitor);
-    const monitorGroupList = useStoreState((state) => state.monitor.monitorGroupListByUser);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [hasGroupSelected, setHasGroupSelected] = useState(false);
+    const [monitorGroupList, setMonitorGroupList] = useState<IMonitorGroupListByUser[]>([]);
+    useEffect(() => {
+        if (monitorGroupList.length === 0) {
+            fillMonitorGroupList();
+        }
+    });
+
+    const fillMonitorGroupList = async () => {
+        await MonitorService.getMonitorGroupListByUserToken().then((response) => {
+            setMonitorGroupList(response);
+        });
+    };
     const handleAddHeader = () => {
         const lastHeader = headers[headers.length - 1];
         if (!lastHeader || (lastHeader.name.trim() !== '' && lastHeader.value.trim() !== '')) {
-            // Adicionar um novo cabeçalho à lista
             setHeaders([...headers, { name: '', value: '' }]);
         } else {
             showSnackbar(t("dashboard.addHttpForm.fillThePreviusHeader"), "error");
@@ -84,10 +95,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId, setMonitorPai
         data.checkCertificateExpiry = data.checkCertificateExpiry === "1";
         data.ignoreTLSSSL = data.ignoreTLSSSL === "1";
         if (headers.length > 0) {
-            // data.headers = headers.map(header => [header.name, header.value]);
             const headersList = headers.map(header => ({ item1: header.name, item2: header.value }));
-
-            // Adicionando 'headersList' aos dados do formulário
             data.headers = headersList;
         }
 
@@ -499,7 +507,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId, setMonitorPai
                             marginTop: '16px'
                         }}>
                         <Button onClick={handleAddHeader} variant="contained" >
-                        {t("dashboard.addHttpForm.addHeaders")}
+                            {t("dashboard.addHttpForm.addHeaders")}
                         </Button>
                     </Box>
                     <Box
@@ -549,7 +557,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId, setMonitorPai
                                         display: 'flex',
                                         minWidth: '20%'
                                     }}>
-                                        <Button variant="contained" sx={{ width: '100%' }} color='error' onClick={() => handleRemoveHeader(index)}><DeleteForever/></Button>
+                                        <Button variant="contained" sx={{ width: '100%' }} color='error' onClick={() => handleRemoveHeader(index)}><DeleteForever /></Button>
                                     </Box>
                                 </Box>
                             ))}</Box>

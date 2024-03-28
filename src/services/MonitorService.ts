@@ -40,6 +40,13 @@ const MonitorService = {
       `MonitorGroup/monitorGroupListByUser/${id}`,
       appendOptionalHeaders(headers)
     ),
+    getMonitorGroupListByUserToken: async (      
+      headers?: AxiosHeaders
+    ): Promise<IMonitorGroupListByUser[]> =>
+      await requests.get(
+        `MonitorGroup/monitorGroupListByUser/`,
+        appendOptionalHeaders(headers)
+      ),
   getMonitorAgents: async (headers?: AxiosHeaders): Promise<IAgent[]> =>
     await requests.get(
       "Monitor/allMonitorAgents",

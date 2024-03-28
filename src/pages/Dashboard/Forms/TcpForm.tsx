@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, TextField, Select, MenuItem, FormControl, InputLabel, Button, CircularProgress } from '@mui/material';
 import { useStoreActions, useStoreState } from '../../../hooks';
 import { Environment, Region } from '../../../enums/Enums';
@@ -7,6 +7,7 @@ import MonitorService from '../../../services/MonitorService';
 import { showSnackbar } from '../../../utils/snackbarHelper';
 import { useTranslation } from 'react-i18next';
 import InputMask from 'react-input-mask';
+import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
 
 interface IAddTcpMonitorProps {
     monitorTypeId: number;
@@ -31,13 +32,22 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId, setMonitorPaine
     });
     const { selectedEnvironment } = useStoreState((state) => state.app);
     const { thunkGetMonitorGroupListByUser } = useStoreActions((actions) => actions.monitor);
-    const monitorGroupList = useStoreState((state) => state.monitor.monitorGroupListByUser);
+
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [hasGroupSelected, setHasGroupSelected] = useState(false);
-    const isIPv4 = (value: any) => {
-        const ipv4Regex = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
-        return ipv4Regex.test(value);
+    const [monitorGroupList, setMonitorGroupList] = useState<IMonitorGroupListByUser[]>([]);
+    useEffect(() => {
+        if (monitorGroupList.length === 0) {
+            fillMonitorGroupList();
+        }
+    });
+
+    const fillMonitorGroupList = async () => {
+        await MonitorService.getMonitorGroupListByUserToken().then((response) => {
+            setMonitorGroupList(response);
+        });
     };
+
     const handleMonitorGroupChange = (event: any) => {
         const selectedGroup = monitorGroupList.find(group => group.id === event.target.value);
         if (selectedGroup === undefined) {
@@ -308,32 +318,20 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId, setMonitorPaine
                     }}
                 >
                     <FormControl fullWidth>
-                     
-                        <InputMask
-                            mask="999.999.999.999"
-                            maskChar=" "
-                            defaultValue=""
-                            {...register("ip", {
-                                required: true,
-                                validate: {
-                                    validIPv4: (value) => isIPv4(value) || t("dashboard.addHttpForm.errors.ip")
-                                }
-                            })}
-                        >
-                           {((inputProps: any) => {
-                                return <TextField
-                                    fullWidth
-                                    label={t("dashboard.addHttpForm.ip")}
-                                    margin="normal"
-                                    variant="outlined"
-                                    autoFocus
-                                    autoComplete="off"
-                                    error={!!errors.ip}
-                                    {...inputProps}
-                                />
-                            }) as any}
 
-                        </InputMask>
+                        <TextField
+                            fullWidth
+                            label={t("dashboard.addHttpForm.ip")}
+                            margin="normal"
+                            variant="outlined"
+                            autoFocus
+                            autoComplete="off"
+                            error={!!errors.ip}
+                            {...register("ip", {
+                                required: true
+                            })}
+                        />
+
                     </FormControl>
                 </Box>
                 <Box
@@ -377,7 +375,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId, setMonitorPaine
                     </Button>
                 </Box>
             </>}
-        </form>
+        </form >
     </>
     )
 }
