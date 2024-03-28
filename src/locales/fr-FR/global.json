@@ -1,0 +1,101 @@
+{
+    "general": {
+        "goBack": "Retour"
+    },
+    "header": {
+        "logout": "Déconnexion"
+    },
+    "sidebar": {
+        "monitorList": "Liste des moniteurs",
+        "monitorManagement": "Gestion des moniteurs",
+        "monitorAgents": "Agents de moniteur",
+        "notificationManagement": "Gestion des notifications",
+        "monitorAlert": "Alerte de moniteur",
+        "users": "Utilisateurs",
+        "settings": "Paramètres"
+    },
+    "dashboard": {
+        "text": "Tableau de bord",
+        "search": "Recherche",
+        "noResultFoundFor": "Aucun résultat trouvé",
+        "resume": "Reprendre",
+        "pause": "Pause",
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "serviceDown": "Service interrompu",
+        "metric": "Métrique",
+        "uptime": "Temps de fonctionnement",
+        "hour": "Heure",
+        "hours": "Heures",
+        "days": "Jours",
+        "months": "Mois",
+        "certificateexpiration": "Expiration du certificat",
+        "response": "Réponse (moy.)",
+        "certificateIsAboutToExpireFor": "Le certificat va expirer pour",
+        "environment": "Environnement",
+        "alarm": "Alertes",
+        "pauseConfirmation": "Le moniteur a été mis à jour !",
+        "up": "En ligne",
+        "down": "Hors ligne",
+        "paused": "En pause"
+    },
+    "monitorAgents": {
+        "text": "Agents de moniteur",
+        "totalNumberOfMonitorAgents": "Nombre total d'agents de moniteur",
+        "totalNumberofRunningMonitors": "Nombre total de moniteurs en fonctionnement",
+        "hostname": "Nom d'hôte",
+        "numberOfMonitors": "Nombre de moniteurs",
+        "master": "Principal",
+        "location": "Emplacement",
+        "monitorAgentsInEurope": "Agents de moniteur en Europe",
+        "monitorAgentsInAsia": "Agents de moniteur en Asie",
+        "monitorAgentsInAfrica": "Agents de moniteur en Afrique",
+        "monitorAgentsInNorthAmerica": "Agents de moniteur en Amérique du Nord",
+        "monitorAgentsInLatinAmerica": "Agents de moniteur en Amérique Latine",
+        "monitorAgentsInOceania": "Agents de moniteur en Océanie",
+        "version": "Version"
+    },
+    "monitorManagement": {
+        "text": "Gestion des moniteurs"
+    },
+    "settings": {
+        "text": "Paramètres",
+        "general": {
+            "text": "Général",
+            "language": "Langue",
+            "applicationLanguageHasBeenChanged": "La langue de l'application a été changée",
+            "displayTimezone": "Fuseau horaire d'affichage",
+            "timezoneSettingsHaveBeenChanged": "Les paramètres de fuseau horaire ont été changés",
+            "theme": "Thème",
+            "light": "Clair",
+            "lightThemeHasBeenEnabled": "Le thème clair a été activé",
+            "dark": "Sombre",
+            "darkThemeHasBeenEnabled": "Le thème sombre a été activé"
+        }
+    },
+    "about": {
+        "text": "À propos",
+        "checkProjectOn": "Vérifier le projet sur"
+    },
+    "pageNotFound": "Page non trouvée",
+    "users": {
+        "text": "Utilisateurs",
+        "userName": "Utilisateur",
+        "email": "Email",
+        "isAdmin": "Administrateur",
+        "actions": "Actions",
+        "true": "Oui",
+        "false": "Non",
+        "noResultFoundFor": "Aucun résultat trouvé",
+        "monitorConfirmation": "Les groupes de moniteurs ont été changés"
+    },
+    "monitorAlerts": {
+        "text": "Alertes de moniteur",
+        "noResultFoundFor": "Aucun résultat trouvé",
+        "monitorAlerts": "Alertes de moniteur",
+        "timeStamp": "Horodatage",
+        "monitorName": "Nom du moniteur",
+        "message": "Message",
+        "screenshot": "Capture d'écran"
+    }
+}
