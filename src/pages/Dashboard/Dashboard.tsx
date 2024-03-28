@@ -300,7 +300,4 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
 };
 
 export default Dashboard;
-function componentDidMount() {
-  throw new Error("Function not implemented.");
-}
-
+ 
