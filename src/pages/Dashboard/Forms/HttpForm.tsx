@@ -1,26 +1,28 @@
-import { useState } from 'react';
-import { Box, TextField, Select, MenuItem, FormControl, InputLabel, Button, CircularProgress } from '@mui/material';
+import { SetStateAction, useEffect, useState } from 'react';
+import { Box, TextField, Select, MenuItem, FormControl, InputLabel, Button, CircularProgress, Card, CardContent } from '@mui/material';
 import { useStoreActions, useStoreState } from '../../../hooks';
 import { Environment, MonitorHttpMethod, Region } from '../../../enums/Enums';
 import { useForm } from "react-hook-form";
 import MonitorService from '../../../services/MonitorService';
 import { showSnackbar } from '../../../utils/snackbarHelper';
 import { useTranslation } from 'react-i18next';
+import DeleteForever from "@mui/icons-material/DeleteForever";
 interface IAddHttpMonitorProps {
     monitorTypeId: number;
+    setMonitorPainelState: any;
 }
-const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
+const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId, setMonitorPainelState }) => {
     const { t } = useTranslation("global");
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
+    const { register, handleSubmit, getValues, setValue, watch, formState: { errors } } = useForm({
         defaultValues: {
             name: '',
             monitorGroup: null,
             monitorRegion: null,
             monitorEnvironment: null,
             monitorHttpMethod: null,
-            checkCertificateExpiry: false,
-            ignoreTLSSSL: false,
+            checkCertificateExpiry: "0",
+            ignoreTLSSSL: "0",
             urlToCheck: '',
             maxRedirects: 5,
             heartBeatInterval: 1,
@@ -32,12 +34,29 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
         }
     });
 
+    const urlToCheck = watch("urlToCheck");
+    const [headers, setHeaders] = useState<{ name: string; value: string; }[]>([]);
+
     const { selectedEnvironment } = useStoreState((state) => state.app);
     const { thunkGetMonitorGroupListByUser, setAddMonitorPainel } = useStoreActions((actions) => actions.monitor);
-    const monitorGroupList = useStoreState((state) => state.monitor.monitorGroupList);
+    const monitorGroupList = useStoreState((state) => state.monitor.monitorGroupListByUser);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [hasGroupSelected, setHasGroupSelected] = useState(false);
+    const handleAddHeader = () => {
+        const lastHeader = headers[headers.length - 1];
+        if (!lastHeader || (lastHeader.name.trim() !== '' && lastHeader.value.trim() !== '')) {
+            // Adicionar um novo cabeçalho à lista
+            setHeaders([...headers, { name: '', value: '' }]);
+        } else {
+            showSnackbar(t("dashboard.addHttpForm.fillThePreviusHeader"), "error");
+        }
+    };
 
+    const handleRemoveHeader = (index: number) => {
+        const updatedHeaders = [...headers];
+        updatedHeaders.splice(index, 1);
+        setHeaders(updatedHeaders);
+    };
     const handleMonitorGroupChange = (event: any) => {
         const selectedGroup = monitorGroupList.find(group => group.id === event.target.value);
         if (selectedGroup === undefined) {
@@ -46,11 +65,32 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
             setHasGroupSelected(true);
         }
     };
+    const handleCancelButton = () => {
+        setMonitorPainelState(false);
+    };
+    useEffect(() => {
+        const url = urlToCheck.toLowerCase();
+        if (url.startsWith('http://')) {
+            setValue("ignoreTLSSSL", "0");
+            setValue("checkCertificateExpiry", "0");
+        } else if (url.startsWith('https://')) {
+            setValue("ignoreTLSSSL", "0");
+            setValue("checkCertificateExpiry", "1");
+        }
+    }, [urlToCheck]);
 
     const handleValidSubmit = async (data: any) => {
         setIsButtonDisabled(true);
         data.checkCertificateExpiry = data.checkCertificateExpiry === "1";
         data.ignoreTLSSSL = data.ignoreTLSSSL === "1";
+        if (headers.length > 0) {
+            // data.headers = headers.map(header => [header.name, header.value]);
+            const headersList = headers.map(header => ({ item1: header.name, item2: header.value }));
+
+            // Adicionando 'headersList' aos dados do formulário
+            data.headers = headersList;
+        }
+
         await MonitorService.createHttpMonitor(data).then(async (response: any) => {
             await MonitorService.addMonitorToGroup({ monitorId: response, monitorgroupId: data.monitorGroup }).then(async () => {
                 setIsButtonDisabled(false);
@@ -116,8 +156,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                     marginBottom: '0px !important'
                                 }}
                                 autoComplete="off"
+                                error={!!errors.name}
                             />
-                            {errors.name && <span>{t("dashboard.addHttpForm.errors.name")}</span>}
                         </FormControl>
                     </Box>
                     <Box
@@ -146,8 +186,9 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                     marginBottom: '0px !important'
                                 }}
                                 autoComplete="off"
+                                error={!!errors.urlToCheck}
                             />
-                            {errors.urlToCheck && <span>{errors.urlToCheck.message}</span>}
+                            {errors.urlToCheck && <span style={{ color: "#f44336" }}>{t("dashboard.addHttpForm.errors.url")}</span>}
 
                         </FormControl>
                     </Box>
@@ -169,12 +210,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                 {...register("monitorRegion", { required: true })}
                                 id="monitorRegion-selection"
                                 label={t("dashboard.addHttpFrom.monitorRegion")}
+                                error={!!errors.monitorRegion}
                             >
                                 {(
                                     Object.keys(Region) as Array<
                                         keyof typeof Region
                                     >
-                                )
+                                ).sort((a, b) => a.localeCompare(b))
                                     .filter((key) => !isNaN(Number(Region[key])))
                                     .map((key) => (
                                         <MenuItem
@@ -185,8 +227,6 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                         </MenuItem>
                                     ))}
                             </Select>
-                            {errors.monitorRegion && <span>{t("dashboard.addHttpForm.errors.region")}</span>}
-
                         </FormControl>
                     </Box>
                     <Box
@@ -207,12 +247,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                 {...register("monitorEnvironment", { required: true })}
                                 id="monitorEnvironment-selection"
                                 label={t("dashboard.addHttpForm.monitorEnvironment")}
+                                error={!!errors.monitorEnvironment}
                             >
                                 {(
                                     Object.keys(Environment) as Array<
                                         keyof typeof Environment
                                     >
-                                )
+                                ).sort((a, b) => a.localeCompare(b))
                                     .filter((key) => !isNaN(Number(Environment[key])))
                                     .map((key) => (
                                         <MenuItem
@@ -223,8 +264,6 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                         </MenuItem>
                                     ))}
                             </Select>
-                            {errors.monitorEnvironment && <span>{t("dashboard.addHttpForm.errors.monitorEnvironment")}</span>}
-
                         </FormControl>
                     </Box>
                     <Box
@@ -244,17 +283,18 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                 labelId="checkCertificateExpiry-selection"
                                 id="checkCertificateExpiry-selection"
                                 {...register("checkCertificateExpiry", { required: true })}
+                                value={getValues("checkCertificateExpiry")}
                                 label={t("dashboard.addHttpForm.checkCertificateExpiry")}
+                                disabled={urlToCheck.startsWith('http://')}
+                                error={!!errors.checkCertificateExpiry}
                             >
-                                <MenuItem value="0">
-                                    {t("dashboard.addHttpForm.no")}
-                                </MenuItem>
                                 <MenuItem value="1">
                                     {t("dashboard.addHttpForm.yes")}
                                 </MenuItem>
+                                <MenuItem value="0">
+                                    {t("dashboard.addHttpForm.no")}
+                                </MenuItem>
                             </Select>
-                            {errors.checkCertificateExpiry && <span>{t("dashboard.addHttpForm.errors.checkCertificateExpiry")}</span>}
-
                         </FormControl>
                     </Box>
                     <Box
@@ -274,18 +314,18 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                 labelId="ignoreSSL-selection"
                                 id="ignoreSSL-selection"
                                 {...register("ignoreTLSSSL", { required: true })}
+                                value={getValues("ignoreTLSSSL")}
                                 label={t("dashboard.addHttpForm.ignoreTLSSSL")}
+                                disabled={urlToCheck.startsWith('http://')}
+                                error={!!errors.ignoreTLSSSL}
                             >
-                                <MenuItem value="0">
-                                    {t("dashboard.addHttpForm.no")}
-                                </MenuItem>
                                 <MenuItem value="1">
                                     {t("dashboard.addHttpForm.yes")}
                                 </MenuItem>
-
+                                <MenuItem value="0">
+                                    {t("dashboard.addHttpForm.no")}
+                                </MenuItem>
                             </Select>
-                            {errors.ignoreTLSSSL && <span>{t("dashboard.addHttpForm.errors.ignoreTLSSSL")}</span>}
-
                         </FormControl>
                     </Box>
                     <Box
@@ -306,12 +346,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                 {...register("monitorHttpMethod", { required: true })}
                                 id="httpMethod-selection"
                                 label={t("dashboard.addHttpForm.httpMethod")}
+                                error={!!errors.monitorHttpMethod}
                             >
                                 {(
                                     Object.keys(MonitorHttpMethod) as Array<
                                         keyof typeof MonitorHttpMethod
                                     >
-                                )
+                                ).sort((a, b) => a.localeCompare(b))
                                     .filter((key) => !isNaN(Number(MonitorHttpMethod[key])))
                                     .map((key) => (
                                         <MenuItem
@@ -322,8 +363,6 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                         </MenuItem>
                                     ))}
                             </Select>
-                            {errors.monitorHttpMethod && <span>{t("dashboard.addHttpForm.errors.httpMethod")}</span>}
-
                         </FormControl>
                     </Box>
                     <Box
@@ -346,8 +385,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                     marginBottom: '0px !important'
                                 }}
                                 autoComplete="off"
+                                error={!!errors.retries}
                             />
-                            {errors.retries && <span>{t("dashboard.addHttpForm.errors.retries")}</span>}
 
                         </FormControl>
                     </Box>
@@ -371,8 +410,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                     marginBottom: '0px !important'
                                 }}
                                 autoComplete="off"
+                                error={!!errors.maxRedirects}
                             />
-                            {errors.maxRedirects && <span>{t("dashboard.addHttpForm.errors.maxRedirects")}</span>}
 
                         </FormControl>
                     </Box>
@@ -396,8 +435,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                     marginBottom: '0px !important'
                                 }}
                                 autoComplete="off"
+                                error={!!errors.heartBeatInterval}
                             />
-                            {errors.heartBeatInterval && <span>{t("dashboard.addHttpForm.errors.heartbeatInterval")}</span>}
 
                         </FormControl>
                     </Box>
@@ -421,9 +460,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                                     marginBottom: '0px !important'
                                 }}
                                 autoComplete="off"
+                                error={!!errors.timeout}
                             />
-                            {errors.timeout && <span>{t("dashboard.addHttpForm.errors.timeout")}</span>}
-
                         </FormControl>
                     </Box>
 
@@ -456,18 +494,91 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({ monitorTypeId }) => {
                     <Box
                         sx={{
                             display: "flex",
-                            flexDirection: "column",
                             alignItems: "center",
-                            justifyContent: "center",
+                            justifyContent: "flex-start",
+                            marginTop: '16px'
+                        }}>
+                        <Button onClick={handleAddHeader} variant="contained" >
+                        {t("dashboard.addHttpForm.addHeaders")}
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+
+                        }}
+                    >
+                        <Box
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "flex-start",
+                                width: '100%',
+                            }}
+                        >
+                            <Box>{headers.map((header, index) => (
+                                <Box key={index} sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "flex-start",
+                                    marginTop: '16px'
+                                }}>
+                                    <TextField
+                                        label={t("dashboard.addHttpForm.headerName")}
+                                        value={header.name}
+                                        sx={{ minWidth: '30%', marginRight: '8px' }}
+                                        onChange={(e) => {
+                                            const updatedHeaders = [...headers];
+                                            updatedHeaders[index].name = e.target.value;
+                                            setHeaders(updatedHeaders);
+                                        }}
+                                    />
+                                    <TextField
+                                        label={t("dashboard.addHttpForm.headerValue")}
+                                        sx={{ minWidth: '55%', marginRight: '8px' }}
+                                        value={header.value}
+                                        onChange={(e) => {
+                                            const updatedHeaders = [...headers];
+                                            updatedHeaders[index].value = e.target.value;
+                                            setHeaders(updatedHeaders);
+                                        }}
+                                    />
+                                    <Box sx={{
+                                        justifyContent: "flex-end",
+                                        display: 'flex',
+                                        minWidth: '20%'
+                                    }}>
+                                        <Button variant="contained" sx={{ width: '100%' }} color='error' onClick={() => handleRemoveHeader(index)}><DeleteForever/></Button>
+                                    </Box>
+                                </Box>
+                            ))}</Box>
+
+                        </Box>
+
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignSelf: "flex-end",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            justifyContent: "flex-end",
                             marginBottom: '0'
                         }}
                     >
                         <Button
-                            type="submit"
-                            fullWidth
                             variant="contained"
-                            size="large"
-                            sx={{ mb: 2, mt: 2, color: "white", fontWeight: 700, position: "relative" }}
+                            color="secondary"
+                            onClick={() => handleCancelButton()}
+                        >
+                            {t("users.cancel")}
+                        </Button>
+                        <Button
+                            type="submit"
+                            color="success"
+                            variant="contained"
+                            sx={{ mb: 2, mt: 2, ml: 2, color: "white", fontWeight: 700, position: "relative" }}
                             disabled={isButtonDisabled}
                         >
                             {isButtonDisabled && (

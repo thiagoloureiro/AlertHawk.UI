@@ -1,4 +1,4 @@
-import {  useState } from 'react';
+import { useState } from 'react';
 import { Box, TextField, Select, MenuItem, FormControl, InputLabel, Button, CircularProgress } from '@mui/material';
 import { useStoreActions, useStoreState } from '../../../hooks';
 import { Environment, Region } from '../../../enums/Enums';
@@ -6,10 +6,13 @@ import { useForm } from "react-hook-form";
 import MonitorService from '../../../services/MonitorService';
 import { showSnackbar } from '../../../utils/snackbarHelper';
 import { useTranslation } from 'react-i18next';
+import InputMask from 'react-input-mask';
+
 interface IAddTcpMonitorProps {
     monitorTypeId: number;
+    setMonitorPainelState: any;
 }
-const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
+const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId, setMonitorPainelState }) => {
     const { t } = useTranslation("global");
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -27,8 +30,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
         }
     });
     const { selectedEnvironment } = useStoreState((state) => state.app);
-    const { thunkGetMonitorGroupListByUser, setAddMonitorPainel } = useStoreActions((actions) => actions.monitor);
-    const monitorGroupList = useStoreState((state) => state.monitor.monitorGroupList);
+    const { thunkGetMonitorGroupListByUser } = useStoreActions((actions) => actions.monitor);
+    const monitorGroupList = useStoreState((state) => state.monitor.monitorGroupListByUser);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     const [hasGroupSelected, setHasGroupSelected] = useState(false);
     const isIPv4 = (value: any) => {
@@ -43,21 +46,24 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
             setHasGroupSelected(true);
         }
     };
-
+    const handleCancelButton = () => {
+        setMonitorPainelState(false);
+    };
     const handleValidSubmit = async (data: any) => {
         setIsButtonDisabled(true);
         data.checkCertificateExpiry = data.checkCertificateExpiry === "1";
         data.ignoreTLSSSL = data.ignoreTLSSSL === "1";
+        data.port = parseInt(data.port, 10);
         await MonitorService.createTcpMonitor(data).then(async (response: any) => {
             await MonitorService.addMonitorToGroup({ monitorId: response, monitorgroupId: data.monitorGroup }).then(async () => {
                 setIsButtonDisabled(false);
                 await thunkGetMonitorGroupListByUser(selectedEnvironment);
-                setAddMonitorPainel(false);
                 showSnackbar(t("dashboard.addHttpForm.success"), "success");
-
+                setMonitorPainelState(false);
             });
         });
     }
+
     return (<>
         <form onSubmit={handleSubmit(handleValidSubmit)}>
 
@@ -111,8 +117,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                                 marginBottom: '0px !important'
                             }}
                             autoComplete="off"
+                            error={!!errors.name}
                         />
-                        {errors.name && <span>{t("dashboard.addHttpForm.errors.name")}</span>}
                     </FormControl>
                 </Box>
                 <Box
@@ -130,9 +136,11 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                         </InputLabel>
                         <Select
                             labelId="monitorRegion-selection"
+                            defaultValue=""
                             {...register("monitorRegion", { required: true })}
                             id="monitorRegion-selection"
                             label={t("dashboard.addHttpFrom.monitorRegion")}
+                            error={!!errors.monitorRegion}
                         >
                             {(
                                 Object.keys(Region) as Array<
@@ -149,8 +157,6 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                                     </MenuItem>
                                 ))}
                         </Select>
-                        {errors.monitorRegion && <span>{t("dashboard.addHttpForm.errors.region")}</span>}
-
                     </FormControl>
                 </Box>
                 <Box
@@ -170,7 +176,9 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                             labelId="monitorEnvironment-selection"
                             {...register("monitorEnvironment", { required: true })}
                             id="monitorEnvironment-selection"
+                            defaultValue=""
                             label={t("dashboard.addHttpForm.monitorEnvironment")}
+                            error={!!errors.monitorEnvironment}
                         >
                             {(
                                 Object.keys(Environment) as Array<
@@ -187,7 +195,6 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                                     </MenuItem>
                                 ))}
                         </Select>
-                        {errors.monitorEnvironment && <span>{t("dashboard.addHttpForm.errors.monitorEnvironment")}</span>}
 
                     </FormControl>
                 </Box>
@@ -211,8 +218,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                                 marginBottom: '0px !important'
                             }}
                             autoComplete="off"
+                            error={!!errors.retries}
                         />
-                        {errors.retries && <span>{t("dashboard.addHttpForm.errors.retries")}</span>}
 
                     </FormControl>
                 </Box>
@@ -236,8 +243,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                                 marginBottom: '0px !important'
                             }}
                             autoComplete="off"
+                            error={!!errors.heartBeatInterval}
                         />
-                        {errors.heartBeatInterval && <span>{t("dashboard.addHttpForm.errors.heartbeatInterval")}</span>}
 
                     </FormControl>
                 </Box>
@@ -261,8 +268,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                                 marginBottom: '0px !important'
                             }}
                             autoComplete="off"
+                            error={!!errors.timeout}
                         />
-                        {errors.timeout && <span>{t("dashboard.addHttpForm.errors.timeout")}</span>}
 
                     </FormControl>
                 </Box>
@@ -286,8 +293,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                                 marginBottom: '0px !important'
                             }}
                             autoComplete="off"
+                            error={!!errors.port}
                         />
-                        {errors.timeout && <span>{t("dashboard.addHttpForm.errors.port")}</span>}
 
                     </FormControl>
                 </Box>
@@ -299,61 +306,76 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({ monitorTypeId }) => {
                         justifyContent: "center",
                         marginBottom: '0'
                     }}
-                > <FormControl fullWidth>
-                        <TextField
+                >
+                    <FormControl fullWidth>
+                     
+                        <InputMask
+                            mask="999.999.999.999"
+                            maskChar=" "
+                            defaultValue=""
                             {...register("ip", {
                                 required: true,
                                 validate: {
                                     validIPv4: (value) => isIPv4(value) || t("dashboard.addHttpForm.errors.ip")
                                 }
                             })}
-                            fullWidth
-                            label={t("dashboard.addHttpForm.ip")}
-                            margin="normal"
-                            variant="outlined"
-                            autoFocus
-                            sx={{
-                                marginBottom: '0px !important'
-                            }}
-                            autoComplete="off"
-                        />
-                        {errors.timeout && <span>{t("dashboard.addHttpForm.errors.ip")}</span>}
+                        >
+                           {((inputProps: any) => {
+                                return <TextField
+                                    fullWidth
+                                    label={t("dashboard.addHttpForm.ip")}
+                                    margin="normal"
+                                    variant="outlined"
+                                    autoFocus
+                                    autoComplete="off"
+                                    error={!!errors.ip}
+                                    {...inputProps}
+                                />
+                            }) as any}
 
+                        </InputMask>
                     </FormControl>
                 </Box>
                 <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            marginBottom: '0'
-                        }}
+                    sx={{
+                        display: "flex",
+                        alignSelf: "flex-end",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "flex-end",
+                        marginBottom: '0'
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() => handleCancelButton()}
                     >
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            size="large"
-                            sx={{ mb: 2, mt: 2, color: "white", fontWeight: 700, position: "relative" }}
-                            disabled={isButtonDisabled}
-                        >
-                            {isButtonDisabled && (
-                                <CircularProgress
-                                    size={24}
-                                    sx={{
-                                        color: "primary.dark",
-                                        position: "absolute",
-                                        top: "50%",
-                                        left: "50%",
-                                        marginTop: "-12px",
-                                        marginLeft: "-12px",
-                                    }}
-                                />
-                            )}
-                            {t("dashboard.addHttpForm.save")}
-                        </Button>
-                    </Box>
+                        {t("users.cancel")}
+                    </Button>
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="success"
+                        sx={{ mb: 2, mt: 2, ml: 2, color: "white", fontWeight: 700, position: "relative" }}
+                        disabled={isButtonDisabled}
+                    >
+                        {isButtonDisabled && (
+                            <CircularProgress
+                                size={24}
+                                sx={{
+                                    color: "primary.dark",
+                                    position: "absolute",
+                                    top: "50%",
+                                    left: "50%",
+                                    marginTop: "-12px",
+                                    marginLeft: "-12px",
+                                }}
+                            />
+                        )}
+                        {t("dashboard.addHttpForm.save")}
+                    </Button>
+                </Box>
             </>}
         </form>
     </>

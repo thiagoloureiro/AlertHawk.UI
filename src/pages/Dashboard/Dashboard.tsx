@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import {
   Box,
-  // Button,
+  Button,
   Card,
   CardContent,
   FormControl,
@@ -33,9 +33,9 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
   const { isSidebarOpen, selectedEnvironment } = useStoreState(
     (state) => state.app
   );
-  const { monitorGroupListByUser, addMonitorPainel } = useStoreState((state) => state.monitor);
+  const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
   const { setSelectedEnvironment } = useStoreActions((action) => action.app);
-  const { setAddMonitorPainel } = useStoreActions((action) => action.monitor);
+  const [ addMonitorPainel, setAddMonitorPainel ] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
   const [selectedChildRowIndex, setSelectedChildRowIndex] = useState<
@@ -52,7 +52,9 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
   // const [selectedEnvironment, setSelectedEnvironment] = useState<number | "">(
   //   ""
   // );
-
+  useEffect(() => {
+    setAddMonitorPainel(false);
+  }, []);
   const handleEnvironmentChange = (event: SelectChangeEvent<number>) => {
     setSelectedEnvironment(event.target.value as number);
   };
@@ -115,12 +117,13 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
     );
   }, [selectedChildRowIndex, monitorGroupListByUser]);
 
-  // function handleAddNew(): void {
-  //   setSelectedMonitorItem(null);
-  //   setSelectedChildRowIndex(null);
-  //   setSelectedMonitorGroup(null);
-  //   setAddMonitorPainel(true);
-  // }
+  function handleAddNew(): void {
+    setSelectedMonitorItem(null);
+    setSelectedChildRowIndex(null);
+    setSelectedMonitorGroup(null);
+    setSelectedRowIndex(null);
+    setAddMonitorPainel(true);
+  }
 
   return (
     <>
@@ -212,11 +215,15 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
                     />
                   </FormControl>
                 </div>
-                {/* <div>
+                <div>
                   <FormControl fullWidth>
-                    <Button color="primary" onClick={handleAddNew}>{t("dashboard.addNew")}</Button>
+                    <Button  type="submit"
+                        variant="contained"
+                        color="success"
+                        sx={{ mb: 2, mt: 2, ml: 2, color: "white", minWidth: '110px', fontWeight: 700, position: "relative" }}
+                    onClick={handleAddNew}>{t("dashboard.addNew")}</Button>
                   </FormControl>
-                </div> */}
+                </div>
               </Stack>
               <Box
                 sx={{
@@ -280,7 +287,7 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
                     borderRadius: "30px",
                   },
                 }}>
-                  <AddNewMonitor/>
+                  <AddNewMonitor setMonitorPainelState={setAddMonitorPainel}/>
                 </Box>
               </CardContent>
             </Card>
@@ -293,3 +300,7 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
 };
 
 export default Dashboard;
+function componentDidMount() {
+  throw new Error("Function not implemented.");
+}
+
