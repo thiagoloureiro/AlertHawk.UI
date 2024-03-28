@@ -53,6 +53,20 @@ const About: FC<IAboutProps> = () => {
             Github
           </a>
         </Typography>
+        <Typography variant="subtitle2" fontSize={14}>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://github.com/thiagoloureiro/AlertHawk.UI/releases"
+            style={{
+              color: isDarkMode ? "#ffffff" : "#001e3c",
+              fontWeight: 500,
+            }}
+          >
+            Release Notes
+          </a>
+        </Typography>
+        
       </Stack>
     </Stack>
   );
