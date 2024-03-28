@@ -421,12 +421,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (24 {t("dashboard.hours")})
                     </Typography>
                     <Typography variant="subtitle1">
-                      {selectedMonitorGroup.monitors.length === 0
-                        ? "N/A"
-                        : calculateAverageUptime(
-                            selectedMonitorGroup.monitors,
-                            "uptime24Hrs"
-                          ).toFixed(2) + " %"}
+                      {selectedMonitorGroup.avgUptime24Hrs
+                        ? selectedMonitorGroup.avgUptime24Hrs.toFixed(2) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -444,12 +441,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (7 {t("dashboard.days")})
                     </Typography>
                     <Typography variant="subtitle1">
-                      {selectedMonitorGroup.monitors.length === 0
-                        ? "N/A"
-                        : calculateAverageUptime(
-                            selectedMonitorGroup.monitors,
-                            "uptime7Days"
-                          ).toFixed(2) + " %"}
+                      {selectedMonitorGroup.avgUptime7Days
+                        ? selectedMonitorGroup.avgUptime7Days.toFixed(2) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -467,12 +461,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (30 {t("dashboard.days")})
                     </Typography>
                     <Typography variant="subtitle1">
-                      {selectedMonitorGroup.monitors.length === 0
-                        ? "N/A"
-                        : calculateAverageUptime(
-                            selectedMonitorGroup.monitors,
-                            "uptime30Days"
-                          ).toFixed(2) + " %"}
+                      {selectedMonitorGroup.avgUptime30Days
+                        ? selectedMonitorGroup.avgUptime30Days.toFixed(2) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -490,12 +481,10 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (3 {t("dashboard.months")})
                     </Typography>
                     <Typography variant="subtitle1">
-                      {selectedMonitorGroup.monitors.length === 0
-                        ? "N/A"
-                        : calculateAverageUptime(
-                            selectedMonitorGroup.monitors,
-                            "uptime3Months"
-                          ).toFixed(2) + " %"}
+                      {selectedMonitorGroup.avgUptime3Months
+                        ? selectedMonitorGroup.avgUptime3Months.toFixed(2) +
+                          " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -513,12 +502,10 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (6 {t("dashboard.months")})
                     </Typography>
                     <Typography variant="subtitle1">
-                      {selectedMonitorGroup.monitors.length === 0
-                        ? "N/A"
-                        : calculateAverageUptime(
-                            selectedMonitorGroup.monitors,
-                            "uptime6Months"
-                          ).toFixed(2) + " %"}
+                      {selectedMonitorGroup.avgUptime6Months
+                        ? selectedMonitorGroup.avgUptime6Months.toFixed(2) +
+                          " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                 </Box>
@@ -642,12 +629,13 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (24 {t("dashboard.hours")})
                     </Typography>
                     <Typography variant="subtitle1">
-                      {selectedMonitorItem.monitorStatusDashboard[
-                        selectedMetric
-                      ] ?? "N/A"}
-                      {selectedMonitorItem.monitorStatusDashboard[
-                        selectedMetric
-                      ] && "%"}
+                      {selectedMonitorItem.monitorStatusDashboard.uptime24Hrs &&
+                      selectedMonitorItem.monitorStatusDashboard.uptime24Hrs !==
+                        0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime24Hrs.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -665,10 +653,13 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (7 {t("dashboard.days")})
                     </Typography>
                     <Typography variant="subtitle1">
-                      {selectedMonitorItem.monitorStatusDashboard.uptime7Days ??
-                        "N/A"}
                       {selectedMonitorItem.monitorStatusDashboard.uptime7Days &&
-                        "%"}
+                      selectedMonitorItem.monitorStatusDashboard.uptime7Days !==
+                        0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime7Days.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -687,9 +678,13 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     </Typography>
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard
-                        .uptime30Days ?? "N/A"}
-                      {selectedMonitorItem.monitorStatusDashboard
-                        .uptime30Days && "%"}
+                        .uptime30Days &&
+                      selectedMonitorItem.monitorStatusDashboard
+                        .uptime30Days !== 0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime30Days.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -708,9 +703,13 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     </Typography>
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard
-                        .uptime3Months ?? "N/A"}
-                      {selectedMonitorItem.monitorStatusDashboard
-                        .uptime3Months && "%"}
+                        .uptime3Months &&
+                      selectedMonitorItem.monitorStatusDashboard
+                        .uptime3Months !== 0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime3Months.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                   <Box
@@ -729,9 +728,13 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     </Typography>
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard
-                        .uptime6Months ?? "N/A"}
-                      {selectedMonitorItem.monitorStatusDashboard
-                        .uptime6Months && "%"}
+                        .uptime6Months &&
+                      selectedMonitorItem.monitorStatusDashboard
+                        .uptime6Months !== 0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime6Months.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
                     </Typography>
                   </Box>
                 </Box>

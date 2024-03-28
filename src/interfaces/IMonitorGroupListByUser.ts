@@ -20,4 +20,10 @@ export interface IMonitorGroupListByUser {
   id: number;
   name: string;
   monitors: IMonitorGroupListByUserItem[];
+  avgUptime1Hr?: number;
+  avgUptime24Hrs?: number;
+  avgUptime7Days?: number;
+  avgUptime30Days?: number;
+  avgUptime3Months?: number;
+  avgUptime6Months?: number;
 }
