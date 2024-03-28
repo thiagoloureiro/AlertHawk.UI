@@ -7,21 +7,25 @@ import { useTranslation } from 'react-i18next';
 import TcpForm from './TcpForm';
 
 interface AddNewMonitorProps {
+    setMonitorPainelState: any;
 }
 
-const AddNewMonitor: React.FC<AddNewMonitorProps> = () => {
+const AddNewMonitor: React.FC<AddNewMonitorProps> = ({setMonitorPainelState}) => {
     const [monitorTypes, setMonitorTypes] = useState<IMonitorType[]>([]);
-    const [selectedMonitorType, setSelectedMonitorType] = useState<IMonitorType>({} as IMonitorType);
+    const [selectedMonitorType, setSelectedMonitorType] = useState<IMonitorType>({id: 0} as IMonitorType);
     const { t } = useTranslation("global");
 
     useEffect(() => {
+        fetchMonitorTypes();
+    }, [monitorTypes]);
+
+    const fetchMonitorTypes = async () => {
         if (monitorTypes.length === 0) {
-            MonitorTypeService.get().then((response) => {
+            await MonitorTypeService.get().then((response) => {
                 setMonitorTypes(response);
             });
         }
-    }, [monitorTypes]);
-
+    }
     const handleMonitorTypeChange = (event: any) => {
         setSelectedMonitorType(monitorTypes.find((type) => type.id === event.target.value) as IMonitorType);
     };
@@ -51,7 +55,6 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = () => {
                                     label={t("addNewMonitor.monitorType")}
                                     onChange={handleMonitorTypeChange}
                                 >
-                                    <MenuItem value="none" >Select</MenuItem>
                                     {monitorTypes.map((type, key) => (
                                         <MenuItem value={type.id} key={key}>
                                             {type.name}
@@ -62,13 +65,13 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = () => {
                         </Box>
                         {
                             selectedMonitorType?.name === 'HTTP(s)' &&
-                            <HttpForm monitorTypeId={selectedMonitorType?.id}/>
+                            <HttpForm monitorTypeId={selectedMonitorType?.id} setMonitorPainelState={setMonitorPainelState} />
                         }
                         {
                             selectedMonitorType?.name === 'TCP Port' &&
-                            <TcpForm monitorTypeId={selectedMonitorType?.id}/>
+                            <TcpForm monitorTypeId={selectedMonitorType?.id} setMonitorPainelState={setMonitorPainelState}/>
                         }
-                      
+
                     </CardContent>
 
                 </Card>
