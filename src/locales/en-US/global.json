@@ -63,6 +63,10 @@
             "no": "No",
             "port": "Port",
             "ip": "IP",
+            "addHeaders": "Add Headers",
+            "headerValue": "Header Value",
+            "headerName":   "Header Name",
+            "fillThePreviusHeader":"Fill the previous header",
             "errors":{
                 "name": "Name is required",
                 "url": "Invalid URL",

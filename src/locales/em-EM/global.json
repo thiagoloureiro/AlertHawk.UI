@@ -63,6 +63,10 @@
             "no": "❌",
             "port": "🌐",
             "ip": "🌐",
+            "addHeaders": "➕📜",
+            "headerValue": "📄💼",
+            "headerName": "📄📛",
+            "fillThePreviusHeader":"↩️📄🔙📛",
             "errors": {
                 "name": "❗",
                 "url": "❌",

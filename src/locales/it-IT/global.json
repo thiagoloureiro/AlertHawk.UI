@@ -63,7 +63,11 @@
             "no": "No",
             "port": "Porta",
             "ip": "IP",
-            "errors":{
+            "addHeaders": "Aggiungi Intestazioni",
+            "headerValue": "Valore Intestazione",
+            "headerName": "Nome Intestazione",
+            "fillThePreviusHeader": "Compila l'intestazione precedente",
+            "errors": {
                 "name": "Il nome è obbligatorio",
                 "url": "URL non valido",
                 "region": "La regione è obbligatoria",
@@ -78,7 +82,6 @@
                 "port": "La porta è obbligatoria",
                 "ip": "L'IP è obbligatorio"
             }
-            
         }
     },
     "monitorAgents": {

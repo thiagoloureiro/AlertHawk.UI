@@ -63,6 +63,10 @@
             "no": "아니오",
             "port": "포트",
             "ip": "IP",
+            "addHeaders": "헤더 추가",
+            "headerValue": "헤더 값",
+            "headerName": "헤더 이름",
+            "fillThePreviusHeader": "이전 헤더를 채우세요",
             "errors": {
                 "name": "이름은 필수입니다",
                 "url": "유효하지 않은 URL입니다",

@@ -63,6 +63,10 @@
             "no": "Nie",
             "port": "Port",
             "ip": "IP",
+            "addHeaders": "Dodaj Nagłówki",
+            "headerValue": "Wartość Nagłówka",
+            "headerName": "Nazwa Nagłówka",
+            "fillThePreviusHeader": "Wypełnij poprzedni nagłówek",
             "errors":{
                 "name": "Nazwa jest wymagana",
                 "url": "Nieprawidłowy adres URL",

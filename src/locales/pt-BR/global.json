@@ -63,6 +63,10 @@
             "no": "Não",
             "port": "Porta",
             "ip": "IP",
+            "addHeaders": "Adicionar Cabeçalhos",
+            "headerValue": "Valor do Cabeçalho",
+            "headerName": "Nome do Cabeçalho",
+            "fillThePreviusHeader": "Preencha o cabeçalho anterior",
             "errors":{
                 "name": "O nome é obrigatório",
                 "url": "URL inválida",

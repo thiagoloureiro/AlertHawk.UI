@@ -63,7 +63,11 @@
             "no": "Hayır",
             "port": "Bağlantı Noktası",
             "ip": "IP",
-            "errors":{
+            "addHeaders": "Başlıkları Ekle",
+            "headerValue": "Başlık Değeri",
+            "headerName": "Başlık Adı",
+            "fillThePreviusHeader": "Önceki başlığı doldur",
+            "errors": {
                 "name": "Ad alanı gereklidir",
                 "url": "Geçersiz URL",
                 "region": "Bölge gereklidir",

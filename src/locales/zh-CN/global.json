@@ -63,6 +63,10 @@
             "no": "否",
             "port": "端口",
             "ip": "IP",
+            "addHeaders": "添加标头",
+            "headerValue": "标头值",
+            "headerName": "标头名称",
+            "fillThePreviusHeader": "填写上一个标头",
             "errors": {
                 "name": "名称为必填项",
                 "url": "无效的URL",
