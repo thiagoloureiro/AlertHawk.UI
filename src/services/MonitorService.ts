@@ -12,7 +12,6 @@ import {
 import { IAgent } from "../interfaces/IAgent";
 import { Environment } from "../enums/Enums";
 import { IMonitorStats } from "../interfaces/IMonitorStats";
-import monitor from "../models/monitor";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
