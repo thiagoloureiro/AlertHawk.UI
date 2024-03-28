@@ -6,7 +6,7 @@ import {
   Button,
   CircularProgress,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MicrosoftLogoPath from "./microsoft-windows-logo.svg";
 import getTheme from "../../theme";
 import { loginRequest } from "../../config/authConfig";
@@ -22,7 +22,7 @@ const Form: FC<IFormProps> = ({ description }) => {
   const [password, setPassword] = useState<string>("");
   const [step, setStep] = useState<number>(1);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { instance } = useMsal();
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const Form: FC<IFormProps> = ({ description }) => {
     setIsButtonDisabled(true);
     setTimeout(() => {
       setIsButtonDisabled(false);
-      navigate("/dashboard");
+      //navigate("/dashboard");
     }, 3000);
   };
 
