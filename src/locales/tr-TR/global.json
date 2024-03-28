@@ -39,6 +39,9 @@
         "down": "Çevrimdışı",
         "paused": "Duraklatıldı",
         "addNew": "Yeni ekle",
+        "deleteConfirmation": "Monitör silindi!",
+        "confirmDeleteTitle": "Silme Onayı",
+        "confirmDeleteMessage": "Bu monitörü silmek istediğinizden emin misiniz?",
         "addHttpForm": {
             "success": "Monitör eklendi!",
             "addNewMonitor": "Yeni Monitör Ekle",

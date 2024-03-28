@@ -39,6 +39,9 @@
         "down": "离线",
         "paused": "暂停",
         "addNew": "添加新",
+        "deleteConfirmation": "监视器已删除！",
+        "confirmDeleteTitle": "删除确认",
+        "confirmDeleteMessage": "您确定要删除此监视器吗？",
         "addHttpForm": {
             "success": "监视器已添加！",
             "addNewMonitor": "添加新监视器",

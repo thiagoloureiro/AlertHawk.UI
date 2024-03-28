@@ -39,6 +39,9 @@
         "down": "Hors ligne",
         "paused": "En pause",
         "addNew": "Ajouter",
+        "deleteConfirmation": "Le moniteur a été supprimé!",
+        "confirmDeleteTitle": "Confirmation de suppression",
+        "confirmDeleteMessage": "Êtes-vous sûr de vouloir supprimer ce moniteur?",
         "addHttpForm": {
             "success": "Le moniteur a été ajouté !",
             "addNewMonitor": "Ajouter un Nouveau Moniteur",

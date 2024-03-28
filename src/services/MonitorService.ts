@@ -12,6 +12,7 @@ import {
 import { IAgent } from "../interfaces/IAgent";
 import { Environment } from "../enums/Enums";
 import { IMonitorStats } from "../interfaces/IMonitorStats";
+import monitor from "../models/monitor";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -24,6 +25,8 @@ const requests = {
       .then(responseBody),
   put: (url: string, body: Object, headers?: AxiosHeaders) =>
     axiosInstance.monitoring.put(url, body, { headers }).then(responseBody),
+  delete: (url: string, headers?: AxiosHeaders) =>
+    axiosInstance.monitoring.delete(url, { headers }).then(responseBody),
 };
 
 const MonitorService = {
@@ -40,13 +43,13 @@ const MonitorService = {
       `MonitorGroup/monitorGroupListByUser/${id}`,
       appendOptionalHeaders(headers)
     ),
-    getMonitorGroupListByUserToken: async (      
-      headers?: AxiosHeaders
-    ): Promise<IMonitorGroupListByUser[]> =>
-      await requests.get(
-        `MonitorGroup/monitorGroupListByUser/`,
-        appendOptionalHeaders(headers)
-      ),
+  getMonitorGroupListByUserToken: async (
+    headers?: AxiosHeaders
+  ): Promise<IMonitorGroupListByUser[]> =>
+    await requests.get(
+      `MonitorGroup/monitorGroupListByUser/`,
+      appendOptionalHeaders(headers)
+    ),
   getMonitorAgents: async (headers?: AxiosHeaders): Promise<IAgent[]> =>
     await requests.get(
       "Monitor/allMonitorAgents",
@@ -110,6 +113,11 @@ const MonitorService = {
     await requests.post(
       `monitorGroup/addMonitorToGroup`,
       monitorGroupItem,
+      appendOptionalHeaders(headers)
+    ),
+    deleteMonitor: async (monitorId: number, headers?: AxiosHeaders): Promise<void> =>
+    await requests.delete(
+      `Monitor/deleteMonitor/${monitorId}`,
       appendOptionalHeaders(headers)
     ),
 };

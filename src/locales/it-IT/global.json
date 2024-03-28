@@ -39,6 +39,9 @@
         "down": "Offline",
         "paused": "In pausa",
         "addNew": "Aggiungi nuovo",
+        "deleteConfirmation": "Il monitor è stato eliminato!",
+        "confirmDeleteTitle": "Conferma eliminazione",
+        "confirmDeleteMessage": "Sei sicuro di voler eliminare questo monitor?",
         "addHttpForm": {
             "success": "Il monitor è stato aggiunto!",
             "addNewMonitor": "Aggiungi Nuovo Monitor",

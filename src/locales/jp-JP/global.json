@@ -39,6 +39,9 @@
         "down": "オフライン",
         "paused": "一時停止",
         "addNew": "新規追加",
+        "deleteConfirmation": "モニタが削除されました！",
+        "confirmDeleteTitle": "削除の確認",
+        "confirmDeleteMessage": "このモニタを削除してもよろしいですか？",
         "addHttpForm": {
             "success": "モニターが追加されました！",
             "addNewMonitor": "新しいモニターを追加",

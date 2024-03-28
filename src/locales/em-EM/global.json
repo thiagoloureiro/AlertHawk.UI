@@ -67,6 +67,9 @@
             "headerValue": "📄💼",
             "headerName": "📄📛",
             "fillThePreviusHeader":"↩️📄🔙📛",
+            "deleteConfirmation": "🗑️",
+            "confirmDeleteTitle": "❓",
+            "confirmDeleteMessage": "❓",
             "errors": {
                 "name": "❗",
                 "url": "❌",

@@ -7,7 +7,11 @@ import {
   Card,
   CardContent,
   Chip,
-  Snackbar,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Typography,
 } from "@mui/material";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
@@ -26,17 +30,18 @@ import { useNavigate } from "react-router-dom";
 import MonitorService from "../../../services/MonitorService";
 import { useStoreActions } from "../../../hooks";
 import Chart from "../../../components/Charts/Chart";
+import { showSnackbar } from "../../../utils/snackbarHelper";
 
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
   selectedMonitorItem: IMonitorGroupListByUserItem | null;
   selectedMetric:
-    | "uptime1Hr"
-    | "uptime24Hrs"
-    | "uptime7Days"
-    | "uptime30Days"
-    | "uptime3Months"
-    | "uptime6Months";
+  | "uptime1Hr"
+  | "uptime24Hrs"
+  | "uptime7Days"
+  | "uptime30Days"
+  | "uptime3Months"
+  | "uptime6Months";
 }
 
 const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
@@ -53,7 +58,27 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
     (actions) => actions.monitor
   );
   const { selectedEnvironment } = useStoreState((state) => state.app);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
+  const handleDeleteBtn = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+  };
+
+  const handleDeleteConfirm = async () => {
+    setOpenDeleteDialog(false);
+    if (selectedMonitorItem !== null) {
+      await MonitorService.deleteMonitor(selectedMonitorItem.id).then(async () => {
+        await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        showSnackbar(t("dashboard.deleteConfirmation"), "success");
+      });
+      
+    }
+    console.log(selectedMonitorItem?.id, selectedMonitorItem?.name);
+  };
   const handleResumePauseBtn = async () => {
     if (selectedMonitorItem !== null) {
       await MonitorService.pauseMonitor(
@@ -68,16 +93,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
     }
     await thunkGetMonitorGroupListByUser(selectedEnvironment);
     setIsPaused(!isPaused);
-    setOpenAlert(true);
+    showSnackbar(t("dashboard.pauseConfirmation"), "success");
   };
   const handleAlertBtn = () => {
     navigate(`/monitor-alert/${selectedMonitorItem?.id}`);
   };
-  const [openAlert, setOpenAlert] = useState(false);
-  const handleCloseAlert = () => {
-    setOpenAlert(false);
-  };
-
   useEffect(() => {
     if (selectedMonitorItem !== null) {
       setIsPaused(selectedMonitorItem.paused);
@@ -247,6 +267,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
             color="secondary"
             disableElevation
           >
+
             <Button
               aria-label="pause/resume"
               startIcon={isPaused ? <PlayArrowIcon /> : <PauseIcon />}
@@ -256,13 +277,15 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                 {isPaused ? t("dashboard.resume") : t("dashboard.pause")}
               </Box>
             </Button>
-            <Button
-              aria-label=""
-              startIcon={<EditNoteIcon />}
-              onClick={handleEditBtn}
-            >
-              {t("dashboard.edit")}
-            </Button>
+            {selectedMonitorItem !== null && (
+              <Button
+                aria-label=""
+                startIcon={<EditNoteIcon />}
+                onClick={handleEditBtn}
+              >
+                {t("dashboard.edit")}
+              </Button>
+            )}
             {selectedMonitorItem !== null && (
               <Button
                 aria-label=""
@@ -272,15 +295,18 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                 {t("dashboard.alarm")}
               </Button>
             )}
-            <Button
-              aria-label="delete"
-              startIcon={
-                <DeleteIcon sx={{ color: isDarkMode ? "inherit" : "#fff" }} />
-              }
-              color="error"
-            >
-              {t("dashboard.delete")}
-            </Button>
+            {selectedMonitorItem !== null && (
+              <Button
+                aria-label="delete"
+                startIcon={
+                  <DeleteIcon sx={{ color: isDarkMode ? "inherit" : "#fff" }} />
+                }
+                color="error"
+                onClick={handleDeleteBtn}
+
+              >
+                {t("dashboard.delete")}
+              </Button>)}
           </ButtonGroup>
         </Box>
         {selectedMonitorGroup !== null && (
@@ -308,7 +334,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     ) : (
                       renderUptimeBoxes(
                         calculateAverageUptime(selectedMonitorGroup.monitors) ??
-                          0,
+                        0,
                         selectedMonitorGroup.monitors.every((x) => x.status)
                       )
                     )}
@@ -336,8 +362,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         }}
                       />
                     ) : selectedMonitorGroup.monitors.some(
-                        (x) => x.status && x.paused
-                      ) ? (
+                      (x) => x.status && x.paused
+                    ) ? (
                       <Chip
                         label={t("dashboard.paused")}
                         color="secondary"
@@ -483,7 +509,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     <Typography variant="subtitle1">
                       {selectedMonitorGroup.avgUptime3Months
                         ? selectedMonitorGroup.avgUptime3Months.toFixed(2) +
-                          " %"
+                        " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -504,7 +530,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     <Typography variant="subtitle1">
                       {selectedMonitorGroup.avgUptime6Months
                         ? selectedMonitorGroup.avgUptime6Months.toFixed(2) +
-                          " %"
+                        " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -535,7 +561,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   >
                     {renderUptimeBoxes(
                       selectedMonitorItem.monitorStatusDashboard[
-                        selectedMetric
+                      selectedMetric
                       ] ?? 0,
                       selectedMonitorItem.status
                     )}
@@ -630,11 +656,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     </Typography>
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard.uptime24Hrs &&
-                      selectedMonitorItem.monitorStatusDashboard.uptime24Hrs !==
+                        selectedMonitorItem.monitorStatusDashboard.uptime24Hrs !==
                         0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime24Hrs.toFixed(
-                            2
-                          ) + " %"
+                          2
+                        ) + " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -654,11 +680,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     </Typography>
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard.uptime7Days &&
-                      selectedMonitorItem.monitorStatusDashboard.uptime7Days !==
+                        selectedMonitorItem.monitorStatusDashboard.uptime7Days !==
                         0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime7Days.toFixed(
-                            2
-                          ) + " %"
+                          2
+                        ) + " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -679,11 +705,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard
                         .uptime30Days &&
-                      selectedMonitorItem.monitorStatusDashboard
-                        .uptime30Days !== 0
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime30Days !== 0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime30Days.toFixed(
-                            2
-                          ) + " %"
+                          2
+                        ) + " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -704,11 +730,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard
                         .uptime3Months &&
-                      selectedMonitorItem.monitorStatusDashboard
-                        .uptime3Months !== 0
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime3Months !== 0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime3Months.toFixed(
-                            2
-                          ) + " %"
+                          2
+                        ) + " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -729,11 +755,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard
                         .uptime6Months &&
-                      selectedMonitorItem.monitorStatusDashboard
-                        .uptime6Months !== 0
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime6Months !== 0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime6Months.toFixed(
-                            2
-                          ) + " %"
+                          2
+                        ) + " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -794,21 +820,29 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
           </>
         )}
       </Box>
-      <Snackbar
-        open={openAlert}
-        autoHideDuration={6000}
-        onClose={handleCloseAlert}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      <Dialog
+        open={openDeleteDialog}
+        onClose={handleCloseDeleteDialog}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <Alert
-          onClose={handleCloseAlert}
-          severity="success"
-          elevation={6}
-          variant="filled"
-        >
-          {t("dashboard.pauseConfirmation")}
-        </Alert>
-      </Snackbar>
+        <DialogTitle id="alert-dialog-title">
+          {t("dashboard.confirmDeleteTitle")}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t("dashboard.confirmDeleteMessage")}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDeleteDialog} color="primary">
+            {t("dashboard.addHttpForm.no")}
+          </Button>
+          <Button onClick={handleDeleteConfirm} color="primary" autoFocus>
+            {t("dashboard.addHttpForm.yes")}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

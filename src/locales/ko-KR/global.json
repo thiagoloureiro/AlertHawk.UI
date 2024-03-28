@@ -39,6 +39,9 @@
         "down": "오프라인",
         "paused": "일시 정지",
         "addNew": "새로 추가",
+        "deleteConfirmation": "모니터가 삭제되었습니다!",
+        "confirmDeleteTitle": "삭제 확인",
+        "confirmDeleteMessage": "이 모니터를 삭제하시겠습니까?",
         "addHttpForm": {
             "success": "모니터가 추가되었습니다!",
             "addNewMonitor": "새로운 모니터 추가",

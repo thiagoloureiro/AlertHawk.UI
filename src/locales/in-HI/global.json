@@ -43,6 +43,9 @@
         "headerValue": "शीर्षक मान",
         "headerName": "शीर्षक नाम",
         "fillThePreviusHeader": "पिछले हेडर को भरें",
+        "deleteConfirmation": "मॉनिटर हटा दिया गया है!",
+        "confirmDeleteTitle": "हटाने की पुष्टि",
+        "confirmDeleteMessage": "क्या आप इस मॉनिटर को हटाना चाहते हैं?",
         "addHttpForm": {
             "success": "मॉनिटर जोड़ा गया है!",
             "addNewMonitor": "नया मॉनिटर जोड़ें",
