@@ -655,7 +655,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     </Typography>
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard.uptime24Hrs &&
-                        selectedMonitorItem.monitorStatusDashboard.uptime24Hrs !==
+                        selectedMonitorItem.monitorStatusDashboard.uptime24Hrs >=
                         0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime24Hrs.toFixed(
                           2
@@ -679,7 +679,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     </Typography>
                     <Typography variant="subtitle1">
                       {selectedMonitorItem.monitorStatusDashboard.uptime7Days &&
-                        selectedMonitorItem.monitorStatusDashboard.uptime7Days !==
+                        selectedMonitorItem.monitorStatusDashboard.uptime7Days >=
                         0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime7Days.toFixed(
                           2
@@ -705,7 +705,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       {selectedMonitorItem.monitorStatusDashboard
                         .uptime30Days &&
                         selectedMonitorItem.monitorStatusDashboard
-                          .uptime30Days !== 0
+                          .uptime30Days >= 0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime30Days.toFixed(
                           2
                         ) + " %"
@@ -730,7 +730,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       {selectedMonitorItem.monitorStatusDashboard
                         .uptime3Months &&
                         selectedMonitorItem.monitorStatusDashboard
-                          .uptime3Months !== 0
+                          .uptime3Months >= 0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime3Months.toFixed(
                           2
                         ) + " %"
@@ -755,7 +755,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       {selectedMonitorItem.monitorStatusDashboard
                         .uptime6Months &&
                         selectedMonitorItem.monitorStatusDashboard
-                          .uptime6Months !== 0
+                          .uptime6Months >= 0
                         ? selectedMonitorItem.monitorStatusDashboard.uptime6Months.toFixed(
                           2
                         ) + " %"

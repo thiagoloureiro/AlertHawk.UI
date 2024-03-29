@@ -214,15 +214,23 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     let totalUptime = 0;
     let totalMonitors = 0;
 
+    let uptime = 0;
+
     monitors.forEach((monitor) => {
-      const uptime = monitor.monitorStatusDashboard[selectedMetric] ?? 0;
-      if (uptime !== 0) {
+     uptime = monitor.monitorStatusDashboard[selectedMetric] ?? 0;
+
+      if (uptime >= 0) {
         totalUptime += uptime ?? 0;
         totalMonitors++;
       }
+
     });
 
-    return totalMonitors === 0 ? 0 : totalUptime / totalMonitors;
+    if(uptime < 0){
+      return "N/A";
+    }
+    let result =  totalMonitors === 0 ? 0 : totalUptime / totalMonitors;
+    return result.toFixed(2);
   };
 
   const renderParentStatusChip = () => {
@@ -250,9 +258,11 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     if (allRunning) {
       return (
         <Chip
-          label={
-            calculateAverageUptime(monitorGroup.monitors).toFixed(2) + " %"
-          }
+        label={
+          typeof calculateAverageUptime(monitorGroup.monitors) === "number"
+            ? calculateAverageUptime(monitorGroup.monitors) + " %"
+            : calculateAverageUptime(monitorGroup.monitors)
+        }
           color="success"
           size="medium"
           sx={{
@@ -267,9 +277,11 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     } else {
       return (
         <Chip
-          label={
-            calculateAverageUptime(monitorGroup.monitors).toFixed(2) + " %"
-          }
+        label={
+          typeof calculateAverageUptime(monitorGroup.monitors) === "number"
+            ? calculateAverageUptime(monitorGroup.monitors) + " %"
+            : calculateAverageUptime(monitorGroup.monitors)
+        }
           color="error"
           size="medium"
           sx={{
@@ -368,10 +380,12 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                           {monitor.monitorStatusDashboard[selectedMetric] !==
                           0 ? (
                             <Chip
-                              label={
-                                monitor.monitorStatusDashboard[selectedMetric] +
-                                " %"
-                              }
+                            label={
+                              (monitor.monitorStatusDashboard[selectedMetric] ?? 0) < 0
+                                ? "N/A"
+                                : (monitor.monitorStatusDashboard[selectedMetric] ?? "N/A") + " %"
+                            }
+                            
                               color={
                                 !monitor.status
                                   ? "error"
