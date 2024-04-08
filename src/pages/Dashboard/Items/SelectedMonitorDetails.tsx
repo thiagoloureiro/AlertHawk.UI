@@ -35,12 +35,12 @@ interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
   selectedMonitorItem: IMonitorGroupListByUserItem | null;
   selectedMetric:
-  | "uptime1Hr"
-  | "uptime24Hrs"
-  | "uptime7Days"
-  | "uptime30Days"
-  | "uptime3Months"
-  | "uptime6Months";
+    | "uptime1Hr"
+    | "uptime24Hrs"
+    | "uptime7Days"
+    | "uptime30Days"
+    | "uptime3Months"
+    | "uptime6Months";
 }
 
 const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
@@ -70,11 +70,12 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   const handleDeleteConfirm = async () => {
     setOpenDeleteDialog(false);
     if (selectedMonitorItem !== null) {
-      await MonitorService.deleteMonitor(selectedMonitorItem.id).then(async () => {
-        await thunkGetMonitorGroupListByUser(selectedEnvironment);
-        showSnackbar(t("dashboard.deleteConfirmation"), "success");
-      });
-      
+      await MonitorService.deleteMonitor(selectedMonitorItem.id).then(
+        async () => {
+          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          showSnackbar(t("dashboard.deleteConfirmation"), "success");
+        }
+      );
     }
     console.log(selectedMonitorItem?.id, selectedMonitorItem?.name);
   };
@@ -266,7 +267,6 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
             color="secondary"
             disableElevation
           >
-
             <Button
               aria-label="pause/resume"
               startIcon={isPaused ? <PlayArrowIcon /> : <PauseIcon />}
@@ -302,10 +302,10 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                 }
                 color="error"
                 onClick={handleDeleteBtn}
-
               >
                 {t("dashboard.delete")}
-              </Button>)}
+              </Button>
+            )}
           </ButtonGroup>
         </Box>
         {selectedMonitorGroup !== null && (
@@ -333,7 +333,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     ) : (
                       renderUptimeBoxes(
                         calculateAverageUptime(selectedMonitorGroup.monitors) ??
-                        0,
+                          0,
                         selectedMonitorGroup.monitors.every((x) => x.status)
                       )
                     )}
@@ -361,8 +361,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         }}
                       />
                     ) : selectedMonitorGroup.monitors.some(
-                      (x) => x.status && x.paused
-                    ) ? (
+                        (x) => x.status && x.paused
+                      ) ? (
                       <Chip
                         label={t("dashboard.paused")}
                         color="secondary"
@@ -443,6 +443,26 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       {t("dashboard.uptime")}
                     </Typography>
                     <Typography variant="body2">
+                      (1 {t("dashboard.hour")})
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      {selectedMonitorGroup.avgUptime1Hr
+                        ? selectedMonitorGroup.avgUptime1Hr.toFixed(2) + " %"
+                        : "N/A"}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="h6">
+                      {t("dashboard.uptime")}
+                    </Typography>
+                    <Typography variant="body2">
                       (24 {t("dashboard.hours")})
                     </Typography>
                     <Typography variant="subtitle1">
@@ -508,7 +528,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     <Typography variant="subtitle1">
                       {selectedMonitorGroup.avgUptime3Months
                         ? selectedMonitorGroup.avgUptime3Months.toFixed(2) +
-                        " %"
+                          " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -529,7 +549,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                     <Typography variant="subtitle1">
                       {selectedMonitorGroup.avgUptime6Months
                         ? selectedMonitorGroup.avgUptime6Months.toFixed(2) +
-                        " %"
+                          " %"
                         : "N/A"}
                     </Typography>
                   </Box>
@@ -560,7 +580,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   >
                     {renderUptimeBoxes(
                       selectedMonitorItem.monitorStatusDashboard[
-                      selectedMetric
+                        selectedMetric
                       ] ?? 0,
                       selectedMonitorItem.status
                     )}
@@ -651,13 +671,42 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       {t("dashboard.uptime")}
                     </Typography>
                     <Typography variant="body2">
+                      (1 {t("dashboard.hour")})
+                    </Typography>
+                    <Typography variant="subtitle1">
+                      {typeof selectedMonitorItem.monitorStatusDashboard
+                        .uptime1Hr === "number" &&
+                      selectedMonitorItem.monitorStatusDashboard.uptime1Hr >= 0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime1Hr.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
+                    </Typography>
+                  </Box>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="h6">
+                      {t("dashboard.uptime")}
+                    </Typography>
+                    <Typography variant="body2">
                       (24 {t("dashboard.hours")})
                     </Typography>
                     <Typography variant="subtitle1">
-                    {typeof selectedMonitorItem.monitorStatusDashboard.uptime24Hrs === "number" && selectedMonitorItem.monitorStatusDashboard.uptime24Hrs >= 0
-                      ? selectedMonitorItem.monitorStatusDashboard.uptime24Hrs.toFixed(2) + " %"
-                      : "N/A"}
-                  </Typography>
+                      {typeof selectedMonitorItem.monitorStatusDashboard
+                        .uptime24Hrs === "number" &&
+                      selectedMonitorItem.monitorStatusDashboard.uptime24Hrs >=
+                        0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime24Hrs.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
+                    </Typography>
                   </Box>
                   <Box
                     sx={{
@@ -674,10 +723,15 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (7 {t("dashboard.days")})
                     </Typography>
                     <Typography variant="subtitle1">
-                    {typeof selectedMonitorItem.monitorStatusDashboard.uptime7Days === "number" && selectedMonitorItem.monitorStatusDashboard.uptime7Days >= 0
-                      ? selectedMonitorItem.monitorStatusDashboard.uptime7Days.toFixed(2) + " %"
-                      : "N/A"}
-                  </Typography>
+                      {typeof selectedMonitorItem.monitorStatusDashboard
+                        .uptime7Days === "number" &&
+                      selectedMonitorItem.monitorStatusDashboard.uptime7Days >=
+                        0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime7Days.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
+                    </Typography>
                   </Box>
                   <Box
                     sx={{
@@ -694,10 +748,15 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (30 {t("dashboard.days")})
                     </Typography>
                     <Typography variant="subtitle1">
-                    {typeof selectedMonitorItem.monitorStatusDashboard.uptime30Days === "number" && selectedMonitorItem.monitorStatusDashboard.uptime30Days >= 0
-                      ? selectedMonitorItem.monitorStatusDashboard.uptime30Days.toFixed(2) + " %"
-                      : "N/A"}
-                  </Typography>
+                      {typeof selectedMonitorItem.monitorStatusDashboard
+                        .uptime30Days === "number" &&
+                      selectedMonitorItem.monitorStatusDashboard.uptime30Days >=
+                        0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime30Days.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
+                    </Typography>
                   </Box>
                   <Box
                     sx={{
@@ -714,10 +773,15 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (3 {t("dashboard.months")})
                     </Typography>
                     <Typography variant="subtitle1">
-                    {typeof selectedMonitorItem.monitorStatusDashboard.uptime3Months === "number" && selectedMonitorItem.monitorStatusDashboard.uptime3Months >= 0
-                      ? selectedMonitorItem.monitorStatusDashboard.uptime3Months.toFixed(2) + " %"
-                      : "N/A"}
-                  </Typography>
+                      {typeof selectedMonitorItem.monitorStatusDashboard
+                        .uptime3Months === "number" &&
+                      selectedMonitorItem.monitorStatusDashboard
+                        .uptime3Months >= 0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime3Months.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
+                    </Typography>
                   </Box>
                   <Box
                     sx={{
@@ -734,10 +798,15 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       (6 {t("dashboard.months")})
                     </Typography>
                     <Typography variant="subtitle1">
-                    {typeof selectedMonitorItem.monitorStatusDashboard.uptime6Months === "number" && selectedMonitorItem.monitorStatusDashboard.uptime6Months >= 0
-                      ? selectedMonitorItem.monitorStatusDashboard.uptime6Months.toFixed(2) + " %"
-                      : "N/A"}
-                  </Typography>
+                      {typeof selectedMonitorItem.monitorStatusDashboard
+                        .uptime6Months === "number" &&
+                      selectedMonitorItem.monitorStatusDashboard
+                        .uptime6Months >= 0
+                        ? selectedMonitorItem.monitorStatusDashboard.uptime6Months.toFixed(
+                            2
+                          ) + " %"
+                        : "N/A"}
+                    </Typography>
                   </Box>
                 </Box>
               </CardContent>
