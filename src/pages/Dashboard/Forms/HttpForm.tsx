@@ -31,7 +31,6 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   const {
     register,
     handleSubmit,
-    getValues,
     setValue,
     watch,
     formState: { errors },
@@ -55,7 +54,6 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     },
   });
 
-  const urlToCheck = watch("urlToCheck");
   const certificateExpiry = watch("checkCertificateExpiry");
   const watchIgnoreTLSSL = watch("ignoreTLSSSL");
 
