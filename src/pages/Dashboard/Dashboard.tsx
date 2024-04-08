@@ -26,16 +26,16 @@ import {
 import { Environment } from "../../enums/Enums";
 import AddNewMonitor from "./Forms/AddNewMonitor";
 
-interface IDashboardProps { }
+interface IDashboardProps {}
 
-const Dashboard: FC<IDashboardProps> = ({ }) => {
+const Dashboard: FC<IDashboardProps> = ({}) => {
   const { t } = useTranslation("global");
   const { isSidebarOpen, selectedEnvironment } = useStoreState(
     (state) => state.app
   );
   const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
   const { setSelectedEnvironment } = useStoreActions((action) => action.app);
-  const [ addMonitorPainel, setAddMonitorPainel ] = useState<boolean>(false);
+  const [addMonitorPanel, setAddMonitorPanel] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
   const [selectedChildRowIndex, setSelectedChildRowIndex] = useState<
@@ -53,7 +53,7 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
   //   ""
   // );
   useEffect(() => {
-    setAddMonitorPainel(false);
+    setAddMonitorPanel(false);
   }, []);
   const handleEnvironmentChange = (event: SelectChangeEvent<number>) => {
     setSelectedEnvironment(event.target.value as number);
@@ -62,11 +62,11 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
   const handleMetricChange = (event: SelectChangeEvent<string>) => {
     setSelectedMetric(
       event.target.value as
-      | "uptime24Hrs"
-      | "uptime7Days"
-      | "uptime30Days"
-      | "uptime3Months"
-      | "uptime6Months"
+        | "uptime24Hrs"
+        | "uptime7Days"
+        | "uptime30Days"
+        | "uptime3Months"
+        | "uptime6Months"
     );
   };
 
@@ -84,11 +84,11 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
   const handleRowClick = (index: number) => {
     setSelectedRowIndex(selectedRowIndex === index ? selectedRowIndex : index);
     setSelectedChildRowIndex(null);
-    setAddMonitorPainel(false);
+    setAddMonitorPanel(false);
   };
 
   const handleChildRowClick = (index: number) => {
-    setAddMonitorPainel(false);
+    setAddMonitorPanel(false);
     setSelectedChildRowIndex(
       selectedChildRowIndex === index ? selectedChildRowIndex : index
     );
@@ -107,12 +107,12 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
     setSelectedMonitorItem(
       selectedChildRowIndex !== null
         ? monitorGroupListByUser.reduce((foundItem, parent) => {
-          if (foundItem) return foundItem;
-          const childItem = parent.monitors.find(
-            (child) => child.id === selectedChildRowIndex
-          );
-          return childItem ? childItem : foundItem;
-        }, null as IMonitorGroupListByUserItem | null)
+            if (foundItem) return foundItem;
+            const childItem = parent.monitors.find(
+              (child) => child.id === selectedChildRowIndex
+            );
+            return childItem ? childItem : foundItem;
+          }, null as IMonitorGroupListByUserItem | null)
         : null
     );
   }, [selectedChildRowIndex, monitorGroupListByUser]);
@@ -122,7 +122,7 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
     setSelectedChildRowIndex(null);
     setSelectedMonitorGroup(null);
     setSelectedRowIndex(null);
-    setAddMonitorPainel(true);
+    setAddMonitorPanel(true);
   }
 
   return (
@@ -217,11 +217,23 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
                 </div>
                 <div>
                   <FormControl fullWidth>
-                    <Button  type="submit"
-                        variant="contained"
-                        color="success"
-                        sx={{ mb: 2, mt: 2, ml: 2, color: "white", minWidth: '110px', fontWeight: 700, position: "relative" }}
-                    onClick={handleAddNew}>{t("dashboard.addNew")}</Button>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="success"
+                      sx={{
+                        mb: 2,
+                        mt: 2,
+                        ml: 2,
+                        color: "white",
+                        minWidth: "110px",
+                        fontWeight: 700,
+                        position: "relative",
+                      }}
+                      onClick={handleAddNew}
+                    >
+                      {t("dashboard.addNew")}
+                    </Button>
                   </FormControl>
                 </div>
               </Stack>
@@ -266,33 +278,33 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
             />
           ) : null}
 
-          {
-            addMonitorPainel &&
+          {addMonitorPanel && (
             <Card>
               <CardContent>
-                <Box sx={{
-                  overflowY: "auto",
-                  maxHeight: "calc(100vh - 210px)",
-                  paddingRight: "16px",
-                  "&::-webkit-scrollbar": {
-                    width: "0.4em",
-                  },
-                  "&::-webkit-scrollbar-track": {
-                    boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-                    webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-                  },
-                  "&::-webkit-scrollbar-thumb": {
-                    backgroundColor: "secondary.main",
-                    outline: "1px solid secondary.main",
-                    borderRadius: "30px",
-                  },
-                }}>
-                  <AddNewMonitor setMonitorPainelState={setAddMonitorPainel}/>
+                <Box
+                  sx={{
+                    overflowY: "auto",
+                    maxHeight: "calc(100vh - 210px)",
+                    paddingRight: "16px",
+                    "&::-webkit-scrollbar": {
+                      width: "0.4em",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      backgroundColor: "secondary.main",
+                      outline: "1px solid secondary.main",
+                      borderRadius: "30px",
+                    },
+                  }}
+                >
+                  <AddNewMonitor setAddMonitorPanel={setAddMonitorPanel} />
                 </Box>
               </CardContent>
             </Card>
-          }
-
+          )}
         </Grid>
       </Grid>
     </>
@@ -300,4 +312,3 @@ const Dashboard: FC<IDashboardProps> = ({ }) => {
 };
 
 export default Dashboard;
- 

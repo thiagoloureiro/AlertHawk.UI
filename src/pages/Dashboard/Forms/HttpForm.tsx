@@ -20,11 +20,11 @@ import DeleteForever from "@mui/icons-material/DeleteForever";
 import { IMonitorGroupListByUser } from "../../../interfaces/IMonitorGroupListByUser";
 interface IAddHttpMonitorProps {
   monitorTypeId: number;
-  setMonitorPainelState: any;
+  setAddMonitorPanel: (val: boolean) => void;
 }
 const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   monitorTypeId,
-  setMonitorPainelState,
+  setAddMonitorPanel,
 }) => {
   const { t } = useTranslation("global");
 
@@ -60,8 +60,9 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   const [headers, setHeaders] = useState<{ name: string; value: string }[]>([]);
 
   const { selectedEnvironment } = useStoreState((state) => state.app);
-  const { thunkGetMonitorGroupListByUser, setAddMonitorPainel } =
-    useStoreActions((actions) => actions.monitor);
+  const { thunkGetMonitorGroupListByUser } = useStoreActions(
+    (actions) => actions.monitor
+  );
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [hasGroupSelected, setHasGroupSelected] = useState(false);
   const [monitorGroupList, setMonitorGroupList] = useState<
@@ -106,7 +107,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     }
   };
   const handleCancelButton = () => {
-    setMonitorPainelState(false);
+    setAddMonitorPanel(false);
   };
   // Kamil Bulanda - no matter if link starts with http or https you can choose certificate expiry
   //   useEffect(() => {
@@ -138,9 +139,9 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
         monitorgroupId: data.monitorGroup,
       }).then(async () => {
         setIsButtonDisabled(false);
-        await thunkGetMonitorGroupListByUser(selectedEnvironment);
-        setAddMonitorPainel(false);
+        setAddMonitorPanel(false);
         showSnackbar(t("dashboard.addHttpForm.success"), "success");
+        await thunkGetMonitorGroupListByUser(selectedEnvironment);
       });
     });
   };
