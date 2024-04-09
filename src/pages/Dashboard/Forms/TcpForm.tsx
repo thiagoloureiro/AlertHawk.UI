@@ -82,8 +82,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
   };
   const handleValidSubmit = async (data: any) => {
     setIsButtonDisabled(true);
-    data.checkCertificateExpiry = data.checkCertificateExpiry === "1";
-    data.ignoreTLSSSL = data.ignoreTLSSSL === "1";
+    data.checkCertExpiry = data.checkCertExpiry === "1";
+    data.ignoreTlsSsl = data.ignoreTlsSsl === "1";
     data.port = parseInt(data.port, 10);
     await MonitorService.createTcpMonitor(data).then(async (response: any) => {
       await MonitorService.addMonitorToGroup({

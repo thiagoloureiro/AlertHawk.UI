@@ -18,6 +18,7 @@ import { showSnackbar } from "../../../utils/snackbarHelper";
 import { useTranslation } from "react-i18next";
 import DeleteForever from "@mui/icons-material/DeleteForever";
 import { IMonitorGroupListByUser } from "../../../interfaces/IMonitorGroupListByUser";
+import logging from "../../../utils/logging";
 interface IAddHttpMonitorProps {
   monitorTypeId: number;
   setAddMonitorPanel: (val: boolean) => void;
@@ -41,8 +42,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       monitorRegion: null,
       monitorEnvironment: null,
       monitorHttpMethod: null,
-      checkCertificateExpiry: "0",
-      ignoreTLSSSL: "0",
+      checkCertExpiry: "0",
+      ignoreTlsSsl: "0",
       urlToCheck: "",
       maxRedirects: 5,
       heartBeatInterval: 1,
@@ -54,8 +55,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     },
   });
 
-  const certificateExpiry = watch("checkCertificateExpiry");
-  const watchIgnoreTLSSL = watch("ignoreTLSSSL");
+  const certificateExpiry = watch("checkCertExpiry");
+  const watchIgnoreTLSSL = watch("ignoreTlsSsl");
 
   const [headers, setHeaders] = useState<{ name: string; value: string }[]>([]);
 
@@ -123,8 +124,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
 
   const handleValidSubmit = async (data: any) => {
     setIsButtonDisabled(true);
-    data.checkCertificateExpiry = data.checkCertificateExpiry === "1";
-    data.ignoreTLSSSL = data.ignoreTLSSSL === "1";
+    data.checkCertExpiry = data.checkCertExpiry === "1";
+    data.ignoreTlsSsl = data.ignoreTlsSsl === "1";
     if (headers.length > 0) {
       const headersList = headers.map((header) => ({
         item1: header.name,
@@ -132,6 +133,8 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       }));
       data.headers = headersList;
     }
+
+    logging.info(data);
 
     await MonitorService.createHttpMonitor(data).then(async (response: any) => {
       await MonitorService.addMonitorToGroup({
@@ -322,14 +325,14 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                 <Select
                   labelId="checkCertificateExpiry-selection"
                   id="checkCertificateExpiry-selection"
-                  {...register("checkCertificateExpiry", { required: true })}
+                  {...register("checkCertExpiry", { required: true })}
                   value={certificateExpiry}
                   label={t("dashboard.addHttpForm.checkCertificateExpiry")}
                   onChange={(event: SelectChangeEvent) => {
-                    setValue("checkCertificateExpiry", event.target.value);
+                    setValue("checkCertExpiry", event.target.value);
                   }}
                   // disabled={urlToCheck.startsWith('http://')}
-                  error={!!errors.checkCertificateExpiry}
+                  error={!!errors.checkCertExpiry}
                 >
                   <MenuItem value="1">
                     {t("dashboard.addHttpForm.yes")}
@@ -354,14 +357,14 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                 <Select
                   labelId="ignoreSSL-selection"
                   id="ignoreSSL-selection"
-                  {...register("ignoreTLSSSL", { required: true })}
+                  {...register("ignoreTlsSsl", { required: true })}
                   value={watchIgnoreTLSSL}
                   label={t("dashboard.addHttpForm.ignoreTLSSSL")}
                   onChange={(event: SelectChangeEvent) => {
-                    setValue("ignoreTLSSSL", event.target.value);
+                    setValue("ignoreTlsSsl", event.target.value);
                   }}
                   //   disabled={urlToCheck.startsWith("http://")} watchIgnoreTLSSL
-                  error={!!errors.ignoreTLSSSL}
+                  error={!!errors.ignoreTlsSsl}
                 >
                   <MenuItem value="1">
                     {t("dashboard.addHttpForm.yes")}
