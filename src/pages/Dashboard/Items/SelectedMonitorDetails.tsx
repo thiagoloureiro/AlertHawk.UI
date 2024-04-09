@@ -880,11 +880,16 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
+          <Button
+            onClick={handleDeleteConfirm}
+            color="primary"
+            autoFocus
+            sx={{ p: "5px 15px" }}
+          >
+            {t("dashboard.addHttpForm.yes")}
+          </Button>
           <Button onClick={handleCloseDeleteDialog} color="primary">
             {t("dashboard.addHttpForm.no")}
-          </Button>
-          <Button onClick={handleDeleteConfirm} color="primary" autoFocus>
-            {t("dashboard.addHttpForm.yes")}
           </Button>
         </DialogActions>
       </Dialog>
