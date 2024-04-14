@@ -4,7 +4,6 @@ import { IMonitorAlerts } from "../../interfaces/IMonitorAlerts";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
 import { useParams } from "react-router-dom";
-
 import {
   Grid,
   Card,
@@ -15,10 +14,12 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Button,
 } from "@mui/material";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import logging from "../../utils/logging";
-interface IMonitorAlertsProps { }
+
+interface IMonitorAlertsProps {}
 interface IHeaderCell {
   id: string;
   label: string;
@@ -48,7 +49,30 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
       }
     };
     fetchMonitorAlerts();
-  }, []);
+  }, [id, monitorId]);
+
+  const handleExport = async () => {
+    try {
+      const response = await MonitorAlertService.getReport(monitorId);
+      const blob =response.data;
+      
+      if (blob.size === 0) {
+        throw new Error('Received empty file.');
+      }
+  
+      const downloadUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = downloadUrl;
+      link.setAttribute('download', 'AlertReport.xls'); // Adjust the filename as needed
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode?.removeChild(link);
+      window.URL.revokeObjectURL(downloadUrl);
+    } catch (error) {
+      console.error('Error downloading the file:', error);
+    }
+  };
+
   const headerCells: readonly IHeaderCell[] = [
     {
       id: "timeStamp",
@@ -87,6 +111,18 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
               <Box
                 sx={{
                   display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  marginBottom: 2,
+                }}
+              >
+                <Button variant="contained" onClick={handleExport}>
+                  Export
+                </Button>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   cursor: "pointer",
@@ -98,20 +134,16 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                       <TableRow>
                         {headerCells.map((headerCell: IHeaderCell) => (
                           <TableCell key={headerCell.id}>
-                            {headerCell.label}{" "}
+                            {headerCell.label}
                           </TableCell>
                         ))}
                       </TableRow>
                     </TableHead>
-
                     <TableBody>
-
                       {monitorAlerts.map((alert) => (
                         <TableRow key={alert.id}>
                           <TableCell>
-                            {moment(alert.timeStamp).format(
-                              "DD/MM/YYYY HH:mm:ss"
-                            )}
+                            {moment(alert.timeStamp).format("DD/MM/YYYY HH:mm:ss")}
                           </TableCell>
                           <TableCell>{alert.monitorName}</TableCell>
                           <TableCell>{alert.message}</TableCell>
