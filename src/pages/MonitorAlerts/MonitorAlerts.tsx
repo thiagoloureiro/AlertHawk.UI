@@ -77,7 +77,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
     <>
       <HelmetProvider>
         <Helmet>
-          <title>AlertHawk | {t("users.text")}</title>
+          <title>AlertHawk | {t("monitorAlerts.text")}</title>
         </Helmet>
       </HelmetProvider>
       <Grid container spacing={4}>
