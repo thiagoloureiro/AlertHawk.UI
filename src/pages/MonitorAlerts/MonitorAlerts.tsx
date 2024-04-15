@@ -63,7 +63,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
       const downloadUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = downloadUrl;
-      link.setAttribute('download', 'AlertReport.xls'); // Adjust the filename as needed
+      link.setAttribute('download', 'AlertReport.xlsx'); // Adjust the filename as needed
       document.body.appendChild(link);
       link.click();
       link.parentNode?.removeChild(link);
