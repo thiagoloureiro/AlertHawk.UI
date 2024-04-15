@@ -130,7 +130,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                   }}
                   onClick={handleExport}
                 >
-                  Export
+                  {t("monitorAlerts.export")}
                 </Button>
               </Box>
               <Box
