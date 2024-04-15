@@ -17,6 +17,7 @@ import {
   Button,
 } from "@mui/material";
 import { HelmetProvider, Helmet } from "react-helmet-async";
+import { useStoreState } from "../../hooks";
 import logging from "../../utils/logging";
 
 interface IMonitorAlertsProps {}
@@ -30,6 +31,7 @@ interface IHeaderCell {
 
 const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
   const [monitorAlerts, setMonitorAlerts] = useState<IMonitorAlerts[]>([]);
+  const { isDarkMode } = useStoreState((state) => state.app);
   const [monitorId, setMonitorId] = useState<number>(0);
   const { t } = useTranslation("global");
   const { id } = useParams<{ id: string }>();
@@ -54,22 +56,22 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
   const handleExport = async () => {
     try {
       const response = await MonitorAlertService.getReport(monitorId);
-      const blob =response.data;
-      
+      const blob = response.data;
+
       if (blob.size === 0) {
-        throw new Error('Received empty file.');
+        throw new Error("Received empty file.");
       }
-  
+
       const downloadUrl = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = downloadUrl;
-      link.setAttribute('download', 'AlertReport.xlsx'); // Adjust the filename as needed
+      link.setAttribute("download", "AlertReport.xlsx"); // Adjust the filename as needed
       document.body.appendChild(link);
       link.click();
       link.parentNode?.removeChild(link);
       window.URL.revokeObjectURL(downloadUrl);
     } catch (error) {
-      console.error('Error downloading the file:', error);
+      console.error("Error downloading the file:", error);
     }
   };
 
@@ -116,7 +118,18 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                   marginBottom: 2,
                 }}
               >
-                <Button variant="contained" onClick={handleExport}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{
+                    backgroundColor: isDarkMode ? "#8bc34a" : "#4caf50",
+                    color: isDarkMode ? "#fff" : "#fefef7",
+                    "&:hover": {
+                      backgroundColor: isDarkMode ? "#8bd21a" : "#4cbf50",
+                    },
+                  }}
+                  onClick={handleExport}
+                >
                   Export
                 </Button>
               </Box>
@@ -143,7 +156,9 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                       {monitorAlerts.map((alert) => (
                         <TableRow key={alert.id}>
                           <TableCell>
-                            {moment(alert.timeStamp).format("DD/MM/YYYY HH:mm:ss")}
+                            {moment(alert.timeStamp).format(
+                              "DD/MM/YYYY HH:mm:ss"
+                            )}
                           </TableCell>
                           <TableCell>{alert.monitorName}</TableCell>
                           <TableCell>{alert.message}</TableCell>
@@ -166,7 +181,9 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                       ))}
                     </TableBody>
                   </Table>
-                ) : (<p>{t("monitorAlerts.noResultFoundFor")}</p>)}
+                ) : (
+                  <p>{t("monitorAlerts.noResultFoundFor")}</p>
+                )}
               </Box>
             </CardContent>
           </Card>
