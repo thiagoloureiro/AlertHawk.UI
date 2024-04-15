@@ -45,10 +45,17 @@ const monitor: IMonitorModel = {
     async (actions, id: Environment, { getStoreActions }) => {
       try {
         getStoreActions().app.setIsLoading(true);
-        const response = await MonitorService.getMonitorGroupListByUser(id);
-        actions.setMonitorGroupListByUser(response);
-        const monitorGroupList = await MonitorService.getMonitorGroupList();
-        actions.setMonitorGroupList(monitorGroupList);
+        
+        // Start both asynchronous operations in parallel
+        const [userMonitorGroupList, generalMonitorGroupList] = await Promise.all([
+          MonitorService.getMonitorGroupListByUser(id),
+          MonitorService.getMonitorGroupList()
+        ]);
+        
+        // Now that both promises have resolved, update the state with the results
+        actions.setMonitorGroupListByUser(userMonitorGroupList);
+        actions.setMonitorGroupList(generalMonitorGroupList);
+        
         return Status.Success;
       } catch (err: any) {
         logging.error(err);
@@ -59,7 +66,7 @@ const monitor: IMonitorModel = {
         getStoreActions().app.setIsLoading(false);
       }
     }
-  ),
+  ),    
   agents: [],
   setAgents: action((state, payload) => {
     state.agents = payload;

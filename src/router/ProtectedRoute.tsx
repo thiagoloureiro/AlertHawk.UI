@@ -76,10 +76,19 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
 
   useEffect(() => {
     const fetchAppData = async () => {
-      await thunkGetMonitorStats(selectedEnvironment);
-      await thunkGetMonitorGroupListByUser(selectedEnvironment);
-      await thunkGetMonitorAgents();
+      try {
+        // Run all thunks in parallel
+        await Promise.all([
+          thunkGetMonitorStats(selectedEnvironment),
+          thunkGetMonitorGroupListByUser(selectedEnvironment),
+          thunkGetMonitorAgents()
+        ]);
+      } catch (error) {
+        console.error("Error fetching app data", error);
+        // Handle errors, possibly update state to show an error message or similar
+      }
     };
+  
 
     if (user !== null) {
       setTimeout(() => {
