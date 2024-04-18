@@ -6,6 +6,9 @@ const continentMap: { [key: number]: string } = {
   5: "Africa",
   6: "Asia",
   7: "Custom",
+  8: "Custom2",
+  9: "Custom3",
+  10: "Custom4"
 };
 
 export const getContinentName = (continentNumber: number): string => {
