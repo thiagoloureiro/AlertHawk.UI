@@ -15,6 +15,7 @@ import {
   TableCell,
   TableBody,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { useStoreState } from "../../hooks";
@@ -31,6 +32,7 @@ interface IHeaderCell {
 
 const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
   const [monitorAlerts, setMonitorAlerts] = useState<IMonitorAlerts[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { isDarkMode } = useStoreState((state) => state.app);
   const [monitorId, setMonitorId] = useState<number>(0);
   const { t } = useTranslation("global");
@@ -46,6 +48,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
           ? await MonitorAlertService.get(parseInt(id))
           : await MonitorAlertService.get(monitorId);
         setMonitorAlerts(response);
+        setIsLoading(false);
       } catch (error) {
         logging.error(error);
       }
@@ -141,7 +144,9 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                   cursor: "pointer",
                 }}
               >
-                {monitorAlerts.length > 0 ? (
+                {isLoading ? (
+                  <CircularProgress color="success" />
+                ) : monitorAlerts.length > 0 ? (
                   <Table>
                     <TableHead>
                       <TableRow>
