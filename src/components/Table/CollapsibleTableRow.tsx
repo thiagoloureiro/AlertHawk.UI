@@ -18,6 +18,7 @@ import {
 } from "../../interfaces/IMonitorGroupListByUser";
 import { useStoreState } from "../../hooks";
 import { useTranslation } from "react-i18next";
+import { all } from "axios";
 
 interface ICollapsibleTableRowProps {
   monitorGroup: IMonitorGroupListByUser;
@@ -253,7 +254,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
       );
     }
 
-    const allRunning = monitors.every((monitor) => monitor.status);
+    const allRunning = monitors.every(monitor => monitor.paused || monitor.status);
 
     if (allRunning) {
       return (
@@ -343,7 +344,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
           {renderOverallStatusChip()}
         </TableCell>
       </TableRow>
-      <TableRow>
+      <TableRow> 
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: "4px 4px 4px 5%" }}>
