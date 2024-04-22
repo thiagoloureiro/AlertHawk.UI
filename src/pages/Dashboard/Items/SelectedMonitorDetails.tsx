@@ -593,51 +593,49 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                       justifyContent: "center",
                     }}
                   >
-                    {selectedMonitorItem.status ? (
-                      selectedMonitorItem.paused ? (
-                        <Chip
-                          label={t("dashboard.paused")}
-                          color="secondary"
-                          sx={{
-                            borderRadius: "56px",
-                            p: "20px 20px",
-                            "& .MuiChip-label": {
-                              color: "primary",
-                              fontWeight: 700,
-                              fontSize: 24,
-                            },
-                          }}
-                        />
-                      ) : (
-                        <Chip
-                          label={t("dashboard.up")}
-                          color="success"
-                          sx={{
-                            borderRadius: "56px",
-                            p: "20px 20px",
-                            "& .MuiChip-label": {
-                              color: "#fff",
-                              fontWeight: 700,
-                              fontSize: 24,
-                            },
-                          }}
-                        />
-                      )
-                    ) : (
-                      <Chip
-                        label={t("dashboard.down")}
-                        color="error"
-                        sx={{
-                          borderRadius: "56px",
-                          p: "20px 20px",
-                          "& .MuiChip-label": {
-                            color: "#fff",
-                            fontWeight: 700,
-                            fontSize: 24,
-                          },
-                        }}
-                      />
-                    )}
+                     {selectedMonitorItem.paused ? (
+                    <Chip
+                      label={t("dashboard.paused")}
+                      color="secondary"
+                      sx={{
+                        borderRadius: "56px",
+                        p: "20px 20px",
+                        "& .MuiChip-label": {
+                          color: "primary",
+                          fontWeight: 700,
+                          fontSize: 24,
+                        },
+                      }}
+                    />
+                  ) : selectedMonitorItem.status ? (
+                    <Chip
+                      label={t("dashboard.up")}
+                      color="success"
+                      sx={{
+                        borderRadius: "56px",
+                        p: "20px 20px",
+                        "& .MuiChip-label": {
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: 24,
+                        },
+                      }}
+                    />
+                  ) : (
+                    <Chip
+                      label={t("dashboard.down")}
+                      color="error"
+                      sx={{
+                        borderRadius: "56px",
+                        p: "20px 20px",
+                        "& .MuiChip-label": {
+                          color: "#fff",
+                          fontWeight: 700,
+                          fontSize: 24,
+                        },
+                      }}
+                    />
+                  )}
                   </Box>
                 </Box>
                 <Typography

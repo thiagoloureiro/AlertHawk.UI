@@ -1,5 +1,7 @@
 import {
+  Box,
   Card,
+  CircularProgress,
   Table,
   TableBody,
   TableContainer,
@@ -42,6 +44,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   selectedMetric,
 }) => {
   const { t } = useTranslation("global");
+  const [isMonitorsLoading, setIsMonitorsLoading] = useState<boolean>(true);
 
   const filteredMonitorGroups = monitors.filter(
     (monitor) =>
@@ -62,8 +65,14 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   >([]);
 
   useEffect(() => {
+    if (monitors.length > 0) {
+      setIsMonitorsLoading(false);
+    }
+  }, [monitors]);
+
+  useEffect(() => {
     const downServices = monitors.flatMap((monitorGroup) =>
-      monitorGroup.monitors.filter((monitor) => !monitor.status)
+      monitorGroup.monitors.filter((monitor) => !monitor.status && !monitor.paused)
     );
     const certificateExpirationList = monitors.flatMap((monitorGroup) =>
       monitorGroup.monitors
@@ -115,7 +124,20 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
     }
   }, [certificateExpirationList]);
 
-  return (
+  return isMonitorsLoading ? (
+    <Box
+      sx={{
+        position: "relative",
+        width: "100%",
+        minHeight: "calc(100vh - 130px)",
+      }}
+    >
+      <CircularProgress
+        color="success"
+        sx={{ position: "absolute", left: "50%" }}
+      />
+    </Box>
+  ) : (
     <TableContainer component={Card}>
       <Table
         sx={{
