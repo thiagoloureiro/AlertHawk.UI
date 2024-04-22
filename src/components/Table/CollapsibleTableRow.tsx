@@ -158,9 +158,9 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
       );
     }
 
-    const anyDown = monitors.some((monitor) => !monitor.status);
+    const anyDown = monitors.some((monitor) => !monitor.status && !monitor.paused);
     const anyPaused = monitors.some(
-      (monitor) => monitor.status && monitor.paused
+      (monitor) => monitor.paused
     );
     if (anyDown) {
       return (
@@ -385,14 +385,13 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                                 ? "N/A"
                                 : (monitor.monitorStatusDashboard[selectedMetric] ?? "N/A") + " %"
                             }
-                            
-                              color={
-                                !monitor.status
+                            color={
+                              monitor.paused
+                                ? "secondary"
+                                : !monitor.status
                                   ? "error"
-                                  : monitor.paused
-                                  ? "secondary"
                                   : "success"
-                              }
+                            }
                               size="medium"
                               sx={{
                                 p: "5px 15px",
@@ -408,7 +407,13 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                                 monitor.monitorStatusDashboard[selectedMetric] +
                                 " %"
                               }
-                              color="error"
+                              color={
+                                monitor.paused
+                                  ? "secondary"
+                                  : !monitor.status
+                                    ? "error"
+                                    : "success"
+                              }
                               size="medium"
                               sx={{
                                 p: "5px 15px",

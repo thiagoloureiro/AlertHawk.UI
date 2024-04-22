@@ -72,7 +72,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
 
   useEffect(() => {
     const downServices = monitors.flatMap((monitorGroup) =>
-      monitorGroup.monitors.filter((monitor) => !monitor.status)
+      monitorGroup.monitors.filter((monitor) => !monitor.status && !monitor.paused)
     );
     const certificateExpirationList = monitors.flatMap((monitorGroup) =>
       monitorGroup.monitors
