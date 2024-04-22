@@ -18,7 +18,6 @@ import {
 } from "../../interfaces/IMonitorGroupListByUser";
 import { useStoreState } from "../../hooks";
 import { useTranslation } from "react-i18next";
-import { all } from "axios";
 
 interface ICollapsibleTableRowProps {
   monitorGroup: IMonitorGroupListByUser;
