@@ -75,14 +75,14 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
     logging.info(data);
     if (selectedMonitorGroup) {
       data.id = selectedMonitorGroup.id;
-      await MonitorService.editMonitorGroup(data).then(async (response: any) => {
+      await MonitorService.editMonitorGroup(data).then(async () => {
         await thunkGetMonitorGroupListByUser(selectedEnvironment);
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
         showSnackbar(t("monitorGroups.updateSuccess"), "success");
       });
     } else {
-      await MonitorService.createMonitorGroup(data).then(async (response: any) => {
+      await MonitorService.createMonitorGroup(data).then(async () => {
         await thunkGetMonitorGroupListByUser(selectedEnvironment);
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
