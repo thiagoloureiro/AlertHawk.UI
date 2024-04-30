@@ -12,7 +12,8 @@
     "notificationManagement": "알림 관리",
     "monitorAlert": "모니터 경고",
     "users": "사용자",
-    "settings": "설정"
+    "settings": "설정",
+    "monitorGroups": "모니터 그룹"
   },
   "dashboard": {
     "text": "대시보드",
@@ -151,5 +152,17 @@
     "message": "메시지",
     "screenshot": "스크린샷",
     "export": "내보내다"
+  },
+  "monitorGroups": {
+    "name": "이름",
+    "noResultFoundFor": "결과가 없습니다",
+    "title": "모니터 그룹",
+    "addMonitorGroup": "모니터 그룹 추가",
+    "createSuccess": "모니터 그룹이 생성되었습니다!",
+    "updateSuccess": "모니터 그룹이 업데이트되었습니다!",
+    "hasItemsFound": "모니터 그룹에 항목이 있습니다. 먼저 삭제하십시오",
+    "monitorNotFound": "모니터를 찾을 수 없음",
+    "deleteConfirmation": "모니터 그룹이 삭제되었습니다!",
+    "confirmDeleteMessage": "이 모니터 그룹을 삭제하시겠습니까?"
   }
 }

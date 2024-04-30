@@ -12,7 +12,8 @@
     "notificationManagement": "Управління сповіщеннями",
     "monitorAlert": "Оповіщення монітора",
     "users": "Користувачі",
-    "settings": "Налаштування"
+    "settings": "Налаштування",
+    "monitorGroups": "Групи моніторингу"
   },
   "dashboard": {
     "text": "Інформаційна панель",
@@ -151,5 +152,17 @@
     "message": "Повідомлення",
     "screenshot": "Скріншот",
     "export": "Експорт"
+  },
+  "monitorGroups": {
+    "name": "Ім'я",
+    "noResultFoundFor": "Результат не знайдено",
+    "title": "Групи моніторингу",
+    "addMonitorGroup": "Додати групу моніторингу",
+    "createSuccess": "Група моніторингу створена!",
+    "updateSuccess": "Група моніторингу оновлена!",
+    "hasItemsFound": "У групі моніторингу знайдено елементи, будь ласка, спочатку видаліть їх",
+    "monitorNotFound": "Монітор не знайдено",
+    "deleteConfirmation": "Група моніторингу видалена!",
+    "confirmDeleteMessage": "Ви впевнені, що хочете видалити цю групу моніторингу?"
   }
 }

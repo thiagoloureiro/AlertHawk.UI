@@ -12,7 +12,8 @@
     "notificationManagement": "Gestion des Notifications",
     "monitorAlert": "Alerte de Surveillance",
     "users": "Utilisateurs",
-    "settings": "Paramètres"
+    "settings": "Paramètres",
+    "monitorGroups": "Groupes de Moniteurs"
   },
   "dashboard": {
     "text": "Tableau de Bord",
@@ -151,5 +152,17 @@
     "message": "Message",
     "screenshot": "Capture d'Écran",
     "export": "Exporter"
+  },
+  "monitorGroups": {
+    "name": "Nom",
+    "noResultFoundFor": "Aucun résultat trouvé",
+    "title": "Groupes de surveillance",
+    "addMonitorGroup": "Ajouter un groupe de surveillance",
+    "createSuccess": "Le groupe de surveillance a été créé !",
+    "updateSuccess": "Le groupe de surveillance a été mis à jour !",
+    "hasItemsFound": "Le groupe de surveillance contient des éléments trouvés, veuillez d'abord les supprimer",
+    "monitorNotFound": "Moniteur non trouvé",
+    "deleteConfirmation": "Le groupe de surveillance a été supprimé !",
+    "confirmDeleteMessage": "Êtes-vous sûr de vouloir supprimer ce groupe de surveillance?"
   }
 }

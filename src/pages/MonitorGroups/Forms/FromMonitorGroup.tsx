@@ -1,15 +1,13 @@
-import { Box, Typography, Card, CardContent, FormControl, TextField, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack } from '@mui/material';
-import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import DeleteIcon from "@mui/icons-material/Delete";
-
-import { useTranslation } from "react-i18next";
 import logging from "../../../utils/logging";
-import MonitorService from '../../../services/MonitorService';
+import { useTranslation } from "react-i18next";
+import React, { useEffect, useState } from 'react';
+import DeleteIcon from "@mui/icons-material/Delete";
 import { showSnackbar } from "../../../utils/snackbarHelper";
+import MonitorService from '../../../services/MonitorService';
+import { useStoreActions, useStoreState } from '../../../hooks';
 import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
-import { useStoreState } from '../../../hooks';
-
+import { Box, Typography, Card, CardContent, FormControl, TextField, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack } from '@mui/material';
 
 interface IFromMonitorGroupProps {
   setAddMonitorPanel: (val: boolean) => void;
@@ -18,14 +16,19 @@ interface IFromMonitorGroupProps {
 
 const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel, selectedMonitorGroup }) => {
   const { t } = useTranslation("global");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const { isDarkMode } = useStoreState((state) => state.app);
+  const { selectedEnvironment } = useStoreState((state) => state.app);
+  const { thunkGetMonitorGroupListByUser } = useStoreActions(
+    (actions) => actions.monitor
+  );
+
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
 
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -33,12 +36,15 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
 
     },
   });
+
   useEffect(() => {
     if (selectedMonitorGroup) {
       setValue("name", selectedMonitorGroup.name);
+    } else {
+      setValue("name", "");
     }
   });
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+
   const handleDeleteBtn = () => {
     setOpenDeleteDialog(true);
   };
@@ -46,16 +52,21 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
   const handleCloseDeleteDialog = () => {
     setOpenDeleteDialog(false);
   };
+
   const handleDeleteConfirm = async () => {
     setOpenDeleteDialog(false);
     if (selectedMonitorGroup !== null) {
       await MonitorService.deleteGroupMonitor(selectedMonitorGroup.id).then(
         async () => {
-          showSnackbar(t("dashboard.deleteConfirmation"), "success");
+          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          showSnackbar(t("monitorGroups.deleteConfirmation"), "success");
           setOpenDeleteDialog(false);
           setAddMonitorPanel(false);
         }
-      );
+      ).catch((err) => {
+        logging.error(err);
+        showSnackbar(t(err.response.data), "error");
+      });
     }
   };
 
@@ -65,21 +76,25 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
     if (selectedMonitorGroup) {
       data.id = selectedMonitorGroup.id;
       await MonitorService.editMonitorGroup(data).then(async (response: any) => {
+        await thunkGetMonitorGroupListByUser(selectedEnvironment);
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
         showSnackbar(t("monitorGroups.updateSuccess"), "success");
       });
     } else {
       await MonitorService.createMonitorGroup(data).then(async (response: any) => {
+        await thunkGetMonitorGroupListByUser(selectedEnvironment);
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
         showSnackbar(t("monitorGroups.createSuccess"), "success");
       });
     }
   };
+
   const handleCancelButton = () => {
     setAddMonitorPanel(false);
   };
+
   return (
     <>
       <form onSubmit={handleSubmit(handleValidSubmit)}>
@@ -98,18 +113,20 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
               </FormControl>
             </div>
             <div>
-              <FormControl fullWidth>
-                <Button
-                  aria-label="delete"
-                  startIcon={
-                    <DeleteIcon sx={{ color: isDarkMode ? "inherit" : "#fff" }} />
-                  }
-                  color="error"
-                  onClick={handleDeleteBtn}
-                >
-                  {t("dashboard.delete")}
-                </Button>
-              </FormControl>
+              {(selectedMonitorGroup !== null) && (
+
+                <FormControl fullWidth>
+                  <Button
+                    aria-label="delete"
+                    startIcon={
+                      <DeleteIcon sx={{ color: isDarkMode ? "inherit" : "#fff" }} />
+                    }
+                    color="error"
+                    onClick={handleDeleteBtn}
+                  >
+                    {t("dashboard.delete")}
+                  </Button>
+                </FormControl>)}
             </div>
           </Stack>
           <Card>
@@ -125,7 +142,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
                   <TextField
                     {...register("name", { required: true })}
                     fullWidth
-                    label={t("monitorGroups.Name")}
+                    label={t("monitorGroups.name")}
                     margin="normal"
                     variant="outlined"
                     autoFocus
@@ -199,7 +216,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {t("dashboard.confirmDeleteMessage")}
+            {t("monitorGroups.confirmDeleteMessage")}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

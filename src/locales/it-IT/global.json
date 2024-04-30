@@ -12,7 +12,8 @@
     "monitorAgents": "Agenti di Monitoraggio",
     "monitorAlert": "Avviso Monitor",
     "users": "Utenti",
-    "settings": "Impostazioni"
+    "settings": "Impostazioni",
+    "monitorGroups": "Gruppi di Monitoraggio"
   },
   "dashboard": {
     "text": "Dashboard",
@@ -151,5 +152,17 @@
     "message": "Messaggio",
     "screenshot": "Screenshot",
     "export": "Esportare"
+  },
+  "monitorGroups": {
+    "name": "Nome",
+    "noResultFoundFor": "Nessun risultato trovato",
+    "title": "Gruppi di Monitoraggio",
+    "addMonitorGroup": "Aggiungi Gruppo di Monitoraggio",
+    "createSuccess": "Il gruppo di monitoraggio è stato creato!",
+    "updateSuccess": "Il gruppo di monitoraggio è stato aggiornato!",
+    "hasItemsFound": "Il gruppo di monitoraggio ha elementi trovati, si prega di eliminarli prima",
+    "monitorNotFound": "Monitor non trovato",
+    "deleteConfirmation": "Il gruppo di monitoraggio è stato eliminato!",
+    "confirmDeleteMessage": "Sei sicuro di voler eliminare questo gruppo di monitoraggio?"
   }
 }

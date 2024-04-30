@@ -12,7 +12,8 @@
     "notificationManagement": "Notificações",
     "monitorAlert": "Alerta do Monitor",
     "users": "Usuários",
-    "settings": "Configurações"
+    "settings": "Configurações",
+    "monitorGroups": "Grupos de Monitoramento"
   },
   "dashboard": {
     "text": "Dashboard",
@@ -151,5 +152,17 @@
     "message": "Mensagem",
     "screenshot": "Captura de Tela",
     "export": "Exportar"
+  },
+  "monitorGroups": {
+    "name": "Nome",
+    "noResultFoundFor": "Nenhum resultado encontrado",
+    "title": "Grupos de Monitoramento",
+    "addMonitorGroup": "Adicionar Grupo de Monitoramento",
+    "createSuccess": "Grupo de monitoramento foi criado!",
+    "updateSuccess": "Grupo de monitoramento foi atualizado!",
+    "hasItemsFound": "Grupo de monitoramento possui itens encontrados, por favor, exclua-os primeiro",
+    "monitorNotFound": "Monitor não encontrado",
+    "deleteConfirmation": "Grupo de monitoramento foi excluído!",
+    "confirmDeleteMessage": "Tem certeza de que deseja excluir este grupo de monitoramento?"
   }
 }

@@ -43,12 +43,15 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
   }, [addMonitorPanel]);
   
   const handleMonitorGroupSelection = (monitorGroup: IMonitorGroupListByUser | null) => {
+    setAddMonitorPanel(false);
     setSelectedMonitorGroup(monitorGroup);
     setAddMonitorPanel(true);
 
   };
 
   function handleAddNew(): void {
+    setAddMonitorPanel(false);
+    setSelectedMonitorGroup(null);
     setAddMonitorPanel(true);
   }
   const fetchData = async () => {

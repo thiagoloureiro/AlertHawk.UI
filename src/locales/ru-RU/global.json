@@ -12,7 +12,8 @@
     "notificationManagement": "Управление уведомлениями",
     "monitorAlert": "Оповещения монитора",
     "users": "Пользователи",
-    "settings": "Настройки"
+    "settings": "Настройки",
+    "monitorGroups": "Группы мониторинга"
   },
   "dashboard": {
     "text": "Панель управления",
@@ -151,5 +152,17 @@
     "message": "Сообщение",
     "screenshot": "Снимок экрана",
     "export": "Экспорт"
+  },
+  "monitorGroups": {
+    "name": "Имя",
+    "noResultFoundFor": "Результат не найден",
+    "title": "Группы мониторинга",
+    "addMonitorGroup": "Добавить группу мониторинга",
+    "createSuccess": "Группа мониторинга создана!",
+    "updateSuccess": "Группа мониторинга обновлена!",
+    "hasItemsFound": "Группа мониторинга содержит найденные элементы, пожалуйста, сначала удалите их",
+    "monitorNotFound": "Монитор не найден",
+    "deleteConfirmation": "Группа мониторинга удалена!",
+    "confirmDeleteMessage": "Вы уверены, что хотите удалить эту группу мониторинга?"
   }
 }
