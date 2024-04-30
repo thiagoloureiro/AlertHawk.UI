@@ -44,18 +44,28 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   selectedMetric,
 }) => {
   const { t } = useTranslation("global");
-  const [isMonitorsLoading, setIsMonitorsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [filteredMonitorGroups, setFilteredMonitorGroups] = useState<
+    IMonitorGroupListByUser[]
+  >([]);
 
-  const filteredMonitorGroups = monitors.filter(
-    (monitor) =>
-      monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
-      monitor.monitors.some((childMonitor) =>
-        childMonitor.name
-          .toLowerCase()
-          .includes(searchText.trim().toLowerCase())
-      )
-  );
+  useEffect(() => {
+    setIsLoading(true);
 
+    const filteredMonitorGroups = monitors.filter(
+      (monitor) =>
+        monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
+        monitor.monitors.some((childMonitor) => {
+          childMonitor.name
+            .toLowerCase()
+            .includes(searchText.trim().toLowerCase());
+        })
+    );
+    setFilteredMonitorGroups(filteredMonitorGroups);
+    setTimeout(() => setIsLoading(false), 500);
+  }, [searchText, monitors]);
+
+  useEffect(() => {}, [filteredMonitorGroups]);
   const [downServices, setDownServices] = useState<
     IMonitorGroupListByUserItem[]
   >([]);
@@ -65,14 +75,10 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   >([]);
 
   useEffect(() => {
-    if (monitors.length > 0) {
-      setIsMonitorsLoading(false);
-    }
-  }, [monitors]);
-
-  useEffect(() => {
     const downServices = monitors.flatMap((monitorGroup) =>
-      monitorGroup.monitors.filter((monitor) => !monitor.status && !monitor.paused)
+      monitorGroup.monitors.filter(
+        (monitor) => !monitor.status && !monitor.paused
+      )
     );
     const certificateExpirationList = monitors.flatMap((monitorGroup) =>
       monitorGroup.monitors
@@ -124,7 +130,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
     }
   }, [certificateExpirationList]);
 
-  return isMonitorsLoading ? (
+  return isLoading ? (
     <Box
       sx={{
         position: "relative",
