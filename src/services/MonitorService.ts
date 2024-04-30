@@ -114,11 +114,34 @@ const MonitorService = {
       monitorGroupItem,
       appendOptionalHeaders(headers)
     ),
-    deleteMonitor: async (monitorId: number, headers?: AxiosHeaders): Promise<void> =>
+  deleteMonitor: async (monitorId: number, headers?: AxiosHeaders): Promise<void> =>
     await requests.delete(
       `Monitor/deleteMonitor/${monitorId}`,
       appendOptionalHeaders(headers)
     ),
+  createMonitorGroup: async (
+    monitorGroup: IMonitorGroupListByUser,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      `monitorGroup/addMonitorGroup`,
+      monitorGroup,
+      appendOptionalHeaders(headers)
+    ),
+  editMonitorGroup: async (
+    monitorGroup: IMonitorGroupListByUser,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      `monitorGroup/updateMonitorGroup`,
+      monitorGroup,
+      appendOptionalHeaders(headers)
+    ),
+    deleteGroupMonitor: async (monitorId: number, headers?: AxiosHeaders): Promise<void> =>
+      await requests.delete(
+        `monitorGroup/deleteMonitorGroup/${monitorId}`,
+        appendOptionalHeaders(headers)
+      ),
 };
 
 export default MonitorService;

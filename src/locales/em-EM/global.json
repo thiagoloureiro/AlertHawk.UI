@@ -12,7 +12,8 @@
     "notificationManagement": "🔔🔧",
     "monitorAlert": "👀🚨",
     "users": "👥",
-    "settings": "🛠️"
+    "settings": "🛠️",
+    "monitorGroups": "📛"
   },
   "dashboard": {
     "text": "📊👀",
@@ -151,5 +152,17 @@
     "message": "💬",
     "screenshot": "🖼️",
     "export": "📤"
+  },
+  "monitorGroups": {
+    "name": "📛",
+    "title": "🔍👥",
+    "noResultFoundFor": "🚫",
+    "addMonitorGroup": "➕",
+    "createSuccess": "✅",
+    "updateSuccess": "✅",
+    "hasItemsFound": "⚠️",
+    "monitorNotFound": "🚫",
+    "deleteConfirmation": "🗑️",
+    "confirmDeleteMessage": "❓"
   }
 }

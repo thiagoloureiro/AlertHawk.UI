@@ -12,7 +12,8 @@
     "monitorAgents": "监控代理",
     "monitorAlert": "监控警报",
     "users": "用户",
-    "settings": "设置"
+    "settings": "设置",
+    "monitorGroups": "监控组"
   },
   "dashboard": {
     "text": "仪表盘",
@@ -151,5 +152,17 @@
     "message": "消息",
     "screenshot": "屏幕截图",
     "export": "出口"
+  },
+  "monitorGroups": {
+    "name": "名称",
+    "noResultFoundFor": "未找到结果",
+    "title": "监控组",
+    "addMonitorGroup": "添加监控组",
+    "createSuccess": "监控组已创建！",
+    "updateSuccess": "监控组已更新！",
+    "hasItemsFound": "监控组中存在项，请先删除它们",
+    "monitorNotFound": "未找到监控",
+    "deleteConfirmation": "监控组已删除！",
+    "confirmDeleteMessage": "您确定要删除此监控组吗？"
   }
 }

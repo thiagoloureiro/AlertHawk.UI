@@ -25,7 +25,7 @@ import { styled, Theme, CSSObject } from "@mui/material/styles";
 import { useStoreState } from "../../hooks";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-
+import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
 interface ISidebarProps {
   isOpen: boolean;
   onToggle: () => void;
@@ -138,6 +138,11 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       text: t("sidebar.users"),
       pathname: "/users",
       icon: <PeopleAltOutlinedIcon />,
+    });
+    menuItems.push({
+      text: t("sidebar.monitorGroups"),
+      pathname: "/monitorGroups",
+      icon: <LibraryAddIcon />,
     });
   }
 
