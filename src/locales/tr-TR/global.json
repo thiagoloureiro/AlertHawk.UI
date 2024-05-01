@@ -12,7 +12,8 @@
     "notificationManagement": "Bildirim Yönetimi",
     "monitorAlert": "Monitor Alarmı",
     "users": "Kullanıcılar",
-    "settings": "Ayarlar"
+    "settings": "Ayarlar",
+    "monitorGroups": "İzleme Grupları"
   },
   "dashboard": {
     "text": "Kontrol Paneli",
@@ -151,5 +152,17 @@
     "message": "Mesaj",
     "screenshot": "Ekran Görüntüsü",
     "export": "İhracat"
+  },
+  "monitorGroups": {
+    "name": "Ad",
+    "noResultFoundFor": "Sonuç bulunamadı",
+    "title": "İzleme Grupları",
+    "addMonitorGroup": "İzleme Grubu Ekle",
+    "createSuccess": "İzleme grubu oluşturuldu!",
+    "updateSuccess": "İzleme grubu güncellendi!",
+    "hasItemsFound": "İzleme grubunda öğeler bulundu, lütfen önce bunları silin",
+    "monitorNotFound": "İzleme bulunamadı",
+    "deleteConfirmation": "İzleme grubu silindi!",
+    "confirmDeleteMessage": "Bu izleme grubunu silmek istediğinizden emin misiniz?"
   }
 }

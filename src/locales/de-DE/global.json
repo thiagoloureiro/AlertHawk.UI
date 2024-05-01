@@ -12,7 +12,8 @@
     "notificationManagement": "Benachrichtigungsmanagement",
     "monitorAlert": "Monitor-Alarm",
     "users": "Benutzer",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "monitorGroups": "Überwachungsgruppen"
   },
   "dashboard": {
     "text": "Dashboard",
@@ -151,5 +152,17 @@
     "message": "Nachricht",
     "screenshot": "Screenshot",
     "export": "Export"
+  },
+  "monitorGroups": {
+    "name": "Name",
+    "noResultFoundFor": "Kein Ergebnis gefunden",
+    "title": "Überwachungsgruppen",
+    "addMonitorGroup": "Überwachungsgruppe hinzufügen",
+    "createSuccess": "Überwachungsgruppe wurde erstellt!",
+    "updateSuccess": "Überwachungsgruppe wurde aktualisiert!",
+    "hasItemsFound": "Überwachungsgruppe hat Artikel gefunden, bitte löschen Sie diese zuerst",
+    "monitorNotFound": "Überwachung nicht gefunden",
+    "deleteConfirmation": "Überwachungsgruppe wurde gelöscht!",
+    "confirmDeleteMessage": "Sind Sie sicher, dass Sie diese Überwachungsgruppe löschen möchten?"
   }
 }

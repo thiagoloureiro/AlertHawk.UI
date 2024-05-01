@@ -12,7 +12,8 @@
     "notificationManagement": "सूचना प्रबंधन",
     "monitorAlert": "मॉनिटर चेतावनी",
     "users": "उपयोगकर्ता",
-    "settings": "सेटिंग्स"
+    "settings": "सेटिंग्स",
+    "monitorGroups": "मॉनिटर समूह"
   },
   "dashboard": {
     "text": "डैशबोर्ड",
@@ -151,5 +152,17 @@
     "message": "संदेश",
     "screenshot": "स्क्रीनशॉट",
     "export": "निर्यात"
+  },
+  "monitorGroups": {
+    "name": "नाम",
+    "noResultFoundFor": "कोई परिणाम नहीं मिला",
+    "title": "मॉनिटर समूह",
+    "addMonitorGroup": "मॉनिटर समूह जोड़ें",
+    "createSuccess": "मॉनिटर समूह बनाया गया है!",
+    "updateSuccess": "मॉनिटर समूह अपडेट किया गया है!",
+    "hasItemsFound": "मॉनिटर समूह में आइटम मिले हैं, कृपया पहले उन्हें हटाएं",
+    "monitorNotFound": "मॉनिटर नहीं मिला",
+    "deleteConfirmation": "मॉनिटर समूह हटा दिया गया है!",
+    "confirmDeleteMessage": "क्या आप इस मॉनिटर समूह को हटाना चाहते हैं?"
   }
 }
