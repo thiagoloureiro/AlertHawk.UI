@@ -33,12 +33,10 @@ interface IHeaderCell {
 const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
   const [monitorAlerts, setMonitorAlerts] = useState<IMonitorAlerts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { isDarkMode } = useStoreState((state) => state.app);
+  const { isDarkMode, selectedDisplayTimezone } = useStoreState((state) => state.app);
   const [monitorId, setMonitorId] = useState<number>(0);
   const { t } = useTranslation("global");
   const { id } = useParams<{ id: string }>();
-  const userTimeZone = Intl.DateTimeFormat().resolvedOptions();
-
 
   useEffect(() => {
     const fetchMonitorAlerts = async () => {
@@ -50,12 +48,6 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
           ? await MonitorAlertService.get(parseInt(id))
           : await MonitorAlertService.get(monitorId);
 
-        if (response.length > 0) {
-          response.forEach((alert: IMonitorAlerts) => {
-            var result = moment(alert.timeStamp).tz(userTimeZone.timeZone, true);
-            alert.timeStamp = new Date(Date.UTC(result.year(), result.month(), result.day(), result.hour(), result.minute(), result.second()));
-          });
-        }
         setMonitorAlerts(response);
         setIsLoading(false);
       } catch (error) {
@@ -170,10 +162,11 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                         <TableRow key={alert.id}>
                           <TableCell>
                             {
-                              moment(alert.timeStamp).format("DD/MM/YYYY HH:mm:ss")
+                              moment
+                                .utc(alert.timeStamp)
+                                .tz(selectedDisplayTimezone)
+                                .format("DD/MM/YYYY HH:mm:ss")
                             }
-
-
                           </TableCell>
                           <TableCell>{alert.monitorName}</TableCell>
                           <TableCell>{alert.message}</TableCell>
