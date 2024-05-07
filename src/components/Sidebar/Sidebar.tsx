@@ -123,7 +123,7 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
     },
     {
       text: t("sidebar.notificationManagement"),
-      pathname: "/notification-management",
+      pathname: "/notifications",
       icon: <AddAlertOutlinedIcon />,
     },
     {

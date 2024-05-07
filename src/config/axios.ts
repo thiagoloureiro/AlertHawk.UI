@@ -5,6 +5,7 @@ import logging from "../utils/logging";
 
 const authApiBaseUrl = import.meta.env.VITE_APP_AUTH_API_URL;
 const monitoringApiBaseUrl = import.meta.env.VITE_APP_MONITORING_API_URL;
+const notificationApiBaseUrl = import.meta.env.VITE_APP_NOTIFICATION_API_URL;
 
 const createAxiosInstance = (baseUrl: string) => {
   const instance = axios.create({
@@ -74,6 +75,7 @@ const createAxiosInstance = (baseUrl: string) => {
 const axiosInstance = {
   auth: createAxiosInstance(authApiBaseUrl),
   monitoring: createAxiosInstance(monitoringApiBaseUrl),
+  notification: createAxiosInstance(notificationApiBaseUrl),
 };
 
 export default axiosInstance;
