@@ -20,6 +20,7 @@ import {
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import { useStoreState } from "../../hooks";
 import logging from "../../utils/logging";
+import { Environment } from "../../enums/Enums";
 
 interface IMonitorAlertsProps { }
 interface IHeaderCell {
@@ -87,6 +88,11 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
     {
       id: "monitorName",
       label: t("monitorAlerts.monitorName"),
+      sortable: true,
+    },
+    {
+      id: "monitorEnvironment",
+      label: t("dashboard.environment"),
       sortable: true,
     },
     {
@@ -169,6 +175,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                             }
                           </TableCell>
                           <TableCell>{alert.monitorName}</TableCell>
+                          <TableCell>{alert.environment === 0 ? 'N/A' : Environment[alert.environment]}</TableCell>
                           <TableCell>{alert.message}</TableCell>
                           <TableCell>
                             {alert.screenShotUrl != null ? (
