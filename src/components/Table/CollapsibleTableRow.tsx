@@ -21,10 +21,11 @@ import { useTranslation } from "react-i18next";
 
 interface ICollapsibleTableRowProps {
   monitorGroup: IMonitorGroupListByUser;
+  monitorGroupId: number;
   isSelected: boolean;
   selectedChildRowIndex: number | null;
   onRowClick: () => void;
-  handleChildRowClick: (childMonitorId: number) => void;
+  handleChildRowClick: (childMonitorId: number, monitorGroupId: number) => void;
   selectedMetric:
     | "uptime1Hr"
     | "uptime24Hrs"
@@ -36,6 +37,7 @@ interface ICollapsibleTableRowProps {
 
 const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   monitorGroup,
+  monitorGroupId,
   isSelected,
   selectedChildRowIndex,
   onRowClick,
@@ -158,10 +160,10 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
       );
     }
 
-    const anyDown = monitors.some((monitor) => !monitor.status && !monitor.paused);
-    const anyPaused = monitors.some(
-      (monitor) => monitor.paused
+    const anyDown = monitors.some(
+      (monitor) => !monitor.status && !monitor.paused
     );
+    const anyPaused = monitors.some((monitor) => monitor.paused);
     if (anyDown) {
       return (
         <Chip
@@ -217,19 +219,18 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     let uptime = 0;
 
     monitors.forEach((monitor) => {
-     uptime = monitor.monitorStatusDashboard[selectedMetric] ?? 0;
+      uptime = monitor.monitorStatusDashboard[selectedMetric] ?? 0;
 
       if (uptime >= 0) {
         totalUptime += uptime ?? 0;
         totalMonitors++;
       }
-
     });
 
-    if(uptime < 0){
+    if (uptime < 0) {
       return "N/A";
     }
-    let result =  totalMonitors === 0 ? 0 : totalUptime / totalMonitors;
+    let result = totalMonitors === 0 ? 0 : totalUptime / totalMonitors;
     return result.toFixed(2);
   };
 
@@ -253,16 +254,18 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
       );
     }
 
-    const allRunning = monitors.every(monitor => monitor.paused || monitor.status);
+    const allRunning = monitors.every(
+      (monitor) => monitor.paused || monitor.status
+    );
 
     if (allRunning) {
       return (
         <Chip
-        label={
-          typeof calculateAverageUptime(monitorGroup.monitors) === "number"
-            ? calculateAverageUptime(monitorGroup.monitors) + " %"
-            : calculateAverageUptime(monitorGroup.monitors)
-        }
+          label={
+            typeof calculateAverageUptime(monitorGroup.monitors) === "number"
+              ? calculateAverageUptime(monitorGroup.monitors) + " %"
+              : calculateAverageUptime(monitorGroup.monitors)
+          }
           color="success"
           size="medium"
           sx={{
@@ -277,11 +280,11 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     } else {
       return (
         <Chip
-        label={
-          typeof calculateAverageUptime(monitorGroup.monitors) === "number"
-            ? calculateAverageUptime(monitorGroup.monitors) + " %"
-            : calculateAverageUptime(monitorGroup.monitors)
-        }
+          label={
+            typeof calculateAverageUptime(monitorGroup.monitors) === "number"
+              ? calculateAverageUptime(monitorGroup.monitors) + " %"
+              : calculateAverageUptime(monitorGroup.monitors)
+          }
           color="error"
           size="medium"
           sx={{
@@ -343,7 +346,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
           {renderOverallStatusChip()}
         </TableCell>
       </TableRow>
-      <TableRow> 
+      <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: "4px 4px 4px 5%" }}>
@@ -363,7 +366,9 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                               : "inherit",
                           userSelect: "none",
                         }}
-                        onClick={() => handleChildRowClick(monitor.id)}
+                        onClick={() =>
+                          handleChildRowClick(monitor.id, monitorGroupId)
+                        }
                       >
                         <TableCell
                           component="th"
@@ -380,18 +385,22 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                           {monitor.monitorStatusDashboard[selectedMetric] !==
                           0 ? (
                             <Chip
-                            label={
-                              (monitor.monitorStatusDashboard[selectedMetric] ?? 0) < 0
-                                ? "N/A"
-                                : (monitor.monitorStatusDashboard[selectedMetric] ?? "N/A") + " %"
-                            }
-                            color={
-                              monitor.paused
-                                ? "secondary"
-                                : !monitor.status
+                              label={
+                                (monitor.monitorStatusDashboard[
+                                  selectedMetric
+                                ] ?? 0) < 0
+                                  ? "N/A"
+                                  : (monitor.monitorStatusDashboard[
+                                      selectedMetric
+                                    ] ?? "N/A") + " %"
+                              }
+                              color={
+                                monitor.paused
+                                  ? "secondary"
+                                  : !monitor.status
                                   ? "error"
                                   : "success"
-                            }
+                              }
                               size="medium"
                               sx={{
                                 p: "5px 15px",
@@ -411,8 +420,8 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
                                 monitor.paused
                                   ? "secondary"
                                   : !monitor.status
-                                    ? "error"
-                                    : "success"
+                                  ? "error"
+                                  : "success"
                               }
                               size="medium"
                               sx={{

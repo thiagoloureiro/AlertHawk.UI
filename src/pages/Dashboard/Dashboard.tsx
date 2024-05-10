@@ -87,12 +87,12 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     setAddMonitorPanel(false);
   };
 
-  const handleChildRowClick = (index: number) => {
+  const handleChildRowClick = (index: number, monitorGroupId: number) => {
     setAddMonitorPanel(false);
     setSelectedChildRowIndex(
       selectedChildRowIndex === index ? selectedChildRowIndex : index
     );
-    setSelectedRowIndex(null);
+    setSelectedRowIndex(monitorGroupId);
   };
 
   useEffect(() => {
