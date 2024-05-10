@@ -17,15 +17,25 @@ import MonitorService from "../../../services/MonitorService";
 import { showSnackbar } from "../../../utils/snackbarHelper";
 import { useTranslation } from "react-i18next";
 import DeleteForever from "@mui/icons-material/DeleteForever";
-import { IMonitorGroupListByUser } from "../../../interfaces/IMonitorGroupListByUser";
+import {
+  IMonitorGroupListByUser,
+  IMonitorGroupListByUserItem,
+} from "../../../interfaces/IMonitorGroupListByUser";
 import logging from "../../../utils/logging";
+
 interface IAddHttpMonitorProps {
   monitorTypeId: number;
   setAddMonitorPanel: (val: boolean) => void;
+  editMode: boolean;
+  monitorItemToBeEdited?: IMonitorGroupListByUserItem | null;
+  monitorGroupToBeEdited?: IMonitorGroupListByUser | null;
 }
 const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   monitorTypeId,
   setAddMonitorPanel,
+  editMode,
+  monitorItemToBeEdited,
+  monitorGroupToBeEdited,
 }) => {
   const { t } = useTranslation("global");
 
@@ -35,25 +45,47 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     setValue,
     watch,
     formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: "",
-      monitorGroup: null,
-      monitorRegion: null,
-      monitorEnvironment: null,
-      monitorHttpMethod: null,
-      checkCertExpiry: "0",
-      ignoreTlsSsl: "0",
-      urlToCheck: "",
-      maxRedirects: 5,
-      heartBeatInterval: 1,
-      body: "",
-      timeout: 20,
-      retries: 3,
-      status: true,
-      monitorTypeId: monitorTypeId,
-    },
-  });
+  } = useForm(
+    editMode
+      ? {
+          defaultValues: {
+            name: monitorItemToBeEdited?.name,
+            monitorGroup: monitorGroupToBeEdited?.id ?? null,
+            monitorRegion: monitorItemToBeEdited?.monitorRegion,
+            monitorEnvironment: monitorItemToBeEdited?.monitorEnvironment,
+            monitorHttpMethod: null,
+            checkCertExpiry: "0",
+            ignoreTlsSsl: "0",
+            urlToCheck: monitorItemToBeEdited?.urlToCheck,
+            maxRedirects: 5,
+            heartBeatInterval: monitorItemToBeEdited?.heartBeatInterval,
+            body: "",
+            timeout: 20,
+            retries: monitorItemToBeEdited?.retries,
+            status: monitorItemToBeEdited?.status,
+            monitorTypeId: monitorTypeId,
+          },
+        }
+      : {
+          defaultValues: {
+            name: "",
+            monitorGroup: null,
+            monitorRegion: null,
+            monitorEnvironment: null,
+            monitorHttpMethod: null,
+            checkCertExpiry: "0",
+            ignoreTlsSsl: "0",
+            urlToCheck: "",
+            maxRedirects: 5,
+            heartBeatInterval: 1,
+            body: "",
+            timeout: 20,
+            retries: 3,
+            status: true,
+            monitorTypeId: monitorTypeId,
+          },
+        }
+  );
 
   const certificateExpiry = watch("checkCertExpiry");
   const watchIgnoreTLSSL = watch("ignoreTlsSsl");
@@ -65,10 +97,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     (actions) => actions.monitor
   );
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [hasGroupSelected, setHasGroupSelected] = useState(false);
+  const [hasGroupSelected, setHasGroupSelected] = useState(
+    monitorGroupToBeEdited?.id ? true : false
+  );
   const [monitorGroupList, setMonitorGroupList] = useState<
     IMonitorGroupListByUser[]
   >([]);
+
   useEffect(() => {
     if (monitorGroupList.length === 0) {
       fillMonitorGroupList();
@@ -80,6 +115,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       setMonitorGroupList(response);
     });
   };
+
   const handleAddHeader = () => {
     const lastHeader = headers[headers.length - 1];
     if (
@@ -110,6 +146,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   const handleCancelButton = () => {
     setAddMonitorPanel(false);
   };
+
   // Kamil Bulanda - no matter if link starts with http or https you can choose certificate expiry
   //   useEffect(() => {
   //     const url = urlToCheck.toLowerCase();
@@ -169,6 +206,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
               {...register("monitorGroup")}
               labelId="monitorGroup-selection"
               id="monitorGroup-selection"
+              defaultValue={monitorGroupToBeEdited?.id}
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
             >
@@ -201,12 +239,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   label="Monitor Name"
                   margin="normal"
                   variant="outlined"
-                  autoFocus
+                  autoFocus={editMode ? false : true}
                   sx={{
                     marginBottom: "0px !important",
                   }}
                   autoComplete="off"
                   error={!!errors.name}
+                  defaultValue={monitorItemToBeEdited?.name}
                 />
               </FormControl>
             </Box>
@@ -233,12 +272,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   label="URL to check"
                   margin="normal"
                   variant="outlined"
-                  autoFocus
+                  autoFocus={editMode ? false : true}
                   sx={{
                     marginBottom: "0px !important",
                   }}
                   autoComplete="off"
                   error={!!errors.urlToCheck}
+                  defaultValue={monitorItemToBeEdited?.urlToCheck}
                 />
                 {errors.urlToCheck && (
                   <span style={{ color: "#f44336" }}>
@@ -266,6 +306,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   id="monitorRegion-selection"
                   label={t("dashboard.addHttpFrom.monitorRegion")}
                   error={!!errors.monitorRegion}
+                  defaultValue={monitorItemToBeEdited?.monitorRegion}
                 >
                   {(Object.keys(Region) as Array<keyof typeof Region>)
                     .sort((a, b) => a.localeCompare(b))
@@ -297,6 +338,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   id="monitorEnvironment-selection"
                   label={t("dashboard.addHttpForm.monitorEnvironment")}
                   error={!!errors.monitorEnvironment}
+                  defaultValue={monitorItemToBeEdited?.monitorEnvironment}
                 >
                   {(Object.keys(Environment) as Array<keyof typeof Environment>)
                     .sort((a, b) => a.localeCompare(b))
@@ -428,12 +470,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   label={t("dashboard.addHttpForm.retries")}
                   margin="normal"
                   variant="outlined"
-                  autoFocus
+                  autoFocus={editMode ? false : true}
                   sx={{
                     marginBottom: "0px !important",
                   }}
                   autoComplete="off"
                   error={!!errors.retries}
+                  defaultValue={monitorItemToBeEdited?.retries}
                 />
               </FormControl>
             </Box>
@@ -454,7 +497,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   label={t("dashboard.addHttpForm.maxRedirects")}
                   margin="normal"
                   variant="outlined"
-                  autoFocus
+                  autoFocus={editMode ? false : true}
                   sx={{
                     marginBottom: "0px !important",
                   }}
@@ -480,12 +523,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   label={t("dashboard.addHttpForm.heartbeatInterval")}
                   margin="normal"
                   variant="outlined"
-                  autoFocus
+                  autoFocus={editMode ? false : true}
                   sx={{
                     marginBottom: "0px !important",
                   }}
                   autoComplete="off"
                   error={!!errors.heartBeatInterval}
+                  defaultValue={monitorItemToBeEdited?.heartBeatInterval}
                 />
               </FormControl>
             </Box>
@@ -506,7 +550,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   label={t("dashboard.addHttpForm.timeout")}
                   margin="normal"
                   variant="outlined"
-                  autoFocus
+                  autoFocus={editMode ? false : true}
                   sx={{
                     marginBottom: "0px !important",
                   }}
@@ -535,7 +579,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   variant="outlined"
                   multiline
                   rows={6}
-                  autoFocus
+                  autoFocus={!editMode}
                   sx={{
                     marginBottom: "0px !important",
                   }}

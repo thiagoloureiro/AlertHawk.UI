@@ -10,6 +10,10 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { IMonitorType } from "../../../interfaces/IMonitorType";
+import {
+  IMonitorGroupListByUser,
+  IMonitorGroupListByUserItem,
+} from "../../../interfaces/IMonitorGroupListByUser";
 import MonitorTypeService from "../../../services/MonitorTypeService";
 import HttpForm from "./HttpForm";
 import { useTranslation } from "react-i18next";
@@ -17,17 +21,24 @@ import TcpForm from "./TcpForm";
 
 interface EditMonitorProps {
   setAddMonitorPanel: (val: boolean) => void;
+  monitorItemToBeEdited: IMonitorGroupListByUserItem | null;
+  monitorGroupToBeEdited: IMonitorGroupListByUser | null;
 }
 
-const EditMonitor: React.FC<EditMonitorProps> = ({ setAddMonitorPanel }) => {
+const EditMonitor: React.FC<EditMonitorProps> = ({
+  setAddMonitorPanel,
+  monitorItemToBeEdited,
+  monitorGroupToBeEdited,
+}) => {
   const [monitorTypes, setMonitorTypes] = useState<IMonitorType[]>([]);
   const [selectedMonitorType, setSelectedMonitorType] = useState<IMonitorType>({
-    id: 0,
+    id: monitorItemToBeEdited?.monitorTypeId,
   } as IMonitorType);
   const { t } = useTranslation("global");
 
   useEffect(() => {
     fetchMonitorTypes();
+    // console.log(monitorItemToBeEdited);
   }, [monitorTypes]);
 
   const fetchMonitorTypes = async () => {
@@ -48,7 +59,7 @@ const EditMonitor: React.FC<EditMonitorProps> = ({ setAddMonitorPanel }) => {
     <>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
         <Typography variant="h5" px={2} sx={{ marginBottom: "-15px" }}>
-          Add new monitor
+          Edit monitor
         </Typography>
         <Card>
           <CardContent>
@@ -76,13 +87,16 @@ const EditMonitor: React.FC<EditMonitorProps> = ({ setAddMonitorPanel }) => {
                 </Select>
               </FormControl>
             </Box>
-            {selectedMonitorType?.name === "HTTP(s)" && (
+            {selectedMonitorType?.id === 1 && (
               <HttpForm
                 monitorTypeId={selectedMonitorType?.id}
                 setAddMonitorPanel={setAddMonitorPanel}
+                editMode={true}
+                monitorItemToBeEdited={monitorItemToBeEdited}
+                monitorGroupToBeEdited={monitorGroupToBeEdited}
               />
             )}
-            {selectedMonitorType?.name === "TCP Port" && (
+            {selectedMonitorType?.id === 2 && (
               <TcpForm
                 monitorTypeId={selectedMonitorType?.id}
                 setAddMonitorPanel={setAddMonitorPanel}
