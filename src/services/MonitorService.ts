@@ -62,6 +62,15 @@ const MonitorService = {
       `Monitor/monitorStatusDashboard/${id}`,
       appendOptionalHeaders(headers)
     ),
+  // getMonitorHttpByMonitorId
+  getMonitorHttpByMonitorId: async (
+    id: number | undefined,
+    headers?: AxiosHeaders
+  ): Promise<IMonitorHttp> =>
+    await requests.get(
+      `Monitor/getMonitorHttpByMonitorId/${id}`,
+      appendOptionalHeaders(headers)
+    ),
   getMonitorGroupList: async (
     headers?: AxiosHeaders
   ): Promise<IMonitorGroupListByUser[]> =>
@@ -96,6 +105,7 @@ const MonitorService = {
       monitor,
       appendOptionalHeaders(headers)
     ),
+
   createTcpMonitor: async (
     monitor: IMonitorTcp,
     headers?: AxiosHeaders
@@ -114,7 +124,10 @@ const MonitorService = {
       monitorGroupItem,
       appendOptionalHeaders(headers)
     ),
-  deleteMonitor: async (monitorId: number, headers?: AxiosHeaders): Promise<void> =>
+  deleteMonitor: async (
+    monitorId: number,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
     await requests.delete(
       `Monitor/deleteMonitor/${monitorId}`,
       appendOptionalHeaders(headers)
@@ -137,11 +150,23 @@ const MonitorService = {
       monitorGroup,
       appendOptionalHeaders(headers)
     ),
-    deleteGroupMonitor: async (monitorId: number, headers?: AxiosHeaders): Promise<void> =>
-      await requests.delete(
-        `monitorGroup/deleteMonitorGroup/${monitorId}`,
-        appendOptionalHeaders(headers)
-      ),
+  editHttpMonitor: async (
+    monitor: IMonitorHttp,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      `Monitor/updateMonitorHttp`,
+      monitor,
+      appendOptionalHeaders(headers)
+    ),
+  deleteGroupMonitor: async (
+    monitorId: number,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.delete(
+      `monitorGroup/deleteMonitorGroup/${monitorId}`,
+      appendOptionalHeaders(headers)
+    ),
 };
 
 export default MonitorService;
