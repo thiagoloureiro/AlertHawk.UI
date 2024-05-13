@@ -17,7 +17,7 @@ import {
   IMonitorGroupListByUserItem,
 } from "../../interfaces/IMonitorGroupListByUser";
 import { showSnackbar } from "../../utils/snackbarHelper";
-import { useStoreActions, useStoreState } from "../../hooks";
+import { useStoreState } from "../../hooks";
 
 interface ICollapsibleTable {
   monitors: IMonitorGroupListByUser[];
@@ -45,29 +45,10 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   selectedMetric,
 }) => {
   const { t } = useTranslation("global");
-  const [isMonitorsLoading, setIsMonitorsLoading] = useState<boolean>(true);
-  const { selectedEnvironment } = useStoreState(
+  const { isLoading } = useStoreState(
     (state) => state.app
   );
-  const {
-    thunkGetMonitorGroupListByUser,
-    thunkGetMonitorAgents,
-    thunkGetMonitorStats,
-  } = useStoreActions((actions) => actions.monitor);
-  useEffect(() => {
-    try {
-      monitors = [];
-      setIsMonitorsLoading(true);
-      setTimeout(async () => {
-        await thunkGetMonitorStats(selectedEnvironment);
-        await thunkGetMonitorGroupListByUser(selectedEnvironment);
-        await thunkGetMonitorAgents();
-        setIsMonitorsLoading(false);
-      }, 1000);
-    } catch (error) {
-      setIsMonitorsLoading(false);
-    }
-  }, []);
+ 
   const filteredMonitorGroups = monitors.filter(
     (monitor) =>
       monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
@@ -138,7 +119,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
     }
   }, [certificateExpirationList]);
 
-  return isMonitorsLoading ? (
+  return isLoading ? (
     <Box
       sx={{
         position: "relative",

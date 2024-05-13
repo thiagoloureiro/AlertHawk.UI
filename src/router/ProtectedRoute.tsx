@@ -78,10 +78,12 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     const fetchAppData = async () => {
       try {
         // Run all thunks in parallel
+        setIsLoading(true);
         await Promise.all([
           thunkGetMonitorStats(selectedEnvironment),
           thunkGetMonitorGroupListByUser(selectedEnvironment),
-          thunkGetMonitorAgents()
+          thunkGetMonitorAgents(),
+          setIsLoading(false)
         ]);
       } catch (error) {
         console.error("Error fetching app data", error);
