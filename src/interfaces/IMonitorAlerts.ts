@@ -6,5 +6,6 @@ export interface IMonitorAlerts {
     status: boolean;
     message: string;
     screenShotUrl: string;
+    environment: number;
   }
   

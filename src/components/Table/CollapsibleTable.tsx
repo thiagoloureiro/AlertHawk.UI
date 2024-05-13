@@ -17,6 +17,7 @@ import {
   IMonitorGroupListByUserItem,
 } from "../../interfaces/IMonitorGroupListByUser";
 import { showSnackbar } from "../../utils/snackbarHelper";
+import { useStoreState } from "../../hooks";
 
 interface ICollapsibleTable {
   monitors: IMonitorGroupListByUser[];
@@ -26,12 +27,12 @@ interface ICollapsibleTable {
   handleRowClick: (monitorId: number) => void;
   handleChildRowClick: (childMonitorId: number) => void;
   selectedMetric:
-    | "uptime1Hr"
-    | "uptime24Hrs"
-    | "uptime7Days"
-    | "uptime30Days"
-    | "uptime3Months"
-    | "uptime6Months";
+  | "uptime1Hr"
+  | "uptime24Hrs"
+  | "uptime7Days"
+  | "uptime30Days"
+  | "uptime3Months"
+  | "uptime6Months";
 }
 
 const CollapsibleTable: FC<ICollapsibleTable> = ({
@@ -44,8 +45,10 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   selectedMetric,
 }) => {
   const { t } = useTranslation("global");
-  const [isMonitorsLoading, setIsMonitorsLoading] = useState<boolean>(true);
-
+  const { isMonitorLoading } = useStoreState(
+    (state) => state.app
+  );
+ 
   const filteredMonitorGroups = monitors.filter(
     (monitor) =>
       monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
@@ -63,12 +66,6 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   const [certificateExpirationList, setCertificateExpirationList] = useState<
     IMonitorGroupListByUserItem[]
   >([]);
-
-  useEffect(() => {
-    if (monitors.length > 0) {
-      setIsMonitorsLoading(false);
-    }
-  }, [monitors]);
 
   useEffect(() => {
     const downServices = monitors.flatMap((monitorGroup) =>
@@ -103,8 +100,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       certificateExpirationList.slice(0, 3).forEach((service, index) => {
         setTimeout(() => {
           showSnackbar(
-            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${
-              service.daysToExpireCert
+            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${service.daysToExpireCert
             } ${t("dashboard.days").toLowerCase()}]`,
             "warning"
           );
@@ -114,8 +110,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       certificateExpirationList.forEach((service, index) => {
         setTimeout(() => {
           showSnackbar(
-            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${
-              service.daysToExpireCert
+            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${service.daysToExpireCert
             } ${t("dashboard.days").toLowerCase()}]`,
             "warning"
           );
@@ -124,7 +119,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
     }
   }, [certificateExpirationList]);
 
-  return isMonitorsLoading ? (
+  return isMonitorLoading ? (
     <Box
       sx={{
         position: "relative",
