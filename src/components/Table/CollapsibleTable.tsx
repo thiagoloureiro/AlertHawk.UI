@@ -45,7 +45,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   selectedMetric,
 }) => {
   const { t } = useTranslation("global");
-  const { isLoading } = useStoreState(
+  const { isMonitorLoading } = useStoreState(
     (state) => state.app
   );
  
@@ -119,7 +119,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
     }
   }, [certificateExpirationList]);
 
-  return isLoading ? (
+  return isMonitorLoading ? (
     <Box
       sx={{
         position: "relative",
