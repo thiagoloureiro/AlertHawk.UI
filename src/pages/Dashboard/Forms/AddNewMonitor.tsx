@@ -82,6 +82,7 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
               <HttpForm
                 monitorTypeId={selectedMonitorType?.id}
                 setAddMonitorPanel={setAddMonitorPanel}
+                editMode={false}
               />
             )}
             {selectedMonitorType?.name === "TCP Port" && (
