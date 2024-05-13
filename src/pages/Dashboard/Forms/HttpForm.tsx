@@ -44,48 +44,27 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors },
-  } = useForm(
-    editMode
-      ? {
-          defaultValues: {
-            name: monitorItemToBeEdited?.name,
-            monitorGroup: monitorGroupToBeEdited?.id ?? null,
-            monitorRegion: monitorItemToBeEdited?.monitorRegion,
-            monitorEnvironment: monitorItemToBeEdited?.monitorEnvironment,
-            monitorHttpMethod: null,
-            checkCertExpiry: "0",
-            ignoreTlsSsl: "0",
-            urlToCheck: monitorItemToBeEdited?.urlToCheck,
-            maxRedirects: 5,
-            heartBeatInterval: monitorItemToBeEdited?.heartBeatInterval,
-            body: "",
-            timeout: 20,
-            retries: monitorItemToBeEdited?.retries,
-            status: monitorItemToBeEdited?.status,
-            monitorTypeId: monitorTypeId,
-          },
-        }
-      : {
-          defaultValues: {
-            name: "",
-            monitorGroup: null,
-            monitorRegion: null,
-            monitorEnvironment: null,
-            monitorHttpMethod: null,
-            checkCertExpiry: "0",
-            ignoreTlsSsl: "0",
-            urlToCheck: "",
-            maxRedirects: 5,
-            heartBeatInterval: 1,
-            body: "",
-            timeout: 20,
-            retries: 3,
-            status: true,
-            monitorTypeId: monitorTypeId,
-          },
-        }
-  );
+  } = useForm({
+    defaultValues: {
+      name: editMode ? monitorItemToBeEdited?.name : "",
+      monitorGroup: null,
+      monitorRegion: null,
+      monitorEnvironment: null,
+      monitorHttpMethod: null,
+      checkCertExpiry: "0",
+      ignoreTlsSsl: "0",
+      urlToCheck: editMode ? monitorItemToBeEdited?.urlToCheck : "",
+      maxRedirects: 5,
+      heartBeatInterval: 1,
+      body: "",
+      timeout: 20,
+      retries: 3,
+      status: true,
+      monitorTypeId: monitorTypeId,
+    },
+  });
 
   const certificateExpiry = watch("checkCertExpiry");
   const watchIgnoreTLSSL = watch("ignoreTlsSsl");
@@ -103,12 +82,41 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   const [monitorGroupList, setMonitorGroupList] = useState<
     IMonitorGroupListByUser[]
   >([]);
-
+  const [dataToEdit, setDataToEdit] = useState(null);
   useEffect(() => {
     if (monitorGroupList.length === 0) {
       fillMonitorGroupList();
     }
+    if (editMode && dataToEdit == null) {
+      getEditData();
+    }
   });
+
+  const getEditData = async () => {
+    await MonitorService.getMonitorHttpByMonitorId(
+      monitorItemToBeEdited?.id
+    ).then((response: any) => {
+      console.log(response);
+      setDataToEdit(response);
+      reset({
+        name: response.name,
+        // monitorGroup: monitorGroupToBeEdited?.id ?? null,
+        monitorRegion: response.monitorRegion,
+        monitorEnvironment: response.monitorEnvironment,
+        monitorHttpMethod: response.monitorHttpMethod,
+        checkCertExpiry: response.checkCertExpiry ? "1" : "0",
+        ignoreTlsSsl: response.ignoreTlsSsl ? "1" : "0",
+        urlToCheck: response.urlToCheck,
+        maxRedirects: response.maxRedirects,
+        heartBeatInterval: response.heartBeatInterval,
+        body: response?.body,
+        timeout: response.timeout,
+        retries: response.retries,
+        status: response.status,
+        monitorTypeId: monitorTypeId,
+      });
+    });
+  };
 
   const fillMonitorGroupList = async () => {
     await MonitorService.getMonitorGroupListByUserToken().then((response) => {
