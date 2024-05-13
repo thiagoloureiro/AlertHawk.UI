@@ -20,13 +20,13 @@ import { useTranslation } from "react-i18next";
 import TcpForm from "./TcpForm";
 
 interface EditMonitorProps {
-  setAddMonitorPanel: (val: boolean) => void;
+  setEditMonitorPanel: (val: boolean) => void;
   monitorItemToBeEdited: IMonitorGroupListByUserItem | null;
   monitorGroupToBeEdited: IMonitorGroupListByUser | null;
 }
 
 const EditMonitor: React.FC<EditMonitorProps> = ({
-  setAddMonitorPanel,
+  setEditMonitorPanel,
   monitorItemToBeEdited,
   monitorGroupToBeEdited,
 }) => {
@@ -90,7 +90,7 @@ const EditMonitor: React.FC<EditMonitorProps> = ({
             {selectedMonitorType?.id === 1 && (
               <HttpForm
                 monitorTypeId={selectedMonitorType?.id}
-                setAddMonitorPanel={setAddMonitorPanel}
+                setAddMonitorPanel={setEditMonitorPanel}
                 editMode={true}
                 monitorItemToBeEdited={monitorItemToBeEdited}
                 monitorGroupToBeEdited={monitorGroupToBeEdited}
@@ -99,7 +99,7 @@ const EditMonitor: React.FC<EditMonitorProps> = ({
             {selectedMonitorType?.id === 2 && (
               <TcpForm
                 monitorTypeId={selectedMonitorType?.id}
-                setAddMonitorPanel={setAddMonitorPanel}
+                setAddMonitorPanel={setEditMonitorPanel}
               />
             )}
           </CardContent>

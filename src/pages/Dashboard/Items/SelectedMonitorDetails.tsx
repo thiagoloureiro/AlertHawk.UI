@@ -42,17 +42,20 @@ interface ISelectedMonitorDetailsProps {
     | "uptime30Days"
     | "uptime3Months"
     | "uptime6Months";
+  setEditMonitorPanel: (val: boolean) => void;
+  editMonitorPanel: boolean;
 }
 
 const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   selectedMonitorGroup,
   selectedMonitorItem,
   selectedMetric,
+  setEditMonitorPanel,
+  editMonitorPanel,
 }) => {
   const { t } = useTranslation("global");
   const { isDarkMode } = useStoreState((state) => state.app);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const navigate = useNavigate();
   const { thunkGetMonitorGroupListByUser } = useStoreActions(
     (actions) => actions.monitor
@@ -113,7 +116,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   });
 
   const handleEditBtn = () => {
-    setIsEditMode(!isEditMode);
+    setEditMonitorPanel(true);
   };
 
   const renderUptimeBoxes = (uptimePercentage: number, status: boolean) => {
@@ -235,10 +238,10 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
   return (
     <>
-      {isEditMode ? (
+      {editMonitorPanel ? (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <EditMonitor
-            setAddMonitorPanel={setIsEditMode}
+            setEditMonitorPanel={setEditMonitorPanel}
             monitorItemToBeEdited={selectedMonitorItem}
             monitorGroupToBeEdited={selectedMonitorGroup}
           />

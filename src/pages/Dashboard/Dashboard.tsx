@@ -36,6 +36,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
   const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
   const { setSelectedEnvironment } = useStoreActions((action) => action.app);
   const [addMonitorPanel, setAddMonitorPanel] = useState<boolean>(false);
+  const [editMonitorPanel, setEditMonitorPanel] = useState<boolean>(false);
   const [searchText, setSearchText] = useState<string>("");
   const [selectedRowIndex, setSelectedRowIndex] = useState<number | null>(null);
   const [selectedChildRowIndex, setSelectedChildRowIndex] = useState<
@@ -54,6 +55,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
   // );
   useEffect(() => {
     setAddMonitorPanel(false);
+    setEditMonitorPanel(false);
   }, []);
   const handleEnvironmentChange = (event: SelectChangeEvent<number>) => {
     setSelectedEnvironment(event.target.value as number);
@@ -85,10 +87,12 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     setSelectedRowIndex(selectedRowIndex === index ? selectedRowIndex : index);
     setSelectedChildRowIndex(null);
     setAddMonitorPanel(false);
+    setEditMonitorPanel(false);
   };
 
   const handleChildRowClick = (index: number, monitorGroupId: number) => {
     setAddMonitorPanel(false);
+    setEditMonitorPanel(false);
     setSelectedChildRowIndex(
       selectedChildRowIndex === index ? selectedChildRowIndex : index
     );
@@ -122,6 +126,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     setSelectedChildRowIndex(null);
     setSelectedMonitorGroup(null);
     setSelectedRowIndex(null);
+    setEditMonitorPanel(false);
     setAddMonitorPanel(true);
   }
 
@@ -271,10 +276,13 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
         </Grid>
         <Grid item xs={12} lg={isSidebarOpen ? 6 : 7}>
           {selectedMonitorGroup !== null || selectedMonitorItem !== null ? (
+            //  const [editMonitorPanel, setEditMonitorPanel] = useState<boolean>(false);
             <SelectedMonitorDetails
               selectedMonitorGroup={selectedMonitorGroup}
               selectedMonitorItem={selectedMonitorItem}
               selectedMetric={selectedMetric}
+              setEditMonitorPanel={setEditMonitorPanel}
+              editMonitorPanel={editMonitorPanel}
             />
           ) : null}
 
