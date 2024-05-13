@@ -1,6 +1,5 @@
 import { FC, Fragment } from "react";
 import { Box, TableCell, TableRow, Typography } from "@mui/material";
-import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
 
 interface INotificationTableRowProps {
   notification: INotification;
@@ -34,7 +33,7 @@ const NotificationTableRow: FC<INotificationTableRowProps> = ({
               : {}
           }
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2, width: '50%' }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2}}>
 
             <Box
               sx={{
@@ -62,7 +61,7 @@ const NotificationTableRow: FC<INotificationTableRowProps> = ({
               : {}
           }
         >
-          <Box sx={{ display: "flex", alignItems: "center", gap: 2, width: '50%' }}>
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2}}>
 
             <Box
               sx={{

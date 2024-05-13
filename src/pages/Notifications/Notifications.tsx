@@ -16,6 +16,7 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import NotFoundContent from "../../components/NotFoundContent/NotFoundContent";
 import NotificationsTable from "../../components/Table/NotificationsTable";
+import FromNotifications from "./Forms/FromNotifications";
 
 interface INotificationsProps { }
 
@@ -24,6 +25,7 @@ const Notifications: FC<INotificationsProps> = () => {
   const { user } = useStoreState((state) => state.user);
   const [searchText, setSearchText] = useState<string>("");
   const [notifications, setNotifications] = useState<INotification[]>([]);
+  const [notificationTypes, setNotificationTypes] = useState<INotificationType[]>([]);
   const [selectedNotification, setSelectedNotification] = useState<INotification | null>(null);
   const [addPanel, setAddPanel] = useState<boolean>(false);
   const handleSearchInputChange = (
@@ -56,6 +58,7 @@ const Notifications: FC<INotificationsProps> = () => {
     var notificationResponse = await NotificationService.getAll();
     if (notificationResponse != null) {
       var notificationTypeResponse = await NotificationService.getNotificationTypes();
+      setNotificationTypes(notificationTypeResponse);
       notificationResponse.forEach((notification: INotification) => {
         notification.notificationType = notificationTypeResponse.find(
           (notificationType: INotificationType) => notificationType.id == notification.notificationTypeId
@@ -180,7 +183,7 @@ const Notifications: FC<INotificationsProps> = () => {
                         },
                       }}
                     >
-                      {/* <FromMonitorGroup setAddMonitorPanel={setAddMonitorPanel} selectedMonitorGroup={selectedMonitorGroup} /> */}
+                      <FromNotifications selectedNotification={selectedNotification} setAddPanel={setAddPanel} notificationTypes={notificationTypes}/>
                     </Box>
                   </CardContent>
                 </Card>

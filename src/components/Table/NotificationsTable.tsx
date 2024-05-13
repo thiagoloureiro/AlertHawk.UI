@@ -59,7 +59,7 @@ const NotificationsTable: FC<INotificationTableProps> = ({
   const headerCells: readonly IHeaderCell[] = [
     {
       id: "Name",
-      label: t("monitorGroups.name"),
+      label: t("notifications.name"),
       sortable: false,
       width: "70%",
       align: "left",
@@ -145,7 +145,7 @@ const NotificationsTable: FC<INotificationTableProps> = ({
             <TableRow>
               <TableCell colSpan={headerCells.length} align="center">
                 <Typography variant="body2" sx={{ textAlign: "center" }}>
-                  {t("monitorGroups.noResultFoundFor")}
+                  {t("notifications.noResultFoundFor")}
                 </Typography>
               </TableCell>
             </TableRow>
