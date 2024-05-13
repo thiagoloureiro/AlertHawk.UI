@@ -5,6 +5,8 @@ import { Environment } from "../enums/Enums";
 export interface IAppModel {
   isLoading: boolean;
   setIsLoading: Action<IAppModel, boolean>;
+  isMonitorLoading: boolean;
+  setIsMonitorLoading: Action<IAppModel, boolean>;
   isDarkMode: boolean;
   setIsDarkMode: Action<IAppModel, boolean>;
   setResetApp: Action<IAppModel>;
@@ -22,6 +24,7 @@ export interface IAppModel {
 
 const defaultAppState = {
   isLoading: false,
+  isMonitorLoading: false,
   isDarkMode: false,
   isSidebarOpen: false,
   isSmallScreen: false,
@@ -34,6 +37,10 @@ const app: IAppModel = {
   isLoading: defaultAppState.isLoading,
   setIsLoading: action((state, payload) => {
     state.isLoading = payload;
+  }),
+  isMonitorLoading: defaultAppState.isLoading,
+  setIsMonitorLoading: action((state, payload) => {
+    state.isMonitorLoading = payload;
   }),
   isDarkMode: defaultAppState.isDarkMode,
   setIsDarkMode: action((state, payload) => {
