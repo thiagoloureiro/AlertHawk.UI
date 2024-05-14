@@ -49,7 +49,7 @@ const Notifications: FC<INotificationsProps> = () => {
 
   };
 
-  function handleAddNew(): void {
+  const handleAddNew = () => {
     setAddPanel(false);
     setSelectedNotification(null);
     setAddPanel(true);
@@ -96,7 +96,7 @@ const Notifications: FC<INotificationsProps> = () => {
         <>
           <HelmetProvider>
             <Helmet>
-              <title>AlertHawk | {t("monitorGroups.title")}</title>
+              <title>AlertHawk | {t("notifications.title")}</title>
             </Helmet>
           </HelmetProvider>
           <Grid container spacing={4}>
@@ -116,7 +116,7 @@ const Notifications: FC<INotificationsProps> = () => {
                           startAdornment={<SearchOutlinedIcon />}
                           value={searchText}
                           onChange={handleSearchInputChange}
-                          placeholder={t("dashboard.search")}
+                          placeholder={t("notifications.search")}
                         />
                       </FormControl>
                     </div>
@@ -137,7 +137,7 @@ const Notifications: FC<INotificationsProps> = () => {
                           }}
                           onClick={handleAddNew}
                         >
-                          {t("dashboard.addNew")}
+                          {t("notifications.addNew")}
                         </Button>
                       </FormControl>
                     </div>
@@ -189,7 +189,6 @@ const Notifications: FC<INotificationsProps> = () => {
                 </Card>
               )}
             </Grid>
-
           </Grid>
         </>
       )}

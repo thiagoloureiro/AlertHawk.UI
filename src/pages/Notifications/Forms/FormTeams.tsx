@@ -1,13 +1,13 @@
-import { Box, FormControl, TextField } from '@mui/material';
-import { t } from 'i18next';
 import React from 'react';
-
+import { useTranslation } from "react-i18next";
+import { Box, FormControl, TextField } from '@mui/material';
 interface FormTeamsProps {
     register: any;
     errors: any;
 }
 
 const FormTeams: React.FC<FormTeamsProps> = ({ errors, register }) => {
+    const { t } = useTranslation("global");
     return (
         <Box
             sx={{
@@ -23,7 +23,7 @@ const FormTeams: React.FC<FormTeamsProps> = ({ errors, register }) => {
                         required: true,
                         pattern: {
                             value: /^(https?|http):\/\/[^\s/$.?#].[^\s]*$/i,
-                            message: t("dashboard.addHttpFrom.errors.url"),
+                            message: t("notifications.errors.url"),
                         },
                     })}
                     fullWidth
@@ -37,6 +37,11 @@ const FormTeams: React.FC<FormTeamsProps> = ({ errors, register }) => {
                     autoComplete="off"
                     error={!!errors?.notificationTeams?.webHookUrl}
                 />
+                {!!errors?.notificationTeams?.webHookUrl && (
+                    <span style={{ color: "#f44336" }}>
+                        {t("notifications.errors.url")}
+                    </span>
+                )}
             </FormControl>
         </Box>
     );

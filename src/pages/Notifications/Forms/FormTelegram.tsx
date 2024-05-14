@@ -1,13 +1,13 @@
-import { Box, FormControl, TextField } from '@mui/material';
-import { t } from 'i18next';
 import React from 'react';
-
+import { useTranslation } from "react-i18next";
+import { Box, FormControl, TextField } from '@mui/material';
 interface IFormTelegramProps {
     register: any;
     errors: any;
 }
 
-const FormTelegram: React.FC<IFormTelegramProps> = ({register, errors}) => {
+const FormTelegram: React.FC<IFormTelegramProps> = ({ register, errors }) => {
+    const { t } = useTranslation("global");
     return (
         <>
             <Box
@@ -20,9 +20,9 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({register, errors}) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                           {...register("notificationTelegram.chatId", { required: true })}
+                        {...register("notificationTelegram.chatId", { required: true })}
                         fullWidth
-                        label={t("notifications.chatd")}
+                        label={t("notifications.chatId")}
                         margin="normal"
                         variant="outlined"
                         autoFocus
@@ -31,7 +31,7 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({register, errors}) => {
                             marginBottom: "0px !important",
                         }}
                         autoComplete="off"
-                      error={!!errors?.notificationTelegram?.chatId}
+                        error={!!errors?.notificationTelegram?.chatId}
                     />
                 </FormControl>
             </Box>
@@ -45,7 +45,7 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({register, errors}) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                           {...register("notificationTelegram.telegramBotToken", { required: true })}
+                        {...register("notificationTelegram.telegramBotToken", { required: true })}
                         fullWidth
                         label={t("notifications.telegramBotToken")}
                         margin="normal"
@@ -55,7 +55,7 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({register, errors}) => {
                             marginBottom: "0px !important",
                         }}
                         autoComplete="off"
-                      error={!!errors?.notificationTelegram?.telegramBotToken}
+                        error={!!errors?.notificationTelegram?.telegramBotToken}
                     />
                 </FormControl>
             </Box>

@@ -61,14 +61,12 @@ const NotificationsTable: FC<INotificationTableProps> = ({
       id: "Name",
       label: t("notifications.name"),
       sortable: false,
-      width: "70%",
       align: "left",
     },
     {
       id: "tYPE",
-      label: t("notification.type"),
+      label: t("notifications.type"),
       sortable: false,
-      width: "70%",
       align: "left",
     }
 

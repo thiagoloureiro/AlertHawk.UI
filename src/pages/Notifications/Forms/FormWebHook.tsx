@@ -1,40 +1,36 @@
-import { Box, FormControl, TextField } from '@mui/material';
-import { t } from 'i18next';
 import React from 'react';
-
+import { useTranslation } from "react-i18next";
+import { DeleteForever } from '@mui/icons-material';
+import { showSnackbar } from '../../../utils/snackbarHelper';
+import { Box, Button, FormControl, TextField } from '@mui/material';
 interface IFormTelegramProps {
     register: any;
     errors: any;
+    headers: { name: string; value: string }[];
+    setHeaders: React.Dispatch<React.SetStateAction<{ name: string; value: string }[]>>;
 }
 
-const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register }) => {
+const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register, headers, setHeaders }) => {
+    const { t } = useTranslation("global");
+    const handleAddHeader = () => {
+        const lastHeader = headers[headers.length - 1];
+        if (
+            !lastHeader ||
+            (lastHeader.name.trim() !== "" && lastHeader.value.trim() !== "")
+        ) {
+            setHeaders([...headers, { name: "", value: "" }]);
+        } else {
+            showSnackbar(t("notifications.fillThePreviusHeader"), "error");
+        }
+    };
+    const handleRemoveHeader = (index: number) => {
+        const updatedHeaders = [...headers];
+        updatedHeaders.splice(index, 1);
+        setHeaders(updatedHeaders);
+    };
+
     return (
         <>
-            <Box
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    marginTop: "16px",
-                }}
-            >
-                <FormControl fullWidth>
-                    <TextField
-                        {...register("notificationWebHook.notificationId", { required: true })}
-                        fullWidth
-                        label={t("notification.notificationId")}
-                        margin="normal"
-                        variant="outlined"
-                        autoFocus
-                        type='number'
-                        sx={{
-                            marginBottom: "0px !important",
-                        }}
-                        autoComplete="off"
-                        error={!!errors?.notificationWebHook?.notificationId}
-                    />
-                </FormControl>
-            </Box>
             <Box
                 sx={{
                     display: "flex",
@@ -73,7 +69,7 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register }) => {
                             required: true,
                             pattern: {
                                 value: /^(https?|http):\/\/[^\s/$.?#].[^\s]*$/i,
-                                message: t("dashboard.addHttpFrom.errors.url"),
+                                message: t("notifications.errors.url"),
                             },
                         })}
                         fullWidth
@@ -87,6 +83,11 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register }) => {
                         autoComplete="off"
                         error={!!errors?.notificationWebHook?.webHookUrl}
                     />
+                    {!!errors?.notificationTeams?.webHookUrl && (
+                  <span style={{ color: "#f44336" }}>
+                    {t("notifications.errors.url")}
+                  </span>
+                )}
                 </FormControl>
             </Box>
             <Box
@@ -105,6 +106,8 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register }) => {
                         margin="normal"
                         variant="outlined"
                         autoFocus
+                        multiline
+                        rows={6}
                         sx={{
                             marginBottom: "0px !important",
                         }}
@@ -137,30 +140,84 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register }) => {
                     />
                 </FormControl>
             </Box>
-            {/* <Box
+            <Box
                 sx={{
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "space-around",
+                    justifyContent: "flex-start",
                     marginTop: "16px",
                 }}
             >
-                <FormControl fullWidth>
-                    <TextField
-                        {...register("notificationWebHook.headers", { required: true })}
-                        fullWidth
-                        label={t("notifications.headers")}
-                        margin="normal"
-                        variant="outlined"
-                        autoFocus
-                        sx={{
-                            marginBottom: "0px !important",
-                        }}
-                        autoComplete="off"
-                        error={!!errors?.notificationWebHook?.headers}
-                    />
-                </FormControl>
-            </Box> */}
+                <Button onClick={handleAddHeader} variant="contained">
+                    {t("notifications.addHeaders")}
+                </Button>
+            </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        width: "100%",
+                    }}
+                >
+                    <Box>
+                        {headers.map((header, index) => (
+                            <Box
+                                key={index}
+                                sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "flex-start",
+                                    marginTop: "16px",
+                                }}
+                            >
+                                <TextField
+                                    label={t("notifications.headerName")}
+                                    value={header.name}
+                                    sx={{ minWidth: "30%", marginRight: "8px" }}
+                                    onChange={(e) => {
+                                        const updatedHeaders = [...headers];
+                                        updatedHeaders[index].name = e.target.value;
+                                        setHeaders(updatedHeaders);
+                                    }}
+                                />
+                                <TextField
+                                    label={t("notifications.headerValue")}
+                                    sx={{ minWidth: "55%", marginRight: "8px" }}
+                                    value={header.value}
+                                    onChange={(e) => {
+                                        const updatedHeaders = [...headers];
+                                        updatedHeaders[index].value = e.target.value;
+                                        setHeaders(updatedHeaders);
+                                    }}
+                                />
+                                <Box
+                                    sx={{
+                                        justifyContent: "flex-end",
+                                        display: "flex",
+                                        minWidth: "20%",
+                                    }}
+                                >
+                                    <Button
+                                        variant="contained"
+                                        sx={{ width: "100%" }}
+                                        color="error"
+                                        onClick={() => handleRemoveHeader(index)}
+                                    >
+                                        <DeleteForever />
+                                    </Button>
+                                </Box>
+                            </Box>
+                        ))}
+                    </Box>
+                </Box>
+            </Box>
         </>
     );
 };

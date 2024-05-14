@@ -1,20 +1,19 @@
+import FormSlack from './FormSlack';
+import FormEmail from './FormEmail';
+import FormTeams from './FormTeams';
+import FormWebHook from './FormWebHook';
+import FormTelegram from './FormTelegram';
 import { useForm } from 'react-hook-form';
 import logging from "../../../utils/logging";
 import { useTranslation } from "react-i18next";
+import { useStoreState } from '../../../hooks';
 import React, { useEffect, useState } from 'react';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { showSnackbar } from "../../../utils/snackbarHelper";
 import MonitorService from '../../../services/MonitorService';
-import { useStoreState } from '../../../hooks';
+import NotificationService from '../../../services/NotificationService';
 import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
 import { Box, Typography, Card, CardContent, FormControl, TextField, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, MenuItem, InputLabel, Select } from '@mui/material';
-import FormTeams from './FormTeams';
-import FormTelegram from './FormTelegram';
-import FormEmail from './FormEmail';
-import FormWebHook from './FormWebHook';
-import FormSlack from './FormSlack';
-import NotificationService from '../../../services/NotificationService';
-
 interface IFromNotificationsProps {
   setAddPanel: (val: boolean) => void;
   selectedNotification: INotification | null;
@@ -23,17 +22,16 @@ interface IFromNotificationsProps {
 
 const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, selectedNotification, notificationTypes }) => {
   const { t } = useTranslation("global");
-  const { isDarkMode } = useStoreState((state) => state.app);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [isTypeTeams, setisTypeTeams] = useState(false);
   const [isTypeEmail, setisTypeEmail] = useState(false);
-  const [isTypeTelegram, setisTypeTelegram] = useState(false);
-  const [isTypeWebHook, setisTypeWebHook] = useState(false);
   const [isTypeSlack, setisTypeSlack] = useState(false);
-  const [monitorGroupList, setMonitorGroupList] = useState<
-    IMonitorGroupListByUser[]
-  >([]);
+  const [isTypeWebHook, setisTypeWebHook] = useState(false);
+  const { isDarkMode } = useStoreState((state) => state.app);
+  const [isTypeTelegram, setisTypeTelegram] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [headers, setHeaders] = useState<{ name: string; value: string }[]>([]);
+  const [monitorGroupList, setMonitorGroupList] = useState<IMonitorGroupListByUser[]>([]);
 
   useEffect(() => {
     if (monitorGroupList.length === 0) {
@@ -103,74 +101,77 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
       }
     },
   });
-
+const cleanFormData = () => {
+  hideAllForms();
+  setValue("name", "");
+  setValue("description", "");
+  setValue("monitorGroupId", 0);
+  setValue("notificationTypeId", 0);
+  setValue("notificationTeams.webHookUrl", "");
+  setValue("notificationTelegram.chatId", 0);
+  setValue("notificationTelegram.telegramBotToken", "");
+  setValue("notificationSlack.channel", "");
+  setValue("notificationSlack.webHookUrl", "");
+  setValue("notificationEmail.fromEmail", "");
+  setValue("notificationEmail.toEmail", "");
+  setValue("notificationEmail.hostname", "");
+  setValue("notificationEmail.port", 0);
+  setValue("notificationEmail.username", "");
+  setValue("notificationEmail.password", "");
+  setValue("notificationEmail.toCCEmail", "");
+  setValue("notificationEmail.toBCCEmail", "");
+  setValue("notificationEmail.enableSsl", true);
+  setValue("notificationEmail.subject", "");
+  setValue("notificationEmail.body", "");
+  setValue("notificationEmail.isHtmlBody", true);
+  setValue("notificationWebHook.message", "");
+  setValue("notificationWebHook.webHookUrl", "");
+  setValue("notificationWebHook.body", "");
+  setValue("notificationWebHook.headersJson", "");
+}
+const fillFormData = () => {
+  setValue("name", selectedNotification!.name);
+  setValue("description", selectedNotification!.description);
+  setValue("monitorGroupId", selectedNotification!.monitorGroupId);
+  setValue("notificationTypeId", selectedNotification!.notificationTypeId);
+  if (selectedNotification!.notificationTeams) {
+    setValue("notificationTeams.webHookUrl", selectedNotification!.notificationTeams.webHookUrl);
+  }
+  if (selectedNotification!.notificationTelegram) {
+    setValue("notificationTelegram.chatId", selectedNotification!.notificationTelegram.chatId);
+    setValue("notificationTelegram.telegramBotToken", selectedNotification!.notificationTelegram.telegramBotToken);
+  }
+  if (selectedNotification!.notificationSlack) {
+    setValue("notificationSlack.channel", selectedNotification!.notificationSlack.channel);
+    setValue("notificationSlack.webHookUrl", selectedNotification!.notificationSlack.webHookUrl);
+  }
+  if (selectedNotification!.notificationEmail) {
+    setValue("notificationEmail.fromEmail", selectedNotification!.notificationEmail.fromEmail);
+    setValue("notificationEmail.toEmail", selectedNotification!.notificationEmail.toEmail);
+    setValue("notificationEmail.hostname", selectedNotification!.notificationEmail.hostname);
+    setValue("notificationEmail.port", selectedNotification!.notificationEmail.port);
+    setValue("notificationEmail.username", selectedNotification!.notificationEmail.username);
+    setValue("notificationEmail.password", selectedNotification!.notificationEmail.password);
+    setValue("notificationEmail.toCCEmail", selectedNotification!.notificationEmail.toCCEmail);
+    setValue("notificationEmail.toBCCEmail", selectedNotification!.notificationEmail.toBCCEmail);
+    setValue("notificationEmail.enableSsl", selectedNotification!.notificationEmail.enableSsl);
+    setValue("notificationEmail.subject", selectedNotification!.notificationEmail.subject);
+    setValue("notificationEmail.body", selectedNotification!.notificationEmail.body);
+    setValue("notificationEmail.isHtmlBody", selectedNotification!.notificationEmail.isHtmlBody ? true : false);
+  }
+  if (selectedNotification!.notificationWebHook) {
+    setValue("notificationWebHook.message", selectedNotification!.notificationWebHook.message);
+    setValue("notificationWebHook.webHookUrl", selectedNotification!.notificationWebHook.webHookUrl);
+    setValue("notificationWebHook.body", selectedNotification!.notificationWebHook.body);
+    setValue("notificationWebHook.headersJson", selectedNotification!.notificationWebHook.headersJson);
+  }
+  handleNotificationTypeChangeLogic(selectedNotification!.notificationTypeId);
+}
   useEffect(() => {
+    cleanFormData();
     if (selectedNotification) {
-      setValue("name", selectedNotification.name);
-      setValue("description", selectedNotification.description);
-      setValue("monitorGroupId", selectedNotification.monitorGroupId);
-      setValue("notificationTypeId", selectedNotification.notificationTypeId);
-      if (selectedNotification.notificationTeams) {
-        setValue("notificationTeams.webHookUrl", selectedNotification.notificationTeams.webHookUrl);
-      }
-      if (selectedNotification.notificationTelegram) {
-        setValue("notificationTelegram.chatId", selectedNotification.notificationTelegram.chatId);
-        setValue("notificationTelegram.telegramBotToken", selectedNotification.notificationTelegram.telegramBotToken);
-      }
-      if (selectedNotification.notificationSlack) {
-        setValue("notificationSlack.channel", selectedNotification.notificationSlack.channel);
-        setValue("notificationSlack.webHookUrl", selectedNotification.notificationSlack.webHookUrl);
-      }
-      if (selectedNotification.notificationEmail) {
-        setValue("notificationEmail.fromEmail", selectedNotification.notificationEmail.fromEmail);
-        setValue("notificationEmail.toEmail", selectedNotification.notificationEmail.toEmail);
-        setValue("notificationEmail.hostname", selectedNotification.notificationEmail.hostname);
-        setValue("notificationEmail.port", selectedNotification.notificationEmail.port);
-        setValue("notificationEmail.username", selectedNotification.notificationEmail.username);
-        setValue("notificationEmail.password", selectedNotification.notificationEmail.password);
-        setValue("notificationEmail.toCCEmail", selectedNotification.notificationEmail.toCCEmail);
-        setValue("notificationEmail.toBCCEmail", selectedNotification.notificationEmail.toBCCEmail);
-        setValue("notificationEmail.enableSsl", selectedNotification.notificationEmail.enableSsl);
-        setValue("notificationEmail.subject", selectedNotification.notificationEmail.subject);
-        setValue("notificationEmail.body", selectedNotification.notificationEmail.body);
-        setValue("notificationEmail.isHtmlBody", selectedNotification.notificationEmail.isHtmlBody ? true : false);
-      }
-      if (selectedNotification.notificationWebHook) {
-        setValue("notificationWebHook.message", selectedNotification.notificationWebHook.message);
-        setValue("notificationWebHook.webHookUrl", selectedNotification.notificationWebHook.webHookUrl);
-        setValue("notificationWebHook.body", selectedNotification.notificationWebHook.body);
-        setValue("notificationWebHook.headersJson", selectedNotification.notificationWebHook.headersJson);
-      }
-      handleNotificationTypeChangeLogic(selectedNotification.notificationTypeId);
-
-    } else {
-      setValue("name", "");
-      setValue("description", "");
-      setValue("monitorGroupId", 0);
-      setValue("notificationTypeId", 0);
-      setValue("notificationTeams.webHookUrl", "");
-      setValue("notificationTelegram.chatId", 0);
-      setValue("notificationTelegram.telegramBotToken", "");
-      setValue("notificationSlack.channel", "");
-      setValue("notificationSlack.webHookUrl", "");
-      setValue("notificationEmail.fromEmail", "");
-      setValue("notificationEmail.toEmail", "");
-      setValue("notificationEmail.hostname", "");
-      setValue("notificationEmail.port", 0);
-      setValue("notificationEmail.username", "");
-      setValue("notificationEmail.password", "");
-      setValue("notificationEmail.toCCEmail", "");
-      setValue("notificationEmail.toBCCEmail", "");
-      setValue("notificationEmail.enableSsl", true);
-      setValue("notificationEmail.subject", "");
-      setValue("notificationEmail.body", "");
-      setValue("notificationEmail.isHtmlBody", true);
-      setValue("notificationWebHook.message", "");
-      setValue("notificationWebHook.webHookUrl", "");
-      setValue("notificationWebHook.body", "");
-      setValue("notificationWebHook.headersJson", "");
-
-    }
+     fillFormData();
+    }  
   }, [selectedNotification]);
 
   const handleDeleteBtn = () => {
@@ -186,7 +187,7 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
     if (selectedNotification !== null) {
       await NotificationService.delete(selectedNotification.id).then(
         async () => {
-          showSnackbar(t("notification.deleteConfirmation"), "success");
+          showSnackbar(t("notifications.deleteConfirmation"), "success");
           setOpenDeleteDialog(false);
           setAddPanel(false);
         }
@@ -199,19 +200,18 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
 
   const handleValidSubmit = async (data: any) => {
     setIsButtonDisabled(true);
-    logging.info(data);
     if (selectedNotification) {
       data.id = selectedNotification.id;
       await NotificationService.edit(data).then(async () => {
-      setIsButtonDisabled(false);
-      setAddPanel(false);
-      showSnackbar(t("monitorGroups.updateSuccess"), "success");
+        setIsButtonDisabled(false);
+        setAddPanel(false);
+        showSnackbar(t("notifications.updateSuccess"), "success");
       });
     } else {
       await NotificationService.create(data).then(async () => {
         setIsButtonDisabled(false);
         setAddPanel(false);
-        showSnackbar(t("monitorGroups.createSuccess"), "success");
+        showSnackbar(t("notifications.createSuccess"), "success");
       });
     }
   };
@@ -227,10 +227,8 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
   }
 
   const handleNotificationTypeChange = async (event: any) => {
-
     setValue("notificationTypeId", event.target.value);
     handleNotificationTypeChangeLogic(event.target.value);
-
   }
 
   const handleNotificationTypeChangeLogic = (notificationTypeId: number) => {
@@ -347,14 +345,14 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
               >
                 <FormControl fullWidth>
                   <InputLabel id="monitorGroup-selection">
-                    {t("notifications.monitorGroupId")}
+                    {t("notifications.monitorGroup")}
                   </InputLabel>
                   <Select
                     labelId="monitorGroup-selection"
                     id="monitorGroup-selection"
                     value={watch("monitorGroupId")}
                     onChange={handleMonitorGroupChange}
-                    label={t("notifications.monitorGroupId")}
+                    label={t("notifications.monitorGroup")}
                   >
                     {monitorGroupList
                       .sort((a, b) => a.name.localeCompare(b.name))
@@ -375,11 +373,11 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
                 }}
               >
                 <FormControl fullWidth>
-                  <InputLabel id="monitorType-selection">{t("notifications.Type")}</InputLabel>
+                  <InputLabel id="notificationType-selection">{t("notifications.type")}</InputLabel>
                   <Select
-                    labelId="monitorType-selection"
-                    id="monitorType-selection"
-                    label={t("addNewMonitor.monitorType")}
+                    labelId="notificationType-selection"
+                    id="notificationType-selection"
+                    label={t("notifications.type")}
                     value={watch("notificationTypeId")}
                     onChange={handleNotificationTypeChange}
                   >
@@ -395,7 +393,7 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
               {isTypeTeams && <FormTeams errors={errors} register={register} />}
               {isTypeTelegram && <FormTelegram errors={errors} register={register} />}
               {isTypeEmail && <FormEmail errors={errors} register={register} watch={watch} />}
-              {isTypeWebHook && <FormWebHook errors={errors} register={register} />}
+              {isTypeWebHook && <FormWebHook errors={errors} register={register} headers={headers} setHeaders={setHeaders}/>}
               {isTypeSlack && <FormSlack errors={errors} register={register} />}
               <Box
                 sx={{
@@ -456,11 +454,11 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {t("notification.confirmDeleteTitle")}
+          {t("notifications.confirmDeleteTitle")}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {t("notification.confirmDeleteMessage")}
+            {t("notifications.confirmDeleteMessage")}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -470,10 +468,10 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
             autoFocus
             sx={{ p: "5px 15px" }}
           >
-            {t("dashboard.addHttpForm.yes")}
+            {t("notifications.yes")}
           </Button>
           <Button onClick={handleCloseDeleteDialog} color="primary">
-            {t("dashboard.addHttpForm.no")}
+            {t("notifications.no")}
           </Button>
         </DialogActions>
       </Dialog>

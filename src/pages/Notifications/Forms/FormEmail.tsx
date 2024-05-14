@@ -1,7 +1,7 @@
-import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { t } from 'i18next';
 import React from 'react';
+import { useTranslation } from "react-i18next";
 
+import { Box, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 interface IFormEmailProps {
     register: any;
     errors: any;
@@ -9,6 +9,7 @@ interface IFormEmailProps {
 }
 
 const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
+    const { t } = useTranslation("global");
     return (
         <>
             <Box
@@ -21,15 +22,15 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                        {...register("notificationEmail.FromEmail", {
+                        {...register("notificationEmail.fromEmail", {
                             required: true,
                             pattern: {
                                 value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: t("notificationEmail..Errors.validEmail"),
+                                message: t("notifications.errors.validEmail"),
                             }
                         })}
                         fullWidth
-                        label={t("notifications.FromEmail")}
+                        label={t("notifications.fromEmail")}
                         margin="normal"
                         variant="outlined"
                         autoFocus
@@ -37,10 +38,16 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
                             marginBottom: "0px !important",
                         }}
                         autoComplete="off"
-                        error={!!errors?.notificationEmail?.FromEmail}
+                        error={!!errors?.notificationEmail?.fromEmail}
                     />
+                    {!!errors?.notificationEmail?.fromEmail && (
+                        <span style={{ color: "#f44336" }}>
+                            {t("notifications.errors.validEmail")}
+                        </span>
+                    )}
                 </FormControl>
             </Box>
+
             <Box
                 sx={{
                     display: "flex",
@@ -51,39 +58,9 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                        {...register("notificationEmail.ToEmail", {
-                            required: true,
-                            pattern: {
-                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                                message: t("notificationEmail..Errors.validEmail"),
-                            }
-                        })}
+                        {...register("notificationEmail.hostName", { required: true })}
                         fullWidth
-                        label={t("notifications.ToEmail")}
-                        margin="normal"
-                        variant="outlined"
-                        autoFocus
-                        sx={{
-                            marginBottom: "0px !important",
-                        }}
-                        autoComplete="off"
-                        error={!!errors?.notificationEmail?.ToEmail}
-                    />
-                </FormControl>
-            </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    marginTop: "16px",
-                }}
-            >
-                <FormControl fullWidth>
-                    <TextField
-                        {...register("notificationEmail.HostName", { required: true })}
-                        fullWidth
-                        label={t("notifications.HostName")}
+                        label={t("notifications.hostName")}
                         margin="normal"
                         variant="outlined"
                         autoFocus
@@ -105,9 +82,9 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                        {...register("notificationEmail.Port", { required: true })}
+                        {...register("notificationEmail.port", { required: true })}
                         fullWidth
-                        label={t("notifications.Port")}
+                        label={t("notifications.port")}
                         margin="normal"
                         variant="outlined"
                         autoFocus
@@ -116,7 +93,7 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
                             marginBottom: "0px !important",
                         }}
                         autoComplete="off"
-                        error={!!errors?.notificationEmail?.Port}
+                        error={!!errors?.notificationEmail?.port}
                     />
                 </FormControl>
             </Box>
@@ -130,9 +107,9 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                        {...register("notificationEmail.Username", { required: true })}
+                        {...register("notificationEmail.username", { required: true })}
                         fullWidth
-                        label={t("notifications.Username")}
+                        label={t("notifications.username")}
                         margin="normal"
                         variant="outlined"
                         autoFocus
@@ -140,7 +117,7 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
                             marginBottom: "0px !important",
                         }}
                         autoComplete="off"
-                        error={!!errors?.notificationEmail?.Username}
+                        error={!!errors?.notificationEmail?.username}
                     />
                 </FormControl>
             </Box>
@@ -179,9 +156,15 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                        {...register("notificationEmail.toCCEmail", { required: true })}
+                        {...register("notificationEmail.toEmail", {
+                            required: true,
+                            pattern: {
+                                value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                                message: t("notifications.Errors.validEmail"),
+                            }
+                        })}
                         fullWidth
-                        label={t("notifications.toCCEmail")}
+                        label={t("notifications.toEmail")}
                         margin="normal"
                         variant="outlined"
                         autoFocus
@@ -189,8 +172,13 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
                             marginBottom: "0px !important",
                         }}
                         autoComplete="off"
-                        error={!!errors?.notificationEmail?.toCCEmail}
+                        error={!!errors?.notificationEmail?.toEmail}
                     />
+                    {!!errors?.notificationEmail?.toEmail && (
+                        <span style={{ color: "#f44336" }}>
+                            {t("notifications.errors.validEmail")}
+                        </span>
+                    )}
                 </FormControl>
             </Box>
             <Box
@@ -203,7 +191,36 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                        {...register("notificationEmail.toBCCEmail", { required: true })}
+                        {...register("notificationEmail.toCCEmail")}
+                        fullWidth
+                        label={t("notifications.toCCEmail")}
+                        margin="normal"
+                        variant="outlined"
+                        autoFocus
+                        sx={{
+                            marginBottom: "0px !important",
+                        }}
+                        autoComplete="off"
+                        error={!!errors?.notificationEmail?.toCCEmail}
+                    />
+                    {!!errors?.notificationEmail?.toCCCEmail && (
+                        <span style={{ color: "#f44336" }}>
+                            {t("notifications.errors.validEmail")}
+                        </span>
+                    )}
+                </FormControl>
+            </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    marginTop: "16px",
+                }}
+            >
+                <FormControl fullWidth>
+                    <TextField
+                        {...register("notificationEmail.toBCCEmail")}
                         fullWidth
                         label={t("notifications.toBCCEmail")}
                         margin="normal"
@@ -215,6 +232,11 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
                         autoComplete="off"
                         error={!!errors?.notificationEmail?.toBCCEmail}
                     />
+                    {!!errors?.notificationEmail?.toBCCEmail && (
+                        <span style={{ color: "#f44336" }}>
+                            {t("notifications.errors.validEmail")}
+                        </span>
+                    )}
                 </FormControl>
             </Box>
             <Box
@@ -277,30 +299,6 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
                 }}
             >
                 <FormControl fullWidth>
-                    <TextField
-                        {...register("notificationEmail.body", { required: true })}
-                        fullWidth
-                        label={t("notifications.body")}
-                        margin="normal"
-                        variant="outlined"
-                        autoFocus
-                        sx={{
-                            marginBottom: "0px !important",
-                        }}
-                        autoComplete="off"
-                        error={!!errors?.notificationEmail?.body}
-                    />
-                </FormControl>
-            </Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                    marginTop: "16px",
-                }}
-            >
-                <FormControl fullWidth>
                     <InputLabel id="isHtmlBody-selection">
                         {t("notifications.isHtmlBody")}
                     </InputLabel>
@@ -317,6 +315,32 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
                         </MenuItem>
                         <MenuItem value="false">{t("notifications.no")}</MenuItem>
                     </Select>
+                </FormControl>
+            </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-around",
+                    marginTop: "16px",
+                }}
+            >
+                <FormControl fullWidth>
+                    <TextField
+                        {...register("notificationEmail.body", { required: true })}
+                        fullWidth
+                        label={t("notifications.body")}
+                        margin="normal"
+                        variant="outlined"
+                        autoFocus
+                        sx={{
+                            marginBottom: "0px !important",
+                        }}
+                        autoComplete="off"
+                        multiline
+                        rows={6}
+                        error={!!errors?.notificationEmail?.body}
+                    />
                 </FormControl>
             </Box>
         </>
