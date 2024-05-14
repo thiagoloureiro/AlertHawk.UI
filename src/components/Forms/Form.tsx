@@ -82,70 +82,8 @@ const Form: FC<IFormProps> = ({ description }) => {
             <b>{description}</b>
           </Typography>
         )}
-
-        {step === 1 && (
-          <TextField
-            fullWidth
-            label="Username"
-            margin="normal"
-            variant="outlined"
-            value={username}
-            onChange={handleUsernameChange}
-            autoFocus
-            autoComplete="off"
-          />
-        )}
-
-        {step === 2 && (
-          <TextField
-            fullWidth
-            label="Password"
-            type="password"
-            margin="normal"
-            variant="outlined"
-            value={password}
-            onChange={handlePasswordChange}
-            autoFocus
-            autoComplete="off"
-          />
-        )}
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          size="large"
-          sx={{ mb: 2, color: "white", fontWeight: 700, position: "relative" }}
-          disabled={step === 1 ? !username : !password || isButtonDisabled}
-        >
-          {isButtonDisabled && (
-            <CircularProgress
-              size={24}
-              sx={{
-                color: "primary.dark",
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                marginTop: "-12px",
-                marginLeft: "-12px",
-              }}
-            />
-          )}
-          {step === 1 ? "Next Step" : "Sign In"}
-        </Button>
-
-        <Typography variant="body2" sx={{ textAlign: "center", mb: 2 }}>
-          Not have an account?{" "}
-          <Link
-            to="/#"
-            style={{
-              color: getTheme("light").palette.primary.light,
-              fontWeight: 700,
-            }}
-          >
-            Register
-          </Link>
-        </Typography>
+      
+     
       </form>
       <div
         style={{
@@ -168,7 +106,7 @@ const Form: FC<IFormProps> = ({ description }) => {
           width="20px"
           style={{ marginRight: "12px" }}
         />
-        Log in with Azure AD
+        Log in with Microsoft Account
       </Button>
     </Container>
   );
