@@ -71,6 +71,14 @@ const MonitorService = {
       `Monitor/getMonitorHttpByMonitorId/${id}`,
       appendOptionalHeaders(headers)
     ),
+  getMonitorTcpByMonitorId: async (
+    id: number | undefined,
+    headers?: AxiosHeaders
+  ): Promise<IMonitorHttp> =>
+    await requests.get(
+      `Monitor/getMonitorTcpByMonitorId/${id}`,
+      appendOptionalHeaders(headers)
+    ),
   getMonitorGroupList: async (
     headers?: AxiosHeaders
   ): Promise<IMonitorGroupListByUser[]> =>
