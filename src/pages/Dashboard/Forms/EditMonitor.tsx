@@ -38,7 +38,6 @@ const EditMonitor: React.FC<EditMonitorProps> = ({
 
   useEffect(() => {
     fetchMonitorTypes();
-    // console.log(monitorItemToBeEdited);
   }, [monitorTypes]);
 
   const fetchMonitorTypes = async () => {
@@ -97,10 +96,13 @@ const EditMonitor: React.FC<EditMonitorProps> = ({
                 monitorGroupToBeEdited={monitorGroupToBeEdited}
               />
             )}
-            {selectedMonitorType?.id === 2 && (
+            {selectedMonitorType?.id === 3 && (
               <TcpForm
                 monitorTypeId={selectedMonitorType?.id}
                 setAddMonitorPanel={setEditMonitorPanel}
+                editMode={true}
+                monitorItemToBeEdited={monitorItemToBeEdited}
+                monitorGroupToBeEdited={monitorGroupToBeEdited}
               />
             )}
           </CardContent>
