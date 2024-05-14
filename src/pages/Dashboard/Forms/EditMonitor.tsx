@@ -78,6 +78,7 @@ const EditMonitor: React.FC<EditMonitorProps> = ({
                   value={selectedMonitorType.id}
                   label={t("addNewMonitor.monitorType")}
                   onChange={handleMonitorTypeChange}
+                  disabled
                 >
                   {monitorTypes.map((type, key) => (
                     <MenuItem value={type.id} key={key}>
