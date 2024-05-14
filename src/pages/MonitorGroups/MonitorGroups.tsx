@@ -88,7 +88,6 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
         fetchData();
       } else {
         fetchUserData();
-       // setMonitorGroups([]);
       }
     }
   }, [monitorGroups]);
