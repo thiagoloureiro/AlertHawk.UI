@@ -52,7 +52,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       monitorGroup: null,
       monitorRegion: null,
       monitorEnvironment: null,
-      monitorHttpMethod: null,
+      monitorHttpMethod: "1",
       checkCertExpiry: "0",
       ignoreTlsSsl: "0",
       urlToCheck: editMode ? monitorItemToBeEdited?.urlToCheck : "",
@@ -68,6 +68,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
 
   const certificateExpiry = watch("checkCertExpiry");
   const watchIgnoreTLSSL = watch("ignoreTlsSsl");
+  const watchMonitorHttpMethod = watch("monitorHttpMethod");
 
   const [headers, setHeaders] = useState<{ name: string; value: string }[]>([]);
 
@@ -90,7 +91,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     if (editMode && dataToEdit == null) {
       getEditData();
     }
-  });
+  }, [reset]);
 
   const getEditData = async () => {
     await MonitorService.getMonitorHttpByMonitorId(
@@ -442,6 +443,10 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   id="httpMethod-selection"
                   label={t("dashboard.addHttpForm.httpMethod")}
                   error={!!errors.monitorHttpMethod}
+                  value={watchMonitorHttpMethod}
+                  onChange={(e: SelectChangeEvent) => {
+                    setValue("monitorHttpMethod", e.target.value);
+                  }}
                 >
                   {(
                     Object.keys(MonitorHttpMethod) as Array<
