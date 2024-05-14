@@ -181,17 +181,28 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
 
     logging.info(data);
 
-    await MonitorService.createHttpMonitor(data).then(async (response: any) => {
-      await MonitorService.addMonitorToGroup({
-        monitorId: response,
-        monitorgroupId: data.monitorGroup,
-      }).then(async () => {
+    if (editMode) {
+      await MonitorService.editHttpMonitor(data).then(async () => {
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
         showSnackbar(t("dashboard.addHttpForm.success"), "success");
         await thunkGetMonitorGroupListByUser(selectedEnvironment);
       });
-    });
+    } else {
+      await MonitorService.createHttpMonitor(data).then(
+        async (response: any) => {
+          await MonitorService.addMonitorToGroup({
+            monitorId: response,
+            monitorgroupId: data.monitorGroup,
+          }).then(async () => {
+            setIsButtonDisabled(false);
+            setAddMonitorPanel(false);
+            showSnackbar(t("dashboard.addHttpForm.success"), "success");
+            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          });
+        }
+      );
+    }
   };
 
   return (
