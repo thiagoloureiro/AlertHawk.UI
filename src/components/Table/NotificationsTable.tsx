@@ -143,7 +143,7 @@ const NotificationsTable: FC<INotificationTableProps> = ({
             <TableRow>
               <TableCell colSpan={headerCells.length} align="center">
                 <Typography variant="body2" sx={{ textAlign: "center" }}>
-                  {t("notifications.noResultFoundFor")}
+                {t("dashboard.noResultFoundFor")}
                 </Typography>
               </TableCell>
             </TableRow>
