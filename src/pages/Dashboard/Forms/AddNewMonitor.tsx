@@ -89,6 +89,7 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
               <TcpForm
                 monitorTypeId={selectedMonitorType?.id}
                 setAddMonitorPanel={setAddMonitorPanel}
+                editMode={false}
               />
             )}
           </CardContent>
