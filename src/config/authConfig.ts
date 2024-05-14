@@ -3,8 +3,7 @@ import { Configuration, PopupRequest } from "@azure/msal-browser";
 export const msalConfig: Configuration = {
   auth: {
     clientId: import.meta.env.VITE_APP_CLIENT_ID || "",
-    authority: `${import.meta.env.VITE_APP_AUTHORITY}
-    }`,
+    authority: `${import.meta.env.VITE_APP_AUTHORITY}`,
     redirectUri: import.meta.env.VITE_APP_REDIRECT_URI + "/",
   },
   cache: {
