@@ -1,0 +1,51 @@
+import React from 'react';
+import { useTranslation } from "react-i18next";
+import { Box, FormControl, TextField } from '@mui/material';
+interface FormTeamsProps {
+    register: any;
+    errors: any;
+}
+
+const FormTeams: React.FC<FormTeamsProps> = ({ errors, register }) => {
+    const { t } = useTranslation("global");
+    return (
+        <Box
+            sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-around",
+                marginTop: "16px",
+            }}
+        >
+            <FormControl fullWidth>
+                <TextField
+                    {...register("notificationTeams.webHookUrl", {
+                        required: true,
+                        pattern: {
+                            value: /^(https?|http):\/\/[^\s/$.?#].[^\s]*$/i,
+                            message: t("notifications.errors.url"),
+                        },
+                    })}
+                    fullWidth
+                    label={t("notifications.webHookUrl")}
+                    margin="normal"
+                    variant="outlined"
+                    autoFocus
+                    sx={{
+                        marginBottom: "0px !important",
+                    }}
+                    autoComplete="off"
+                    error={!!errors?.notificationTeams?.webHookUrl}
+                />
+                {!!errors?.notificationTeams?.webHookUrl && (
+                    <span style={{ color: "#f44336" }}>
+                        {t("notifications.errors.url")}
+                    </span>
+                )}
+            </FormControl>
+        </Box>
+    );
+};
+
+export default FormTeams;
+
