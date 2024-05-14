@@ -97,7 +97,6 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     await MonitorService.getMonitorHttpByMonitorId(
       monitorItemToBeEdited?.id
     ).then((response: any) => {
-      console.log(response);
       setDataToEdit(response);
       reset({
         name: response.name,
@@ -218,6 +217,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
               defaultValue={monitorGroupToBeEdited?.id}
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
+              disabled={editMode}
             >
               {monitorGroupList
                 .sort((a, b) => a.name.localeCompare(b.name))
