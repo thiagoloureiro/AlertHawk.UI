@@ -81,8 +81,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
         }
       );
     }
-    console.log(selectedMonitorItem?.id, selectedMonitorItem?.name);
   };
+ 
   const handleResumePauseBtn = async () => {
     if (selectedMonitorItem !== null) {
       await MonitorService.pauseMonitor(
@@ -323,7 +323,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
               )}
             </ButtonGroup>
           </Box>
-          {selectedMonitorGroup !== null && (
+          {selectedMonitorGroup !== null && selectedMonitorItem === null && (
             <>
               <Card>
                 <CardContent sx={{ position: "relative" }}>
