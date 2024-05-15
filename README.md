@@ -1,9 +1,9 @@
 # Project Title
 
-[![Contributors](https://img.shields.io/github/contributors/your-repo-owner/your-repo-name.svg)](https://github.com/your-repo-owner/your-repo-name/graphs/contributors)
-[![Forks](https://img.shields.io/github/forks/your-repo-owner/your-repo-name.svg?style=social)](https://github.com/your-repo-owner/your-repo-name/network/members)
-[![Stars](https://img.shields.io/github/stars/your-repo-owner/your-repo-name.svg?style=social)](https://github.com/your-repo-owner/your-repo-name/stargazers)
-[![Issues](https://img.shields.io/github/issues/your-repo-owner/your-repo-name.svg)](https://github.com/your-repo-owner/your-repo-name/issues)
+[![Contributors](https://img.shields.io/github/contributors/thiagoloureiro/AlertHawk.UI.svg)](https://github.com/thiagoloureiro/AlertHawk.UI/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/thiagoloureiro/AlertHawk.UI.svg?style=social)](https://github.com/thiagoloureiro/AlertHawk.UI/network/members)
+[![Stars](https://img.shields.io/github/stars/thiagoloureiro/AlertHawk.UI.svg?style=social)](https://github.com/thiagoloureiro/AlertHawk.UI/stargazers)
+[![Issues](https://img.shields.io/github/issues/thiagoloureiro/AlertHawk.UI.svg)](https://github.com/thiagoloureiro/AlertHawk.UI/issues)
 
 ## Description
 
@@ -17,7 +17,7 @@ Thanks to these wonderful people for their contributions to the project:
 |:---:|:---:|:---:|
 | [BulandaK](https://github.com/BulandaK) | [altughan09](https://github.com/altughan09) | [guilhermedclima](https://github.com/guilhermedclima) |
 
-You can find the full list of contributors [here](https://github.com/your-repo-owner/your-repo-name/graphs/contributors).
+You can find the full list of contributors [here](https://github.com/thiagoloureiro/AlertHawk.UI/graphs/contributors).
 
 ## Installation
 
