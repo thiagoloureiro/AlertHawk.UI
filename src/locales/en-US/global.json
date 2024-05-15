@@ -44,7 +44,8 @@
     "confirmDeleteTitle": "Delete Confirmation",
     "confirmDeleteMessage": "Are you sure you want to delete this monitor?",
     "updateHttpForm": {
-      "updateMonitor": "Update Monitor"
+      "updateMonitor": "Update Monitor",
+      "success": "Monitor has been updated!"
     },
     "addHttpForm": {
       "success": "Monitor has been added!",
@@ -163,7 +164,7 @@
     "title": "Monitor Groups",
     "addMonitorGroup": "Add Monitor Group",
     "createSuccess": "Monitor group has been created!",
-    "updateSuccess": "Monitor group has been updated!",	
+    "updateSuccess": "Monitor group has been updated!",
     "hasItemsFound": "Monitor group has items found, please delete them first",
     "monitorNotFound": "Monitor not found",
     "deleteConfirmation": "Monitor group has been deleted!",
@@ -176,12 +177,12 @@
     "type": "Type",
     "description": "Description",
     "monitorGroup": "Monitor group",
-    "addNew":"Add new",
+    "addNew": "Add new",
     "updateSuccess": "The notifications has been updated!",
     "createSuccess": "The notifications has been created!",
     "addNotification": "Add notification",
     "delete": "Delete",
-    "cancel": "Cancel", 
+    "cancel": "Cancel",
     "save": "Save",
     "deleteConfirmation": "Notification has been deleted!",
     "confirmDeleteTitle": "Delete Confirmation",
@@ -205,14 +206,14 @@
     "username": "Username",
     "password": "Password",
     "toEmail": "To email",
-    "toCCEmail":"To CC Email",
+    "toCCEmail": "To CC Email",
     "toBCCEmail": "To BCC email",
     "enableSsl": "Enable Ssl",
     "subject": "Subject",
     "isHtmlBody": "Is html body",
     "errors": {
-    "url": "Url is invalid",
-    "validEmail": "Email is invalid"
-    } 
+      "url": "Url is invalid",
+      "validEmail": "Email is invalid"
+    }
   }
 }
