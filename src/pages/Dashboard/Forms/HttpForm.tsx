@@ -166,15 +166,31 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       }));
       data.headers = headersList;
     }
-
+    data.monitorHttpMethod = Number(data.monitorHttpMethod);
+    data.maxRedirects = Number(data.maxRedirects);
+    data.retries = Number(data.retries);
+    data.heartBeatInterval = Number(data.heartBeatInterval);
+    data.timeout = Number(data.timeout);
     logging.info(data);
 
     if (editMode) {
       await MonitorService.editHttpMonitor(data).then(async () => {
-        setIsButtonDisabled(false);
-        setAddMonitorPanel(false);
-        showSnackbar(t("dashboard.addHttpForm.success"), "success");
-        await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        if (monitorGroupToBeEdited?.id != data.monitorGroup) {
+          await MonitorService.addMonitorToGroup({
+            monitorId: data.id,
+            monitorgroupId: data.monitorGroup,
+          }).then(async () => {
+            setIsButtonDisabled(false);
+            setAddMonitorPanel(false);
+            showSnackbar(t("dashboard.addHttpForm.success"), "success");
+            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          });
+        } else {
+          setIsButtonDisabled(false);
+          setAddMonitorPanel(false);
+          showSnackbar(t("dashboard.addHttpForm.success"), "success");
+          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        }
       });
     } else {
       await MonitorService.createHttpMonitor(data).then(
@@ -216,7 +232,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
               defaultValue={monitorGroupToBeEdited?.id}
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
-              disabled={editMode}
+              // disabled={editMode}
             >
               {monitorGroupList.length > 0 &&
                 monitorGroupList
@@ -443,7 +459,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   id="httpMethod-selection"
                   label={t("dashboard.addHttpForm.httpMethod")}
                   error={!!errors.monitorHttpMethod}
-                  value={`${watchMonitorHttpMethod}`}
+                  value={watchMonitorHttpMethod.toString()}
                   onChange={(e: SelectChangeEvent) => {
                     setValue("monitorHttpMethod", Number(e.target.value));
                   }}

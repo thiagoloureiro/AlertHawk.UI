@@ -88,7 +88,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     await MonitorService.getMonitorTcpByMonitorId(
       monitorItemToBeEdited?.id
     ).then((response: any) => {
-      console.log(response);
+      // console.log(response);
       setDataToEdit(response);
       reset(response);
     });
@@ -119,12 +119,29 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     data.ignoreTlsSsl = data.ignoreTlsSsl === "1";
     data.port = parseInt(data.port, 10);
 
+    data.retries = Number(data.retries);
+    data.heartBeatInterval = Number(data.heartBeatInterval);
+    data.timeout = Number(data.timeout);
+    data.part = Number(data.port);
+
     if (editMode) {
       await MonitorService.editTcpMonitor(data).then(async () => {
-        setIsButtonDisabled(false);
-        setAddMonitorPanel(false);
-        showSnackbar(t("dashboard.addHttpForm.success"), "success");
-        await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        if (monitorGroupToBeEdited?.id != data.monitorGroup) {
+          await MonitorService.addMonitorToGroup({
+            monitorId: data.id,
+            monitorgroupId: data.monitorGroup,
+          }).then(async () => {
+            setIsButtonDisabled(false);
+            setAddMonitorPanel(false);
+            showSnackbar(t("dashboard.addHttpForm.success"), "success");
+            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          });
+        } else {
+          setIsButtonDisabled(false);
+          setAddMonitorPanel(false);
+          showSnackbar(t("dashboard.addHttpForm.success"), "success");
+          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        }
       });
     } else {
       await MonitorService.createTcpMonitor(data).then(
@@ -166,7 +183,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
               defaultValue={monitorGroupToBeEdited?.id}
-              disabled={editMode}
+              // disabled={editMode}
             >
               {monitorGroupList
                 .sort((a, b) => a.name.localeCompare(b.name))
