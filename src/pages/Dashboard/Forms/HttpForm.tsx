@@ -230,11 +230,11 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
               label={t("dashboard.addHttpForm.monitorGroup")}
               disabled={editMode}
             >
-              {monitorGroupList
+              {monitorGroupList.length > 0 && monitorGroupList
                 .sort((a, b) => a.name.localeCompare(b.name))
                 .map((group, key) => (
                   <MenuItem value={group.id} key={key}>
-                    {group.name}
+                  {group.name}
                   </MenuItem>
                 ))}
             </Select>

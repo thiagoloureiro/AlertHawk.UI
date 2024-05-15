@@ -97,7 +97,7 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
       Object.keys(regionTasksMap).forEach((region) => {
         let cx = "";
         let cy = "";
-        if (region === "Custom") {
+        if (region.includes("Custom")) {
           return;
         }
         if (region === "Africa") {
@@ -123,7 +123,6 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
           "http://www.w3.org/2000/svg",
           "circle"
         );
-
         circle.setAttribute("cx", cx);
         circle.setAttribute("cy", cy);
         circle.setAttribute("r", "30");

@@ -39,7 +39,7 @@ const MonitorService = {
     headers?: AxiosHeaders
   ): Promise<IMonitorGroupListByUser[]> =>
     await requests.get(
-      `MonitorGroup/monitorGroupListByUser/${id}`,
+      `MonitorGroup/monitorDashboardGroupListByUser/${id}`,
       appendOptionalHeaders(headers)
     ),
   getMonitorGroupListByUserToken: async (

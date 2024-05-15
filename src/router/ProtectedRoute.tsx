@@ -24,6 +24,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const { selectedEnvironment } = useStoreState((state) => state.app);
   const { user } = useStoreState((state) => state.user);
   const { thunkGetUser } = useStoreActions((actions) => actions.user);
+  const { setIsMonitorLoading } = useStoreActions((state) => state.app);
   const {
     thunkGetMonitorGroupListByUser,
     thunkGetMonitorAgents,
@@ -78,14 +79,17 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     const fetchAppData = async () => {
       try {
         // Run all thunks in parallel
+        setIsMonitorLoading(true);
         await Promise.all([
           thunkGetMonitorStats(selectedEnvironment),
           thunkGetMonitorGroupListByUser(selectedEnvironment),
-          thunkGetMonitorAgents()
+          thunkGetMonitorAgents(),
         ]);
       } catch (error) {
         console.error("Error fetching app data", error);
         // Handle errors, possibly update state to show an error message or similar
+      } finally {
+        setIsMonitorLoading(false);
       }
     };
   
@@ -123,5 +127,4 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     </>
   );
 };
-
 export default ProtectedRoute;

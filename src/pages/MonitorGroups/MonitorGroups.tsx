@@ -38,7 +38,7 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
   }, []);
   useEffect(() => {
     if(addMonitorPanel == false){
-      fetchData();
+      //fetchData();
     }
   }, [addMonitorPanel]);
   
@@ -67,13 +67,27 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
     });
     setMonitorGroups(response);
   };
+
+  const fetchUserData = async () => {
+    var response = await MonitorService.getMonitorGroupListByUserToken();
+    response = response.slice().sort((a, b) => {
+      if (a.name! < b.name!) {
+        return -1;
+      }
+      if (a.name! > b.name!) {
+        return 1;
+      }
+      return 0;
+    });
+    setMonitorGroups(response);
+  };
   useEffect(() => {
     
     if (monitorGroups.length == 0) {
       if (user?.isAdmin) {
         fetchData();
       } else {
-        setMonitorGroups([]);
+        fetchUserData();
       }
     }
   }, [monitorGroups]);

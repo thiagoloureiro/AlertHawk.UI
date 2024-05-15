@@ -117,13 +117,18 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       icon: <MonitorHeartOutlinedIcon />,
     },
     {
+      text: t("sidebar.monitorGroups"),
+      pathname: "/monitorGroups",
+      icon: <LibraryAddIcon />,
+    },
+    {
       text: t("sidebar.monitorAgents"),
       pathname: "/monitor-agents",
       icon: <AddToQueueOutlinedIcon />,
     },
     {
       text: t("sidebar.notificationManagement"),
-      pathname: "/notification-management",
+      pathname: "/notifications",
       icon: <AddAlertOutlinedIcon />,
     },
     {
@@ -139,13 +144,8 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       pathname: "/users",
       icon: <PeopleAltOutlinedIcon />,
     });
-    menuItems.push({
-      text: t("sidebar.monitorGroups"),
-      pathname: "/monitorGroups",
-      icon: <LibraryAddIcon />,
-    });
-  }
 
+  }
   const secondMenuItems: IMenuItem[] = [
     {
       text: t("settings.text"),
