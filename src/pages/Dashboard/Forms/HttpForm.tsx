@@ -49,10 +49,10 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   } = useForm({
     defaultValues: {
       name: editMode ? monitorItemToBeEdited?.name : "",
-      monitorGroup: null,
+      monitorGroup: monitorGroupToBeEdited?.id ?? null,
       monitorRegion: null,
       monitorEnvironment: null,
-      monitorHttpMethod: "1",
+      monitorHttpMethod: 1,
       checkCertExpiry: "0",
       ignoreTlsSsl: "0",
       urlToCheck: editMode ? monitorItemToBeEdited?.urlToCheck : "",
@@ -99,21 +99,9 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
     ).then((response: any) => {
       setDataToEdit(response);
       reset({
-        name: response.name,
-        // monitorGroup: monitorGroupToBeEdited?.id ?? null,
-        monitorRegion: response.monitorRegion,
-        monitorEnvironment: response.monitorEnvironment,
-        monitorHttpMethod: response.monitorHttpMethod,
+        ...response,
         checkCertExpiry: response.checkCertExpiry ? "1" : "0",
         ignoreTlsSsl: response.ignoreTlsSsl ? "1" : "0",
-        urlToCheck: response.urlToCheck,
-        maxRedirects: response.maxRedirects,
-        heartBeatInterval: response.heartBeatInterval,
-        body: response?.body,
-        timeout: response.timeout,
-        retries: response.retries,
-        status: response.status,
-        monitorTypeId: monitorTypeId,
       });
     });
   };
@@ -230,13 +218,14 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
               label={t("dashboard.addHttpForm.monitorGroup")}
               disabled={editMode}
             >
-              {monitorGroupList.length > 0 && monitorGroupList
-                .sort((a, b) => a.name.localeCompare(b.name))
-                .map((group, key) => (
-                  <MenuItem value={group.id} key={key}>
-                  {group.name}
-                  </MenuItem>
-                ))}
+              {monitorGroupList.length > 0 &&
+                monitorGroupList
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((group, key) => (
+                    <MenuItem value={group.id} key={key}>
+                      {group.name}
+                    </MenuItem>
+                  ))}
             </Select>
           </FormControl>
         </Box>
@@ -454,9 +443,9 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   id="httpMethod-selection"
                   label={t("dashboard.addHttpForm.httpMethod")}
                   error={!!errors.monitorHttpMethod}
-                  value={watchMonitorHttpMethod}
+                  value={`${watchMonitorHttpMethod}`}
                   onChange={(e: SelectChangeEvent) => {
-                    setValue("monitorHttpMethod", e.target.value);
+                    setValue("monitorHttpMethod", Number(e.target.value));
                   }}
                 >
                   {(
