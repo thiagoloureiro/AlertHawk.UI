@@ -1,43 +1,34 @@
-import { FC, useEffect, useState } from "react";
-import MonitorAlertService from "../../services/MonitorAlertsService";
-import { IMonitorAlerts } from "../../interfaces/IMonitorAlerts";
-import { useTranslation } from "react-i18next";
-import moment from "moment";
-import { useParams } from "react-router-dom";
 import {
   Grid,
   Card,
   CardContent,
   Box,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
   Button,
   CircularProgress,
+  FormControl,
+  OutlinedInput,
 } from "@mui/material";
-import { HelmetProvider, Helmet } from "react-helmet-async";
-import { useStoreState } from "../../hooks";
 import logging from "../../utils/logging";
-import { Environment } from "../../enums/Enums";
+import { useStoreState } from "../../hooks";
+import { useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { FC, useEffect, useState } from "react";
+import { HelmetProvider, Helmet } from "react-helmet-async";
+import { IMonitorAlerts } from "../../interfaces/IMonitorAlerts";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
+import MonitorAlertService from "../../services/MonitorAlertsService";
+import MonitorAlertsTable from "../../components/Table/MonitorAlertsTable";
 
 interface IMonitorAlertsProps { }
-interface IHeaderCell {
-  id: string;
-  label: string;
-  width?: string;
-  sortable: boolean;
-  align?: "left" | "center" | "right" | "justify" | "inherit";
-}
 
 const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
   const [monitorAlerts, setMonitorAlerts] = useState<IMonitorAlerts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { isDarkMode, selectedDisplayTimezone } = useStoreState((state) => state.app);
+  const { isDarkMode } = useStoreState((state) => state.app);
   const [monitorId, setMonitorId] = useState<number>(0);
   const { t } = useTranslation("global");
   const { id } = useParams<{ id: string }>();
+  const [searchText, setSearchText] = useState<string>("");
 
   useEffect(() => {
     const fetchMonitorAlerts = async () => {
@@ -79,35 +70,11 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
       console.error("Error downloading the file:", error);
     }
   };
-  const headerCells: readonly IHeaderCell[] = [
-    {
-      id: "timeStamp",
-      label: t("monitorAlerts.timeStamp"),
-      sortable: false,
-    },
-    {
-      id: "monitorName",
-      label: t("monitorAlerts.monitorName"),
-      sortable: true,
-    },
-    {
-      id: "monitorEnvironment",
-      label: t("dashboard.environment"),
-      sortable: true,
-    },
-    {
-      id: "monitorMessage",
-      label: t("monitorAlerts.message"),
-      sortable: true,
-    },
-    {
-      id: "screenshot",
-      label: t("monitorAlerts.screenshot"),
-      width: "220px",
-      sortable: true,
-    },
-  ];
-
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchText(event.target.value);
+  };
   return (
     <>
       <HelmetProvider>
@@ -127,20 +94,33 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                   marginBottom: 2,
                 }}
               >
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  sx={{
-                    backgroundColor: isDarkMode ? "#8bc34a" : "#4caf50",
-                    color: isDarkMode ? "#fff" : "#fefef7",
-                    "&:hover": {
-                      backgroundColor: isDarkMode ? "#8bd21a" : "#4cbf50",
-                    },
-                  }}
-                  onClick={handleExport}
-                >
-                  {t("monitorAlerts.export")}
-                </Button>
+                <div style={{ width: "75%", minWidth: "200px" }}>
+                  <FormControl fullWidth>
+                    <OutlinedInput
+                      size="small"
+                      startAdornment={<SearchOutlinedIcon />}
+                      value={searchText}
+                      onChange={handleSearchInputChange}
+                      placeholder={t("dashboard.search")}
+                    />
+                  </FormControl>
+                </div>
+                <div>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    sx={{
+                      backgroundColor: isDarkMode ? "#8bc34a" : "#4caf50",
+                      color: isDarkMode ? "#fff" : "#fefef7",
+                      "&:hover": {
+                        backgroundColor: isDarkMode ? "#8bd21a" : "#4cbf50",
+                      },
+                    }}
+                    onClick={handleExport}
+                  >
+                    {t("monitorAlerts.export")}
+                  </Button>
+                </div>
               </Box>
               <Box
                 sx={{
@@ -152,53 +132,9 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
               >
                 {isLoading ? (
                   <CircularProgress color="success" />
-                ) : monitorAlerts.length > 0 ? (
-                  <Table>
-                    <TableHead>
-                      <TableRow>
-                        {headerCells.map((headerCell: IHeaderCell) => (
-                          <TableCell key={headerCell.id}>
-                            {headerCell.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {monitorAlerts.map((alert) => (
-                        <TableRow key={alert.id}>
-                          <TableCell>
-                            {
-                              moment
-                                .utc(alert.timeStamp)
-                                .tz(selectedDisplayTimezone)
-                                .format("DD/MM/YYYY HH:mm:ss")
-                            }
-                          </TableCell>
-                          <TableCell>{alert.monitorName}</TableCell>
-                          <TableCell>{alert.environment === 0 ? 'N/A' : Environment[alert.environment]}</TableCell>
-                          <TableCell>{alert.message}</TableCell>
-                          <TableCell>
-                            {alert.screenShotUrl != null ? (
-                              <a
-                                href={alert.screenShotUrl}
-                                style={{
-                                  textDecoration: "none",
-                                  color: "unset",
-                                }}
-                              >
-                                Download
-                              </a>
-                            ) : (
-                              "N/A"
-                            )}
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
-                ) : (
-                  <p>{t("monitorAlerts.noResultFoundFor")}</p>
-                )}
+                ) :
+                  <MonitorAlertsTable monitorAlerts={monitorAlerts} searchText={searchText} />
+                }
               </Box>
             </CardContent>
           </Card>
