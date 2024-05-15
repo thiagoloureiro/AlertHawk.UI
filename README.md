@@ -1,30 +1,32 @@
-# React + TypeScript + Vite
+# Project Title
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Contributors](https://img.shields.io/github/contributors/your-repo-owner/your-repo-name.svg)](https://github.com/your-repo-owner/your-repo-name/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/your-repo-owner/your-repo-name.svg?style=social)](https://github.com/your-repo-owner/your-repo-name/network/members)
+[![Stars](https://img.shields.io/github/stars/your-repo-owner/your-repo-name.svg?style=social)](https://github.com/your-repo-owner/your-repo-name/stargazers)
+[![Issues](https://img.shields.io/github/issues/your-repo-owner/your-repo-name.svg)](https://github.com/your-repo-owner/your-repo-name/issues)
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Your project description goes here.
 
-## Expanding the ESLint configuration
+## Contributors
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Thanks to these wonderful people for their contributions to the project:
 
-- Configure the top-level `parserOptions` property like this:
+| [![BulandaK](https://avatars.githubusercontent.com/BulandaK?s=100)](https://github.com/BulandaK) | [![altughan09](https://avatars.githubusercontent.com/altughan09?s=100)](https://github.com/altughan09) | [![guilhermedclima](https://avatars.githubusercontent.com/guilhermedclima?s=100)](https://github.com/guilhermedclima) |
+|:---:|:---:|:---:|
+| [BulandaK](https://github.com/BulandaK) | [altughan09](https://github.com/altughan09) | [guilhermedclima](https://github.com/guilhermedclima) |
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+You can find the full list of contributors [here](https://github.com/your-repo-owner/your-repo-name/graphs/contributors).
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Installation
+
+Instructions for installing the project.
+
+## Usage
+
+Instructions for using the project.
+
+## License
+
+Information about the project's license.
