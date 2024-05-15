@@ -10,21 +10,29 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { IMonitorType } from "../../../interfaces/IMonitorType";
+import {
+  IMonitorGroupListByUser,
+  IMonitorGroupListByUserItem,
+} from "../../../interfaces/IMonitorGroupListByUser";
 import MonitorTypeService from "../../../services/MonitorTypeService";
 import HttpForm from "./HttpForm";
 import { useTranslation } from "react-i18next";
 import TcpForm from "./TcpForm";
 
-interface AddNewMonitorProps {
-  setAddMonitorPanel: (val: boolean) => void;
+interface EditMonitorProps {
+  setEditMonitorPanel: (val: boolean) => void;
+  monitorItemToBeEdited: IMonitorGroupListByUserItem | null;
+  monitorGroupToBeEdited: IMonitorGroupListByUser | null;
 }
 
-const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
-  setAddMonitorPanel,
+const EditMonitor: React.FC<EditMonitorProps> = ({
+  setEditMonitorPanel,
+  monitorItemToBeEdited,
+  monitorGroupToBeEdited,
 }) => {
   const [monitorTypes, setMonitorTypes] = useState<IMonitorType[]>([]);
   const [selectedMonitorType, setSelectedMonitorType] = useState<IMonitorType>({
-    id: 0,
+    id: monitorItemToBeEdited?.monitorTypeId,
   } as IMonitorType);
   const { t } = useTranslation("global");
 
@@ -50,7 +58,7 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
     <>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
         <Typography variant="h5" px={2} sx={{ marginBottom: "-15px" }}>
-        {t("dashboard.addHttpForm.addNewMonitor")}
+        {t("dashboard.updateHttpForm.updateMonitor")}
         </Typography>
         <Card>
           <CardContent>
@@ -69,6 +77,7 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
                   value={selectedMonitorType.id}
                   label={t("addNewMonitor.monitorType")}
                   onChange={handleMonitorTypeChange}
+                  disabled
                 >
                   {monitorTypes.map((type, key) => (
                     <MenuItem value={type.id} key={key}>
@@ -78,18 +87,22 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
                 </Select>
               </FormControl>
             </Box>
-            {selectedMonitorType?.name === "HTTP(s)" && (
+            {selectedMonitorType?.id === 1 && (
               <HttpForm
                 monitorTypeId={selectedMonitorType?.id}
-                setAddMonitorPanel={setAddMonitorPanel}
-                editMode={false}
+                setAddMonitorPanel={setEditMonitorPanel}
+                editMode={true}
+                monitorItemToBeEdited={monitorItemToBeEdited}
+                monitorGroupToBeEdited={monitorGroupToBeEdited}
               />
             )}
-            {selectedMonitorType?.name === "TCP Port" && (
+            {selectedMonitorType?.id === 3 && (
               <TcpForm
                 monitorTypeId={selectedMonitorType?.id}
-                setAddMonitorPanel={setAddMonitorPanel}
-                editMode={false}
+                setAddMonitorPanel={setEditMonitorPanel}
+                editMode={true}
+                monitorItemToBeEdited={monitorItemToBeEdited}
+                monitorGroupToBeEdited={monitorGroupToBeEdited}
               />
             )}
           </CardContent>
@@ -99,4 +112,4 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
   );
 };
 
-export default AddNewMonitor;
+export default EditMonitor;

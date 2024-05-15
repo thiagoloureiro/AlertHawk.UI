@@ -30,6 +30,7 @@ import MonitorService from "../../../services/MonitorService";
 import { useStoreActions } from "../../../hooks";
 import Chart from "../../../components/Charts/Chart";
 import { showSnackbar } from "../../../utils/snackbarHelper";
+import EditMonitor from "../Forms/EditMonitor";
 
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
@@ -41,17 +42,20 @@ interface ISelectedMonitorDetailsProps {
     | "uptime30Days"
     | "uptime3Months"
     | "uptime6Months";
+  setEditMonitorPanel: (val: boolean) => void;
+  editMonitorPanel: boolean;
 }
 
 const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   selectedMonitorGroup,
   selectedMonitorItem,
   selectedMetric,
+  setEditMonitorPanel,
+  editMonitorPanel,
 }) => {
   const { t } = useTranslation("global");
   const { isDarkMode } = useStoreState((state) => state.app);
   const [isPaused, setIsPaused] = useState<boolean>(false);
-  const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const navigate = useNavigate();
   const { thunkGetMonitorGroupListByUser } = useStoreActions(
     (actions) => actions.monitor
@@ -77,8 +81,8 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
         }
       );
     }
-    console.log(selectedMonitorItem?.id, selectedMonitorItem?.name);
   };
+
   const handleResumePauseBtn = async () => {
     if (selectedMonitorItem !== null) {
       await MonitorService.pauseMonitor(
@@ -112,7 +116,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   });
 
   const handleEditBtn = () => {
-    setIsEditMode(!isEditMode);
+    setEditMonitorPanel(true);
   };
 
   const renderUptimeBoxes = (uptimePercentage: number, status: boolean) => {
@@ -234,635 +238,660 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
   return (
     <>
-      <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        <Typography variant="h5" px={2} sx={{ marginBottom: "-10px" }}>
-          {selectedMonitorGroup?.name || selectedMonitorItem?.name}
-        </Typography>
-        {selectedMonitorItem !== null && (
-          <Box px={2}>
-            <a
-              href={
-                selectedMonitorItem.urlToCheck ??
-                selectedMonitorItem.monitorTcp ??
-                "#"
-              }
-              style={{
-                fontWeight: 700,
-                color: isDarkMode ? "#00bcd4" : "#0097a7",
-              }}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {selectedMonitorItem.urlToCheck ??
-                selectedMonitorItem.monitorTcp ??
-                "N/A"}
-            </a>
-          </Box>
-        )}
-
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2, px: 2 }}>
-          <ButtonGroup
-            variant="contained"
-            size="large"
-            color="secondary"
-            disableElevation
-          >
-            <Button
-              aria-label="pause/resume"
-              startIcon={isPaused ? <PlayArrowIcon /> : <PauseIcon />}
-              onClick={handleResumePauseBtn}
-            >
-              <Box sx={{ display: "flex", alignItems: "center" }}>
-                {isPaused ? t("dashboard.resume") : t("dashboard.pause")}
-              </Box>
-            </Button>
-            {selectedMonitorItem !== null && (
-              <Button
-                aria-label=""
-                startIcon={<EditNoteIcon />}
-                onClick={handleEditBtn}
-              >
-                {t("dashboard.edit")}
-              </Button>
-            )}
-            {selectedMonitorItem !== null && (
-              <Button
-                aria-label=""
-                startIcon={<NotificationsIcon />}
-                onClick={handleAlertBtn}
-              >
-                {t("dashboard.alarm")}
-              </Button>
-            )}
-            {selectedMonitorItem !== null && (
-              <Button
-                aria-label="delete"
-                startIcon={
-                  <DeleteIcon sx={{ color: isDarkMode ? "inherit" : "#fff" }} />
-                }
-                color="error"
-                onClick={handleDeleteBtn}
-              >
-                {t("dashboard.delete")}
-              </Button>
-            )}
-          </ButtonGroup>
+      {editMonitorPanel ? (
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <EditMonitor
+            setEditMonitorPanel={setEditMonitorPanel}
+            monitorItemToBeEdited={selectedMonitorItem}
+            monitorGroupToBeEdited={selectedMonitorGroup}
+          />
         </Box>
-        {selectedMonitorGroup !== null && (
-          <>
-            <Card>
-              <CardContent sx={{ position: "relative" }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    px: 6,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 1,
-                    }}
-                  >
-                    {selectedMonitorGroup.monitors.length === 0 ? (
-                      <Typography variant="body1">N/A</Typography>
-                    ) : (
-                      renderUptimeBoxes(
-                        calculateAverageUptime(selectedMonitorGroup.monitors) ??
-                          0,
-                        selectedMonitorGroup.monitors.every((x) => x.status)
-                      )
-                    )}
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    {selectedMonitorGroup.monitors.length === 0 ? (
-                      <Chip
-                        label={"N/A"}
-                        color="secondary"
-                        sx={{
-                          borderRadius: "56px",
-                          p: "20px 20px",
-                          "& .MuiChip-label": {
-                            color: isDarkMode ? "#fff" : "#676767",
-                            fontWeight: 700,
-                            fontSize: 24,
-                          },
-                        }}
-                      />
-                    ) : selectedMonitorGroup.monitors.some(
-                        (x) => x.status && x.paused
-                      ) ? (
-                      <Chip
-                        label={t("dashboard.paused")}
-                        color="secondary"
-                        sx={{
-                          borderRadius: "56px",
-                          p: "20px 20px",
-                          "& .MuiChip-label": {
-                            color: "primary",
-                            fontWeight: 700,
-                            fontSize: 24,
-                          },
-                        }}
-                      />
-                    ) : selectedMonitorGroup.monitors.every((x) => x.status) ? (
-                      <Chip
-                        label={t("dashboard.up")}
-                        color="success"
-                        sx={{
-                          borderRadius: "56px",
-                          p: "20px 20px",
-                          "& .MuiChip-label": {
-                            color: "#fff",
-                            fontWeight: 700,
-                            fontSize: 24,
-                          },
-                        }}
-                      />
-                    ) : (
-                      <Chip
-                        label={t("dashboard.down")}
-                        color="error"
-                        sx={{
-                          borderRadius: "56px",
-                          p: "20px 20px",
-                          "& .MuiChip-label": {
-                            color: "#fff",
-                            fontWeight: 700,
-                            fontSize: 24,
-                          },
-                        }}
-                      />
-                    )}
-                  </Box>
+      ) : (
+        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Typography variant="h5" px={2} sx={{ marginBottom: "-10px" }}>
+            {selectedMonitorGroup !== null
+              ? selectedMonitorItem !== null
+                ? selectedMonitorItem?.name
+                : selectedMonitorGroup?.name
+              : ""}
+          </Typography>
+          {selectedMonitorItem !== null && (
+            <Box px={2}>
+              <a
+                href={
+                  selectedMonitorItem.urlToCheck ??
+                  selectedMonitorItem.monitorTcp ??
+                  "#"
+                }
+                style={{
+                  fontWeight: 700,
+                  color: isDarkMode ? "#00bcd4" : "#0097a7",
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {selectedMonitorItem.urlToCheck ??
+                  selectedMonitorItem.monitorTcp ??
+                  "N/A"}
+              </a>
+            </Box>
+          )}
+
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2, px: 2 }}>
+            <ButtonGroup
+              variant="contained"
+              size="large"
+              color="secondary"
+              disableElevation
+            >
+              <Button
+                aria-label="pause/resume"
+                startIcon={isPaused ? <PlayArrowIcon /> : <PauseIcon />}
+                onClick={handleResumePauseBtn}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  {isPaused ? t("dashboard.resume") : t("dashboard.pause")}
                 </Box>
-                <Typography
-                  variant="subtitle2"
-                  color="secondary.light"
-                  px={4}
-                  sx={{ position: "absolute", left: "30px", bottom: "5px" }}
+              </Button>
+              {selectedMonitorItem !== null && (
+                <Button
+                  aria-label=""
+                  startIcon={<EditNoteIcon />}
+                  onClick={handleEditBtn}
                 >
-                  {getMetricName(selectedMetric).split(" ")[0]}{" "}
-                  {t(
-                    `dashboard.${getMetricName(selectedMetric)
-                      .split(" ")[1]
-                      .toLowerCase()}`
-                  )}
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                  }}
+                  {t("dashboard.edit")}
+                </Button>
+              )}
+              {selectedMonitorItem !== null && (
+                <Button
+                  aria-label=""
+                  startIcon={<NotificationsIcon />}
+                  onClick={handleAlertBtn}
                 >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (1 {t("dashboard.hour")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime1Hr
-                        ? selectedMonitorGroup.avgUptime1Hr.toFixed(2) + " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (24 {t("dashboard.hours")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime24Hrs
-                        ? selectedMonitorGroup.avgUptime24Hrs.toFixed(2) + " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (7 {t("dashboard.days")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime7Days
-                        ? selectedMonitorGroup.avgUptime7Days.toFixed(2) + " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (30 {t("dashboard.days")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime30Days
-                        ? selectedMonitorGroup.avgUptime30Days.toFixed(2) + " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (3 {t("dashboard.months")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime3Months
-                        ? selectedMonitorGroup.avgUptime3Months.toFixed(2) +
-                          " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (6 {t("dashboard.months")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime6Months
-                        ? selectedMonitorGroup.avgUptime6Months.toFixed(2) +
-                          " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-          </>
-        )}
-        {selectedMonitorItem !== null && (
-          <>
-            <Card>
-              <CardContent sx={{ position: "relative" }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    px: 6,
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: 1,
-                    }}
-                  >
-                    {renderUptimeBoxes(
-                      selectedMonitorItem.monitorStatusDashboard[
-                        selectedMetric
-                      ] ?? 0,
-                      selectedMonitorItem.status
-                    )}
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                     {selectedMonitorItem.paused ? (
-                    <Chip
-                      label={t("dashboard.paused")}
-                      color="secondary"
-                      sx={{
-                        borderRadius: "56px",
-                        p: "20px 20px",
-                        "& .MuiChip-label": {
-                          color: "primary",
-                          fontWeight: 700,
-                          fontSize: 24,
-                        },
-                      }}
+                  {t("dashboard.alarm")}
+                </Button>
+              )}
+              {selectedMonitorItem !== null && (
+                <Button
+                  aria-label="delete"
+                  startIcon={
+                    <DeleteIcon
+                      sx={{ color: isDarkMode ? "inherit" : "#fff" }}
                     />
-                  ) : selectedMonitorItem.status ? (
-                    <Chip
-                      label={t("dashboard.up")}
-                      color="success"
+                  }
+                  color="error"
+                  onClick={handleDeleteBtn}
+                >
+                  {t("dashboard.delete")}
+                </Button>
+              )}
+            </ButtonGroup>
+          </Box>
+          {selectedMonitorGroup !== null && selectedMonitorItem === null && (
+            <>
+              <Card>
+                <CardContent sx={{ position: "relative" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      px: 6,
+                    }}
+                  >
+                    <Box
                       sx={{
-                        borderRadius: "56px",
-                        p: "20px 20px",
-                        "& .MuiChip-label": {
-                          color: "#fff",
-                          fontWeight: 700,
-                          fontSize: 24,
-                        },
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 1,
                       }}
-                    />
-                  ) : (
-                    <Chip
-                      label={t("dashboard.down")}
-                      color="error"
+                    >
+                      {selectedMonitorGroup.monitors.length === 0 ? (
+                        <Typography variant="body1">N/A</Typography>
+                      ) : (
+                        renderUptimeBoxes(
+                          calculateAverageUptime(
+                            selectedMonitorGroup.monitors
+                          ) ?? 0,
+                          selectedMonitorGroup.monitors.every((x) => x.status)
+                        )
+                      )}
+                    </Box>
+                    <Box
                       sx={{
-                        borderRadius: "56px",
-                        p: "20px 20px",
-                        "& .MuiChip-label": {
-                          color: "#fff",
-                          fontWeight: 700,
-                          fontSize: 24,
-                        },
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
-                    />
-                  )}
+                    >
+                      {selectedMonitorGroup.monitors.length === 0 ? (
+                        <Chip
+                          label={"N/A"}
+                          color="secondary"
+                          sx={{
+                            borderRadius: "56px",
+                            p: "20px 20px",
+                            "& .MuiChip-label": {
+                              color: isDarkMode ? "#fff" : "#676767",
+                              fontWeight: 700,
+                              fontSize: 24,
+                            },
+                          }}
+                        />
+                      ) : selectedMonitorGroup.monitors.some(
+                          (x) => x.status && x.paused
+                        ) ? (
+                        <Chip
+                          label={t("dashboard.paused")}
+                          color="secondary"
+                          sx={{
+                            borderRadius: "56px",
+                            p: "20px 20px",
+                            "& .MuiChip-label": {
+                              color: "primary",
+                              fontWeight: 700,
+                              fontSize: 24,
+                            },
+                          }}
+                        />
+                      ) : selectedMonitorGroup.monitors.every(
+                          (x) => x.status
+                        ) ? (
+                        <Chip
+                          label={t("dashboard.up")}
+                          color="success"
+                          sx={{
+                            borderRadius: "56px",
+                            p: "20px 20px",
+                            "& .MuiChip-label": {
+                              color: "#fff",
+                              fontWeight: 700,
+                              fontSize: 24,
+                            },
+                          }}
+                        />
+                      ) : (
+                        <Chip
+                          label={t("dashboard.down")}
+                          color="error"
+                          sx={{
+                            borderRadius: "56px",
+                            p: "20px 20px",
+                            "& .MuiChip-label": {
+                              color: "#fff",
+                              fontWeight: 700,
+                              fontSize: 24,
+                            },
+                          }}
+                        />
+                      )}
+                    </Box>
                   </Box>
-                </Box>
-                <Typography
-                  variant="subtitle2"
-                  color="secondary.light"
-                  px={4}
-                  sx={{ position: "absolute", left: "30px", bottom: "5px" }}
-                >
-                  {getMetricName(selectedMetric)}
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                  }}
-                >
+                  <Typography
+                    variant="subtitle2"
+                    color="secondary.light"
+                    px={4}
+                    sx={{ position: "absolute", left: "30px", bottom: "5px" }}
+                  >
+                    {getMetricName(selectedMetric).split(" ")[0]}{" "}
+                    {t(
+                      `dashboard.${getMetricName(selectedMetric)
+                        .split(" ")[1]
+                        .toLowerCase()}`
+                    )}
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent>
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
                       alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "space-around",
                     }}
                   >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (1 {t("dashboard.hour")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {typeof selectedMonitorItem.monitorStatusDashboard
-                        .uptime1Hr === "number" &&
-                      selectedMonitorItem.monitorStatusDashboard.uptime1Hr >= 0
-                        ? selectedMonitorItem.monitorStatusDashboard.uptime1Hr.toFixed(
-                            2
-                          ) + " %"
-                        : "N/A"}
-                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (1 {t("dashboard.hour")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorGroup.avgUptime1Hr
+                          ? selectedMonitorGroup.avgUptime1Hr.toFixed(2) + " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (24 {t("dashboard.hours")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorGroup.avgUptime24Hrs
+                          ? selectedMonitorGroup.avgUptime24Hrs.toFixed(2) +
+                            " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (7 {t("dashboard.days")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorGroup.avgUptime7Days
+                          ? selectedMonitorGroup.avgUptime7Days.toFixed(2) +
+                            " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (30 {t("dashboard.days")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorGroup.avgUptime30Days
+                          ? selectedMonitorGroup.avgUptime30Days.toFixed(2) +
+                            " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (3 {t("dashboard.months")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorGroup.avgUptime3Months
+                          ? selectedMonitorGroup.avgUptime3Months.toFixed(2) +
+                            " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (6 {t("dashboard.months")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorGroup.avgUptime6Months
+                          ? selectedMonitorGroup.avgUptime6Months.toFixed(2) +
+                            " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
                   </Box>
+                </CardContent>
+              </Card>
+            </>
+          )}
+          {selectedMonitorItem !== null && (
+            <>
+              <Card>
+                <CardContent sx={{ position: "relative" }}>
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
                       alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "space-between",
+                      px: 6,
                     }}
                   >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (24 {t("dashboard.hours")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {typeof selectedMonitorItem.monitorStatusDashboard
-                        .uptime24Hrs === "number" &&
-                      selectedMonitorItem.monitorStatusDashboard.uptime24Hrs >=
-                        0
-                        ? selectedMonitorItem.monitorStatusDashboard.uptime24Hrs.toFixed(
-                            2
-                          ) + " %"
-                        : "N/A"}
-                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 1,
+                      }}
+                    >
+                      {renderUptimeBoxes(
+                        selectedMonitorItem.monitorStatusDashboard[
+                          selectedMetric
+                        ] ?? 0,
+                        selectedMonitorItem.status
+                      )}
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {selectedMonitorItem.paused ? (
+                        <Chip
+                          label={t("dashboard.paused")}
+                          color="secondary"
+                          sx={{
+                            borderRadius: "56px",
+                            p: "20px 20px",
+                            "& .MuiChip-label": {
+                              color: "primary",
+                              fontWeight: 700,
+                              fontSize: 24,
+                            },
+                          }}
+                        />
+                      ) : selectedMonitorItem.status ? (
+                        <Chip
+                          label={t("dashboard.up")}
+                          color="success"
+                          sx={{
+                            borderRadius: "56px",
+                            p: "20px 20px",
+                            "& .MuiChip-label": {
+                              color: "#fff",
+                              fontWeight: 700,
+                              fontSize: 24,
+                            },
+                          }}
+                        />
+                      ) : (
+                        <Chip
+                          label={t("dashboard.down")}
+                          color="error"
+                          sx={{
+                            borderRadius: "56px",
+                            p: "20px 20px",
+                            "& .MuiChip-label": {
+                              color: "#fff",
+                              fontWeight: 700,
+                              fontSize: 24,
+                            },
+                          }}
+                        />
+                      )}
+                    </Box>
                   </Box>
+                  <Typography
+                    variant="subtitle2"
+                    color="secondary.light"
+                    px={4}
+                    sx={{ position: "absolute", left: "30px", bottom: "5px" }}
+                  >
+                    {getMetricName(selectedMetric)}
+                  </Typography>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent>
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
                       alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "space-around",
                     }}
                   >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (7 {t("dashboard.days")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {typeof selectedMonitorItem.monitorStatusDashboard
-                        .uptime7Days === "number" &&
-                      selectedMonitorItem.monitorStatusDashboard.uptime7Days >=
-                        0
-                        ? selectedMonitorItem.monitorStatusDashboard.uptime7Days.toFixed(
-                            2
-                          ) + " %"
-                        : "N/A"}
-                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (1 {t("dashboard.hour")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {typeof selectedMonitorItem.monitorStatusDashboard
+                          .uptime1Hr === "number" &&
+                        selectedMonitorItem.monitorStatusDashboard.uptime1Hr >=
+                          0
+                          ? selectedMonitorItem.monitorStatusDashboard.uptime1Hr.toFixed(
+                              2
+                            ) + " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (24 {t("dashboard.hours")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {typeof selectedMonitorItem.monitorStatusDashboard
+                          .uptime24Hrs === "number" &&
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime24Hrs >= 0
+                          ? selectedMonitorItem.monitorStatusDashboard.uptime24Hrs.toFixed(
+                              2
+                            ) + " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (7 {t("dashboard.days")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {typeof selectedMonitorItem.monitorStatusDashboard
+                          .uptime7Days === "number" &&
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime7Days >= 0
+                          ? selectedMonitorItem.monitorStatusDashboard.uptime7Days.toFixed(
+                              2
+                            ) + " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (30 {t("dashboard.days")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {typeof selectedMonitorItem.monitorStatusDashboard
+                          .uptime30Days === "number" &&
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime30Days >= 0
+                          ? selectedMonitorItem.monitorStatusDashboard.uptime30Days.toFixed(
+                              2
+                            ) + " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (3 {t("dashboard.months")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {typeof selectedMonitorItem.monitorStatusDashboard
+                          .uptime3Months === "number" &&
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime3Months >= 0
+                          ? selectedMonitorItem.monitorStatusDashboard.uptime3Months.toFixed(
+                              2
+                            ) + " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.uptime")}
+                      </Typography>
+                      <Typography variant="body2">
+                        (6 {t("dashboard.months")})
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {typeof selectedMonitorItem.monitorStatusDashboard
+                          .uptime6Months === "number" &&
+                        selectedMonitorItem.monitorStatusDashboard
+                          .uptime6Months >= 0
+                          ? selectedMonitorItem.monitorStatusDashboard.uptime6Months.toFixed(
+                              2
+                            ) + " %"
+                          : "N/A"}
+                      </Typography>
+                    </Box>
                   </Box>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent>
                   <Box
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
                       alignItems: "center",
-                      justifyContent: "center",
+                      justifyContent: "space-around",
                     }}
                   >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (30 {t("dashboard.days")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {typeof selectedMonitorItem.monitorStatusDashboard
-                        .uptime30Days === "number" &&
-                      selectedMonitorItem.monitorStatusDashboard.uptime30Days >=
-                        0
-                        ? selectedMonitorItem.monitorStatusDashboard.uptime30Days.toFixed(
-                            2
-                          ) + " %"
-                        : "N/A"}
-                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.response")}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorItem.monitorStatusDashboard
+                          .responseTime + " ms"}
+                      </Typography>
+                    </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <Typography variant="h6">
+                        {t("dashboard.certificateexpiration")}
+                      </Typography>
+                      <Typography variant="subtitle1">
+                        {selectedMonitorItem.monitorStatusDashboard
+                          .certExpDays + " days"}
+                      </Typography>
+                    </Box>
                   </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (3 {t("dashboard.months")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {typeof selectedMonitorItem.monitorStatusDashboard
-                        .uptime3Months === "number" &&
-                      selectedMonitorItem.monitorStatusDashboard
-                        .uptime3Months >= 0
-                        ? selectedMonitorItem.monitorStatusDashboard.uptime3Months.toFixed(
-                            2
-                          ) + " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.uptime")}
-                    </Typography>
-                    <Typography variant="body2">
-                      (6 {t("dashboard.months")})
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {typeof selectedMonitorItem.monitorStatusDashboard
-                        .uptime6Months === "number" &&
-                      selectedMonitorItem.monitorStatusDashboard
-                        .uptime6Months >= 0
-                        ? selectedMonitorItem.monitorStatusDashboard.uptime6Months.toFixed(
-                            2
-                          ) + " %"
-                        : "N/A"}
-                    </Typography>
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.response")}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorItem.monitorStatusDashboard.responseTime +
-                        " ms"}
-                    </Typography>
-                  </Box>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <Typography variant="h6">
-                      {t("dashboard.certificateexpiration")}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                      {selectedMonitorItem.monitorStatusDashboard.certExpDays +
-                        " days"}
-                    </Typography>
-                  </Box>
-                </Box>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardContent>
-                <Chart
-                  data={selectedMonitorItem.monitorStatusDashboard.historyData}
-                />
-              </CardContent>
-            </Card>
-          </>
-        )}
-      </Box>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardContent>
+                  <Chart
+                    data={
+                      selectedMonitorItem.monitorStatusDashboard.historyData
+                    }
+                  />
+                </CardContent>
+              </Card>
+            </>
+          )}
+        </Box>
+      )}
       <Dialog
         open={openDeleteDialog}
         onClose={handleCloseDeleteDialog}
