@@ -82,7 +82,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       );
     }
   };
- 
+
   const handleResumePauseBtn = async () => {
     if (selectedMonitorItem !== null) {
       await MonitorService.pauseMonitor(
@@ -249,7 +249,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       ) : (
         <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
           <Typography variant="h5" px={2} sx={{ marginBottom: "-10px" }}>
-            {selectedMonitorGroup?.name || selectedMonitorItem?.name}
+            {selectedMonitorGroup !== null
+              ? selectedMonitorItem !== null
+                ? selectedMonitorItem?.name
+                : selectedMonitorGroup?.name
+              : ""}
           </Typography>
           {selectedMonitorItem !== null && (
             <Box px={2}>
