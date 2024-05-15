@@ -58,7 +58,7 @@ const EditMonitor: React.FC<EditMonitorProps> = ({
     <>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
         <Typography variant="h5" px={2} sx={{ marginBottom: "-15px" }}>
-          Edit monitor
+        {t("dashboard.updateHttpForm.updateMonitor")}
         </Typography>
         <Card>
           <CardContent>

@@ -43,9 +43,13 @@
     "deleteConfirmation": "Monitor has been deleted!",
     "confirmDeleteTitle": "Delete Confirmation",
     "confirmDeleteMessage": "Are you sure you want to delete this monitor?",
+    "updateHttpForm": {
+      "updateMonitor": "Update Monitor"
+    },
     "addHttpForm": {
       "success": "Monitor has been added!",
       "addNewMonitor": "Add New Monitor",
+      "Monitor": "Add New Monitor",
       "monitorType": "Monitor Type",
       "monitorName": "Monitor Name",
       "monitorGroup": "Monitor Group",
@@ -204,8 +208,6 @@
     "toCCEmail":"To CC Email",
     "toBCCEmail": "To BCC email",
     "enableSsl": "Enable Ssl",
-    "yes": "Yes",
-    "no": "No",
     "subject": "Subject",
     "isHtmlBody": "Is html body",
     "errors": {
@@ -213,5 +215,4 @@
     "validEmail": "Email is invalid"
     } 
   }
-    
 }

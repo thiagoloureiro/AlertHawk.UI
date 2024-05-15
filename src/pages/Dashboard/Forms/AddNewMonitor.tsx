@@ -50,7 +50,7 @@ const AddNewMonitor: React.FC<AddNewMonitorProps> = ({
     <>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 4 }}>
         <Typography variant="h5" px={2} sx={{ marginBottom: "-15px" }}>
-          Add new monitor
+        {t("dashboard.addHttpForm.addNewMonitor")}
         </Typography>
         <Card>
           <CardContent>
