@@ -167,6 +167,15 @@ const MonitorService = {
       monitor,
       appendOptionalHeaders(headers)
     ),
+  editTcpMonitor: async (
+    monitor: IMonitorTcp,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      `Monitor/updateMonitorTcp`,
+      monitor,
+      appendOptionalHeaders(headers)
+    ),
   deleteGroupMonitor: async (
     monitorId: number,
     headers?: AxiosHeaders
