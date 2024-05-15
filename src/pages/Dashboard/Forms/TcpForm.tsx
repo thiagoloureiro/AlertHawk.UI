@@ -90,18 +90,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     ).then((response: any) => {
       console.log(response);
       setDataToEdit(response);
-      reset({
-        name: response.name,
-        monitorRegion: response.monitorRegion,
-        monitorEnvironment: response.monitorEnvironment,
-        heartBeatInterval: response.heartBeatInterval,
-        port: response.port,
-        ip: response.ip,
-        timeout: response.timeout,
-        status: response.status,
-        retries: response.retries,
-        monitorTypeId: monitorTypeId,
-      });
+      reset(response);
     });
   };
 
@@ -129,17 +118,29 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     data.checkCertExpiry = data.checkCertExpiry === "1";
     data.ignoreTlsSsl = data.ignoreTlsSsl === "1";
     data.port = parseInt(data.port, 10);
-    await MonitorService.createTcpMonitor(data).then(async (response: any) => {
-      await MonitorService.addMonitorToGroup({
-        monitorId: response,
-        monitorgroupId: data.monitorGroup,
-      }).then(async () => {
+
+    if (editMode) {
+      await MonitorService.editTcpMonitor(data).then(async () => {
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
         showSnackbar(t("dashboard.addHttpForm.success"), "success");
         await thunkGetMonitorGroupListByUser(selectedEnvironment);
       });
-    });
+    } else {
+      await MonitorService.createTcpMonitor(data).then(
+        async (response: any) => {
+          await MonitorService.addMonitorToGroup({
+            monitorId: response,
+            monitorgroupId: data.monitorGroup,
+          }).then(async () => {
+            setIsButtonDisabled(false);
+            setAddMonitorPanel(false);
+            showSnackbar(t("dashboard.addHttpForm.success"), "success");
+            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          });
+        }
+      );
+    }
   };
 
   return (
