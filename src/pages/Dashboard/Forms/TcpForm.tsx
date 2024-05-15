@@ -15,51 +15,84 @@ import { useForm } from "react-hook-form";
 import MonitorService from "../../../services/MonitorService";
 import { showSnackbar } from "../../../utils/snackbarHelper";
 import { useTranslation } from "react-i18next";
-import { IMonitorGroupListByUser } from "../../../interfaces/IMonitorGroupListByUser";
+import {
+  IMonitorGroupListByUser,
+  IMonitorGroupListByUserItem,
+} from "../../../interfaces/IMonitorGroupListByUser";
 
 interface IAddTcpMonitorProps {
   monitorTypeId: number;
   setAddMonitorPanel: (val: boolean) => void;
+  editMode: boolean;
+  monitorItemToBeEdited?: IMonitorGroupListByUserItem | null;
+  monitorGroupToBeEdited?: IMonitorGroupListByUser | null;
 }
 const TcpForm: React.FC<IAddTcpMonitorProps> = ({
   monitorTypeId,
   setAddMonitorPanel,
+  editMode,
+  monitorItemToBeEdited,
+  monitorGroupToBeEdited,
 }) => {
   const { t } = useTranslation("global");
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
+    watch,
   } = useForm({
     defaultValues: {
-      name: "",
+      name: editMode ? monitorItemToBeEdited?.name : "",
       monitorGroup: null,
-      monitorRegion: null,
-      monitorEnvironment: null,
+      monitorRegion: editMode ? 1 : null,
+      monitorEnvironment: editMode ? 1 : null,
       heartBeatInterval: 1,
       port: 0,
-      ip: "",
+      ip: " ",
       timeout: 20,
       status: true,
       retries: 3,
       monitorTypeId: monitorTypeId,
     },
   });
+
+  const watchMonitorRegion = watch("monitorRegion");
+  const watchMonitorEnvironment = watch("monitorEnvironment");
+
   const { selectedEnvironment } = useStoreState((state) => state.app);
   const { thunkGetMonitorGroupListByUser } = useStoreActions(
     (actions) => actions.monitor
   );
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
-  const [hasGroupSelected, setHasGroupSelected] = useState(false);
+  const [hasGroupSelected, setHasGroupSelected] = useState(
+    monitorGroupToBeEdited?.id ? true : false
+  );
   const [monitorGroupList, setMonitorGroupList] = useState<
     IMonitorGroupListByUser[]
   >([]);
+
+  const [dataToEdit, setDataToEdit] = useState(null);
+
   useEffect(() => {
     if (monitorGroupList.length === 0) {
       fillMonitorGroupList();
     }
+    if (editMode && dataToEdit == null) {
+      getEditData();
+    }
   });
+
+  const getEditData = async () => {
+    await MonitorService.getMonitorTcpByMonitorId(
+      monitorItemToBeEdited?.id
+    ).then((response: any) => {
+      // console.log(response);
+      setDataToEdit(response);
+      reset(response);
+    });
+  };
 
   const fillMonitorGroupList = async () => {
     await MonitorService.getMonitorGroupListByUserToken().then((response) => {
@@ -85,17 +118,46 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     data.checkCertExpiry = data.checkCertExpiry === "1";
     data.ignoreTlsSsl = data.ignoreTlsSsl === "1";
     data.port = parseInt(data.port, 10);
-    await MonitorService.createTcpMonitor(data).then(async (response: any) => {
-      await MonitorService.addMonitorToGroup({
-        monitorId: response,
-        monitorgroupId: data.monitorGroup,
-      }).then(async () => {
-        setIsButtonDisabled(false);
-        setAddMonitorPanel(false);
-        showSnackbar(t("dashboard.addHttpForm.success"), "success");
-        await thunkGetMonitorGroupListByUser(selectedEnvironment);
+
+    data.retries = Number(data.retries);
+    data.heartBeatInterval = Number(data.heartBeatInterval);
+    data.timeout = Number(data.timeout);
+    data.part = Number(data.port);
+
+    if (editMode) {
+      await MonitorService.editTcpMonitor(data).then(async () => {
+        if (monitorGroupToBeEdited?.id != data.monitorGroup) {
+          await MonitorService.addMonitorToGroup({
+            monitorId: data.id,
+            monitorgroupId: data.monitorGroup,
+          }).then(async () => {
+            setIsButtonDisabled(false);
+            setAddMonitorPanel(false);
+            showSnackbar(t("dashboard.addHttpForm.success"), "success");
+            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          });
+        } else {
+          setIsButtonDisabled(false);
+          setAddMonitorPanel(false);
+          showSnackbar(t("dashboard.addHttpForm.success"), "success");
+          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        }
       });
-    });
+    } else {
+      await MonitorService.createTcpMonitor(data).then(
+        async (response: any) => {
+          await MonitorService.addMonitorToGroup({
+            monitorId: response,
+            monitorgroupId: data.monitorGroup,
+          }).then(async () => {
+            setIsButtonDisabled(false);
+            setAddMonitorPanel(false);
+            showSnackbar(t("dashboard.addHttpForm.success"), "success");
+            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          });
+        }
+      );
+    }
   };
 
   return (
@@ -120,6 +182,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
               id="monitorGroup-selection"
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
+              defaultValue={monitorGroupToBeEdited?.id}
+              // disabled={editMode}
             >
               {monitorGroupList
                 .sort((a, b) => a.name.localeCompare(b.name))
@@ -174,7 +238,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                 </InputLabel>
                 <Select
                   labelId="monitorRegion-selection"
-                  defaultValue=""
+                  value={watchMonitorRegion}
                   {...register("monitorRegion", { required: true })}
                   id="monitorRegion-selection"
                   label={t("dashboard.addHttpFrom.monitorRegion")}
@@ -207,7 +271,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   labelId="monitorEnvironment-selection"
                   {...register("monitorEnvironment", { required: true })}
                   id="monitorEnvironment-selection"
-                  defaultValue=""
+                  value={watchMonitorEnvironment}
                   label={t("dashboard.addHttpForm.monitorEnvironment")}
                   error={!!errors.monitorEnvironment}
                 >

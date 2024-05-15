@@ -25,7 +25,7 @@ interface ICollapsibleTable {
   selectedRowIndex: number | null;
   selectedChildRowIndex: number | null;
   handleRowClick: (monitorId: number) => void;
-  handleChildRowClick: (childMonitorId: number) => void;
+  handleChildRowClick: (childMonitorId: number, monitorGroupId: number) => void;
   selectedMetric:
   | "uptime1Hr"
   | "uptime24Hrs"
@@ -69,7 +69,9 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
 
   useEffect(() => {
     const downServices = monitors.flatMap((monitorGroup) =>
-      monitorGroup.monitors.filter((monitor) => !monitor.status && !monitor.paused)
+      monitorGroup.monitors.filter(
+        (monitor) => !monitor.status && !monitor.paused
+      )
     );
     const certificateExpirationList = monitors.flatMap((monitorGroup) =>
       monitorGroup.monitors
@@ -152,6 +154,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
                 <CollapsibleTableRow
                   key={monitorGroup.id}
                   monitorGroup={monitorGroup}
+                  monitorGroupId={monitorGroup.id}
                   isSelected={selectedRowIndex === monitorGroup.id}
                   selectedChildRowIndex={selectedChildRowIndex}
                   onRowClick={() => handleRowClick(monitorGroup.id)}
