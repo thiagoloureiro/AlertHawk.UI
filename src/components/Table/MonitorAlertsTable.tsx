@@ -42,7 +42,7 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
     const calculateMaxRowNumber = () => {
       const windowHeight = window.innerHeight;
       const rowHeight = 84;
-      const maxRows = Math.floor((windowHeight - 400) / rowHeight);
+      const maxRows = Math.floor((windowHeight - 200) / rowHeight);
       setMaxRowNumber(maxRows);
     };
 
