@@ -206,9 +206,17 @@
     "enableSsl": "SSLを有効にする",
     "subject": "件名",
     "isHtmlBody": "HTML本文",
+    "fillAllTheMandatoryFields": "すべての必須フィールドに入力してください",
+    "testNotificationSuccess": "テスト通知が送信されました！",
+    "testNotificationFail": "テスト通知が失敗しました！",
+    "testNotification": "テスト通知",
+    "testNotificationTitle": "テスト通知",
+    "testNotificationMessage": "テスト通知を送信してもよろしいですか？",
+    "sendTest": "テスト送信",
     "errors": {
       "url": "URLが無効です",
       "validEmail": "メールアドレスが無効です"
     }
+    
   }
 }

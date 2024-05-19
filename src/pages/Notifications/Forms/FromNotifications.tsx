@@ -265,7 +265,7 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
     if (isValid) {
       setOpenTestDialog(true);
     } else {
-      showSnackbar(t("notifications.fielsMustBefilled"), "error");
+      showSnackbar(t("notifications.fillAllTheMandatoryFields"), "error");
     }
   };
 

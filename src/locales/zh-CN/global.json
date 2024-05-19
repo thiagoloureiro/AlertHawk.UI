@@ -206,6 +206,13 @@
     "enableSsl": "启用SSL",
     "subject": "主题",
     "isHtmlBody": "是否为HTML主体",
+    "fillAllTheMandatoryFields": "填写所有必填字段",
+    "testNotificationSuccess": "测试通知已发送！",
+    "testNotificationFail": "测试通知发送失败！",
+    "testNotification": "测试通知",
+    "testNotificationTitle": "测试通知",
+    "testNotificationMessage": "您确定要发送测试通知吗？",
+    "sendTest": "发送测试",
     "errors": {
       "url": "URL无效",
       "validEmail": "电子邮件无效"
