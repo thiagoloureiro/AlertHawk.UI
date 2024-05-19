@@ -42,4 +42,5 @@ interface INotification {
       headers: { item1: string; item2: string }[];
   };
   notificationType: INotificationType;
+  message?: string;
 }
