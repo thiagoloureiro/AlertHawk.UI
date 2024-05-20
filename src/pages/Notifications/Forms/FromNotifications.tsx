@@ -263,7 +263,13 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
       message: testMessage
     };
     try {
-      await NotificationService.sendManualNotification(data);
+     var response =  await NotificationService.sendManualNotification(data);
+      console.log(response, 'data')
+      if(!response)
+        {
+          showSnackbar(t("notifications.testNotificationFail"), "error");
+          return;
+        }
       showSnackbar(t("notifications.testNotificationSuccess"), "success");
     } catch (err) {
       logging.error(err);

@@ -51,7 +51,7 @@ const NotificationService = {
     sendManualNotification: async (
       notification: INotification,
       headers?: AxiosHeaders
-    ): Promise<void> =>
+    ): Promise<boolean> =>
       await requests.post(
         `Notification/SendManualNotification`,
         notification,

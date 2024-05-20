@@ -131,7 +131,7 @@ const FormEmail: React.FC<IFormEmailProps> = ({ register, errors, watch }) => {
             >
                 <FormControl fullWidth>
                     <TextField
-                        {...register("password", { required: true })}
+                        {...register("notificationEmail.password", { required: true })}
                         fullWidth
                         label={t("notifications.password")}
                         margin="normal"
