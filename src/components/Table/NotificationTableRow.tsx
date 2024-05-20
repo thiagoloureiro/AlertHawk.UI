@@ -55,8 +55,8 @@ const NotificationTableRow: FC<INotificationTableRowProps> = ({
           sx={
             selectedNotification?.id === notification.id
               ? {
-                borderTopLeftRadius: "10px",
-                borderBottomLeftRadius: "10px",
+                borderTopRightRadius: "10px",
+                borderBottomRightRadius: "10px",
               }
               : {}
           }

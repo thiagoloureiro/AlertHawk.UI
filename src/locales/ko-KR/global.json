@@ -206,6 +206,13 @@
     "enableSsl": "SSL 활성화",
     "subject": "제목",
     "isHtmlBody": "HTML 본문 여부",
+    "fillAllTheMandatoryFields": "모든 필수 필드를 작성하십시오",
+    "testNotificationSuccess": "테스트 알림이 전송되었습니다!",
+    "testNotificationFail": "테스트 알림 전송에 실패했습니다!",
+    "testNotification": "테스트 알림",
+    "testNotificationTitle": "테스트 알림",
+    "testNotificationMessage": "테스트 알림을 보내시겠습니까?",
+    "sendTest": "테스트 전송",
     "errors": {
       "url": "URL이 잘못되었습니다",
       "validEmail": "유효하지 않은 이메일입니다"

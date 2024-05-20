@@ -206,6 +206,13 @@
     "enableSsl": "Abilita SSL",
     "subject": "Oggetto",
     "isHtmlBody": "Corpo HTML",
+    "fillAllTheMandatoryFields": "Compila tutti i campi obbligatori",
+    "testNotificationSuccess": "La notifica di test è stata inviata!",
+    "testNotificationFail": "La notifica di test è fallita!",
+    "testNotification": "Notifica di test",
+    "testNotificationTitle": "Notifica di test",
+    "testNotificationMessage": "Sei sicuro di voler inviare una notifica di test?",
+    "sendTest": "Invia test",
     "errors": {
       "url": "URL non valido",
       "validEmail": "Email non valida"

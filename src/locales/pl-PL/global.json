@@ -206,6 +206,13 @@
     "enableSsl": "Włącz SSL",
     "subject": "Temat",
     "isHtmlBody": "Czy jest ciałem HTML",
+    "fillAllTheMandatoryFields": "Wypełnij wszystkie obowiązkowe pola",
+    "testNotificationSuccess": "Powiadomienie testowe zostało wysłane!",
+    "testNotificationFail": "Powiadomienie testowe nie powiodło się!",
+    "testNotification": "Powiadomienie testowe",
+    "testNotificationTitle": "Powiadomienie testowe",
+    "testNotificationMessage": "Czy na pewno chcesz wysłać powiadomienie testowe?",
+    "sendTest": "Wyślij test",
     "errors": {
       "url": "URL jest nieprawidłowy",
       "validEmail": "Adres e-mail jest nieprawidłowy"

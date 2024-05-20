@@ -206,6 +206,13 @@
     "enableSsl": "SSL etkinleştir",
     "subject": "Konu",
     "isHtmlBody": "HTML gövde",
+    "fillAllTheMandatoryFields": "Tüm zorunlu alanları doldurun",
+    "testNotificationSuccess": "Test bildirimi gönderildi!",
+    "testNotificationFail": "Test bildirimi başarısız oldu!",
+    "testNotification": "Test Bildirimi",
+    "testNotificationTitle": "Test Bildirimi",
+    "testNotificationMessage": "Test bildirimi göndermek istediğinizden emin misiniz?",
+    "sendTest": "Test Gönder",
     "errors": {
       "url": "URL geçersiz",
       "validEmail": "E-posta geçersiz"
