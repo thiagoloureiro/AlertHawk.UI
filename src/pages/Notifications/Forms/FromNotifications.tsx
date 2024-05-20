@@ -33,10 +33,7 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
   const [headers, setHeaders] = useState<{ name: string; value: string }[]>([]);
   const [openTestDialog, setOpenTestDialog] = useState(false);
   const [testMessage, setTestMessage] = useState('');
-
   
-
- 
   const {
     register,
     handleSubmit,
