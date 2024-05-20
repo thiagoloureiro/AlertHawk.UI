@@ -10,17 +10,17 @@ import { useStoreState } from '../../../hooks';
 import React, { useEffect, useState } from 'react';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { showSnackbar } from "../../../utils/snackbarHelper";
-import MonitorService from '../../../services/MonitorService';
 import NotificationService from '../../../services/NotificationService';
-import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
 import { Box, Typography, Card, CardContent, FormControl, TextField, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack, MenuItem, InputLabel, Select } from '@mui/material';
+import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
 interface IFromNotificationsProps {
   setAddPanel: (val: boolean) => void;
   selectedNotification: INotification | null;
   notificationTypes: INotificationType[];
+  monitorGroupList: IMonitorGroupListByUser[];
 }
 
-const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, selectedNotification, notificationTypes }) => {
+const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, selectedNotification, notificationTypes, monitorGroupList }) => {
   const { t } = useTranslation("global");
   const [isTypeTeams, setisTypeTeams] = useState(false);
   const [isTypeEmail, setisTypeEmail] = useState(false);
@@ -31,21 +31,12 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [headers, setHeaders] = useState<{ name: string; value: string }[]>([]);
-  const [monitorGroupList, setMonitorGroupList] = useState<IMonitorGroupListByUser[]>([]);
   const [openTestDialog, setOpenTestDialog] = useState(false);
   const [testMessage, setTestMessage] = useState('');
 
-  useEffect(() => {
-    if (monitorGroupList.length === 0) {
-      fillMonitorGroupList();
-    }
-  });
+  
 
-  const fillMonitorGroupList = async () => {
-    await MonitorService.getMonitorGroupListByUserToken().then((response) => {
-      setMonitorGroupList(response);
-    });
-  };
+ 
   const {
     register,
     handleSubmit,
@@ -133,7 +124,7 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
     setValue("notificationWebHook.body", "");
     setValue("notificationWebHook.headersJson", "");
   }
-  const fillFormData = () => {
+  const fillFormData = () => { 
     setValue("name", selectedNotification!.name);
     setValue("description", selectedNotification!.description);
     setValue("monitorGroupId", selectedNotification!.monitorGroupId);
@@ -261,7 +252,6 @@ const FromNotifications: React.FC<IFromNotificationsProps> = ({ setAddPanel, sel
   };
 
   const handleTestNotificationButton = () => {
-    console.log(isValid)
     if (isValid) {
       setOpenTestDialog(true);
     } else {
