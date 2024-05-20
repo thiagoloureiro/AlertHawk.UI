@@ -30,7 +30,6 @@ const Notifications: FC<INotificationsProps> = () => {
   const [notificationTypes, setNotificationTypes] = useState<INotificationType[]>([]);
   const [selectedNotification, setSelectedNotification] = useState<INotification | null>(null);
   const [monitorGroupList, setMonitorGroupList] = useState<IMonitorGroupListByUser[]>([]);
-
   const [addPanel, setAddPanel] = useState<boolean>(false);
   const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -39,42 +38,50 @@ const Notifications: FC<INotificationsProps> = () => {
   };
   useEffect(() => {
     setAddPanel(false);
-  }, []);
+  });
+
+  const handleNotificationSelection = (notification: INotification | null) => {
+    setAddPanel(false);
+    setTimeout(() => {
+      setSelectedNotification(notification);
+      setAddPanel(true);
+    }, 100);
+  };
+
+  useEffect(() => {
+    if (monitorGroupList.length === 0) {
+      fillMonitorGroupList();
+    }
+    if (notificationTypes.length === 0) {
+      NotificationService.getNotificationTypes().then((response) => {
+        setNotificationTypes(response);
+      });
+    }
+  });
+
+  const fillMonitorGroupList = async () => {
+    await MonitorService.getMonitorGroupListByUserToken().then((response) => {
+      setMonitorGroupList(response);
+    });
+  };
+
   useEffect(() => {
     if (addPanel == false) {
       fetchData();
     }
   }, [addPanel]);
 
-  const handleNotificationSelection = (notification: INotification | null) => {
-    setAddPanel(false);
-    setTimeout(() => {
-      setSelectedNotification(notification);
-    setAddPanel(true);
-    }, 100);   
-  };
-  useEffect(() => {
-    if (monitorGroupList.length === 0) {
-      fillMonitorGroupList();
-    }
-  });
-  const fillMonitorGroupList = async () => {
-    await MonitorService.getMonitorGroupListByUserToken().then((response) => {
-      setMonitorGroupList(response);
-    });
-  };
   const handleAddNew = () => {
     setAddPanel(false);
     setSelectedNotification(null);
     setAddPanel(true);
   }
+
   const fetchData = async () => {
     var notificationResponse = await NotificationService.getAll();
     if (notificationResponse != null) {
-      var notificationTypeResponse = await NotificationService.getNotificationTypes();
-      setNotificationTypes(notificationTypeResponse);
       notificationResponse.forEach((notification: INotification) => {
-        notification.notificationType = notificationTypeResponse.find(
+        notification.notificationType = notificationTypes.find(
           (notificationType: INotificationType) => notificationType.id == notification.notificationTypeId
         )!;
       }
@@ -197,7 +204,7 @@ const Notifications: FC<INotificationsProps> = () => {
                         },
                       }}
                     >
-                      <FromNotifications selectedNotification={selectedNotification} setAddPanel={setAddPanel} notificationTypes={notificationTypes} monitorGroupList={monitorGroupList}/>
+                      <FromNotifications selectedNotification={selectedNotification} setAddPanel={setAddPanel} notificationTypes={notificationTypes} monitorGroupList={monitorGroupList} />
                     </Box>
                   </CardContent>
                 </Card>
