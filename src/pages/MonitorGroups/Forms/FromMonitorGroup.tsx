@@ -12,9 +12,10 @@ import { Box, Typography, Card, CardContent, FormControl, TextField, Button, Cir
 interface IFromMonitorGroupProps {
   setAddMonitorPanel: (val: boolean) => void;
   selectedMonitorGroup: IMonitorGroupListByUser | null;
+  reloadData: () => void;
 }
 
-const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel, selectedMonitorGroup }) => {
+const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel, selectedMonitorGroup, reloadData }) => {
   const { t } = useTranslation("global");
   const { isDarkMode } = useStoreState((state) => state.app);
   const { selectedEnvironment } = useStoreState((state) => state.app);
@@ -60,6 +61,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
         async () => {
           await thunkGetMonitorGroupListByUser(selectedEnvironment);
           showSnackbar(t("monitorGroups.deleteConfirmation"), "success");
+          reloadData();
           setOpenDeleteDialog(false);
           setAddMonitorPanel(false);
         }
@@ -77,6 +79,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
       data.id = selectedMonitorGroup.id;
       await MonitorService.editMonitorGroup(data).then(async () => {
         await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        reloadData();
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
         showSnackbar(t("monitorGroups.updateSuccess"), "success");
@@ -84,6 +87,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
     } else {
       await MonitorService.createMonitorGroup(data).then(async () => {
         await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        reloadData();
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
         showSnackbar(t("monitorGroups.createSuccess"), "success");
