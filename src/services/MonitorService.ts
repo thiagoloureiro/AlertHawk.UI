@@ -54,6 +54,11 @@ const MonitorService = {
       "Monitor/allMonitorAgents",
       appendOptionalHeaders(headers)
     ),
+  getMonitorCount: async (headers?: AxiosHeaders): Promise<number> =>
+    await requests.get(
+      "Monitor/GetMonitorCount",
+      appendOptionalHeaders(headers)
+    ),
   getMonitorStatus: async (
     id: Environment,
     headers?: AxiosHeaders

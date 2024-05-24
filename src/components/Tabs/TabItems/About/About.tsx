@@ -1,4 +1,9 @@
-import { Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+  CircularProgress,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import getTheme from "../../../../theme";
 import { useStoreState } from "../../../../hooks";
@@ -22,7 +27,9 @@ const About: FC<IAboutProps> = () => {
   const [monitorHistoryCount, setMonitorHistoryCount] = useState<number>(0);
   const [notificationsSentCount, setNotificationsSentCount] =
     useState<number>(0);
+  const [monitorItemCount, setMonitorItemCount] = useState<number>(0);
 
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const getAboutData = async () => {
       await MonitorService.getMonitorAgents().then(async (response) => {
@@ -40,11 +47,15 @@ const About: FC<IAboutProps> = () => {
         }
       );
       await NotificationService.getNotificationCount().then(
-        async (response: number) => {
+        async (response) => {
           // console.log(response, "getNotificationCount response");
           setNotificationsSentCount(response);
         }
       );
+      await MonitorService.getMonitorCount().then(async (response: number) => {
+        setMonitorItemCount(response);
+      });
+      setIsLoading(false);
     };
 
     getAboutData();
@@ -103,18 +114,27 @@ const About: FC<IAboutProps> = () => {
             Release Notes
           </a>
         </Typography>
-        <Typography variant="subtitle2" fontSize={14}>
-          User count: {userCount}
-        </Typography>
-        <Typography variant="subtitle2" fontSize={14}>
-          Agent count: {monitorAgentsCount}
-        </Typography>
-        <Typography variant="subtitle2" fontSize={14}>
-          History count: {monitorHistoryCount}
-        </Typography>
-        <Typography variant="subtitle2" fontSize={14}>
-          Notifications Sent: {notificationsSentCount}
-        </Typography>
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <Typography variant="subtitle2" fontSize={14}>
+              Items monitored: {monitorItemCount}
+            </Typography>
+            <Typography variant="subtitle2" fontSize={14}>
+              User count: {userCount}
+            </Typography>
+            <Typography variant="subtitle2" fontSize={14}>
+              Agent count: {monitorAgentsCount}
+            </Typography>
+            <Typography variant="subtitle2" fontSize={14}>
+              History count: {monitorHistoryCount}
+            </Typography>
+            <Typography variant="subtitle2" fontSize={14}>
+              Notifications Sent: {notificationsSentCount}
+            </Typography>
+          </>
+        )}
       </Stack>
     </Stack>
   );
