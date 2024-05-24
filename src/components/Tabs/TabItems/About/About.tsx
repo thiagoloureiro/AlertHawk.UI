@@ -32,34 +32,37 @@ const About: FC<IAboutProps> = () => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const getAboutData = async () => {
-      await MonitorService.getMonitorAgents().then(async (response) => {
-        // console.log(response, "getMonitorAgents response");
-        setMonitorAgentsCount(response.length);
-      });
-      await UserService.getUserCount().then(async (response) => {
-        // console.log(response, "getUserCount response");
-        setUserCount(response);
-      });
-      await MonitorHistoryService.getMonitorHistoryCount().then(
-        async (response) => {
-          // console.log(response, "historycount response");
-          setMonitorHistoryCount(response);
-        }
-      );
-      await NotificationService.getNotificationCount().then(
-        async (response) => {
-          // console.log(response, "getNotificationCount response");
-          setNotificationsSentCount(response);
-        }
-      );
-      await MonitorService.getMonitorCount().then(async (response: number) => {
-        setMonitorItemCount(response);
-      });
-      setIsLoading(false);
+      try {
+        const [
+          monitorAgentsResponse,
+          userCountResponse,
+          monitorHistoryCountResponse,
+          notificationCountResponse,
+          monitorCountResponse,
+        ] = await Promise.all([
+          MonitorService.getMonitorAgents(),
+          UserService.getUserCount(),
+          MonitorHistoryService.getMonitorHistoryCount(),
+          NotificationService.getNotificationCount(),
+          MonitorService.getMonitorCount(),
+        ]);
+  
+        setMonitorAgentsCount(monitorAgentsResponse.length);
+        setUserCount(userCountResponse);
+        setMonitorHistoryCount(monitorHistoryCountResponse);
+        setNotificationsSentCount(notificationCountResponse);
+        setMonitorItemCount(monitorCountResponse);
+  
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        setIsLoading(false);
+      }
     };
-
+  
     getAboutData();
   }, []);
+  
 
   return (
     <Stack
