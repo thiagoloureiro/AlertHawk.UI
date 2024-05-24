@@ -206,6 +206,13 @@
     "enableSsl": "🔒📡",
     "subject": "📌",
     "isHtmlBody": "📄💻HTML",
+    "fillAllTheMandatoryFields": "📝🔴",
+    "testNotificationSuccess": "✅🔔",
+    "testNotificationFail": "❌🔔",
+    "testNotification": "🔔🧪",
+    "testNotificationTitle": "🔔🧪",
+    "testNotificationMessage": "❓🔔🧪❓",
+    "sendTest": "📤🧪",
     "errors": {
       "url": "🌐❌",
       "validEmail": "📧❌"

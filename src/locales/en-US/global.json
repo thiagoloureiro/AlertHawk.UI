@@ -211,6 +211,13 @@
     "enableSsl": "Enable Ssl",
     "subject": "Subject",
     "isHtmlBody": "Is html body",
+    "fillAllTheMandatoryFields":"Fill all the mandatory fields",
+    "testNotificationSuccess": "Test notification has been sent!",
+    "testNotificationFail": "Test notification has been failed!", 
+    "testNotification": "Test Notification",
+    "testNotificationTitle": "Test Notification",
+    "testNotificationMessage": "Are you sure you want to send a test notification?",
+    "sendTest": "Send Test",
     "errors": {
       "url": "Url is invalid",
       "validEmail": "Email is invalid"

@@ -206,6 +206,13 @@
     "enableSsl": "Включить SSL",
     "subject": "Тема",
     "isHtmlBody": "HTML-тело",
+    "fillAllTheMandatoryFields": "Заполните все обязательные поля",
+    "testNotificationSuccess": "Тестовое уведомление было отправлено!",
+    "testNotificationFail": "Тестовое уведомление не удалось!",
+    "testNotification": "Тестовое уведомление",
+    "testNotificationTitle": "Тестовое уведомление",
+    "testNotificationMessage": "Вы уверены, что хотите отправить тестовое уведомление?",
+    "sendTest": "Отправить тест",
     "errors": {
       "url": "URL недействителен",
       "validEmail": "Электронная почта недействительна"

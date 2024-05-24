@@ -206,6 +206,13 @@
     "enableSsl": "Habilitar SSL",
     "subject": "Asunto",
     "isHtmlBody": "Cuerpo HTML",
+    "fillAllTheMandatoryFields": "Rellene todos los campos obligatorios",
+    "testNotificationSuccess": "¡La notificación de prueba ha sido enviada!",
+    "testNotificationFail": "¡La notificación de prueba ha fallado!",
+    "testNotification": "Notificación de prueba",
+    "testNotificationTitle": "Notificación de prueba",
+    "testNotificationMessage": "¿Está seguro de que desea enviar una notificación de prueba?",
+    "sendTest": "Enviar prueba",
     "errors": {
       "url": "La URL no es válida",
       "validEmail": "El correo electrónico no es válido"

@@ -17,6 +17,8 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import NotFoundContent from "../../components/NotFoundContent/NotFoundContent";
 import NotificationsTable from "../../components/Table/NotificationsTable";
 import FromNotifications from "./Forms/FromNotifications";
+import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
+import MonitorService from "../../services/MonitorService";
 
 interface INotificationsProps { }
 
@@ -27,6 +29,8 @@ const Notifications: FC<INotificationsProps> = () => {
   const [notifications, setNotifications] = useState<INotification[]>([]);
   const [notificationTypes, setNotificationTypes] = useState<INotificationType[]>([]);
   const [selectedNotification, setSelectedNotification] = useState<INotification | null>(null);
+  const [monitorGroupList, setMonitorGroupList] = useState<IMonitorGroupListByUser[]>([]);
+
   const [addPanel, setAddPanel] = useState<boolean>(false);
   const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -44,11 +48,21 @@ const Notifications: FC<INotificationsProps> = () => {
 
   const handleNotificationSelection = (notification: INotification | null) => {
     setAddPanel(false);
-    setSelectedNotification(notification);
+    setTimeout(() => {
+      setSelectedNotification(notification);
     setAddPanel(true);
-
+    }, 100);   
   };
-
+  useEffect(() => {
+    if (monitorGroupList.length === 0) {
+      fillMonitorGroupList();
+    }
+  });
+  const fillMonitorGroupList = async () => {
+    await MonitorService.getMonitorGroupListByUserToken().then((response) => {
+      setMonitorGroupList(response);
+    });
+  };
   const handleAddNew = () => {
     setAddPanel(false);
     setSelectedNotification(null);
@@ -183,7 +197,7 @@ const Notifications: FC<INotificationsProps> = () => {
                         },
                       }}
                     >
-                      <FromNotifications selectedNotification={selectedNotification} setAddPanel={setAddPanel} notificationTypes={notificationTypes}/>
+                      <FromNotifications selectedNotification={selectedNotification} setAddPanel={setAddPanel} notificationTypes={notificationTypes} monitorGroupList={monitorGroupList}/>
                     </Box>
                   </CardContent>
                 </Card>

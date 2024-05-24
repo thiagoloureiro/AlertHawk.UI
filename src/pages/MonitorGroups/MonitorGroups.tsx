@@ -28,31 +28,19 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
   const [monitorGroups, setMonitorGroups] = useState<IMonitorGroupListByUser[]>([]);
   const [selectedMonitorGroup, setSelectedMonitorGroup] = useState<IMonitorGroupListByUser | null>(null);
   const [addMonitorPanel, setAddMonitorPanel] = useState<boolean>(false);
-  const handleSearchInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setSearchText(event.target.value);
-  };
+
   useEffect(() => {
-    setAddMonitorPanel(false);
-  }, []);
-  useEffect(() => {
-    if(addMonitorPanel == false){
-      //fetchData();
+    if (monitorGroups.length == 0) {
+      loadMonitorGroups();
     }
-  }, [addMonitorPanel]);
-  
-  const handleMonitorGroupSelection = (monitorGroup: IMonitorGroupListByUser | null) => {
-    setAddMonitorPanel(false);
-    setSelectedMonitorGroup(monitorGroup);
-    setAddMonitorPanel(true);
+  }, [monitorGroups]);
 
-  };
-
-  function handleAddNew(): void {
-    setAddMonitorPanel(false);
-    setSelectedMonitorGroup(null);
-    setAddMonitorPanel(true);
+  const loadMonitorGroups = async () => {
+    if (user?.isAdmin) {
+      fetchData();
+    } else {
+      fetchUserData();
+    }
   }
   const fetchData = async () => {
     var response = await MonitorService.getMonitorGroupList();
@@ -81,16 +69,24 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
     });
     setMonitorGroups(response);
   };
-  useEffect(() => {
-    
-    if (monitorGroups.length == 0) {
-      if (user?.isAdmin) {
-        fetchData();
-      } else {
-        fetchUserData();
-      }
-    }
-  }, [monitorGroups]);
+
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setSearchText(event.target.value);
+  };
+
+  const handleMonitorGroupSelection = (monitorGroup: IMonitorGroupListByUser | null) => {
+    setAddMonitorPanel(false);
+    setSelectedMonitorGroup(monitorGroup);
+    setAddMonitorPanel(true);
+  };
+
+  const handleAddNew = () => {
+    setAddMonitorPanel(false);
+    setSelectedMonitorGroup(null);
+    setAddMonitorPanel(true);
+  }
 
   return (
     <>
@@ -139,7 +135,7 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
                             fontWeight: 700,
                             position: "relative",
                           }}
-                        onClick={handleAddNew}
+                          onClick={handleAddNew}
                         >
                           {t("dashboard.addNew")}
                         </Button>
@@ -165,33 +161,33 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
               </Card>
             </Grid>
             <Grid item xs={12} lg={7}>
-            {addMonitorPanel && (
-            <Card>
-              <CardContent>
-                <Box
-                  sx={{
-                    overflowY: "auto",
-                    maxHeight: "calc(100vh - 210px)",
-                    paddingRight: "16px",
-                    "&::-webkit-scrollbar": {
-                      width: "0.4em",
-                    },
-                    "&::-webkit-scrollbar-track": {
-                      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-                      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                      backgroundColor: "secondary.main",
-                      outline: "1px solid secondary.main",
-                      borderRadius: "30px",
-                    },
-                  }}
-                >
-                  <FromMonitorGroup setAddMonitorPanel={setAddMonitorPanel} selectedMonitorGroup={selectedMonitorGroup}/>
-                </Box>
-              </CardContent>
-            </Card>
-          )}
+              {addMonitorPanel && (
+                <Card>
+                  <CardContent>
+                    <Box
+                      sx={{
+                        overflowY: "auto",
+                        maxHeight: "calc(100vh - 210px)",
+                        paddingRight: "16px",
+                        "&::-webkit-scrollbar": {
+                          width: "0.4em",
+                        },
+                        "&::-webkit-scrollbar-track": {
+                          boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                          webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                        },
+                        "&::-webkit-scrollbar-thumb": {
+                          backgroundColor: "secondary.main",
+                          outline: "1px solid secondary.main",
+                          borderRadius: "30px",
+                        },
+                      }}
+                    >
+                      <FromMonitorGroup setAddMonitorPanel={setAddMonitorPanel} selectedMonitorGroup={selectedMonitorGroup} reloadData={loadMonitorGroups} />
+                    </Box>
+                  </CardContent>
+                </Card>
+              )}
             </Grid>
 
           </Grid>

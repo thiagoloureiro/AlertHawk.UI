@@ -48,6 +48,15 @@ const NotificationService = {
       `Notification/DeleteNotificationItem?id=${notificationId}`,
       appendOptionalHeaders(headers)
     ),
+    sendManualNotification: async (
+      notification: INotification,
+      headers?: AxiosHeaders
+    ): Promise<boolean> =>
+      await requests.post(
+        `Notification/SendManualNotification`,
+        notification,
+        appendOptionalHeaders(headers)
+      ),
 };
 
 export default NotificationService;

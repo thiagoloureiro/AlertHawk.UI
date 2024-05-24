@@ -206,6 +206,13 @@
     "enableSsl": "SSL aktivieren",
     "subject": "Betreff",
     "isHtmlBody": "HTML-Body",
+    "fillAllTheMandatoryFields": "Füllen Sie alle Pflichtfelder aus",
+    "testNotificationSuccess": "Testbenachrichtigung wurde gesendet!",
+    "testNotificationFail": "Testbenachrichtigung fehlgeschlagen!",
+    "testNotification": "Testbenachrichtigung",
+    "testNotificationTitle": "Testbenachrichtigung",
+    "testNotificationMessage": "Sind Sie sicher, dass Sie eine Testbenachrichtigung senden möchten?",
+    "sendTest": "Test senden",
     "errors": {
       "url": "URL ist ungültig",
       "validEmail": "E-Mail ist ungültig"

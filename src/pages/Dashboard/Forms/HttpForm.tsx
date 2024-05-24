@@ -201,7 +201,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
           }).then(async () => {
             setIsButtonDisabled(false);
             setAddMonitorPanel(false);
-            showSnackbar(t("dashboard.createHttpForm.success"), "success");
+            showSnackbar(t("dashboard.addHttpForm.success"), "success");
             await thunkGetMonitorGroupListByUser(selectedEnvironment);
           });
         }

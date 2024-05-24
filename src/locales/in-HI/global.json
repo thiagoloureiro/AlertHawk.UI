@@ -206,6 +206,13 @@
     "enableSsl": "SSL सक्षम करें",
     "subject": "विषय",
     "isHtmlBody": "HTML बॉडी है",
+    "fillAllTheMandatoryFields": "सभी अनिवार्य क्षेत्रों को भरें",
+    "testNotificationSuccess": "टेस्ट नोटिफिकेशन भेजा गया है!",
+    "testNotificationFail": "टेस्ट नोटिफिकेशन विफल रहा है!",
+    "testNotification": "टेस्ट नोटिफिकेशन",
+    "testNotificationTitle": "टेस्ट नोटिफिकेशन",
+    "testNotificationMessage": "क्या आप वाकई एक टेस्ट नोटिफिकेशन भेजना चाहते हैं?",
+    "sendTest": "टेस्ट भेजें",
     "errors": {
       "url": "URL अमान्य है",
       "validEmail": "ईमेल अमान्य है"
