@@ -18,18 +18,32 @@ const requests = {
       .then(responseBody),
   put: (url: string, body: Object, headers?: AxiosHeaders) =>
     axiosInstance.auth.put(url, body, { headers }).then(responseBody),
-
 };
 
 const UserService = {
   get: async (email: string, headers?: AxiosHeaders): Promise<IUser> =>
     await requests.get(`user/${email}`, appendOptionalHeaders(headers)),
   getAll: async (headers?: AxiosHeaders): Promise<IUser[]> =>
-    await requests.get('user/getAll', appendOptionalHeaders(headers)),
-  getUserMonitorGroups: async (id: string, headers?: AxiosHeaders): Promise<IUserMonitorGroup[]> =>
-    await requests.get(`usersMonitorGroup/GetAllByUserId/${id}`, appendOptionalHeaders(headers)),
-  updateMonitorGroup: async (request: IUserMonitorGroup[], headers?: AxiosHeaders): Promise<IUserMonitorGroup> =>
-    await requests.post('usersMonitorGroup/create', request, appendOptionalHeaders(headers)),
+    await requests.get("user/getAll", appendOptionalHeaders(headers)),
+  getUserMonitorGroups: async (
+    id: string,
+    headers?: AxiosHeaders
+  ): Promise<IUserMonitorGroup[]> =>
+    await requests.get(
+      `usersMonitorGroup/GetAllByUserId/${id}`,
+      appendOptionalHeaders(headers)
+    ),
+  updateMonitorGroup: async (
+    request: IUserMonitorGroup[],
+    headers?: AxiosHeaders
+  ): Promise<IUserMonitorGroup> =>
+    await requests.post(
+      "usersMonitorGroup/create",
+      request,
+      appendOptionalHeaders(headers)
+    ),
+  getUserCount: async (headers?: AxiosHeaders): Promise<number> =>
+    await requests.get("User/GetUserCount", appendOptionalHeaders(headers)),
 };
 
 export default UserService;
