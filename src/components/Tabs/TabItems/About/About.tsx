@@ -1,9 +1,13 @@
 import { Stack, Typography, useMediaQuery } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import getTheme from "../../../../theme";
 import { useStoreState } from "../../../../hooks";
 import logo from "./logo.png";
 import { useTranslation } from "react-i18next";
+import MonitorService from "../../../../services/MonitorService";
+import UserService from "../../../../services/UserService";
+import MonitorHistoryService from "../../../../services/MonitorHistoryService";
+import NotificationService from "../../../../services/NotificationService";
 
 interface IAboutProps {}
 
@@ -12,6 +16,39 @@ const About: FC<IAboutProps> = () => {
   const { isDarkMode } = useStoreState((state) => state.app);
   const theme = getTheme(isDarkMode ? "dark" : "light");
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("lg"));
+
+  const [userCount, setUserCount] = useState<number>(0);
+  const [monitorAgentsCount, setMonitorAgentsCount] = useState<number>(0);
+  const [monitorHistoryCount, setMonitorHistoryCount] = useState<number>(0);
+  const [notificationsSentCount, setNotificationsSentCount] =
+    useState<number>(0);
+
+  useEffect(() => {
+    const getAboutData = async () => {
+      await MonitorService.getMonitorAgents().then(async (response) => {
+        // console.log(response, "getMonitorAgents response");
+        setMonitorAgentsCount(response.length);
+      });
+      await UserService.getUserCount().then(async (response) => {
+        // console.log(response, "getUserCount response");
+        setUserCount(response);
+      });
+      await MonitorHistoryService.getMonitorHistoryCount().then(
+        async (response) => {
+          // console.log(response, "historycount response");
+          setMonitorHistoryCount(response);
+        }
+      );
+      await NotificationService.getNotificationCount().then(
+        async (response: number) => {
+          // console.log(response, "getNotificationCount response");
+          setNotificationsSentCount(response);
+        }
+      );
+    };
+
+    getAboutData();
+  }, []);
 
   return (
     <Stack
@@ -66,7 +103,18 @@ const About: FC<IAboutProps> = () => {
             Release Notes
           </a>
         </Typography>
-        
+        <Typography variant="subtitle2" fontSize={14}>
+          User count: {userCount}
+        </Typography>
+        <Typography variant="subtitle2" fontSize={14}>
+          Agent count: {monitorAgentsCount}
+        </Typography>
+        <Typography variant="subtitle2" fontSize={14}>
+          History count: {monitorHistoryCount}
+        </Typography>
+        <Typography variant="subtitle2" fontSize={14}>
+          Notifications Sent: {notificationsSentCount}
+        </Typography>
       </Stack>
     </Stack>
   );
