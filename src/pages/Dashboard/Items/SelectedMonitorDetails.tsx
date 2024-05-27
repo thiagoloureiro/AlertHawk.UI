@@ -31,6 +31,7 @@ import { useStoreActions } from "../../../hooks";
 import Chart from "../../../components/Charts/Chart";
 import { showSnackbar } from "../../../utils/snackbarHelper";
 import EditMonitor from "../Forms/EditMonitor";
+import NotificationsListDialog from "../../../components/Dialogs/NotificationsListDialog";
 
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
@@ -62,6 +63,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   );
   const { selectedEnvironment } = useStoreState((state) => state.app);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [openNotificationDialog, setOpenNotificationDialog] = useState(false);
 
   const handleDeleteBtn = () => {
     setOpenDeleteDialog(true);
@@ -69,6 +71,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
   const handleCloseDeleteDialog = () => {
     setOpenDeleteDialog(false);
+  };
+  const handleCloseNotificationDialog = () => {
+    setOpenNotificationDialog(false);
   };
 
   const handleDeleteConfirm = async () => {
@@ -114,6 +119,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       }
     }
   });
+  const handleNotificationBtn = () => {
+    setOpenNotificationDialog(true);
+  };
 
   const handleEditBtn = () => {
     setEditMonitorPanel(true);
@@ -309,6 +317,15 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   onClick={handleAlertBtn}
                 >
                   {t("dashboard.alarm")}
+                </Button>
+              )}
+              {selectedMonitorItem !== null && (
+                <Button
+                  aria-label=""
+                  startIcon={<NotificationsIcon />}
+                  onClick={handleNotificationBtn}
+                >
+                  {t("notifications.title")}
                 </Button>
               )}
               {selectedMonitorItem !== null && (
@@ -920,6 +937,11 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
           </Button>
         </DialogActions>
       </Dialog>
+      <NotificationsListDialog
+        openDialog={openNotificationDialog}
+        handleCloseDialog={handleCloseNotificationDialog}
+        monitorId={selectedMonitorItem?.id}
+      />
     </>
   );
 };
