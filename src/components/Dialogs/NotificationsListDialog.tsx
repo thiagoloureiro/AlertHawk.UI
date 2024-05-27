@@ -54,10 +54,22 @@ const NotificationsListDialog: React.FC<INotificationsListDialog> = ({
 
     const getAllNotification = async () => {
       NotificationService.getAll().then((res) => {
-        // console.log(allNotificationList);
-        setAllNotificationList(res);
+        // Sort the notifications alphabetically by a specific property
+        const sortedRes = res.sort((a, b) => {
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+    
+        // Set the sorted notifications in the state
+        setAllNotificationList(sortedRes);
       });
     };
+    
 
     getAllNotification();
   }, [monitorId]);
