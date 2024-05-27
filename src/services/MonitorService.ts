@@ -91,6 +91,14 @@ const MonitorService = {
       `MonitorGroup/monitorGroupList`,
       appendOptionalHeaders(headers)
     ),
+  getMonitorNotification: async (
+    id: number | undefined,
+    headers?: AxiosHeaders
+  ): Promise<[]> =>
+    await requests.get(
+      `MonitorNotification/monitorNotifications/${id}`,
+      appendOptionalHeaders(headers)
+    ),
   pauseMonitor: async (
     id: number,
     paused: boolean,
