@@ -34,16 +34,12 @@ const NotificationsListDialog: React.FC<INotificationsListDialog> = ({
 
   useEffect(() => {
     MonitorService.getMonitorNotification(monitorId).then((res) => {
-      //   console.log(res, "notifications");
       const alreadySelected = res.map((element: any) => {
         return element.notificationId;
       });
-      //   console.log("already selected", alreadySelected);
-      //   console.log("all ", selectedNotifications);
       const containsAll = alreadySelected.every((element) =>
         selectedNotifications.includes(element)
       );
-      //   console.log(containsAll, "contains all");
       if (!containsAll) {
         setSelectedNotifications((prevState) => [
           ...prevState,
@@ -54,7 +50,6 @@ const NotificationsListDialog: React.FC<INotificationsListDialog> = ({
 
     const getAllNotification = async () => {
       NotificationService.getAll().then((res) => {
-        // Sort the notifications alphabetically by a specific property
         const sortedRes = res.sort((a, b) => {
           if (a.name < b.name) {
             return -1;
@@ -64,26 +59,47 @@ const NotificationsListDialog: React.FC<INotificationsListDialog> = ({
           }
           return 0;
         });
-    
-        // Set the sorted notifications in the state
         setAllNotificationList(sortedRes);
       });
     };
-    
+
 
     getAllNotification();
   }, [monitorId]);
 
   const handleChange = (
-    event: SelectChangeEvent<typeof selectedNotifications>
+    event: SelectChangeEvent<number[]>
   ) => {
+
     const {
       target: { value },
     } = event;
+    const selected = typeof value === "string" ? value.split(",").map(Number) : value;
 
-    setSelectedNotifications(
-      typeof value === "string" ? value.split(",") : value
-    );
+    const addedNotifications = selected.filter((id) => !selectedNotifications.includes(id));
+    const removedNotifications = selectedNotifications.filter((id) => !selected.includes(id));
+
+
+    if (addedNotifications.length > 0) {
+      const request: any = {
+        monitorId: monitorId,
+        notificationId: addedNotifications[0],
+      };
+      MonitorService.addMonitorNotification(request).then(() => {
+      });
+    }
+
+    if (removedNotifications.length > 0) {
+      const request: any = {
+        monitorId: monitorId,
+        notificationId: removedNotifications[0],
+      };
+      MonitorService.removeMonitorNotification(request).then(() => {
+      });
+    }
+
+    setSelectedNotifications(selected);
+
   };
   useEffect(() => {
     console.log(selectedNotifications);
