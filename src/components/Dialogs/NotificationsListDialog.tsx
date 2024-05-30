@@ -30,40 +30,49 @@ const NotificationsListDialog: React.FC<INotificationsListDialog> = ({
   const [selectedNotifications, setSelectedNotifications] = React.useState<number[]>([]);
 
   React.useEffect(() => {
-    if (monitorId === undefined) return;
+    if (monitorId === undefined) {
+      setSelectedNotifications([]);
+      return;
+    }
 
-    MonitorService.getMonitorNotification(monitorId).then((res) => {
-      const alreadySelected = res.map((element: any) => element.notificationId);
-      const containsAll = alreadySelected.every((element) => selectedNotifications.includes(element));
-      if (!containsAll) {
-        setSelectedNotifications((prevState) => [...prevState, ...alreadySelected]);
+    const fetchMonitorNotification = async () => {
+      try {
+        const res = await MonitorService.getMonitorNotification(monitorId);
+        const alreadySelected = res.map((element: any) => element.notificationId);
+        setSelectedNotifications(alreadySelected);
+      } catch (error) {
+        console.error('Error fetching monitor notifications:', error);
       }
-    });
-
-    const getAllNotification = async () => {
-      NotificationService.getAll().then((res) => {
-        const sortedRes = res.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
-        setAllNotificationList(sortedRes);
-      });
     };
 
-    getAllNotification();
+    const fetchAllNotifications = async () => {
+      try {
+        const res = await NotificationService.getAll();
+        const sortedRes = res.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+        setAllNotificationList(sortedRes);
+      } catch (error) {
+        console.error('Error fetching all notifications:', error);
+      }
+    };
+
+    fetchMonitorNotification();
+    fetchAllNotifications();
   }, [monitorId]);
 
-  const handleToggle = (value: number) => () => {
+  const handleToggle = (value: number) => async () => {
     const currentIndex = selectedNotifications.indexOf(value);
     const newSelected = [...selectedNotifications];
 
     if (currentIndex === -1) {
       newSelected.push(value);
       const request = { monitorId: monitorId, notificationId: value };
-      MonitorService.addMonitorNotification(request).then(() => {});
+      await MonitorService.addMonitorNotification(request);
     } else {
       newSelected.splice(currentIndex, 1);
       const request = { monitorId: monitorId, notificationId: value };
-      MonitorService.removeMonitorNotification(request).then(() => {});
+      await MonitorService.removeMonitorNotification(request);
     }
-
+    
     setSelectedNotifications(newSelected);
   };
 
@@ -72,14 +81,12 @@ const NotificationsListDialog: React.FC<INotificationsListDialog> = ({
       open={openDialog}
       onClose={handleCloseDialog}
       aria-labelledby="notification-dialog-title"
-      aria-describedby="notification-dialog-description"
-      
-    >
+      aria-describedby="notification-dialog-description">
       <DialogTitle id="alert-dialog-title">
         {t('notifications.title')}
       </DialogTitle>
       <FormControl sx={{ m: 1, width: '500px' }}>
-        <List sx={{ width: '100%', maxWidth: '500ox' ,bgcolor: 'background.paper' }}>
+        <List sx={{ width: '100%', maxWidth: '500px', bgcolor: 'background.paper' }}>
           {allNotificationList.map((item) => {
             const labelId = `checkbox-list-label-${item.id}`;
 
