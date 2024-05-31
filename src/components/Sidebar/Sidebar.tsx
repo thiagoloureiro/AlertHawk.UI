@@ -126,14 +126,14 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       pathname: "/monitor-alert",
       icon: <ErrorOutlineOutlinedIcon />,
     },
-  ];
-
-  if (user?.isAdmin) {
-    menuItems.push({
+    {
       text: t("sidebar.notificationManagement"),
       pathname: "/notifications",
       icon: <AddAlertOutlinedIcon />,
-    });
+    }
+  ];
+
+  if (user?.isAdmin) {
     menuItems.push({
       text: t("sidebar.monitorGroups"),
       pathname: "/monitorGroups",
