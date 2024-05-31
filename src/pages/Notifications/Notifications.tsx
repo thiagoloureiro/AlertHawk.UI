@@ -20,16 +20,21 @@ import FromNotifications from "./Forms/FromNotifications";
 import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
 import MonitorService from "../../services/MonitorService";
 
-interface INotificationsProps { }
+interface INotificationsProps {}
 
 const Notifications: FC<INotificationsProps> = () => {
   const { t } = useTranslation("global");
   const { user } = useStoreState((state) => state.user);
   const [searchText, setSearchText] = useState<string>("");
   const [notifications, setNotifications] = useState<INotification[]>([]);
-  const [notificationTypes, setNotificationTypes] = useState<INotificationType[]>([]);
-  const [selectedNotification, setSelectedNotification] = useState<INotification | null>(null);
-  const [monitorGroupList, setMonitorGroupList] = useState<IMonitorGroupListByUser[]>([]);
+  const [notificationTypes, setNotificationTypes] = useState<
+    INotificationType[]
+  >([]);
+  const [selectedNotification, setSelectedNotification] =
+    useState<INotification | null>(null);
+  const [monitorGroupList, setMonitorGroupList] = useState<
+    IMonitorGroupListByUser[]
+  >([]);
 
   const [addPanel, setAddPanel] = useState<boolean>(false);
   const handleSearchInputChange = (
@@ -50,14 +55,14 @@ const Notifications: FC<INotificationsProps> = () => {
     setAddPanel(false);
     setTimeout(() => {
       setSelectedNotification(notification);
-    setAddPanel(true);
-    }, 100);   
+      setAddPanel(true);
+    }, 100);
   };
   useEffect(() => {
     if (monitorGroupList.length === 0) {
       fillMonitorGroupList();
     }
-  });
+  }, []);
   const fillMonitorGroupList = async () => {
     await MonitorService.getMonitorGroupListByUserToken().then((response) => {
       setMonitorGroupList(response);
@@ -67,18 +72,19 @@ const Notifications: FC<INotificationsProps> = () => {
     setAddPanel(false);
     setSelectedNotification(null);
     setAddPanel(true);
-  }
+  };
   const fetchData = async () => {
     var notificationResponse = await NotificationService.getAll();
     if (notificationResponse != null) {
-      var notificationTypeResponse = await NotificationService.getNotificationTypes();
+      var notificationTypeResponse =
+        await NotificationService.getNotificationTypes();
       setNotificationTypes(notificationTypeResponse);
       notificationResponse.forEach((notification: INotification) => {
         notification.notificationType = notificationTypeResponse.find(
-          (notificationType: INotificationType) => notificationType.id == notification.notificationTypeId
+          (notificationType: INotificationType) =>
+            notificationType.id == notification.notificationTypeId
         )!;
-      }
-      )
+      });
     }
     notificationResponse = notificationResponse.slice().sort((a, b) => {
       if (a.name! < b.name!) {
@@ -92,7 +98,6 @@ const Notifications: FC<INotificationsProps> = () => {
     setNotifications(notificationResponse);
   };
   useEffect(() => {
-
     if (notifications.length == 0) {
       if (user?.isAdmin) {
         fetchData();
@@ -197,7 +202,12 @@ const Notifications: FC<INotificationsProps> = () => {
                         },
                       }}
                     >
-                      <FromNotifications selectedNotification={selectedNotification} setAddPanel={setAddPanel} notificationTypes={notificationTypes} monitorGroupList={monitorGroupList}/>
+                      <FromNotifications
+                        selectedNotification={selectedNotification}
+                        setAddPanel={setAddPanel}
+                        notificationTypes={notificationTypes}
+                        monitorGroupList={monitorGroupList}
+                      />
                     </Box>
                   </CardContent>
                 </Card>

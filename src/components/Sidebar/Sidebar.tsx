@@ -117,19 +117,9 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       icon: <MonitorHeartOutlinedIcon />,
     },
     {
-      text: t("sidebar.monitorGroups"),
-      pathname: "/monitorGroups",
-      icon: <LibraryAddIcon />,
-    },
-    {
       text: t("sidebar.monitorAgents"),
       pathname: "/monitor-agents",
       icon: <AddToQueueOutlinedIcon />,
-    },
-    {
-      text: t("sidebar.notificationManagement"),
-      pathname: "/notifications",
-      icon: <AddAlertOutlinedIcon />,
     },
     {
       text: t("sidebar.monitorAlert"),
@@ -140,11 +130,20 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
 
   if (user?.isAdmin) {
     menuItems.push({
+      text: t("sidebar.notificationManagement"),
+      pathname: "/notifications",
+      icon: <AddAlertOutlinedIcon />,
+    });
+    menuItems.push({
+      text: t("sidebar.monitorGroups"),
+      pathname: "/monitorGroups",
+      icon: <LibraryAddIcon />,
+    });
+    menuItems.push({
       text: t("sidebar.users"),
       pathname: "/users",
       icon: <PeopleAltOutlinedIcon />,
     });
-
   }
   const secondMenuItems: IMenuItem[] = [
     {
