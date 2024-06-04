@@ -42,7 +42,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
 
     try {
       const result = await instance.acquireTokenSilent(request);
-      sessionStorage.setItem("jwtToken", result.accessToken);
+      localStorage.setItem("jwtToken", result.accessToken);
       setEmail(result.account.username);
     } catch (e) {
       logging.error(e);
@@ -53,7 +53,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
-      const accessToken = sessionStorage.getItem("jwtToken");
+      const accessToken = localStorage.getItem("jwtToken");
 
       if (accessToken && isTokenExpired(accessToken)) {
         await acquireTokenSilent();
@@ -68,12 +68,12 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       await acquireTokenSilent();
     };
 
-    const accessToken = sessionStorage.getItem("jwtToken");
+    const accessToken = localStorage.getItem("jwtToken");
 
     if (isAuthenticated && (!accessToken || isTokenExpired(accessToken))) {
       acquireToken();
     } else if (!isAuthenticated) {
-      sessionStorage.clear();
+      localStorage.clear();
       setTimeout(() => {
         window.location.href = "/";
         resetStore();

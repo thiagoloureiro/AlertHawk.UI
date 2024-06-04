@@ -7,7 +7,7 @@ export const msalConfig: Configuration = {
     redirectUri: import.meta.env.VITE_APP_REDIRECT_URI + "/",
   },
   cache: {
-    cacheLocation: "sessionStorage",
+    cacheLocation: "localStorage",
   },
 };
 

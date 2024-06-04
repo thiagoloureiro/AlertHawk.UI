@@ -35,7 +35,7 @@ const createAxiosInstance = (baseUrl: string) => {
   });
 
   function surfaceLogout() {
-    sessionStorage.clear();
+    localStorage.clear();
     setTimeout(() => {
       window.location.href = "/";
       resetStore();
@@ -43,7 +43,7 @@ const createAxiosInstance = (baseUrl: string) => {
   }
 
   instance.interceptors.request.use(async (requestConfig) => {
-    const jwtToken = sessionStorage.getItem("jwtToken");
+    const jwtToken = localStorage.getItem("jwtToken");
 
     if (jwtToken != null) {
       requestConfig.headers["Authorization"] = `Bearer ${jwtToken}`;
