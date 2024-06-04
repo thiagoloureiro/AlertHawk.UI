@@ -13,6 +13,7 @@ export interface IMonitorGroupListByUserItem {
   paused: boolean;
   monitorRegion: number;
   monitorEnvironment: number;
+  checkCertExpiry: boolean;
   monitorStatusDashboard: IMonitorStatusDashboard;
 }
 
