@@ -27,12 +27,12 @@ interface ICollapsibleTable {
   handleRowClick: (monitorId: number) => void;
   handleChildRowClick: (childMonitorId: number, monitorGroupId: number) => void;
   selectedMetric:
-  | "uptime1Hr"
-  | "uptime24Hrs"
-  | "uptime7Days"
-  | "uptime30Days"
-  | "uptime3Months"
-  | "uptime6Months";
+    | "uptime1Hr"
+    | "uptime24Hrs"
+    | "uptime7Days"
+    | "uptime30Days"
+    | "uptime3Months"
+    | "uptime6Months";
 }
 
 const CollapsibleTable: FC<ICollapsibleTable> = ({
@@ -45,10 +45,8 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   selectedMetric,
 }) => {
   const { t } = useTranslation("global");
-  const { isMonitorLoading } = useStoreState(
-    (state) => state.app
-  );
- 
+  const { isMonitorLoading } = useStoreState((state) => state.app);
+
   const filteredMonitorGroups = monitors.filter(
     (monitor) =>
       monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
@@ -77,8 +75,7 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       monitorGroup.monitors
         .filter(
           (monitor) =>
-            monitor.urlToCheck?.startsWith("https") &&
-            monitor.daysToExpireCert <= 30
+            monitor.checkCertExpiry && monitor.daysToExpireCert <= 30 && monitor
         )
         .sort((a, b) => b.daysToExpireCert - a.daysToExpireCert)
     );
@@ -102,7 +99,8 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       certificateExpirationList.slice(0, 3).forEach((service, index) => {
         setTimeout(() => {
           showSnackbar(
-            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${service.daysToExpireCert
+            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${
+              service.daysToExpireCert
             } ${t("dashboard.days").toLowerCase()}]`,
             "warning"
           );
@@ -112,7 +110,8 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       certificateExpirationList.forEach((service, index) => {
         setTimeout(() => {
           showSnackbar(
-            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${service.daysToExpireCert
+            `${t("dashboard.certificateIsAboutToExpireFor")} ${service.name} [${
+              service.daysToExpireCert
             } ${t("dashboard.days").toLowerCase()}]`,
             "warning"
           );
