@@ -7,6 +7,7 @@ import { useStoreActions, useStoreState } from "../hooks";
 import { resetStore } from "../store";
 import Layout from "../components/Layout/Layout";
 import { ClipLoader } from "react-spinners";
+import { isTokenExpired } from "../utils/tokenHelper";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -31,29 +32,46 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     thunkGetMonitorStats,
   } = useStoreActions((actions) => actions.monitor);
 
+  const acquireTokenSilent = async () => {
+    setIsLoading(true);
+
+    const request = {
+      scopes: loginRequest.scopes,
+      account: instance.getAllAccounts()[0],
+    };
+
+    try {
+      const result = await instance.acquireTokenSilent(request);
+      sessionStorage.setItem("jwtToken", result.accessToken);
+      setEmail(result.account.username);
+    } catch (e) {
+      logging.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    if (isAuthenticated && !sessionStorage.getItem("jwtToken")) {
-      setIsLoading(true);
+    const intervalId = setInterval(async () => {
+      const accessToken = sessionStorage.getItem("jwtToken");
 
-      const request = {
-        scopes: loginRequest.scopes,
-        account: instance.getAllAccounts()[0],
-      };
+      if (accessToken && isTokenExpired(accessToken)) {
+        await acquireTokenSilent();
+      }
+    }, 60 * 1000);
 
-      instance
-        .acquireTokenSilent(request)
-        .then((result) => {
-          var accessToken = result.accessToken;
-          sessionStorage.setItem("jwtToken", accessToken);
-          const userEmail = result.account.username;
-          setEmail(userEmail);
-        })
-        .catch((e) => {
-          logging.error(e);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+    return () => clearInterval(intervalId);
+  }, [instance]);
+
+  useEffect(() => {
+    const acquireToken = async () => {
+      await acquireTokenSilent();
+    };
+
+    const accessToken = sessionStorage.getItem("jwtToken");
+
+    if (isAuthenticated && (!accessToken || isTokenExpired(accessToken))) {
+      acquireToken();
     } else if (!isAuthenticated) {
       sessionStorage.clear();
       setTimeout(() => {
@@ -78,7 +96,6 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   useEffect(() => {
     const fetchAppData = async () => {
       try {
-        // Run all thunks in parallel
         setIsMonitorLoading(true);
         await Promise.all([
           thunkGetMonitorStats(selectedEnvironment),
@@ -86,13 +103,11 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
           thunkGetMonitorAgents(),
         ]);
       } catch (error) {
-        console.error("Error fetching app data", error);
-        // Handle errors, possibly update state to show an error message or similar
+        logging.error(error);
       } finally {
         setIsMonitorLoading(false);
       }
     };
-  
 
     if (user !== null) {
       setTimeout(() => {
@@ -100,18 +115,6 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       }, 100);
     }
   }, [user, selectedEnvironment]);
-
-  // useEffect(() => {
-  //   const fetchSupportRolesData = async () => {
-  //     await thunkGetSupportRoles();
-  //   };
-
-  //   if (user?.userRole?.userType?.name?.toLowerCase() === "abb") {
-  //     setTimeout(() => {
-  //       fetchSupportRolesData();
-  //     }, 100);
-  //   }
-  // }, [user?.userRole?.userType?.name]);
 
   useEffect(() => {
     if (!isAuthenticated) {
