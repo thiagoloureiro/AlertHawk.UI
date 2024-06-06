@@ -43,6 +43,10 @@
     "deleteConfirmation": "Монітор був видалений!",
     "confirmDeleteTitle": "Підтвердження видалення",
     "confirmDeleteMessage": "Ви впевнені, що хочете видалити цей монітор?",
+    "updateHttpForm": {
+      "updateMonitor": "Оновити монітор",
+      "success": "Монітор було оновлено!"
+    },    
     "addHttpForm": {
       "success": "Монітор був доданий!",
       "addNewMonitor": "Додати новий монітор",

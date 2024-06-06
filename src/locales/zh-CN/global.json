@@ -43,6 +43,10 @@
     "deleteConfirmation": "监视器已删除！",
     "confirmDeleteTitle": "删除确认",
     "confirmDeleteMessage": "您确定要删除此监视器吗？",
+    "updateHttpForm": {
+      "updateMonitor": "更新监视器",
+      "success": "监视器已更新！"
+    },    
     "addHttpForm": {
       "success": "监视器已添加！",
       "addNewMonitor": "添加新监视器",

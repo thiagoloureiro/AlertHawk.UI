@@ -43,6 +43,10 @@
     "deleteConfirmation": "모니터가 삭제되었습니다!",
     "confirmDeleteTitle": "삭제 확인",
     "confirmDeleteMessage": "이 모니터를 삭제하시겠습니까?",
+    "updateHttpForm": {
+      "updateMonitor": "모니터 업데이트",
+      "success": "모니터가 업데이트되었습니다!"
+    },    
     "addHttpForm": {
       "success": "모니터가 추가되었습니다!",
       "addNewMonitor": "새로운 모니터 추가",

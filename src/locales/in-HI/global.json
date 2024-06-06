@@ -47,6 +47,10 @@
     "deleteConfirmation": "मॉनिटर हटा दिया गया है!",
     "confirmDeleteTitle": "हटाने की पुष्टि",
     "confirmDeleteMessage": "क्या आप इस मॉनिटर को हटाना चाहते हैं?",
+    "updateHttpForm": {
+      "updateMonitor": "मॉनिटर अपडेट करें",
+      "success": "मॉनिटर को अपडेट किया गया है!"
+    },    
     "addHttpForm": {
       "success": "मॉनिटर जोड़ा गया है!",
       "addNewMonitor": "नया मॉनिटर जोड़ें",
