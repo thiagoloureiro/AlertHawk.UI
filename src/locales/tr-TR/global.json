@@ -43,6 +43,10 @@
     "deleteConfirmation": "Monitör silindi!",
     "confirmDeleteTitle": "Silme Onayı",
     "confirmDeleteMessage": "Bu monitörü silmek istediğinizden emin misiniz?",
+    "updateHttpForm": {
+      "updateMonitor": "Monitörü Güncelle",
+      "success": "Monitör güncellendi!"
+    },    
     "addHttpForm": {
       "success": "Monitör eklendi!",
       "addNewMonitor": "Yeni Monitör Ekle",

@@ -36,6 +36,7 @@ const languageOptions = [
   { code: "de-DE", text: "Deutsch" },
   { code: "en-US", text: "English" },
   { code: "fr-FR", text: "Française" },
+  { code: "fi-FI", text: "Suomalainen" },
   { code: "it-IT", text: "Italiano" },
   { code: "jp-JP", text: "日本語" },
   { code: "ko-KR", text: "한국인" },

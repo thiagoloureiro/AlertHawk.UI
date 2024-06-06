@@ -43,6 +43,10 @@
     "deleteConfirmation": "Monitor foi excluído!",
     "confirmDeleteTitle": "Confirmação de Exclusão",
     "confirmDeleteMessage": "Tem certeza de que deseja excluir este monitor?",
+    "updateHttpForm": {
+      "updateMonitor": "Atualizar Monitor",
+      "success": "O monitor foi atualizado!"
+    },    
     "addHttpForm": {
       "success": "O monitor foi adicionado!",
       "addNewMonitor": "Adicionar Novo Monitor",

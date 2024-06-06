@@ -43,6 +43,10 @@
     "deleteConfirmation": "モニタが削除されました！",
     "confirmDeleteTitle": "削除の確認",
     "confirmDeleteMessage": "このモニタを削除してもよろしいですか？",
+    "updateHttpForm": {
+      "updateMonitor": "モニターを更新",
+      "success": "モニターが更新されました！"
+    },    
     "addHttpForm": {
       "success": "モニターが追加されました！",
       "addNewMonitor": "新しいモニターを追加",
