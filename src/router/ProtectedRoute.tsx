@@ -22,10 +22,14 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const navigate: NavigateFunction = useNavigate();
   const { instance } = useMsal();
 
-  const { selectedEnvironment } = useStoreState((state) => state.app);
+  const { selectedEnvironment, refreshRate } = useStoreState(
+    (state) => state.app
+  );
   const { user } = useStoreState((state) => state.user);
   const { thunkGetUser } = useStoreActions((actions) => actions.user);
-  const { setIsMonitorLoading } = useStoreActions((state) => state.app);
+  const { setIsMonitorLoading, setRefreshRate } = useStoreActions(
+    (action) => action.app
+  );
   const {
     thunkGetMonitorGroupListByUser,
     thunkGetMonitorAgents,
@@ -115,6 +119,55 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       }, 100);
     }
   }, [user, selectedEnvironment]);
+
+  useEffect(() => {
+    const fetchAppData = async () => {
+      try {
+        await Promise.all([
+          thunkGetMonitorStats(selectedEnvironment),
+          thunkGetMonitorGroupListByUser(selectedEnvironment),
+          thunkGetMonitorAgents(),
+        ]);
+      } catch (error) {
+        logging.error(error);
+      }
+    };
+
+    let refreshIntervalId: ReturnType<typeof setInterval> | null = null;
+
+    if (refreshRate) {
+      refreshIntervalId = setInterval(() => {
+        fetchAppData();
+      }, (refreshRate as number) * 1000);
+    }
+
+    const resetRefreshRate = () => {
+      setRefreshRate("");
+      if (refreshIntervalId) {
+        clearInterval(refreshIntervalId);
+      }
+    };
+
+    const handleUserInteraction = (event: MouseEvent | KeyboardEvent) => {
+      // Check if the event is a keyboard event and if the key is "F5"
+      if (event instanceof KeyboardEvent && event.key === "F5") {
+          resetRefreshRate();
+      }
+  };
+  
+    window.addEventListener("beforeunload", resetRefreshRate); // Handle F5 and page refresh
+    document.addEventListener("keydown", handleUserInteraction);
+  
+
+    return () => {
+      if (refreshIntervalId) {
+        clearInterval(refreshIntervalId);
+      }
+      window.removeEventListener("beforeunload", resetRefreshRate);
+      // document.removeEventListener("click", handleUserInteraction);
+      document.removeEventListener("keydown", handleUserInteraction);
+    };
+  }, [refreshRate]);
 
   useEffect(() => {
     if (!isAuthenticated) {

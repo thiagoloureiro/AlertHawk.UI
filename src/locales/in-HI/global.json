@@ -3,6 +3,8 @@
     "goBack": "वापस जाएं"
   },
   "header": {
+    "refreshRate": "रिफ्रेश दर",
+    "off": "बंद",
     "logout": "लॉग आउट"
   },
   "sidebar": {

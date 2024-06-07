@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   Hidden,
   Tooltip,
+  Button,
 } from "@mui/material";
 import { CustomSwitch } from "../Icons/MaterialUISwitch";
 import { useStoreActions, useStoreState } from "../../hooks";
@@ -22,6 +23,7 @@ import { useTranslation } from "react-i18next";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
+import { ExpandMore, ExpandLess } from "@mui/icons-material";
 
 interface IHeaderProps {
   title: string;
@@ -31,9 +33,13 @@ interface IHeaderProps {
 const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
   const { t } = useTranslation("global");
   const isAuthenticated: boolean = useIsAuthenticated();
-  const { isDarkMode, isSmallScreen } = useStoreState((state) => state.app);
+  const { isDarkMode, isSmallScreen, refreshRate } = useStoreState(
+    (state) => state.app
+  );
   const { stats } = useStoreState((state) => state.monitor);
-  const { setIsDarkMode } = useStoreActions((action) => action.app);
+  const { setIsDarkMode, setRefreshRate } = useStoreActions(
+    (action) => action.app
+  );
   const theme = useTheme();
   const { user } = useStoreState((actions) => actions.user);
   const navigate = useNavigate();
@@ -47,6 +53,21 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const [anchorElRefreshRate, setAnchorElRefreshRate] =
+    useState<null | HTMLElement>(null);
+  const isRefreshRateOpen = Boolean(anchorElRefreshRate);
+
+  const handleRefreshRateClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setAnchorElRefreshRate(event.currentTarget);
+  };
+
+  const handleRefreshRateClose = (rate: string | number) => {
+    setRefreshRate(rate === "Off" ? "" : rate);
+    setAnchorElRefreshRate(null);
   };
 
   const toggleDarkTheme = () => {
@@ -187,6 +208,98 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
           alignItems="center"
           spacing={3}
         >
+          {isAuthenticated && (
+            <>
+              <Button
+                variant="text"
+                id="refresh-rate-btn"
+                aria-controls={
+                  isRefreshRateOpen ? "refresh-rate-menu" : undefined
+                }
+                aria-haspopup="true"
+                aria-expanded={isRefreshRateOpen ? "true" : undefined}
+                onClick={handleRefreshRateClick}
+                disableRipple
+                sx={{
+                  minWidth: 190,
+                }}
+              >
+                <span
+                  style={{
+                    color: isDarkMode ? "#00bcd4" : "#001e3c",
+                    marginRight: "4px",
+                  }}
+                >
+                  {t("header.refreshRate")}:{" "}
+                  <b>
+                    {typeof refreshRate === "number"
+                      ? refreshRate + "s"
+                      : refreshRate || t("header.off")}
+                  </b>
+                </span>
+                {isRefreshRateOpen ? (
+                  <ExpandLess
+                    fontSize="small"
+                    sx={{ fill: isDarkMode ? "#00bcd4" : "#001e3c" }}
+                  />
+                ) : (
+                  <ExpandMore
+                    fontSize="small"
+                    sx={{ fill: isDarkMode ? "#00bcd4" : "#001e3c" }}
+                  />
+                )}
+              </Button>
+              <Menu
+                id="refresh-rate-menu"
+                anchorEl={anchorElRefreshRate}
+                open={isRefreshRateOpen}
+                onClose={() => setAnchorElRefreshRate(null)}
+                MenuListProps={{
+                  "aria-labelledby": "refresh-rate-btn",
+                }}
+                PaperProps={{
+                  elevation: 0,
+                  sx: {
+                    minWidth: 180,
+                    borderRadius: 3,
+                    overflow: "visible",
+                    filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+                    mt: 1.5,
+                    "&::before": {
+                      content: '""',
+                      display: "block",
+                      position: "absolute",
+                      top: 0,
+                      left: "calc(50% - 5px)",
+                      width: 10,
+                      height: 10,
+                      bgcolor: "background.paper",
+                      transform: "translateY(-50%) rotate(45deg)",
+                      zIndex: 0,
+                    },
+                  },
+                }}
+                transformOrigin={{ horizontal: "right", vertical: "top" }}
+                anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+              >
+                <MenuItem onClick={() => handleRefreshRateClose("Off")}>
+                  Off
+                </MenuItem>
+                <MenuItem onClick={() => handleRefreshRateClose(5)}>
+                  5s
+                </MenuItem>
+                <MenuItem onClick={() => handleRefreshRateClose(10)}>
+                  10s
+                </MenuItem>
+                <MenuItem onClick={() => handleRefreshRateClose(30)}>
+                  30s
+                </MenuItem>
+                <MenuItem onClick={() => handleRefreshRateClose(60)}>
+                  60s
+                </MenuItem>
+              </Menu>
+            </>
+          )}
           <Hidden smDown>
             <CustomSwitch checked={isDarkMode} onChange={toggleDarkTheme} />
           </Hidden>

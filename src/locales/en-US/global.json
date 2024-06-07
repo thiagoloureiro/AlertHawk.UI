@@ -3,6 +3,8 @@
     "goBack": "Go Back"
   },
   "header": {
+    "refreshRate": "Refresh Rate",
+    "off": "Off",
     "logout": "Logout"
   },
   "sidebar": {

@@ -3,6 +3,8 @@
     "goBack": "Powrót"
   },
   "header": {
+    "refreshRate": "Częstotliwość Odświeżania",
+    "off": "Wyłączona",
     "logout": "Wyloguj się"
   },
   "sidebar": {

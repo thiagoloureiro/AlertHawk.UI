@@ -3,6 +3,8 @@
     "goBack": "Voltar"
   },
   "header": {
+    "refreshRate": "Taxa de Atualização",
+    "off": "Desligado",
     "logout": "Deslogar"
   },
   "sidebar": {

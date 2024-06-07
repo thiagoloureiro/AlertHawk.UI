@@ -3,7 +3,9 @@
        "goBack":"Palaa"
     },
     "header":{
-       "logout":"Kirjaudu ulos"
+      "refreshRate": "Päivitysnopeus",
+      "off": "Pois päältä",  
+      "logout":"Kirjaudu ulos"
     },
     "sidebar":{
        "monitorList":"Seurantalista",

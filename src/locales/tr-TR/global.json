@@ -3,6 +3,8 @@
     "goBack": "Geri Dön"
   },
   "header": {
+    "refreshRate": "Yenileme Hızı",
+    "off": "Kapalı",
     "logout": "Çıkış yap"
   },
   "sidebar": {

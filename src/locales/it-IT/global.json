@@ -3,6 +3,8 @@
     "goBack": "Indietro"
   },
   "header": {
+    "refreshRate": "Frequenza di aggiornamento",
+    "off": "Spento",
     "logout": "Esci"
   },
   "sidebar": {

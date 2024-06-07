@@ -130,15 +130,16 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       text: t("sidebar.notificationManagement"),
       pathname: "/notifications",
       icon: <AddAlertOutlinedIcon />,
+    },
+    {
+      text: t("sidebar.monitorGroups"),
+      pathname: "/monitorGroups",
+      icon: <LibraryAddIcon />
     }
   ];
 
   if (user?.isAdmin) {
-    menuItems.push({
-      text: t("sidebar.monitorGroups"),
-      pathname: "/monitorGroups",
-      icon: <LibraryAddIcon />,
-    });
+
     menuItems.push({
       text: t("sidebar.users"),
       pathname: "/users",
