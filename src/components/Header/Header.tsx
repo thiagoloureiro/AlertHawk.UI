@@ -283,7 +283,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
                 anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
               >
                 <MenuItem onClick={() => handleRefreshRateClose("Off")}>
-                  Off
+                  {t("header.off")}
                 </MenuItem>
                 <MenuItem onClick={() => handleRefreshRateClose(5)}>
                   5s
