@@ -90,9 +90,7 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
 
   return (
     <>
-      {!user?.isAdmin ? (
-        <NotFoundContent />
-      ) : (
+
         <>
           <HelmetProvider>
             <Helmet>
@@ -192,7 +190,6 @@ const MonitorGroups: FC<IMonitorGroupsProps> = () => {
 
           </Grid>
         </>
-      )}
     </>
   );
 };
