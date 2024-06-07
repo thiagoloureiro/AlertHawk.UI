@@ -15,7 +15,6 @@ import MonitorService from "../../services/MonitorService";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import MonitorGroupsTable from "../../components/Table/MonitorGroupsTable";
-import NotFoundContent from "../../components/NotFoundContent/NotFoundContent";
 import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
 import FromMonitorGroup from "./Forms/FromMonitorGroup";
 
