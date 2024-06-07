@@ -3,6 +3,8 @@
     "goBack": "뒤로 가기"
   },
   "header": {
+    "refreshRate": "재생률",
+    "off": "끄다",
     "logout": "로그아웃"
   },
   "sidebar": {

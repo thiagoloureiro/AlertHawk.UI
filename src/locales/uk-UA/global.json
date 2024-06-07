@@ -3,6 +3,8 @@
     "goBack": "Повернутися"
   },
   "header": {
+    "refreshRate": "Частота оновлення",
+    "off": "вимкнено",
     "logout": "Вийти"
   },
   "sidebar": {

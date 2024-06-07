@@ -20,6 +20,8 @@ export interface IAppModel {
   setIsMediumScreen: Action<IAppModel, boolean>;
   selectedEnvironment: Environment;
   setSelectedEnvironment: Action<IAppModel, Environment>;
+  refreshRate: string | number;
+  setRefreshRate: Action<IAppModel, string | number>;
 }
 
 const defaultAppState = {
@@ -31,6 +33,7 @@ const defaultAppState = {
   isMediumScreen: false,
   selectedDisplayTimezone: momentTZ.tz.guess(),
   selectedEnvironment: Environment.Production,
+  refreshRate: "",
 };
 
 const app: IAppModel = {
@@ -68,6 +71,10 @@ const app: IAppModel = {
   selectedEnvironment: defaultAppState.selectedEnvironment,
   setSelectedEnvironment: action((state, payload) => {
     state.selectedEnvironment = payload;
+  }),
+  refreshRate: defaultAppState.refreshRate,
+  setRefreshRate: action((state, payload) => {
+    state.refreshRate = payload;
   }),
 };
 

@@ -3,6 +3,8 @@
     "goBack": "🚶‍♂️🔙"
   },
   "header": {
+    "refreshRate": "🔄",
+    "off": "🚫",
     "logout": "🚪"
   },
   "sidebar": {

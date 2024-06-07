@@ -3,6 +3,8 @@
     "goBack": "戻る"
   },
   "header": {
+    "refreshRate": "リフレッシュレート",
+    "off": "オフ",
     "logout": "ログアウト"
   },
   "sidebar": {

@@ -3,6 +3,8 @@
     "goBack": "Retour"
   },
   "header": {
+    "refreshRate": "Taux de Rafraîchissement",
+    "off": "Désactivé",
     "logout": "Déconnexion"
   },
   "sidebar": {

@@ -3,6 +3,8 @@
     "goBack": "返回"
   },
   "header": {
+    "refreshRate": "刷新率",
+    "off": "关闭",
     "logout": "登出"
   },
   "sidebar": {

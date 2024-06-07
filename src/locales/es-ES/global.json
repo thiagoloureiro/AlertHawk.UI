@@ -3,6 +3,8 @@
     "goBack": "Volver Atrás"
   },
   "header": {
+    "refreshRate": "Frecuencia de Actualización",
+    "off": "Desactivada",
     "logout": "Cerrar sesión"
   },
   "sidebar": {
