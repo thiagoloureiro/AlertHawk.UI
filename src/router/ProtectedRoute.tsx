@@ -148,13 +148,16 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       }
     };
 
-    const handleUserInteraction = (_event: MouseEvent | KeyboardEvent) => {
-      resetRefreshRate();
-    };
-
+    const handleUserInteraction = (event: MouseEvent | KeyboardEvent) => {
+      // Check if the event is a keyboard event and if the key is "F5"
+      if (event instanceof KeyboardEvent && event.key === "F5") {
+          resetRefreshRate();
+      }
+  };
+  
     window.addEventListener("beforeunload", resetRefreshRate); // Handle F5 and page refresh
-    // document.addEventListener("click", handleUserInteraction);
     document.addEventListener("keydown", handleUserInteraction);
+  
 
     return () => {
       if (refreshIntervalId) {
