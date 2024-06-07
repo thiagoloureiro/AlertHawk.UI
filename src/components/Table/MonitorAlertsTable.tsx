@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { Environment } from "../../enums/Enums";
 import MonitorAlertsTableRow from "./MonitorAlertsTableRow";
 import { ChangeEvent, FC, useEffect, useState } from "react";
 import { IMonitorAlerts } from "../../interfaces/IMonitorAlerts";
@@ -18,6 +17,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 interface IMonitorAlertsTableTableProps {
   monitorAlerts: IMonitorAlerts[];
   searchText: string;
+  selectedEnvironment: number | undefined;
 }
 
 interface IHeaderCell {
@@ -30,13 +30,16 @@ interface IHeaderCell {
 
 const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
   monitorAlerts,
-  searchText
+  searchText,
+  selectedEnvironment,
 }) => {
   const { t } = useTranslation("global");
 
   const [maxRowNumber, setMaxRowNumber] = useState<number>(6);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [filteredMonitorAlerts, setfilteredMonitorAlerts] = useState<IMonitorAlerts[]>([]);
+  const [filteredMonitorAlerts, setfilteredMonitorAlerts] = useState<
+    IMonitorAlerts[]
+  >([]);
 
   useEffect(() => {
     const calculateMaxRowNumber = () => {
@@ -84,7 +87,7 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
       label: t("monitorAlerts.screenshot"),
       width: "20%",
       sortable: true,
-    }
+    },
   ];
 
   const handleChangePage = (_: ChangeEvent<unknown>, page: number) => {
@@ -94,16 +97,17 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
   useEffect(() => {
     const filtered = monitorAlerts.filter((monitorAlert) => {
       const searchTextLower = searchText.trim().toLowerCase();
-      const environmentString = Environment[monitorAlert.environment];
+      // const environmentString = Environment[monitorAlert.environment];
 
-      return (
-        monitorAlert.monitorName?.toLowerCase().includes(searchTextLower) ||
-        monitorAlert.message.toLowerCase().includes(searchTextLower) ||
-        (environmentString && environmentString.toLowerCase().includes(searchTextLower))
-      );
+      if (monitorAlert.environment === selectedEnvironment) {
+        return (
+          monitorAlert.monitorName?.toLowerCase().includes(searchTextLower) ||
+          monitorAlert.message.toLowerCase().includes(searchTextLower)
+          //   (environmentString &&
+          //     environmentString.toLowerCase().includes(searchTextLower))
+        );
+      }
     });
-
-
 
     const newPageCount = Math.ceil(filtered.length / maxRowNumber);
 
@@ -112,7 +116,7 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
     }
 
     setfilteredMonitorAlerts(filtered);
-  }, [monitorAlerts, searchText]);
+  }, [monitorAlerts, searchText, selectedEnvironment]);
 
   return (
     <TableContainer component={Card}>
@@ -122,7 +126,9 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
             borderBottom: "none",
           },
           minHeight:
-            filteredMonitorAlerts.length === 0 ? "calc(100vh - 400px)" : "unset",
+            filteredMonitorAlerts.length === 0
+              ? "calc(100vh - 400px)"
+              : "unset",
         }}
       >
         <TableHead>
@@ -132,10 +138,7 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
             }}
           >
             {headerCells.map((headerCell: IHeaderCell) => (
-              <TableCell
-                key={headerCell.id}
-                align={headerCell.align}
-              >
+              <TableCell key={headerCell.id} align={headerCell.align}>
                 {headerCell.label}
               </TableCell>
             ))}
@@ -167,7 +170,7 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
           )}
         </TableBody>
       </Table>
-      { }
+      {}
       <Pagination
         sx={{
           width: "100%",
@@ -179,8 +182,8 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
           filteredMonitorAlerts.length === 0
             ? 1
             : filteredMonitorAlerts.length % maxRowNumber === 0
-              ? filteredMonitorAlerts.length / maxRowNumber
-              : Math.ceil(filteredMonitorAlerts.length / maxRowNumber)
+            ? filteredMonitorAlerts.length / maxRowNumber
+            : Math.ceil(filteredMonitorAlerts.length / maxRowNumber)
         }
         defaultPage={1}
         page={currentPage}
