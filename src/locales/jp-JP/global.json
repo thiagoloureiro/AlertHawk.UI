@@ -38,6 +38,7 @@
     "environment": "環境 ",
     "alarm": "アラート",
     "pauseConfirmation": "モニターが更新されました！",
+    "status": "ステータス",
     "up": "オンライン",
     "down": "オフライン",
     "paused": "一時停止",

@@ -38,6 +38,7 @@
        "environment":"Ympäristö",
        "alarm":"Hälytykset",
        "pauseConfirmation":"Valvontaa on päivitetty!",
+       "status": "Tila",
        "up":"Verkossa",
        "down":"Poissa verkosta",
        "paused":"Keskeytetty",

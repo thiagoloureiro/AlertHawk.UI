@@ -50,9 +50,13 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     | "uptime3Months"
     | "uptime6Months"
   >("uptime24Hrs");
-  // const [selectedEnvironment, setSelectedEnvironment] = useState<number | "">(
-  //   ""
-  // );
+
+  const [monitorStatus, setMonitorStatus] = useState<string>("all");
+
+  const handleMonitorStatusChange = (event: SelectChangeEvent<string>) => {
+    setMonitorStatus(event.target.value);
+  };
+
   useEffect(() => {
     setAddMonitorPanel(false);
     setEditMonitorPanel(false);
@@ -145,10 +149,51 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                 direction="row"
                 justifyContent="space-between"
                 alignItems="center"
+                gap={2}
+                marginBottom={2}
+              >
+                <div style={{ flex: 1 }}>
+                  <FormControl fullWidth>
+                    <OutlinedInput
+                      size="small"
+                      startAdornment={<SearchOutlinedIcon />}
+                      value={searchText}
+                      onChange={handleSearchInputChange}
+                      placeholder={t("dashboard.search")}
+                    />
+                  </FormControl>
+                </div>
+                <div>
+                  <FormControl fullWidth>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="success"
+                      sx={{
+                        // mb: 2,
+                        // mt: 2,
+                        // ml: 2,
+                        color: "white",
+                        minWidth: "110px",
+                        fontWeight: 700,
+                        position: "relative",
+                      }}
+                      onClick={handleAddNew}
+                    >
+                      {t("dashboard.addNew")}
+                    </Button>
+                  </FormControl>
+                </div>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                gap={2}
                 marginBottom={4}
               >
-                <Box>
-                  <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
+                <Box sx={{ flex: 1 }}>
+                  <FormControl sx={{ minWidth: 160 }} size="small" fullWidth>
                     <InputLabel id="metric-selection-label">
                       {t("dashboard.metric")}
                     </InputLabel>
@@ -156,7 +201,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                       labelId="metric-selection-label"
                       id="metric-selection"
                       value={selectedMetric}
-                      label="Metric"
+                      label={t("dashboard.metric")}
                       onChange={handleMetricChange}
                     >
                       <MenuItem value="uptime1Hr">
@@ -180,8 +225,8 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                     </Select>
                   </FormControl>
                 </Box>
-                <Box>
-                  <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
+                <Box sx={{ flex: 1 }}>
+                  <FormControl sx={{ minWidth: 160 }} size="small" fullWidth>
                     <InputLabel id="environment-selection-label">
                       {t("dashboard.environment")}
                     </InputLabel>
@@ -189,7 +234,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                       labelId="environment-selection-label"
                       id="environment-selection"
                       value={selectedEnvironment}
-                      label="Environment"
+                      label={t("dashboard.environment")}
                       onChange={handleEnvironmentChange}
                     >
                       {(
@@ -209,38 +254,24 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                     </Select>
                   </FormControl>
                 </Box>
-                <div>
-                  <FormControl fullWidth>
-                    <OutlinedInput
-                      size="small"
-                      startAdornment={<SearchOutlinedIcon />}
-                      value={searchText}
-                      onChange={handleSearchInputChange}
-                      placeholder={t("dashboard.search")}
-                    />
-                  </FormControl>
-                </div>
-                <div>
-                  <FormControl fullWidth>
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      color="success"
-                      sx={{
-                        mb: 2,
-                        mt: 2,
-                        ml: 2,
-                        color: "white",
-                        minWidth: "110px",
-                        fontWeight: 700,
-                        position: "relative",
-                      }}
-                      onClick={handleAddNew}
+                <Box sx={{ flex: 1 }}>
+                  <FormControl sx={{ minWidth: 160 }} size="small" fullWidth>
+                    <InputLabel id="monitor-status-label">
+                      {t("dashboard.status")}
+                    </InputLabel>
+                    <Select
+                      labelId="monitor-status-label"
+                      id="metric-selection"
+                      value={monitorStatus}
+                      label={t("dashboard.status")}
+                      onChange={handleMonitorStatusChange}
                     >
-                      {t("dashboard.addNew")}
-                    </Button>
+                      <MenuItem value="all">{t("users.all")}</MenuItem>
+                      <MenuItem value="up">{t("dashboard.up")}</MenuItem>
+                      <MenuItem value="down">{t("dashboard.down")}</MenuItem>
+                    </Select>
                   </FormControl>
-                </div>
+                </Box>
               </Stack>
               <Box
                 sx={{
@@ -264,6 +295,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                 <CollapsibleTable
                   monitors={monitorGroupListByUser}
                   searchText={searchText}
+                  monitorStatus={monitorStatus}
                   handleRowClick={handleRowClick}
                   handleChildRowClick={handleChildRowClick}
                   selectedRowIndex={selectedRowIndex}

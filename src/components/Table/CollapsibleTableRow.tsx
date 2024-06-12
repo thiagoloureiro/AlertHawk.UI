@@ -33,6 +33,9 @@ interface ICollapsibleTableRowProps {
     | "uptime30Days"
     | "uptime3Months"
     | "uptime6Months";
+  monitorStatus: string;
+  searchText: string;
+  parentMatchesSearchText: boolean;
 }
 
 const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
@@ -43,6 +46,9 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
   onRowClick,
   handleChildRowClick,
   selectedMetric,
+  monitorStatus,
+  searchText,
+  parentMatchesSearchText,
 }) => {
   const [open, setOpen] = useState<boolean>(false);
   const { isDarkMode } = useStoreState((state) => state.app);
@@ -299,6 +305,32 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
     }
   };
 
+  const childMatchesSearchText = monitorGroup.monitors.some((childMonitor) =>
+    childMonitor.name.toLowerCase().includes(searchText.trim().toLowerCase())
+  );
+
+  // Filter child monitors based on the conditions
+  const filteredChildMonitors = parentMatchesSearchText
+    ? childMatchesSearchText
+      ? monitorGroup.monitors.filter((childMonitor) =>
+          childMonitor.name
+            .toLowerCase()
+            .includes(searchText.trim().toLowerCase())
+        )
+      : monitorGroup.monitors
+    : monitorGroup.monitors.filter((childMonitor) => {
+        const matchesSearchText = childMonitor.name
+          .toLowerCase()
+          .includes(searchText.trim().toLowerCase());
+
+        const matchesMonitorStatus =
+          monitorStatus === "all" ||
+          (monitorStatus === "up" && childMonitor.status) ||
+          (monitorStatus === "down" && !childMonitor.status);
+
+        return matchesSearchText && matchesMonitorStatus;
+      });
+
   return (
     <Fragment>
       <TableRow
@@ -352,7 +384,7 @@ const CollapsibleTableRow: FC<ICollapsibleTableRowProps> = ({
             <Box sx={{ margin: "4px 4px 4px 5%" }}>
               <Table size="medium" aria-label="monitors">
                 <TableBody>
-                  {monitorGroup.monitors
+                  {filteredChildMonitors
                     .slice()
                     .sort((a, b) => a.name.localeCompare(b.name))
                     .map((monitor) => (

@@ -38,6 +38,7 @@
     "environment": "Środowisko",
     "alarm": "Alerty",
     "pauseConfirmation": "Monitor został zaktualizowany!",
+    "status": "Status",
     "up": "Online",
     "down": "Offline",
     "paused": "Wstrzymane",
