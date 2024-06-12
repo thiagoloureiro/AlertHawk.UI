@@ -38,6 +38,7 @@
     "environment": "环境",
     "alarm": "警报",
     "pauseConfirmation": "监视器已更新！",
+    "status": "现状",
     "up": "在线",
     "down": "离线",
     "paused": "暂停",

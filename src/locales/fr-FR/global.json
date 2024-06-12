@@ -38,6 +38,7 @@
     "environment": "Environnement",
     "alarm": "Alertes",
     "pauseConfirmation": "Le moniteur a été mis à jour !",
+    "status": "Tila",
     "up": "En ligne",
     "down": "Hors ligne",
     "paused": "En pause",

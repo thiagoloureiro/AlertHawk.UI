@@ -38,6 +38,7 @@
     "environment": "Ambiente",
     "alarm": "Avvisi",
     "pauseConfirmation": "Il monitor è stato aggiornato!",
+    "status": "Stato",
     "up": "Online",
     "down": "Offline",
     "paused": "In pausa",

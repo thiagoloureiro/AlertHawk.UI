@@ -22,6 +22,7 @@ import { useStoreState } from "../../hooks";
 interface ICollapsibleTable {
   monitors: IMonitorGroupListByUser[];
   searchText: string;
+  monitorStatus: string;
   selectedRowIndex: number | null;
   selectedChildRowIndex: number | null;
   handleRowClick: (monitorId: number) => void;
@@ -38,6 +39,7 @@ interface ICollapsibleTable {
 const CollapsibleTable: FC<ICollapsibleTable> = ({
   monitors,
   searchText,
+  monitorStatus,
   handleRowClick,
   handleChildRowClick,
   selectedRowIndex,
@@ -47,15 +49,29 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   const { t } = useTranslation("global");
   const { isMonitorLoading } = useStoreState((state) => state.app);
 
-  const filteredMonitorGroups = monitors.filter(
-    (monitor) =>
+  const filteredMonitorGroups = monitors.filter((monitor) => {
+    const matchesSearchText =
       monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
       monitor.monitors.some((childMonitor) =>
         childMonitor.name
           .toLowerCase()
           .includes(searchText.trim().toLowerCase())
-      )
-  );
+      );
+
+    const allChildrenUp = monitor.monitors.every(
+      (childMonitor) => childMonitor.status
+    );
+    const anyChildrenDown = monitor.monitors.some(
+      (childMonitor) => !childMonitor.status
+    );
+
+    const matchesMonitorStatus =
+      monitorStatus === "all" ||
+      (monitorStatus === "up" && allChildrenUp) ||
+      (monitorStatus === "down" && anyChildrenDown);
+
+    return matchesSearchText && matchesMonitorStatus;
+  });
 
   const [downServices, setDownServices] = useState<
     IMonitorGroupListByUserItem[]
@@ -149,18 +165,27 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
             filteredMonitorGroups
               .slice()
               .sort((a, b) => a.name.localeCompare(b.name))
-              .map((monitorGroup) => (
-                <CollapsibleTableRow
-                  key={monitorGroup.id}
-                  monitorGroup={monitorGroup}
-                  monitorGroupId={monitorGroup.id}
-                  isSelected={selectedRowIndex === monitorGroup.id}
-                  selectedChildRowIndex={selectedChildRowIndex}
-                  onRowClick={() => handleRowClick(monitorGroup.id)}
-                  handleChildRowClick={handleChildRowClick}
-                  selectedMetric={selectedMetric}
-                />
-              ))
+              .map((monitorGroup) => {
+                const parentMatchesSearchText = monitorGroup.name
+                  .toLowerCase()
+                  .includes(searchText.trim().toLowerCase());
+
+                return (
+                  <CollapsibleTableRow
+                    key={monitorGroup.id}
+                    monitorGroup={monitorGroup}
+                    monitorGroupId={monitorGroup.id}
+                    isSelected={selectedRowIndex === monitorGroup.id}
+                    selectedChildRowIndex={selectedChildRowIndex}
+                    onRowClick={() => handleRowClick(monitorGroup.id)}
+                    handleChildRowClick={handleChildRowClick}
+                    selectedMetric={selectedMetric}
+                    monitorStatus={monitorStatus}
+                    searchText={searchText}
+                    parentMatchesSearchText={parentMatchesSearchText}
+                  />
+                );
+              })
           ) : (
             <TableRow>
               <TableCell>
