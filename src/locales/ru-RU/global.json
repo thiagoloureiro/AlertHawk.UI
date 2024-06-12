@@ -49,7 +49,7 @@
     "updateHttpForm": {
       "updateMonitor": "Обновить монитор",
       "success": "Монитор был обновлен!"
-    },    
+    },
     "addHttpForm": {
       "success": "Монитор был добавлен!",
       "addNewMonitor": "Добавить новый монитор",
@@ -170,7 +170,8 @@
     "hasItemsFound": "Группа мониторинга нашла элементы, пожалуйста, сначала удалите их",
     "monitorNotFound": "Монитор не найден",
     "deleteConfirmation": "Группа мониторинга удалена!",
-    "confirmDeleteMessage": "Вы уверены, что хотите удалить эту группу мониторинга?"
+    "confirmDeleteMessage": "Вы уверены, что хотите удалить эту группу мониторинга?",
+    "editMonitorGroup": "Редактировать Группу Мониторов"
   },
   "notifications": {
     "title": "Уведомления",

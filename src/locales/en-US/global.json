@@ -171,7 +171,8 @@
     "hasItemsFound": "Monitor group has items found, please delete them first",
     "monitorNotFound": "Monitor not found",
     "deleteConfirmation": "Monitor group has been deleted!",
-    "confirmDeleteMessage": "Are you sure you want to delete this monitor group?"
+    "confirmDeleteMessage": "Are you sure you want to delete this monitor group?",
+    "editMonitorGroup": "Edit Monitor Group"
   },
   "notifications": {
     "title": "Notifications",
@@ -214,9 +215,9 @@
     "enableSsl": "Enable Ssl",
     "subject": "Subject",
     "isHtmlBody": "Is html body",
-    "fillAllTheMandatoryFields":"Fill all the mandatory fields",
+    "fillAllTheMandatoryFields": "Fill all the mandatory fields",
     "testNotificationSuccess": "Test notification has been sent!",
-    "testNotificationFail": "Test notification has been failed!", 
+    "testNotificationFail": "Test notification has been failed!",
     "testNotification": "Test Notification",
     "testNotificationTitle": "Test Notification",
     "testNotificationMessage": "Are you sure you want to send a test notification?",
