@@ -31,12 +31,14 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
     handleSubmit,
     setValue,
     formState: { errors },
+    watch
   } = useForm({
     defaultValues: {
       name: "",
-
     },
   });
+
+  const watchName = watch("name");
 
   useEffect(() => {
     if (selectedMonitorGroup) {
@@ -44,7 +46,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
     } else {
       setValue("name", "");
     }
-  });
+  }, [selectedMonitorGroup, setValue]);
 
   const handleDeleteBtn = () => {
     setOpenDeleteDialog(true);
@@ -118,7 +120,6 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
             </div>
             <div>
               {(selectedMonitorGroup !== null) && (
-
                 <FormControl fullWidth>
                   <Button
                     aria-label="delete"
@@ -130,7 +131,8 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
                   >
                     {t("dashboard.delete")}
                   </Button>
-                </FormControl>)}
+                </FormControl>
+              )}
             </div>
           </Stack>
           <Card>
@@ -149,12 +151,12 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
                     label={t("monitorGroups.name")}
                     margin="normal"
                     variant="outlined"
-                    autoFocus
                     sx={{
                       marginBottom: "0px !important",
                     }}
                     autoComplete="off"
                     error={!!errors.name}
+                    value={watchName}
                   />
                 </FormControl>
               </Box>
@@ -242,4 +244,3 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
 };
 
 export default FromMonitorGroup;
-
