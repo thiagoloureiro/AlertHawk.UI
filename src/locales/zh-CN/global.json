@@ -49,7 +49,7 @@
     "updateHttpForm": {
       "updateMonitor": "更新监视器",
       "success": "监视器已更新！"
-    },    
+    },
     "addHttpForm": {
       "success": "监视器已添加！",
       "addNewMonitor": "添加新监视器",
@@ -170,7 +170,8 @@
     "hasItemsFound": "监控组找到了项目，请先删除它们",
     "monitorNotFound": "未找到监控",
     "deleteConfirmation": "监控组已删除！",
-    "confirmDeleteMessage": "您确定要删除此监控组吗？"
+    "confirmDeleteMessage": "您确定要删除此监控组吗？",
+    "editMonitorGroup": "编辑监控组"
   },
   "notifications": {
     "title": "通知",

@@ -166,7 +166,8 @@
     "hasItemsFound": "⚠️",
     "monitorNotFound": "🚫",
     "deleteConfirmation": "🗑️",
-    "confirmDeleteMessage": "❓"
+    "confirmDeleteMessage": "❓",
+    "editMonitorGroup": "📝📊👥"
   },
   "notifications": {
     "title": "🔔",

@@ -49,7 +49,7 @@
     "updateHttpForm": {
       "updateMonitor": "モニターを更新",
       "success": "モニターが更新されました！"
-    },    
+    },
     "addHttpForm": {
       "success": "モニターが追加されました！",
       "addNewMonitor": "新しいモニターを追加",
@@ -170,7 +170,8 @@
     "hasItemsFound": "監視グループに項目が見つかりました。まずそれらを削除してください",
     "monitorNotFound": "モニターが見つかりません",
     "deleteConfirmation": "モニターグループが削除されました！",
-    "confirmDeleteMessage": "このモニターグループを削除してもよろしいですか？"
+    "confirmDeleteMessage": "このモニターグループを削除してもよろしいですか？",
+    "editMonitorGroup": "モニターグループ編集"
   },
   "notifications": {
     "title": "通知",
@@ -224,6 +225,5 @@
       "url": "URLが無効です",
       "validEmail": "メールアドレスが無効です"
     }
-    
   }
 }

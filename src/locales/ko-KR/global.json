@@ -49,7 +49,7 @@
     "updateHttpForm": {
       "updateMonitor": "모니터 업데이트",
       "success": "모니터가 업데이트되었습니다!"
-    },    
+    },
     "addHttpForm": {
       "success": "모니터가 추가되었습니다!",
       "addNewMonitor": "새로운 모니터 추가",
@@ -170,7 +170,8 @@
     "hasItemsFound": "모니터 그룹에 항목이 발견되었습니다. 먼저 삭제하세요.",
     "monitorNotFound": "모니터를 찾을 수 없음",
     "deleteConfirmation": "모니터 그룹이 삭제되었습니다!",
-    "confirmDeleteMessage": "이 모니터 그룹을 삭제하시겠습니까?"
+    "confirmDeleteMessage": "이 모니터 그룹을 삭제하시겠습니까?",
+    "editMonitorGroup": "모니터 그룹 수정"
   },
   "notifications": {
     "title": "알림",

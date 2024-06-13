@@ -49,7 +49,7 @@
     "updateHttpForm": {
       "updateMonitor": "Оновити монітор",
       "success": "Монітор було оновлено!"
-    },    
+    },
     "addHttpForm": {
       "success": "Монітор був доданий!",
       "addNewMonitor": "Додати новий монітор",
@@ -170,7 +170,8 @@
     "hasItemsFound": "Моніторна група знайшла елементи, будь ласка, спочатку видаліть їх",
     "monitorNotFound": "Монітор не знайдено",
     "deleteConfirmation": "Група моніторингу видалена!",
-    "confirmDeleteMessage": "Ви впевнені, що хочете видалити цю групу моніторингу?"
+    "confirmDeleteMessage": "Ви впевнені, що хочете видалити цю групу моніторингу?",
+    "editMonitorGroup": "Редагувати Групу Моніторів"
   },
   "notifications": {
     "title": "Сповіщення",

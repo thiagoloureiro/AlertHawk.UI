@@ -112,7 +112,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
             <div style={{ width: "75%", minWidth: "200px" }}>
               <FormControl fullWidth>
                 <Typography variant="h5" px={2} sx={{ marginBottom: "-15px" }}>
-                  {t("monitorGroups.addMonitorGroup")}
+                  {(!selectedMonitorGroup) ? (t("monitorGroups.addMonitorGroup")) : t("monitorGroups.editMonitorGroup")}
                 </Typography>
               </FormControl>
             </div>

@@ -49,7 +49,7 @@
     "updateHttpForm": {
       "updateMonitor": "Monitörü Güncelle",
       "success": "Monitör güncellendi!"
-    },    
+    },
     "addHttpForm": {
       "success": "Monitör eklendi!",
       "addNewMonitor": "Yeni Monitör Ekle",
@@ -170,7 +170,8 @@
     "hasItemsFound": "Monitör grubu bulunan öğeleri buldu, lütfen önce onları silin",
     "monitorNotFound": "İzleme bulunamadı",
     "deleteConfirmation": "İzleme grubu silindi!",
-    "confirmDeleteMessage": "Bu izleme grubunu silmek istediğinizden emin misiniz?"
+    "confirmDeleteMessage": "Bu izleme grubunu silmek istediğinizden emin misiniz?",
+    "editMonitorGroup": "Monitör Grubunu Düzenle"
   },
   "notifications": {
     "title": "Bildirimler",

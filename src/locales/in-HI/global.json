@@ -53,7 +53,7 @@
     "updateHttpForm": {
       "updateMonitor": "मॉनिटर अपडेट करें",
       "success": "मॉनिटर को अपडेट किया गया है!"
-    },    
+    },
     "addHttpForm": {
       "success": "मॉनिटर जोड़ा गया है!",
       "addNewMonitor": "नया मॉनिटर जोड़ें",
@@ -170,7 +170,8 @@
     "hasItemsFound": "मॉनिटर समूह में मद खोजा गया है, कृपया पहले उन्हें हटा दें",
     "monitorNotFound": "मॉनिटर नहीं मिला",
     "deleteConfirmation": "मॉनिटर समूह हटा दिया गया है!",
-    "confirmDeleteMessage": "क्या आप इस मॉनिटर समूह को हटाना चाहते हैं?"
+    "confirmDeleteMessage": "क्या आप इस मॉनिटर समूह को हटाना चाहते हैं?",
+    "editMonitorGroup": "मॉनीटर समूह संपादित करें"
   },
   "notifications": {
     "title": "सूचनाएँ",

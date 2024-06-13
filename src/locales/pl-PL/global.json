@@ -49,7 +49,7 @@
     "updateHttpForm": {
       "updateMonitor": "Aktualizuj monitor",
       "success": "Monitor został zaktualizowany!"
-    },    
+    },
     "addHttpForm": {
       "success": "Monitor został dodany!",
       "addNewMonitor": "Dodaj Nowy Monitor",
@@ -170,7 +170,8 @@
     "hasItemsFound": "Grupa monitorująca znalazła elementy, proszę najpierw je usunąć",
     "monitorNotFound": "Monitor nie znaleziono",
     "deleteConfirmation": "Grupa monitorująca została usunięta!",
-    "confirmDeleteMessage": "Czy na pewno chcesz usunąć tę grupę monitorującą?"
+    "confirmDeleteMessage": "Czy na pewno chcesz usunąć tę grupę monitorującą?",
+    "editMonitorGroup": "Edytuj Grupę Monitorów"
   },
   "notifications": {
     "title": "Powiadomienia",
