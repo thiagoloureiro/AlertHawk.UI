@@ -50,27 +50,37 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   const { isMonitorLoading } = useStoreState((state) => state.app);
 
   const filteredMonitorGroups = monitors.filter((monitor) => {
-    const matchesSearchText =
-      monitor.name.toLowerCase().includes(searchText.trim().toLowerCase()) ||
-      monitor.monitors.some((childMonitor) =>
-        childMonitor.name
-          .toLowerCase()
-          .includes(searchText.trim().toLowerCase())
-      );
+    // Trim and lowercase the search text
+    const trimmedSearchText = searchText.trim().toLowerCase();
 
-    const allChildrenUp = monitor.monitors.every(
-      (childMonitor) => childMonitor.status
-    );
-    const anyChildrenDown = monitor.monitors.some(
-      (childMonitor) => !childMonitor.status
+    // Check if the monitor group's name matches the search text
+    const parentMatchesSearchText = monitor.name
+      .toLowerCase()
+      .includes(trimmedSearchText);
+
+    // Filter child monitors based on search text
+    const filteredChildren = monitor.monitors.filter((childMonitor) =>
+      childMonitor.name.toLowerCase().includes(trimmedSearchText)
     );
 
-    const matchesMonitorStatus =
-      monitorStatus === "all" ||
-      (monitorStatus === "up" && allChildrenUp) ||
-      (monitorStatus === "down" && anyChildrenDown);
+    // Check if any of the filtered children match the status criteria
+    const anyFilteredChildMatchesStatus = filteredChildren.some(
+      (childMonitor) => {
+        const statusMatches =
+          monitorStatus === "all" ||
+          (monitorStatus === "up" && childMonitor.status) ||
+          (monitorStatus === "down" && !childMonitor.status);
+        return statusMatches;
+      }
+    );
 
-    return matchesSearchText && matchesMonitorStatus;
+    // If the search text is empty, use anyFilteredChildMatchesStatus
+    if (trimmedSearchText === "") {
+      return anyFilteredChildMatchesStatus;
+    }
+
+    // Return true if either the parent matches the search text or any filtered child matches the status
+    return parentMatchesSearchText || anyFilteredChildMatchesStatus;
   });
 
   const [downServices, setDownServices] = useState<
