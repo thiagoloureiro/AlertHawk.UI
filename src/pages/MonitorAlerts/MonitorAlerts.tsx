@@ -30,6 +30,7 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
   const [monitorAlerts, setMonitorAlerts] = useState<IMonitorAlerts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [selectedEnvironment, setSelectedEnvironment] = useState<number>(6);
+  const [selectedDays, setSelectedDays] = useState<number>(7);
   const { isDarkMode } = useStoreState((state) => state.app);
   const [monitorId, setMonitorId] = useState<number>(0);
   const { t } = useTranslation("global");
@@ -43,8 +44,8 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
           setMonitorId(parseInt(id));
         }
         const response = id
-          ? await MonitorAlertService.get(parseInt(id))
-          : await MonitorAlertService.get(monitorId);
+          ? await MonitorAlertService.get(parseInt(id), selectedDays)
+          : await MonitorAlertService.get(monitorId, selectedDays);
 
         setMonitorAlerts(response);
         console.log(response);
@@ -54,11 +55,15 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
       }
     };
     fetchMonitorAlerts();
-  }, [id, monitorId]);
+  }, [id, monitorId, selectedDays]);
 
   const handleEnvironmentChange = (event: SelectChangeEvent<number>) => {
     setSelectedEnvironment(event.target.value as number);
   };
+  const handleDaysChange = (event: SelectChangeEvent<number>) => {
+    setSelectedDays(event.target.value as number);
+  };
+
   const handleExport = async () => {
     try {
       const response = await MonitorAlertService.getReport(monitorId);
@@ -130,6 +135,24 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                             {key}
                           </MenuItem>
                         ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
+                    <InputLabel id="days-selection-label">Period</InputLabel>
+                    <Select
+                      labelId="days-selection-label"
+                      id="days-selection"
+                      value={selectedDays}
+                      label="Period"
+                      onChange={handleDaysChange}
+                    >
+                      {[1, 7, 30, 60, 90, 120, 180].map((key) => (
+                        <MenuItem key={key} value={key}>
+                          {key === 1 ? `${key} day` : `${key} days`}
+                        </MenuItem>
+                      ))}
                     </Select>
                   </FormControl>
                 </Box>
