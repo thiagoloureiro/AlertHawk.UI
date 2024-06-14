@@ -50,20 +50,16 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
   const { isMonitorLoading } = useStoreState((state) => state.app);
 
   const filteredMonitorGroups = monitors.filter((monitor) => {
-    // Trim and lowercase the search text
     const trimmedSearchText = searchText.trim().toLowerCase();
 
-    // Check if the monitor group's name matches the search text
     const parentMatchesSearchText = monitor.name
       .toLowerCase()
       .includes(trimmedSearchText);
 
-    // Filter child monitors based on search text
     const filteredChildren = monitor.monitors.filter((childMonitor) =>
       childMonitor.name.toLowerCase().includes(trimmedSearchText)
     );
 
-    // Check if any of the filtered children match the status criteria
     const anyFilteredChildMatchesStatus = filteredChildren.some(
       (childMonitor) => {
         const statusMatches =
@@ -74,12 +70,10 @@ const CollapsibleTable: FC<ICollapsibleTable> = ({
       }
     );
 
-    // If the search text is empty, use anyFilteredChildMatchesStatus
     if (trimmedSearchText === "") {
       return anyFilteredChildMatchesStatus;
     }
 
-    // Return true if either the parent matches the search text or any filtered child matches the status
     return parentMatchesSearchText || anyFilteredChildMatchesStatus;
   });
 
