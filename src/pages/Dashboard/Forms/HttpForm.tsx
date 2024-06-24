@@ -271,6 +271,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   autoComplete="off"
                   error={!!errors.name}
                   defaultValue={monitorItemToBeEdited?.name}
+                  inputProps={{ maxLength: 100 }}
                 />
               </FormControl>
             </Box>

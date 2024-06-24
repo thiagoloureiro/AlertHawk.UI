@@ -220,6 +220,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   }}
                   autoComplete="off"
                   error={!!errors.name}
+                  inputProps={{ maxLength: 100 }}
+
                 />
               </FormControl>
             </Box>
