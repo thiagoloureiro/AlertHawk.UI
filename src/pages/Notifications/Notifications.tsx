@@ -8,13 +8,11 @@ import {
   OutlinedInput,
   Button,
 } from "@mui/material";
-import { useStoreState } from "../../hooks";
 import { useTranslation } from "react-i18next";
 import { FC, useEffect, useState } from "react";
 import NotificationService from "../../services/NotificationService";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import NotFoundContent from "../../components/NotFoundContent/NotFoundContent";
 import NotificationsTable from "../../components/Table/NotificationsTable";
 import FromNotifications from "./Forms/FromNotifications";
 import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
@@ -24,7 +22,6 @@ interface INotificationsProps { }
 
 const Notifications: FC<INotificationsProps> = () => {
   const { t } = useTranslation("global");
-  const { user } = useStoreState((state) => state.user);
   const [searchText, setSearchText] = useState<string>("");
   const [notifications, setNotifications] = useState<INotification[]>([]);
   const [dataFetched, setDataFetched] = useState<boolean>(false); // New state to track data fetching
