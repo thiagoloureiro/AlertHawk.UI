@@ -157,7 +157,8 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel
                     autoComplete="off"
                     error={!!errors.name}
                     value={watchName}
-                  />
+                    inputProps={{ maxLength: 100 }}
+                    />
                 </FormControl>
               </Box>
               <Box
