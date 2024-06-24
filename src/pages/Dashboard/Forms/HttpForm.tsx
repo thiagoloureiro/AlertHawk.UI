@@ -614,6 +614,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                     marginBottom: "0px !important",
                   }}
                   autoComplete="off"
+                  InputLabelProps={{ shrink: true }}
                 />
               </FormControl>
             </Box>
