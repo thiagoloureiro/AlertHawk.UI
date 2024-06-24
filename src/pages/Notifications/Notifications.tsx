@@ -102,19 +102,11 @@ const Notifications: FC<INotificationsProps> = () => {
   };
   useEffect(() => {
     if (notifications.length == 0 && !dataFetched) { // Include the dataFetched check here
-      if (user?.isAdmin) {
         fetchData();
-      } else {
-        setNotifications([]);
-      }
     }
-  }, [notifications, dataFetched, user?.isAdmin]);
+  }, [notifications, dataFetched]);
 
   return (
-    <>
-      {!user?.isAdmin ? (
-        <NotFoundContent />
-      ) : (
         <>
           <HelmetProvider>
             <Helmet>
@@ -220,8 +212,6 @@ const Notifications: FC<INotificationsProps> = () => {
           </Grid>
         </>
       )}
-    </>
-  );
-};
+
 
 export default Notifications;
