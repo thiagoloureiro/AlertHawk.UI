@@ -7,6 +7,10 @@ import {
   CircularProgress,
   FormControl,
   OutlinedInput,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
 } from "@mui/material";
 import logging from "../../utils/logging";
 import { useStoreState } from "../../hooks";
@@ -18,12 +22,15 @@ import { IMonitorAlerts } from "../../interfaces/IMonitorAlerts";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import MonitorAlertService from "../../services/MonitorAlertsService";
 import MonitorAlertsTable from "../../components/Table/MonitorAlertsTable";
+import { Environment } from "../../enums/Enums";
 
-interface IMonitorAlertsProps { }
+interface IMonitorAlertsProps {}
 
 const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
   const [monitorAlerts, setMonitorAlerts] = useState<IMonitorAlerts[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [selectedEnvironment, setSelectedEnvironment] = useState<number>(6);
+  const [selectedDays, setSelectedDays] = useState<number>(7);
   const { isDarkMode } = useStoreState((state) => state.app);
   const [monitorId, setMonitorId] = useState<number>(0);
   const { t } = useTranslation("global");
@@ -37,17 +44,25 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
           setMonitorId(parseInt(id));
         }
         const response = id
-          ? await MonitorAlertService.get(parseInt(id))
-          : await MonitorAlertService.get(monitorId);
+          ? await MonitorAlertService.get(parseInt(id), selectedDays)
+          : await MonitorAlertService.get(monitorId, selectedDays);
 
         setMonitorAlerts(response);
+        console.log(response);
         setIsLoading(false);
       } catch (error) {
         logging.error(error);
       }
     };
     fetchMonitorAlerts();
-  }, [id, monitorId]);
+  }, [id, monitorId, selectedDays]);
+
+  const handleEnvironmentChange = (event: SelectChangeEvent<number>) => {
+    setSelectedEnvironment(event.target.value as number);
+  };
+  const handleDaysChange = (event: SelectChangeEvent<number>) => {
+    setSelectedDays(event.target.value as number);
+  };
 
   const handleExport = async () => {
     try {
@@ -94,6 +109,53 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                   marginBottom: 2,
                 }}
               >
+                <Box>
+                  <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
+                    <InputLabel id="environment-selection-label">
+                      {t("dashboard.environment")}
+                    </InputLabel>
+                    <Select
+                      labelId="environment-selection-label"
+                      id="environment-selection"
+                      value={selectedEnvironment}
+                      label="Environment"
+                      onChange={handleEnvironmentChange}
+                    >
+                      {(
+                        Object.keys(Environment) as Array<
+                          keyof typeof Environment
+                        >
+                      )
+                        .filter((key) => !isNaN(Number(Environment[key])))
+                        .map((key) => (
+                          <MenuItem
+                            key={Environment[key]}
+                            value={Environment[key]}
+                          >
+                            {key}
+                          </MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl sx={{ m: 1, minWidth: 160 }} size="small">
+                    <InputLabel id="days-selection-label">Period</InputLabel>
+                    <Select
+                      labelId="days-selection-label"
+                      id="days-selection"
+                      value={selectedDays}
+                      label="Period"
+                      onChange={handleDaysChange}
+                    >
+                      {[1, 7, 30, 60, 90, 120, 180].map((key) => (
+                        <MenuItem key={key} value={key}>
+                          {key === 1 ? `${key} day` : `${key} days`}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
                 <div style={{ width: "75%", minWidth: "200px" }}>
                   <FormControl fullWidth>
                     <OutlinedInput
@@ -132,9 +194,13 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
               >
                 {isLoading ? (
                   <CircularProgress color="success" />
-                ) :
-                  <MonitorAlertsTable monitorAlerts={monitorAlerts} searchText={searchText} />
-                }
+                ) : (
+                  <MonitorAlertsTable
+                    monitorAlerts={monitorAlerts}
+                    searchText={searchText}
+                    selectedEnvironment={selectedEnvironment}
+                  />
+                )}
               </Box>
             </CardContent>
           </Card>
