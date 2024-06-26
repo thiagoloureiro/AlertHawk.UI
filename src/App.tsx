@@ -9,6 +9,7 @@ import getTheme from "./theme";
 import { CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useStoreActions, useStoreState } from "./hooks";
 import Login from "./pages/Login/Login";
+import Register from "./pages/Register/Register";
 
 const App: FC<{}> = () => {
   const { isDarkMode } = useStoreState((state) => state.app);
@@ -32,8 +33,8 @@ const App: FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AuthenticatedTemplate>
-        <Router>
+      <Router>
+        <AuthenticatedTemplate>
           <Routes>
             {appRoutes.map((item, index) => (
               <Route key={index} path={item.path} element={item.element}>
@@ -49,13 +50,14 @@ const App: FC<{}> = () => {
               </Route>
             ))}
           </Routes>
-        </Router>
-      </AuthenticatedTemplate>
-      <UnauthenticatedTemplate>
-        <Router>
-          <Login />
-        </Router>
-      </UnauthenticatedTemplate>
+        </AuthenticatedTemplate>
+        <UnauthenticatedTemplate>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </UnauthenticatedTemplate>
+      </Router>{" "}
     </ThemeProvider>
   );
 };

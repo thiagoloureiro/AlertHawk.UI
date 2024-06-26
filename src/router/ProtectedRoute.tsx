@@ -17,7 +17,9 @@ interface ProtectedRouteProps {
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [email, setEmail] = useState<string>("");
-
+  const [username, setUsername] = useState<string | null>(
+    localStorage.getItem("username")
+  );
   const isAuthenticated: boolean = useIsAuthenticated();
   const navigate: NavigateFunction = useNavigate();
   const { instance } = useMsal();
@@ -26,7 +28,9 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     (state) => state.app
   );
   const { user } = useStoreState((state) => state.user);
-  const { thunkGetUser } = useStoreActions((actions) => actions.user);
+  const { thunkGetUser, thunkGetUserByUsername } = useStoreActions(
+    (actions) => actions.user
+  );
   const { setIsMonitorLoading, setRefreshRate } = useStoreActions(
     (action) => action.app
   );
@@ -62,6 +66,12 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       if (accessToken && isTokenExpired(accessToken)) {
         await acquireTokenSilent();
       }
+
+      const customAccessToken = localStorage.getItem("authToken");
+
+      if (customAccessToken && isTokenExpired(customAccessToken)) {
+        // TBD
+      }
     }, 60 * 1000);
 
     return () => clearInterval(intervalId);
@@ -73,8 +83,13 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     };
 
     const accessToken = localStorage.getItem("jwtToken");
+    const customAccessToken = localStorage.getItem("authToken");
 
-    if (isAuthenticated && (!accessToken || isTokenExpired(accessToken))) {
+    if (
+      isAuthenticated &&
+      !customAccessToken &&
+      (!accessToken || isTokenExpired(accessToken))
+    ) {
       acquireToken();
     } else if (!isAuthenticated) {
       localStorage.clear();
@@ -96,6 +111,30 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       }, 100);
     }
   }, [email]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      await thunkGetUserByUsername(username!);
+    };
+
+    if (username) {
+      setTimeout(() => {
+        fetchUserData();
+      }, 100);
+    }
+  }, [username]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUsername(localStorage.getItem("username"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchAppData = async () => {

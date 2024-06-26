@@ -4,6 +4,9 @@ import { IUser } from "../interfaces/IUser";
 import appendOptionalHeaders from "../utils/axiosHelper";
 import { AxiosHeaders } from "../interfaces/axios/IAxiosHeaders";
 import { IUserMonitorGroup } from "../interfaces/IUserMonitorGroup";
+import { IUserRegister } from "../interfaces/requests/user/IUserRegister";
+import { IUserLogin } from "../interfaces/requests/user/IUserLogin";
+import { IToken } from "../interfaces/responses/user/IToken";
 
 const responseBody = (response: AxiosResponse) => response.data;
 
@@ -21,8 +24,20 @@ const requests = {
 };
 
 const UserService = {
+  register: async (
+    request: IUserRegister,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(`user/create`, request, appendOptionalHeaders(headers)),
+  login: async (request: IUserLogin): Promise<IToken> =>
+    await requests.post(`auth/login`, request),
   get: async (email: string, headers?: AxiosHeaders): Promise<IUser> =>
     await requests.get(`user/${email}`, appendOptionalHeaders(headers)),
+  getByUsername: async (
+    username: string,
+    headers?: AxiosHeaders
+  ): Promise<IUser> =>
+    await requests.get(`user/${username}`, appendOptionalHeaders(headers)),
   getAll: async (headers?: AxiosHeaders): Promise<IUser[]> =>
     await requests.get("user/getAll", appendOptionalHeaders(headers)),
   getUserMonitorGroups: async (

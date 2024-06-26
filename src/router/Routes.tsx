@@ -8,6 +8,7 @@ import MonitorAlerts from "../pages/MonitorAlerts/MonitorAlerts";
 import ProtectedRoute from "./ProtectedRoute";
 import MonitorGroups from "../pages/MonitorGroups/MonitorGroups";
 import Notifications from "../pages/Notifications/Notifications";
+import Register from "../pages/Register/Register";
 
 const appRoutes: IRoute[] = [
   {
@@ -17,6 +18,10 @@ const appRoutes: IRoute[] = [
         <Dashboard />
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/monitor-agents",
