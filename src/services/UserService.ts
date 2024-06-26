@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import axiosInstance from "../config/axios";
 import { IUser } from "../interfaces/IUser";
 import appendOptionalHeaders from "../utils/axiosHelper";
@@ -8,6 +8,7 @@ import { IUserRegister } from "../interfaces/requests/user/IUserRegister";
 import { IUserLogin } from "../interfaces/requests/user/IUserLogin";
 import { IToken } from "../interfaces/responses/user/IToken";
 
+const authApiBaseUrl = import.meta.env.VITE_APP_AUTH_API_URL;
 const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
@@ -19,18 +20,21 @@ const requests = {
     axiosInstance.auth
       .post(url, body, { headers, ...config })
       .then(responseBody),
+  customPost: (
+    url: string,
+    body?: Object,
+    headers?: AxiosHeaders,
+    config?: Object
+  ) => axios.post(url, body, { headers, ...config }).then(responseBody),
   put: (url: string, body: Object, headers?: AxiosHeaders) =>
     axiosInstance.auth.put(url, body, { headers }).then(responseBody),
 };
 
 const UserService = {
-  register: async (
-    request: IUserRegister,
-    headers?: AxiosHeaders
-  ): Promise<void> =>
-    await requests.post(`user/create`, request, appendOptionalHeaders(headers)),
+  register: async (request: IUserRegister): Promise<void> =>
+    await requests.customPost(`${authApiBaseUrl}/user/create`, request),
   login: async (request: IUserLogin): Promise<IToken> =>
-    await requests.post(`auth/login`, request),
+    await requests.customPost(`${authApiBaseUrl}/auth/login`, request),
   get: async (email: string, headers?: AxiosHeaders): Promise<IUser> =>
     await requests.get(`user/${email}`, appendOptionalHeaders(headers)),
   getByUsername: async (
