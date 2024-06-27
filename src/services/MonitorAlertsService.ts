@@ -31,6 +31,16 @@ const MonitorAlertService = {
       `MonitorAlert/monitorAlertsReport/${monitorId}/${days}/0`,
       appendOptionalHeaders(headers)
     ),
+  getReportByEnviroment: async (
+    monitorId: number,
+    days: number = 30,
+    environment: number = 6,
+    headers?: AxiosHeaders
+  ) =>
+    await requests.getBlob(
+      `MonitorAlert/monitorAlertsReport/${monitorId}/${days}/${environment}/0`,
+      appendOptionalHeaders(headers)
+    ),
 };
 
 export default MonitorAlertService;

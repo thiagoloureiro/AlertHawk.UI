@@ -66,9 +66,10 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
 
   const handleExport = async () => {
     try {
-      const response = await MonitorAlertService.getReport(
+      const response = await MonitorAlertService.getReportByEnviroment(
         monitorId,
-        selectedDays
+        selectedDays,
+        selectedEnvironment
       );
       const blob = response.data;
 
