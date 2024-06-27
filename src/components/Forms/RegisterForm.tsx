@@ -52,8 +52,8 @@ const RegisterForm: FC<{}> = () => {
             {...register("username", {
               required: "Username is required",
               minLength: {
-                value: 6,
-                message: "Username must be at least 6 characters",
+                value: 3,
+                message: "Username must be at least 3 characters",
               },
             })}
             fullWidth
@@ -106,7 +106,7 @@ const RegisterForm: FC<{}> = () => {
           />
 
           <TextField
-            {...register("email", {
+            {...register("userEmail", {
               required: "Email is required",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -118,8 +118,8 @@ const RegisterForm: FC<{}> = () => {
             margin="normal"
             variant="outlined"
             autoComplete="off"
-            error={!!errors.email}
-            helperText={errors.email ? errors.email.message : null}
+            error={!!errors.userEmail}
+            helperText={errors.userEmail ? errors.userEmail.message : null}
             sx={{ mb: 0 }}
           />
         </Box>
