@@ -41,7 +41,7 @@ const NotFoundContent: FC<{}> = () => {
         </Typography>
       )}
       <Button variant="text" size="large" onClick={handleRedirect}>
-        Go Back to Dashboard
+        {t("general.goBack")}
       </Button>
     </Stack>
   );

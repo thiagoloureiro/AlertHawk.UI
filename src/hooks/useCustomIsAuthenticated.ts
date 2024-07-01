@@ -1,15 +1,19 @@
 import { useEffect, useState } from "react";
-import { useIsAuthenticated as useMsalIsAuthenticated } from "@azure/msal-react";
+import {
+  useMsal,
+  useIsAuthenticated as useMsalIsAuthenticated,
+} from "@azure/msal-react";
 import { isTokenExpired } from "../utils/tokenHelper";
 import { ELoginType } from "../enums/Enums";
+import { InteractionStatus } from "@azure/msal-browser";
 
 const useCustomIsAuthenticated = (): boolean | undefined => {
+  const { inProgress } = useMsal();
   const isMsalAuthenticated = useMsalIsAuthenticated();
   const [isAuthenticatedNonAD, setIsAuthenticatedNonAD] = useState<
     boolean | undefined
-  >(undefined); // Initial state as undefined
+  >(undefined);
 
-  // Check for custom JWT token
   useEffect(() => {
     const checkCustomToken = () => {
       const loginType = localStorage.getItem("loginType");
@@ -32,7 +36,10 @@ const useCustomIsAuthenticated = (): boolean | undefined => {
     };
   }, []);
 
-  if (isAuthenticatedNonAD === undefined) {
+  if (
+    isAuthenticatedNonAD === undefined ||
+    inProgress !== InteractionStatus.None
+  ) {
     return undefined;
   }
 
