@@ -3,9 +3,9 @@ import { Box } from "@mui/material";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Sidebar from "../Sidebar/Sidebar";
-import { useIsAuthenticated } from "@azure/msal-react";
 import { useStoreActions, useStoreState } from "../../hooks";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import useCustomIsAuthenticated from "../../hooks/useCustomIsAuthenticated";
 interface ILayoutProps {
   children: ReactNode;
 }
@@ -14,7 +14,7 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
   const { isSidebarOpen, isSmallScreen } = useStoreState((state) => state.app);
   const { setIsSidebarOpen } = useStoreActions((action) => action.app);
 
-  const isAuthenticated: boolean = useIsAuthenticated();
+  const isAuthenticated: boolean | undefined = useCustomIsAuthenticated();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

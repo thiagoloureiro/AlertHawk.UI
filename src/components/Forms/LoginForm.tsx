@@ -1,4 +1,4 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import {
   Container,
   Typography,
@@ -16,12 +16,14 @@ import { Controller, useForm } from "react-hook-form";
 import { showSnackbar } from "../../utils/snackbarHelper";
 import { IUserLogin } from "../../interfaces/requests/user/IUserLogin";
 import UserService from "../../services/UserService";
+import { ELoginType } from "../../enums/Enums";
+import { AxiosError } from "axios";
 
 interface IFormProps {
   description?: string;
 }
 
-const Form: FC<IFormProps> = ({ description }) => {
+const LoginForm: FC<IFormProps> = ({ description }) => {
   const {
     control,
     handleSubmit: onSubmit,
@@ -29,19 +31,7 @@ const Form: FC<IFormProps> = ({ description }) => {
     reset,
   } = useForm<IUserLogin>();
   const [step, setStep] = useState<number>(1);
-  const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
-  // const navigate = useNavigate();
   const { instance } = useMsal();
-
-  useEffect(() => {
-    let timer: number | undefined;
-    if (isButtonDisabled) {
-      timer = setTimeout(() => {
-        setIsButtonDisabled(false);
-      }, 3000);
-    }
-    return () => clearTimeout(timer);
-  }, [isButtonDisabled]);
 
   const handleFormSubmit = (data: IUserLogin) => {
     if (step === 1) {
@@ -52,24 +42,37 @@ const Form: FC<IFormProps> = ({ description }) => {
   };
 
   const handleNonADUserLogin = async (data: IUserLogin) => {
-    setIsButtonDisabled(true);
     try {
       const result = await UserService.login(data);
-      localStorage.removeItem("jwtToken");
-      localStorage.setItem("accessToken", result.token);
+      localStorage.setItem("jwtToken", result.token);
       localStorage.setItem("username", data.username);
-      showSnackbar("Account created successfully", "success");
+      localStorage.setItem("loginType", ELoginType.App);
+      window.dispatchEvent(new Event("storage"));
       reset();
+      setStep(1);
+      // navigate("/", { replace: true });
     } catch (error) {
-      showSnackbar("Something went wrong. Please try again.", "error");
-    } finally {
-      setIsButtonDisabled(false);
+      const defaultErrorMessage = "Something went wrong. Please try again.";
+
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        const errorMessage = error.response.data.content || defaultErrorMessage;
+        showSnackbar(errorMessage, "error");
+      } else {
+        console.error("Login failed:", error);
+        showSnackbar(defaultErrorMessage, "error");
+      }
+
+      localStorage.clear();
     }
   };
 
   const handleAzureADLogin = () => {
-    instance.loginRedirect(loginRequest).catch((e) => {
-      logging.error(e);
+    localStorage.setItem("loginType", ELoginType.Azure);
+    window.dispatchEvent(new Event("storage"));
+    instance.loginRedirect(loginRequest).catch((error) => {
+      logging.error(error);
+      showSnackbar("Something went wrong. Please try again.", "error");
+      localStorage.clear();
     });
   };
 
@@ -150,7 +153,7 @@ const Form: FC<IFormProps> = ({ description }) => {
           variant="contained"
           size="large"
           sx={{ mb: 2, color: "white", fontWeight: 700, position: "relative" }}
-          disabled={isSubmitting || isButtonDisabled}
+          disabled={isSubmitting}
         >
           {isSubmitting && (
             <CircularProgress
@@ -208,4 +211,4 @@ const Form: FC<IFormProps> = ({ description }) => {
   );
 };
 
-export default Form;
+export default LoginForm;

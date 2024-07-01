@@ -37,14 +37,13 @@ const createAxiosInstance = (baseUrl: string) => {
   function surfaceLogout() {
     localStorage.clear();
     setTimeout(() => {
-      window.location.href = "/";
+      window.location.replace("/");
       resetStore();
     }, 10);
   }
 
   instance.interceptors.request.use(async (requestConfig) => {
-    const token =
-      localStorage.getItem("jwtToken") || localStorage.getItem("authToken");
+    const token = localStorage.getItem("jwtToken");
 
     if (token != null) {
       requestConfig.headers["Authorization"] = `Bearer ${token}`;

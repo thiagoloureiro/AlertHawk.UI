@@ -13,6 +13,7 @@ import getTheme from "../../theme";
 import { IUserRegister } from "../../interfaces/requests/user/IUserRegister";
 import UserService from "../../services/UserService";
 import { showSnackbar } from "../../utils/snackbarHelper";
+import { AxiosError } from "axios";
 
 const RegisterForm: FC<{}> = () => {
   const {
@@ -32,8 +33,15 @@ const RegisterForm: FC<{}> = () => {
         "success"
       );
     } catch (error) {
-      console.error("Registration failed:", error);
-      showSnackbar("Something went wrong. Please try again.", "error");
+      const defaultErrorMessage = "Something went wrong. Please try again.";
+
+      if (error instanceof AxiosError && error.response?.status === 400) {
+        const errorMessage = error.response.data.content || defaultErrorMessage;
+        showSnackbar(errorMessage, "error");
+      } else {
+        console.error("Registration failed:", error);
+        showSnackbar(defaultErrorMessage, "error");
+      }
     }
   };
   const password = watch("password");
