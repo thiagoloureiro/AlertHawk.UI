@@ -16,7 +16,6 @@ import {
 import { CustomSwitch } from "../Icons/MaterialUISwitch";
 import { useStoreActions, useStoreState } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { useIsAuthenticated } from "@azure/msal-react";
 import { Logout, Settings } from "@mui/icons-material";
 import logo from "./logo.png";
 import { useTranslation } from "react-i18next";
@@ -24,6 +23,8 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import PauseCircleFilledIcon from "@mui/icons-material/PauseCircleFilled";
 import { ExpandMore, ExpandLess } from "@mui/icons-material";
+import useCustomIsAuthenticated from "../../hooks/useCustomIsAuthenticated";
+import { resetStore } from "../../store";
 
 interface IHeaderProps {
   title: string;
@@ -32,7 +33,7 @@ interface IHeaderProps {
 
 const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
   const { t } = useTranslation("global");
-  const isAuthenticated: boolean = useIsAuthenticated();
+  const isAuthenticated: boolean | undefined = useCustomIsAuthenticated();
   const { isDarkMode, isSmallScreen, refreshRate } = useStoreState(
     (state) => state.app
   );
@@ -72,6 +73,15 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
 
   const toggleDarkTheme = () => {
     setIsDarkMode(!isDarkMode);
+  };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setTimeout(() => {
+      window.location.replace("/");
+      resetStore();
+    }, 10);
+    handleClose();
   };
 
   return (
@@ -412,7 +422,7 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
           </ListItemIcon>
           {t("settings.text")}
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleLogout}>
           <ListItemIcon>
             <Logout
               fontSize="small"

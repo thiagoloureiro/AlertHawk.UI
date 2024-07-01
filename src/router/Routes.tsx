@@ -1,7 +1,6 @@
 import { IRoute } from "../interfaces/IRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import MonitorAgents from "../pages/MonitorAgents/MonitorAgents";
-import NotFound from "../pages/NotFound/NotFound";
 import Settings from "../pages/Settings/Settings";
 import Users from "../pages/Users/Users";
 import MonitorAlerts from "../pages/MonitorAlerts/MonitorAlerts";
@@ -73,10 +72,6 @@ const appRoutes: IRoute[] = [
         <Notifications />
       </ProtectedRoute>
     ),
-  },
-  {
-    path: "*",
-    element: <NotFound />,
   },
 ];
 
