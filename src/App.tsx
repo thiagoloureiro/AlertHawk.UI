@@ -1,14 +1,48 @@
-import { FC, useEffect } from "react";
-import {
-  AuthenticatedTemplate,
-  UnauthenticatedTemplate,
-} from "@azure/msal-react";
+import { FC, ReactElement, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import appRoutes from "./router/Routes";
 import getTheme from "./theme";
 import { CssBaseline, ThemeProvider, useMediaQuery } from "@mui/material";
 import { useStoreActions, useStoreState } from "./hooks";
 import Login from "./pages/Login/Login";
+import {
+  AuthenticatedTemplateProps,
+  UnauthenticatedTemplateProps,
+} from "@azure/msal-react";
+import Register from "./pages/Register/Register";
+import NotFound from "./pages/NotFound/NotFound";
+import useCustomIsAuthenticated from "./hooks/useCustomIsAuthenticated";
+
+function AuthenticatedTemplate({
+  children,
+}: AuthenticatedTemplateProps): ReactElement | null {
+  const isAuthenticated: boolean | undefined = useCustomIsAuthenticated();
+
+  if (isAuthenticated === undefined) {
+    return null;
+  }
+
+  if (isAuthenticated) {
+    return <>{children}</>;
+  }
+
+  return null;
+}
+
+function UnauthenticatedTemplate({
+  children,
+}: UnauthenticatedTemplateProps): ReactElement | null {
+  const isAuthenticated: boolean | undefined = useCustomIsAuthenticated();
+
+  if (isAuthenticated === undefined) {
+    return null;
+  }
+
+  if (!isAuthenticated) {
+    return <>{children}</>;
+  }
+  return null;
+}
 
 const App: FC<{}> = () => {
   const { isDarkMode } = useStoreState((state) => state.app);
@@ -32,8 +66,8 @@ const App: FC<{}> = () => {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <AuthenticatedTemplate>
-        <Router>
+      <Router>
+        <AuthenticatedTemplate>
           <Routes>
             {appRoutes.map((item, index) => (
               <Route key={index} path={item.path} element={item.element}>
@@ -49,13 +83,15 @@ const App: FC<{}> = () => {
               </Route>
             ))}
           </Routes>
-        </Router>
-      </AuthenticatedTemplate>
-      <UnauthenticatedTemplate>
-        <Router>
-          <Login />
-        </Router>
-      </UnauthenticatedTemplate>
+        </AuthenticatedTemplate>
+        <UnauthenticatedTemplate>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </UnauthenticatedTemplate>
+      </Router>{" "}
     </ThemeProvider>
   );
 };

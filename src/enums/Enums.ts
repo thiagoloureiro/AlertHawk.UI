@@ -25,11 +25,16 @@ export enum Region {
   Custom = 7,
   Custom2 = 8,
   Custom3 = 9,
-  Custom4 = 10
+  Custom4 = 10,
 }
 
 export enum MonitorHttpMethod {
   Get = 1,
   Post = 2,
   Put = 3,
+}
+
+export enum ELoginType {
+  App = "App",
+  Azure = "Azure",
 }

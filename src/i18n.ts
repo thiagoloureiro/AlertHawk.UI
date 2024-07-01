@@ -18,7 +18,24 @@ import global_in from "./locales/in-HI/global.json";
 import global_fr from "./locales/fr-FR/global.json";
 import global_fi from "./locales/fi-FI/global.json";
 
-const supportedLngs: string[] = ["en-US", "de-DE", "tr-TR", "pl-PL", "pt-BR", "es-ES","it-IT","ko-KR","jp-JP","zh-CN", "ru-RU", "uk-UA", "em-EM", "in-HI", "fr-FR", "fi-FI"];
+const supportedLngs: string[] = [
+  "en-US",
+  "de-DE",
+  "tr-TR",
+  "pl-PL",
+  "pt-BR",
+  "es-ES",
+  "it-IT",
+  "ko-KR",
+  "jp-JP",
+  "zh-CN",
+  "ru-RU",
+  "uk-UA",
+  "em-EM",
+  "in-HI",
+  "fr-FR",
+  "fi-FI",
+];
 
 i18n
   .use(initReactI18next)
@@ -33,7 +50,7 @@ i18n
       escapeValue: false,
     },
     supportedLngs,
-    fallbackLng: "en",
+    fallbackLng: "en-US",
     load: "currentOnly",
     resources: {
       "en-US": {

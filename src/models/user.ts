@@ -12,6 +12,13 @@ export interface IUserModel {
   setUsers: Action<IUserModel, IUser[]>;
   setResetUser: Action<IUserModel>;
   thunkGetUser: Thunk<IUserModel, string, any, StoreModel, Promise<Status>>;
+  thunkGetUserByUsername: Thunk<
+    IUserModel,
+    string,
+    any,
+    StoreModel,
+    Promise<Status>
+  >;
   thunkGetAllUsers: Thunk<IUserModel, void, any, StoreModel, Promise<Status>>;
 }
 
@@ -44,6 +51,22 @@ const user: IUserModel = {
       getStoreActions().app.setIsLoading(false);
     }
   }),
+  thunkGetUserByUsername: thunk(
+    async (actions, payload: string, { getStoreActions }) => {
+      try {
+        getStoreActions().app.setIsLoading(true);
+        const response = await UserService.getByUsername(payload);
+        actions.setUser(response);
+        return Status.Success;
+      } catch (err: any) {
+        logging.error(err);
+        actions.setUser(defaultUserState);
+        return getStatusFromError(err);
+      } finally {
+        getStoreActions().app.setIsLoading(false);
+      }
+    }
+  ),
   users: [],
   thunkGetAllUsers: thunk(async (actions, _, { getStoreActions }) => {
     try {

@@ -1,6 +1,5 @@
-import { useIsAuthenticated, useMsal } from "@azure/msal-react";
+import { useMsal } from "@azure/msal-react";
 import { FC, useEffect, useState } from "react";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import { loginRequest } from "../config/authConfig";
 import logging from "../utils/logging";
 import { useStoreActions, useStoreState } from "../hooks";
@@ -8,6 +7,9 @@ import { resetStore } from "../store";
 import Layout from "../components/Layout/Layout";
 import { ClipLoader } from "react-spinners";
 import { isTokenExpired } from "../utils/tokenHelper";
+import { ELoginType } from "../enums/Enums";
+import Login from "../pages/Login/Login";
+import useCustomIsAuthenticated from "../hooks/useCustomIsAuthenticated";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -16,17 +18,21 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
+  const [email, setEmail] = useState<string | null>(null);
+  const [username, setUsername] = useState<string | null>(
+    localStorage.getItem("username")
+  );
 
-  const isAuthenticated: boolean = useIsAuthenticated();
-  const navigate: NavigateFunction = useNavigate();
+  const isAuthenticated: boolean | undefined = useCustomIsAuthenticated();
+  // const navigate: NavigateFunction = useNavigate();
   const { instance } = useMsal();
 
   const { selectedEnvironment, refreshRate } = useStoreState(
     (state) => state.app
   );
-  const { user } = useStoreState((state) => state.user);
-  const { thunkGetUser } = useStoreActions((actions) => actions.user);
+  const { thunkGetUser, thunkGetUserByUsername } = useStoreActions(
+    (actions) => actions.user
+  );
   const { setIsMonitorLoading, setRefreshRate } = useStoreActions(
     (action) => action.app
   );
@@ -47,6 +53,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     try {
       const result = await instance.acquireTokenSilent(request);
       localStorage.setItem("jwtToken", result.accessToken);
+      window.dispatchEvent(new Event("storage"));
       setEmail(result.account.username);
     } catch (e) {
       logging.error(e);
@@ -58,9 +65,19 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
   useEffect(() => {
     const intervalId = setInterval(async () => {
       const accessToken = localStorage.getItem("jwtToken");
+      const loginType = localStorage.getItem("loginType");
 
       if (accessToken && isTokenExpired(accessToken)) {
-        await acquireTokenSilent();
+        switch (loginType) {
+          case ELoginType.Azure:
+            await acquireTokenSilent();
+            break;
+          case ELoginType.App:
+            // TBD - Handle token refresh
+            break;
+          default:
+            break;
+        }
       }
     }, 60 * 1000);
 
@@ -72,30 +89,63 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       await acquireTokenSilent();
     };
 
-    const accessToken = localStorage.getItem("jwtToken");
+    if (isAuthenticated !== undefined) {
+      const accessToken = localStorage.getItem("jwtToken");
+      const loginType = localStorage.getItem("loginType");
 
-    if (isAuthenticated && (!accessToken || isTokenExpired(accessToken))) {
-      acquireToken();
-    } else if (!isAuthenticated) {
-      localStorage.clear();
-      setTimeout(() => {
-        window.location.href = "/";
-        resetStore();
-      }, 10);
+      if (isAuthenticated && (!accessToken || isTokenExpired(accessToken))) {
+        switch (loginType) {
+          case ELoginType.Azure:
+            acquireToken();
+            break;
+          case ELoginType.App:
+            break;
+          default:
+            break;
+        }
+      } else if (!isAuthenticated) {
+        localStorage.clear();
+        setTimeout(() => {
+          window.location.href = "/";
+          resetStore();
+        }, 10);
+      }
     }
-  }, []);
+  }, [isAuthenticated]);
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = async (email: string) => {
       await thunkGetUser(email);
     };
 
     if (email) {
+      fetchUserData(email);
+    }
+  }, [email]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      await thunkGetUserByUsername(username!);
+    };
+
+    if (username) {
       setTimeout(() => {
         fetchUserData();
       }, 100);
     }
-  }, [email]);
+  }, [username]);
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setUsername(localStorage.getItem("username"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchAppData = async () => {
@@ -113,12 +163,12 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       }
     };
 
-    if (user !== null) {
+    if (isAuthenticated) {
       setTimeout(() => {
         fetchAppData();
       }, 100);
     }
-  }, [user, selectedEnvironment]);
+  }, [isAuthenticated, selectedEnvironment]);
 
   useEffect(() => {
     const fetchAppData = async () => {
@@ -168,18 +218,18 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
     };
   }, [refreshRate, selectedEnvironment]);
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      navigate("/");
-    }
-  }, [isAuthenticated, navigate]);
+  if (isLoading) {
+    return <ClipLoader color="primary.dark" size={50} />;
+  }
 
-  return (
-    <>
-      {(isLoading && <ClipLoader color="primary.dark" size={50} />) || (
-        <Layout>{children}</Layout>
-      )}
-    </>
-  );
+  if (isAuthenticated === undefined) {
+    return null;
+  }
+
+  if (!isAuthenticated) {
+    return <Login />;
+  }
+
+  return <Layout>{children}</Layout>;
 };
 export default ProtectedRoute;
