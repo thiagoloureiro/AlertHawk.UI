@@ -9,7 +9,6 @@ import {
   MenuItem,
   Divider,
   ListItemIcon,
-  Hidden,
   Tooltip,
   Button,
 } from "@mui/material";
@@ -128,21 +127,25 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
               textDecoration: "none",
             }}
           >
-            <img src={logo} alt="logo" width={isSmallScreen ? 50 : 70} />
-            <Typography
-              variant={isSmallScreen ? "h6" : "h5"}
-              fontWeight={700}
-              style={{
-                color: isDarkMode
-                  ? theme.palette.common.white
-                  : theme.palette.common.black,
-              }}
-            >
-              {title}
-            </Typography>
+            {((isAuthenticated && !isSmallScreen) || !isAuthenticated) && (
+              <>
+                <img src={logo} alt="logo" width={70} />
+                <Typography
+                  variant={isSmallScreen ? "h6" : "h5"}
+                  fontWeight={700}
+                  style={{
+                    color: isDarkMode
+                      ? theme.palette.common.white
+                      : theme.palette.common.black,
+                  }}
+                >
+                  {title}
+                </Typography>
+              </>
+            )}
           </Link>
         </Box>
-        {isAuthenticated && (
+        {isAuthenticated && !isSmallScreen && (
           <Stack
             direction="row"
             justifyContent="center"
@@ -310,9 +313,9 @@ const Header: FC<IHeaderProps> = ({ title, isOpen }) => {
               </Menu>
             </>
           )}
-          <Hidden smDown>
+          {!isSmallScreen && (
             <CustomSwitch checked={isDarkMode} onChange={toggleDarkTheme} />
-          </Hidden>
+          )}
           {isAuthenticated && (
             <Avatar
               onClick={handleClick}

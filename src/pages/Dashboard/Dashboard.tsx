@@ -30,7 +30,7 @@ interface IDashboardProps {}
 
 const Dashboard: FC<IDashboardProps> = ({}) => {
   const { t } = useTranslation("global");
-  const { isSidebarOpen, selectedEnvironment } = useStoreState(
+  const { isSidebarOpen, selectedEnvironment, isSmallScreen } = useStoreState(
     (state) => state.app
   );
   const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
@@ -186,13 +186,13 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                 </div>
               </Stack>
               <Stack
-                direction="row"
+                direction={isSmallScreen ? "column" : "row"}
                 justifyContent="space-between"
                 alignItems="center"
                 gap={2}
                 marginBottom={4}
               >
-                <Box sx={{ flex: 1 }}>
+                <Box sx={{ flex: 1, width: "100%" }}>
                   <FormControl sx={{ minWidth: 160 }} size="small" fullWidth>
                     <InputLabel id="metric-selection-label">
                       {t("dashboard.metric")}
@@ -225,7 +225,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                     </Select>
                   </FormControl>
                 </Box>
-                <Box sx={{ flex: 1 }}>
+                <Box sx={{ flex: 1, width: "100%" }}>
                   <FormControl sx={{ minWidth: 160 }} size="small" fullWidth>
                     <InputLabel id="environment-selection-label">
                       {t("dashboard.environment")}
@@ -254,7 +254,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
                     </Select>
                   </FormControl>
                 </Box>
-                <Box sx={{ flex: 1 }}>
+                <Box sx={{ flex: 1, width: "100%" }}>
                   <FormControl sx={{ minWidth: 160 }} size="small" fullWidth>
                     <InputLabel id="monitor-status-label">
                       {t("dashboard.status")}
