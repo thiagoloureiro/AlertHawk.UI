@@ -44,12 +44,12 @@ const Layout: FC<ILayoutProps> = ({ children }) => {
               ? {
                   width: "100%",
                   py: "20px",
-                  paddingRight: "20px",
+                  paddingRight: isSmallScreen ? "5px" : "20px",
                   minHeight: "calc(100vh - 130px)",
                   paddingLeft: isSidebarOpen
                     ? "360px"
                     : isSmallScreen
-                    ? "80px"
+                    ? "70px"
                     : "110px",
                 }
               : { width: "100%", height: "100%", py: "10px" }

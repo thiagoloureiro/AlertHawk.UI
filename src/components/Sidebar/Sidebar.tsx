@@ -8,7 +8,6 @@ import {
   ListItemIcon,
   ListItemText,
   Tooltip,
-  Hidden,
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import {
@@ -23,9 +22,12 @@ import {
 } from "@mui/icons-material";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import { useStoreState } from "../../hooks";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import LibraryAddIcon from '@mui/icons-material/LibraryAdd';
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import useCustomIsAuthenticated from "../../hooks/useCustomIsAuthenticated";
+import logo from "../Header/logo.png";
+
 interface ISidebarProps {
   isOpen: boolean;
   onToggle: () => void;
@@ -89,9 +91,10 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
   const { t } = useTranslation("global");
   let location = useLocation();
   const [selectedItem, setSelectedItem] = useState<IMenuItem | null>(null);
-  const { isDarkMode } = useStoreState((state) => state.app);
+  const { isDarkMode, isSmallScreen } = useStoreState((state) => state.app);
   const navigate = useNavigate();
   const { user } = useStoreState((state) => state.user);
+  const isAuthenticated = useCustomIsAuthenticated();
 
   useEffect(() => {
     setSelectedItem(
@@ -134,12 +137,11 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
     {
       text: t("sidebar.monitorGroups"),
       pathname: "/monitorGroups",
-      icon: <LibraryAddIcon />
-    }
+      icon: <LibraryAddIcon />,
+    },
   ];
 
   if (user?.isAdmin) {
-
     menuItems.push({
       text: t("sidebar.users"),
       pathname: "/users",
@@ -165,7 +167,11 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       }}
     >
       <DrawerHeader>
-        <Hidden smDown>
+        {isAuthenticated && isSmallScreen ? (
+          <Link to="/">
+            <img src={logo} alt="logo" width="100%" />
+          </Link>
+        ) : (
           <IconButton onClick={onToggle}>
             {!isOpen ? (
               <ChevronRightIcon sx={{ fill: isDarkMode ? "white" : "black" }} />
@@ -173,7 +179,7 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
               <ChevronLeftIcon sx={{ fill: isDarkMode ? "white" : "black" }} />
             )}
           </IconButton>
-        </Hidden>
+        )}
       </DrawerHeader>
       <List sx={{ p: 0 }}>
         {menuItems.map((item, key) => (
