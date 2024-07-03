@@ -20,6 +20,7 @@ export interface IUserModel {
     Promise<Status>
   >;
   thunkGetAllUsers: Thunk<IUserModel, void, any, StoreModel, Promise<Status>>;
+  thunkUserDelete: Thunk<IUserModel, string, any, StoreModel, Promise<Status>>;
 }
 
 const defaultUserState: IUser = {
@@ -83,6 +84,22 @@ const user: IUserModel = {
       getStoreActions().app.setIsLoading(false);
     }
   }),
+  thunkUserDelete: thunk(
+    async (actions, userId: string, { getStoreActions }) => {
+      try {
+        getStoreActions().app.setIsLoading(true);
+        await UserService.deleteUser(userId);
+        await actions.thunkGetAllUsers();
+        return Status.Success;
+      } catch (err: any) {
+        logging.error(err);
+        return getStatusFromError(err);
+      } finally {
+        getStoreActions().app.setIsLoading(false);
+      }
+    }
+  ),
+
   setUsers: action((state, payload) => {
     state.users = payload;
   }),

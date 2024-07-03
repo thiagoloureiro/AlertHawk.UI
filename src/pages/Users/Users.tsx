@@ -13,9 +13,8 @@ import {
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useStoreState } from "../../hooks";
+import { useStoreActions, useStoreState } from "../../hooks";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import UserService from "../../services/UserService";
 import NotFoundContent from "../../components/NotFoundContent/NotFoundContent";
 import { IUser } from "../../interfaces/IUser";
 import UsersTable from "../../components/Table/UsersTable";
@@ -26,8 +25,8 @@ interface IUsersProps {}
 
 const Users: FC<IUsersProps> = () => {
   const { t } = useTranslation("global");
-  const [users, setUsers] = useState<IUser[]>([]);
-  const { user } = useStoreState((state) => state.user);
+  const { user, users } = useStoreState((state) => state.user);
+  const { thunkGetAllUsers } = useStoreActions((action) => action.user);
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [searchText, setSearchText] = useState<string>("");
 
@@ -42,27 +41,14 @@ const Users: FC<IUsersProps> = () => {
   };
 
   useEffect(() => {
-    const fetchData = async () => {
-      var response = await UserService.getAll();
-      response = response.slice().sort((a, b) => {
-        if (a.username! < b.username!) {
-          return -1;
-        }
-        if (a.username! > b.username!) {
-          return 1;
-        }
-        return 0;
-      });
-      setUsers(response);
+    const fetchUsers = async () => {
+      await thunkGetAllUsers();
     };
-    if (users.length == 0) {
-      if (user?.isAdmin) {
-        fetchData();
-      } else {
-        setUsers([]);
-      }
+
+    if (user?.isAdmin) {
+      fetchUsers();
     }
-  }, [users]);
+  }, [user]);
 
   const [selectedRole, setSelectedRole] = useState<
     "all" | "admin" | "non-admin"

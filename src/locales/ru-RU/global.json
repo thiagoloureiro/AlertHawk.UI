@@ -148,7 +148,9 @@
     "cancel": "Отменить",
     "monitorGroups": "Группы мониторов",
     "role": "Роль",
-    "all": "Все"
+    "all": "Все",
+    "userDeleteDialogTitle": "Вы уверены, что хотите удалить этого пользователя?",
+    "userDeleteDialogSuccessConfirmation": "Пользователь успешно удален"
   },
   "monitorAlerts": {
     "text": "Оповещения монитора",

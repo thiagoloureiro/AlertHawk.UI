@@ -148,7 +148,9 @@
     "cancel": "İptal",
     "monitorGroups": "İzleme Grupları",
     "role": "Rol",
-    "all": "Hepsi"
+    "all": "Hepsi",
+    "userDeleteDialogTitle": "Bu kullanıcıyı silmek istediğinizden emin misiniz?",
+    "userDeleteDialogSuccessConfirmation": "Kullanıcı başarıyla silindi"
   },
   "monitorAlerts": {
     "text": "Monitör Uyarıları",

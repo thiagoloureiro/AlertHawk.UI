@@ -28,6 +28,8 @@ const requests = {
   ) => axios.post(url, body, { headers, ...config }).then(responseBody),
   put: (url: string, body: Object, headers?: AxiosHeaders) =>
     axiosInstance.auth.put(url, body, { headers }).then(responseBody),
+  delete: (url: string, headers?: AxiosHeaders) =>
+    axiosInstance.auth.delete(url, { headers }).then(responseBody),
 };
 
 const UserService = {
@@ -63,6 +65,8 @@ const UserService = {
     ),
   getUserCount: async (headers?: AxiosHeaders): Promise<number> =>
     await requests.get("User/GetUserCount", appendOptionalHeaders(headers)),
+  deleteUser: async (id: string, headers?: AxiosHeaders): Promise<void> =>
+    await requests.delete(`User/delete/${id}`, appendOptionalHeaders(headers)),
 };
 
 export default UserService;

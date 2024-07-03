@@ -148,7 +148,9 @@
     "cancel": "Скасувати",
     "monitorGroups": "Групи моніторингу",
     "role": "Роль",
-    "all": "Всі"
+    "all": "Всі",
+    "userDeleteDialogTitle": "Ви впевнені, що хочете видалити цього користувача?",
+    "userDeleteDialogSuccessConfirmation": "Користувача успішно видалено"
   },
   "monitorAlerts": {
     "text": "Оповіщення монітора",

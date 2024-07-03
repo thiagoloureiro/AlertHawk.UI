@@ -148,7 +148,9 @@
     "cancel": "取消",
     "monitorGroups": "监控组",
     "role": "角色",
-    "all": "全部"
+    "all": "全部",
+    "userDeleteDialogTitle": "您确定要删除该用户吗?",
+    "userDeleteDialogSuccessConfirmation": "用户已成功删除"
   },
   "monitorAlerts": {
     "text": "监控警报",
