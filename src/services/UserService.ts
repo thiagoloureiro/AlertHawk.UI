@@ -65,6 +65,8 @@ const UserService = {
     ),
   getUserCount: async (headers?: AxiosHeaders): Promise<number> =>
     await requests.get("User/GetUserCount", appendOptionalHeaders(headers)),
+  updateUser: async (request: IUser, headers?: AxiosHeaders): Promise<number> =>
+    await requests.put("User/update", request, appendOptionalHeaders(headers)),
   deleteUser: async (id: string, headers?: AxiosHeaders): Promise<void> =>
     await requests.delete(`User/delete/${id}`, appendOptionalHeaders(headers)),
 };

@@ -48,4 +48,16 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-export { CustomSwitch };
+const SwitchButton = styled(Switch)(({ theme }) => ({
+  "& .MuiSwitch-switchBase.Mui-checked": {
+    color: theme.palette.success.main,
+    "&:hover": {
+      backgroundColor: theme.palette.success.light,
+    },
+  },
+  "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+    backgroundColor: theme.palette.success.main,
+  },
+}));
+
+export { CustomSwitch, SwitchButton };

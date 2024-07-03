@@ -14,8 +14,6 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { red } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
@@ -24,6 +22,7 @@ import { useStoreActions, useStoreState } from "../../hooks";
 import { Status } from "../../enums/Enums";
 import { showSnackbar } from "../../utils/snackbarHelper";
 import logging from "../../utils/logging";
+import { SwitchButton } from "../Icons/MaterialUISwitch";
 
 interface IUsersTableRowProps {
   userRow: IUser;
@@ -38,7 +37,10 @@ const UsersTableRow: FC<IUsersTableRowProps> = ({
   const { t } = useTranslation("global");
   const [openUserDialog, setOpenUserDialog] = useState<boolean>(false);
   const { user } = useStoreState((state) => state.user);
-  const { thunkUserDelete } = useStoreActions((action) => action.user);
+  const { thunkUserUpdate, thunkUserDelete } = useStoreActions(
+    (action) => action.user
+  );
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
   const handleUserDialogClose = () => {
@@ -47,6 +49,29 @@ const UsersTableRow: FC<IUsersTableRowProps> = ({
 
   const handleUserDialogOpen = () => {
     setOpenUserDialog(true);
+  };
+
+  const toggleUserUpdate = async () => {
+    if (userRow.id === null) {
+      return;
+    }
+
+    setIsUpdating(true);
+
+    try {
+      const updatedUser = { ...userRow, isAdmin: !userRow.isAdmin };
+      const res = await thunkUserUpdate(updatedUser);
+      if (res === Status.Success) {
+        showSnackbar("User role has been updated", "success");
+      } else {
+        showSnackbar("Something went wrong. Please try again.", "error");
+      }
+    } catch (error) {
+      logging.error(error);
+      showSnackbar("Something went wrong. Please try again.", "error");
+    } finally {
+      setIsUpdating(false);
+    }
   };
 
   const handleUserDeletion = async () => {
@@ -123,11 +148,11 @@ const UsersTableRow: FC<IUsersTableRowProps> = ({
           </Box>
         </TableCell>
         <TableCell width={"15%"} align="center">
-          {userRow.isAdmin ? (
-            <CheckCircleIcon sx={{ color: "success.main", ml: 1 }} />
-          ) : (
-            <CancelIcon sx={{ color: "secondary.light", ml: 1 }} />
-          )}
+          <SwitchButton
+            checked={userRow.isAdmin}
+            onChange={toggleUserUpdate}
+            disabled={isUpdating || userRow.id === user?.id}
+          />
         </TableCell>
         <TableCell
           width={"15%"}
