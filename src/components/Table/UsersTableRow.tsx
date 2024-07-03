@@ -67,6 +67,7 @@ const UsersTableRow: FC<IUsersTableRowProps> = ({
       logging.error(error);
       showSnackbar("Something went wrong. Please try again.", "error");
     } finally {
+      handleUserSelection(null);
       setOpenUserDialog(false);
       setIsDeleting(false);
     }
