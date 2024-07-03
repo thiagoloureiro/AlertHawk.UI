@@ -148,7 +148,9 @@
     "cancel": "रद्द करें",
     "monitorGroups": "मॉनिटर समूह",
     "role": "भूमिका",
-    "all": "सभी"
+    "all": "सभी",
+    "userDeleteDialogTitle": "क्या आप वाकई इस उपयोगकर्ता को हटाना चाहते हैं?",
+    "userDeleteDialogSuccessConfirmation": "उपयोगकर्ता को सफलतापूर्वक हटा दिया गया है"
   },
   "monitorAlerts": {
     "text": "मॉनिटर चेतावनियाँ",

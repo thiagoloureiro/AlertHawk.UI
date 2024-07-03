@@ -148,7 +148,9 @@
     "cancel": "キャンセル",
     "monitorGroups": "モニターグループ",
     "role": "役割",
-    "all": "すべて"
+    "all": "すべて",
+    "userDeleteDialogTitle": "本当にこのユーザーを削除しますか?",
+    "userDeleteDialogSuccessConfirmation": "ユーザは正常に削除されました"
   },
   "monitorAlerts": {
     "text": "モニターアラート",

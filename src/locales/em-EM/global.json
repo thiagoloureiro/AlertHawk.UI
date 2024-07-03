@@ -144,7 +144,9 @@
     "cancel": "❌",
     "monitorGroups": "🖥️",
     "role": "👤",
-    "all": "👌"
+    "all": "👌",
+    "userDeleteDialogTitle": "👤❌❓",
+    "userDeleteDialogSuccessConfirmation": "✅"
   },
   "monitorAlerts": {
     "text": "👀🚨",

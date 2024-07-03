@@ -119,6 +119,7 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
         gap: 2,
         px: 6,
         py: 2,
+        paddingBottom: 0,
       }}
     >
       <div

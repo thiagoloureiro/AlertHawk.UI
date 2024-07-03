@@ -148,7 +148,9 @@
     "cancel": "취소",
     "monitorGroups": "모니터 그룹",
     "role": "역할",
-    "all": "모두"
+    "all": "모두",
+    "userDeleteDialogTitle": "이 사용자를 삭제하시겠습니까?",
+    "userDeleteDialogSuccessConfirmation": "사용자가 성공적으로 삭제되었습니다."
   },
   "monitorAlerts": {
     "text": "모니터 경고",

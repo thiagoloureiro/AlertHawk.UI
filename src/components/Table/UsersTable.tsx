@@ -71,8 +71,15 @@ const UsersTable: FC<IUsersTableProps> = ({
       id: "isAdmin",
       label: t("users.isAdmin"),
       sortable: true,
-      width: "30%",
-      align: "right",
+      width: "15%",
+      align: "center",
+    },
+    {
+      id: "action",
+      label: t("users.actions"),
+      sortable: true,
+      width: "15%",
+      align: "center",
     },
   ];
 
@@ -146,7 +153,7 @@ const UsersTable: FC<IUsersTableProps> = ({
                 return (
                   <UsersTableRow
                     key={key}
-                    user={user}
+                    userRow={user}
                     selectedUser={selectedUser}
                     handleUserSelection={handleUserSelection}
                   />

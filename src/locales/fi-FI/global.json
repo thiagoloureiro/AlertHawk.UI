@@ -148,7 +148,9 @@
     "cancel": "Peruuta",
     "monitorGroups": "Valvontaryhmät",
     "role": "Rooli",
-    "all": "Kaikki"
+    "all": "Kaikki",
+    "userDeleteDialogTitle": "Haluatko varmasti poistaa tämän käyttäjän?",
+    "userDeleteDialogSuccessConfirmation": "Käyttäjä on poistettu onnistuneesti"
   },
   "monitorAlerts": {
     "text": "Valvontahälytykset",

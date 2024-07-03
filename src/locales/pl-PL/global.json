@@ -148,7 +148,9 @@
     "cancel": "Anuluj",
     "monitorGroups": "Grupy Monitorów",
     "role": "Rola",
-    "all": "Wszystkie"
+    "all": "Wszystkie",
+    "userDeleteDialogTitle": "Czy na pewno chcesz usunąć tego użytkownika?",
+    "userDeleteDialogSuccessConfirmation": "Użytkownik został pomyślnie usunięty"
   },
   "monitorAlerts": {
     "text": "Alerty Monitorowania",
