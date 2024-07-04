@@ -227,5 +227,12 @@
       "url": "URL non valido",
       "validEmail": "Email non valida"
     }
+  },
+  "admin": {
+    "monitorHistory": "Cronologia del Monitoraggio",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Numero di giorni per cui i dati del monitoraggio saranno conservati",
+    "setToZeroForInfiniteRetention": "Imposta a 0 per la conservazione infinita",
+    "save": "Salva",
+    "clearAllStatistics": "Cancella Tutte le Statistiche"
   }
 }

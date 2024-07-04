@@ -227,5 +227,12 @@
       "url": "URL on virheellinen",
       "validEmail": "Sähköposti on virheellinen"
     }
+  },
+  "admin":{
+    "monitorHistory": "Seuraa historiaa",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Monitoritietoja säilytetään päivien lukumäärä",
+    "setToZeroForInfiniteRetention": "Aseta 0 äärettömälle säilyttämiselle",
+    "save": "Tallenna",
+    "clearAllStatistics": "Tyhjennä kaikki tilastot"
   }
 }

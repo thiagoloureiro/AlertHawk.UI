@@ -112,11 +112,11 @@ const Admin: FC<{}> = ({}) => {
                   }}
                 >
                   <Typography component="div" variant="h5">
-                    Monitor History
+                    {t("admin.monitorHistory")}
                   </Typography>
                   <Typography variant="body2">
-                    Number of days the monitor data will be kept for. (Set to 0
-                    for infinite retention)
+                    {t("admin.numberOfDaysTheMonitorDataWillBeKeptFor")}. (
+                    {t("admin.setToZeroForInfiniteRetention")})
                   </Typography>
                   <Box
                     sx={{
@@ -152,7 +152,7 @@ const Admin: FC<{}> = ({}) => {
                       disabled={isRetentionFormBeingProcessed}
                       onClick={handleSaveClick}
                     >
-                      Save
+                      {t("admin.save")}
                     </Button>
                   </Box>
                   <Divider sx={{ my: 2 }} />
@@ -160,7 +160,7 @@ const Admin: FC<{}> = ({}) => {
                     variant="outlined"
                     color="error"
                     sx={{
-                      width: "250px",
+                      minWidth: "250px",
                       height: "42px",
                       color: red[400],
                       fontWeight: 700,
@@ -170,7 +170,7 @@ const Admin: FC<{}> = ({}) => {
                     disabled={isClearHistoryFormBeingProcessed}
                     onClick={handleDeleteMonitorHistory}
                   >
-                    Clear All Statistics
+                    {t("admin.clearAllStatistics")}
                   </Button>
                 </Box>
               </CardContent>

@@ -227,5 +227,12 @@
       "url": "URL jest nieprawidłowy",
       "validEmail": "Adres e-mail jest nieprawidłowy"
     }
+  },
+  "admin": {
+    "monitorHistory": "Historia monitorowania",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Liczba dni przechowywania danych monitorowania",
+    "setToZeroForInfiniteRetention": "Ustaw 0 dla nieograniczonego przechowywania",
+    "save": "Zapisz",
+    "clearAllStatistics": "Wyczyść wszystkie statystyki"
   }
 }

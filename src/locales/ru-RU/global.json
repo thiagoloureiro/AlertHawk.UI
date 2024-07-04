@@ -227,5 +227,12 @@
       "url": "URL недействителен",
       "validEmail": "Электронная почта недействительна"
     }
+  },
+  "admin": {
+    "monitorHistory": "История мониторинга",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Количество дней, в течение которых будут храниться данные мониторинга",
+    "setToZeroForInfiniteRetention": "Установите 0 для бесконечного хранения",
+    "save": "Сохранить",
+    "clearAllStatistics": "Очистить все статистические данные"
   }
 }

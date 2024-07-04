@@ -227,5 +227,12 @@
       "url": "URLが無効です",
       "validEmail": "メールアドレスが無効です"
     }
+  },
+  "admin": {
+    "monitorHistory": "モニター履歴",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "モニターデータを保持する日数",
+    "setToZeroForInfiniteRetention": "無期限に保持するには0に設定します",
+    "save": "保存",
+    "clearAllStatistics": "すべての統計をクリア"
   }
 }

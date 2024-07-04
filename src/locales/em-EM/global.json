@@ -223,5 +223,12 @@
       "url": "🌐❌",
       "validEmail": "📧❌"
     }
+  },
+  "admin": {
+    "monitorHistory": "📊",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "📅",
+    "setToZeroForInfiniteRetention": "🔄",
+    "save": "💾",
+    "clearAllStatistics": "🗑️"
   }
 }

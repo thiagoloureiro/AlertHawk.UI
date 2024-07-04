@@ -227,5 +227,12 @@
       "url": "L'URL est invalide",
       "validEmail": "L'email est invalide"
     }
+  },
+  "admin":{
+    "monitorHistory" : "Historique du moniteur",
+    "numberOfDaysTheMonitorDataWillBeKeptFor" : "Nombre de jours pendant lesquels les données du moniteur seront conservées",
+    "setToZeroForInfiniteRetention" : "Fixé à 0 pour une rétention infinie",
+    "save" : "Enregistrer",
+    "clearAllStatistics" : "Effacer toutes les statistiques"
   }
 }

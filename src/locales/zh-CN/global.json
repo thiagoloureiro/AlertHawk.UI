@@ -227,5 +227,12 @@
       "url": "URL无效",
       "validEmail": "电子邮件无效"
     }
+  },
+  "admin": {
+    "monitorHistory": "监控历史",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "监控数据保留天数",
+    "setToZeroForInfiniteRetention": "设置为0表示无限保留",
+    "save": "保存",
+    "clearAllStatistics": "清除所有统计数据"
   }
 }

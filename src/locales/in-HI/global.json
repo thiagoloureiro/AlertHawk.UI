@@ -227,5 +227,12 @@
       "url": "URL अमान्य है",
       "validEmail": "ईमेल अमान्य है"
     }
+  },
+  "admin": {
+    "monitorHistory": "मॉनिटर इतिहास",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "मॉनिटर डेटा कितने दिनों तक रखा जाएगा",
+    "setToZeroForInfiniteRetention": "अनंत अवधि के लिए 0 सेट करें",
+    "save": "सहेजें",
+    "clearAllStatistics": "सभी आंकड़े साफ़ करें"
   }
 }

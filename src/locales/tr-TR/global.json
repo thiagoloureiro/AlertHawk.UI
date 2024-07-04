@@ -227,5 +227,12 @@
       "url": "URL geçersiz",
       "validEmail": "E-posta geçersiz"
     }
+  },
+  "admin": {
+    "monitorHistory": "Monitör Geçmişi",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Monitör verilerinin saklanacağı gün sayısı",
+    "setToZeroForInfiniteRetention": "Sınırsız saklama için 0 olarak ayarlayın",
+    "save": "Kaydet",
+    "clearAllStatistics": "Tüm İstatistikleri Temizle"
   }
 }

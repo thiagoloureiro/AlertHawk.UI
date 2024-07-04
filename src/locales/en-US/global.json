@@ -228,5 +228,12 @@
       "url": "Url is invalid",
       "validEmail": "Email is invalid"
     }
+  },
+  "admin":{
+    "monitorHistory": "Monitor History",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Number of days the monitor data will be kept for",
+    "setToZeroForInfiniteRetention": "Set to 0 for infinite retention",
+    "save": "Save",
+    "clearAllStatistics": "Clear All Statistics"
   }
 }

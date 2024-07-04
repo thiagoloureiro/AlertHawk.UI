@@ -227,5 +227,12 @@
       "url": "URL이 잘못되었습니다",
       "validEmail": "유효하지 않은 이메일입니다"
     }
+  },
+  "admin": {
+    "monitorHistory": "모니터 기록",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "모니터 데이터 보존 기간 (일)",
+    "setToZeroForInfiniteRetention": "무제한으로 설정하려면 0 입력",
+    "save": "저장",
+    "clearAllStatistics": "모든 통계 지우기"
   }
 }

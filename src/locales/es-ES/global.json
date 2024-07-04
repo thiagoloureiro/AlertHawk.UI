@@ -227,5 +227,12 @@
       "url": "La URL no es válida",
       "validEmail": "El correo electrónico no es válido"
     }
+  },
+  "admin":{
+    "monitorHistory": "Monitorear Historial",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Número de días durante los cuales se conservarán los datos del monitor",
+    "setToZeroForInfiniteRetention": "Establecido en 0 para retención infinita",
+    "save": "Guardar",
+    "clearAllStatistics": "Borrar todas las estadísticas"
   }
 }
