@@ -19,6 +19,7 @@ import {
   AddToQueueOutlined as AddToQueueOutlinedIcon,
   AddAlertOutlined as AddAlertOutlinedIcon,
   ErrorOutlineOutlined as ErrorOutlineOutlinedIcon,
+  AdminPanelSettingsOutlined as AdminPanelSettingsOutlinedIcon,
 } from "@mui/icons-material";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import { useStoreState } from "../../hooks";
@@ -113,7 +114,7 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
     navigate(item.pathname);
   };
 
-  const menuItems: IMenuItem[] = [
+  let menuItems: IMenuItem[] = [
     {
       text: t("sidebar.monitorList"),
       pathname: "/",
@@ -142,12 +143,25 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
   ];
 
   if (user?.isAdmin) {
-    menuItems.push({
-      text: t("sidebar.users"),
-      pathname: "/users",
-      icon: <PeopleAltOutlinedIcon />,
-    });
+    menuItems = [
+      ...menuItems,
+      ...(user?.isAdmin
+        ? [
+            {
+              text: t("sidebar.users"),
+              pathname: "/users",
+              icon: <PeopleAltOutlinedIcon />,
+            },
+            {
+              text: t("users.isAdmin"),
+              pathname: "/admin",
+              icon: <AdminPanelSettingsOutlinedIcon />,
+            },
+          ]
+        : []),
+    ];
   }
+
   const secondMenuItems: IMenuItem[] = [
     {
       text: t("settings.text"),

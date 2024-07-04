@@ -7,6 +7,7 @@ import MonitorAlerts from "../pages/MonitorAlerts/MonitorAlerts";
 import ProtectedRoute from "./ProtectedRoute";
 import MonitorGroups from "../pages/MonitorGroups/MonitorGroups";
 import Notifications from "../pages/Notifications/Notifications";
+import Admin from "../pages/Admin/Admin";
 
 const appRoutes: IRoute[] = [
   {
@@ -70,6 +71,14 @@ const appRoutes: IRoute[] = [
     element: (
       <ProtectedRoute>
         <Notifications />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <ProtectedRoute>
+        <Admin />
       </ProtectedRoute>
     ),
   },
