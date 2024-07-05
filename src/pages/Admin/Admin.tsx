@@ -153,9 +153,8 @@ const Admin: FC<{}> = ({}) => {
                             shrink: true,
                           }}
                           onBlur={() => {
-                            if (!field.value) {
-                              setValue("retentionInDays", 0);
-                            }
+                            const value = field.value;
+                            setValue("retentionInDays", Math.max(0, value));
                           }}
                           inputProps={{ min: 0 }}
                           size="small"
