@@ -240,6 +240,8 @@
       "somethingWentWrongPleaseTryAgain": "Щось пішло не так. Будь ласка, спробуйте ще раз"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Ви впевнені, що хочете видалити всю статистику?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Будь ласка, зверніть увагу, що цю операцію не можна скасувати",
       "historyRetentionPeriodSavedSuccessfully": "Період збереження історії успішно збережено",
       "monitorHistoryHasBeenRemovedSuccessfully": "Історія моніторингу успішно видалена"
     }

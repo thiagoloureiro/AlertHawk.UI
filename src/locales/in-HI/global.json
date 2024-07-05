@@ -237,10 +237,12 @@
   },
   "snackbar": {
     "general": {
-      "somethingWentWrongPleaseTryAgain": "कुछ गलत हो गया। कृपया पुनः प्रयास करें"
+      "somethingWentWrongPleaseTryAgain": "कुछ गड़बड़ हो गई। कृपया पुन: प्रयास करें"
     },
     "monitorHistory": {
-      "historyRetentionPeriodSavedSuccessfully": "इतिहास संरक्षण अवधि सफलतापूर्वक सहेजी गई",
+      "areYouSureYouWantToDeleteAllStatistics": "क्या आप वाकई सभी सांख्यिकियों को हटाना चाहते हैं?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "कृपया ध्यान दें कि यह कार्य वापस नहीं लिया जा सकता",
+      "historyRetentionPeriodSavedSuccessfully": "इतिहास रिटेंशन अवधि सफलतापूर्वक सहेजी गई",
       "monitorHistoryHasBeenRemovedSuccessfully": "मॉनिटर इतिहास सफलतापूर्वक हटा दिया गया है"
     }
   }

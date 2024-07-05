@@ -234,5 +234,16 @@
     "setToZeroForInfiniteRetention": "Aseta 0 äärettömälle säilyttämiselle",
     "save": "Tallenna",
     "clearAllStatistics": "Tyhjennä kaikki tilastot"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Jotain meni pieleen. Yritä uudelleen"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Oletko varma, että haluat poistaa kaikki tilastot?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Huomioi, että tätä toimintoa ei voi peruuttaa",
+      "historyRetentionPeriodSavedSuccessfully": "Historian säilytysaika tallennettu onnistuneesti",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Valvontahistoria on poistettu onnistuneesti"
+    }
   }
 }

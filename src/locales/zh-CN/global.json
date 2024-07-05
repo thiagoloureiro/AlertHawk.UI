@@ -240,6 +240,8 @@
       "somethingWentWrongPleaseTryAgain": "出现问题，请重试"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "您确定要删除所有统计数据吗?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "请注意，此操作无法撤销",
       "historyRetentionPeriodSavedSuccessfully": "历史保留期已成功保存",
       "monitorHistoryHasBeenRemovedSuccessfully": "监控历史已成功移除"
     }

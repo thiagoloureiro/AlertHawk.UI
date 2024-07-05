@@ -240,6 +240,8 @@
       "somethingWentWrongPleaseTryAgain": "Algo deu errado. Por favor, tente novamente"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Tem certeza de que deseja excluir todas as estatísticas?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Por favor, esteja ciente de que esta operação não pode ser desfeita",
       "historyRetentionPeriodSavedSuccessfully": "Período de retenção do histórico salvo com sucesso",
       "monitorHistoryHasBeenRemovedSuccessfully": "Histórico de monitoramento removido com sucesso"
     }

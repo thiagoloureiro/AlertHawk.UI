@@ -3,8 +3,13 @@ import {
   Button,
   Card,
   CardContent,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Divider,
   Grid,
+  IconButton,
   Stack,
   TextField,
   Typography,
@@ -17,6 +22,7 @@ import { Status } from "../../enums/Enums";
 import { showSnackbar } from "../../utils/snackbarHelper";
 import { red } from "@mui/material/colors";
 import { useForm, Controller } from "react-hook-form";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface FormValues {
   retentionInDays: number;
@@ -38,10 +44,21 @@ const Admin: FC<{}> = ({}) => {
   const [isRetentionFormBeingProcessed, setIsRetentionFormBeingProcessed] =
     useState<boolean>(false);
 
+  const [openClearHistoryDialog, setOpenClearHistoryDialog] =
+    useState<boolean>(false);
+
   const [
     isClearHistoryFormBeingProcessed,
     setIsClearHistoryFormBeingProcessed,
   ] = useState<boolean>(false);
+
+  const handleClearHistoryOpen = () => {
+    setOpenClearHistoryDialog(true);
+  };
+
+  const handleClearHistoryClose = () => {
+    setOpenClearHistoryDialog(false);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,6 +108,7 @@ const Admin: FC<{}> = ({}) => {
         "error"
       );
     }
+    handleClearHistoryClose();
     setIsClearHistoryFormBeingProcessed(false);
   };
 
@@ -174,8 +192,7 @@ const Admin: FC<{}> = ({}) => {
                       position: "relative",
                       alignSelf: "flex-end",
                     }}
-                    disabled={isClearHistoryFormBeingProcessed}
-                    onClick={handleDeleteMonitorHistory}
+                    onClick={handleClearHistoryOpen}
                   >
                     {t("admin.clearAllStatistics")}
                   </Button>
@@ -194,6 +211,97 @@ const Admin: FC<{}> = ({}) => {
           </Stack>
         </Grid>
       </Grid>
+      <Dialog
+        open={openClearHistoryDialog}
+        onClose={handleClearHistoryClose}
+        aria-labelledby="clear-history-dialog"
+        aria-describedby="clear-history-dialog"
+        sx={{
+          "& .MuiPaper-root": {
+            maxWidth: "630px",
+            maxHeight: "unset",
+          },
+        }}
+        disableScrollLock
+      >
+        <DialogTitle component={"span"} sx={{ padding: "24px 24px 0 24px" }}>
+          <IconButton
+            aria-label="close"
+            onClick={handleClearHistoryClose}
+            sx={{
+              position: "absolute",
+              right: "6px",
+              top: "6px",
+              color: "#0F0F0F",
+            }}
+            size="small"
+          >
+            <CloseIcon />
+          </IconButton>
+
+          <Typography
+            variant="h1"
+            fontSize="22px"
+            fontWeight={500}
+            lineHeight={"27.6px"}
+            mb={"12px"}
+          >
+            {t(
+              "snackbar.monitorHistory.areYouSureYouWantToDeleteAllStatistics"
+            )}
+          </Typography>
+        </DialogTitle>
+        <DialogContent>
+          <Typography
+            variant="body2"
+            fontSize="16px"
+            fontWeight={400}
+            lineHeight={"27.6px"}
+          >
+            {t(
+              "snackbar.monitorHistory.pleaseBeAwareThatThisOperationCannotBeUndone"
+            ) + "."}
+          </Typography>
+        </DialogContent>
+        <DialogActions
+          sx={{
+            marginTop: "32px",
+            padding: "0 24px 24px 24px",
+          }}
+        >
+          <Stack direction="row" justifyContent="end" gap="7px">
+            <Button
+              onClick={handleClearHistoryClose}
+              variant="text"
+              sx={{
+                width: 109,
+                fontSize: 14,
+                fontWeight: 500,
+                height: "40px",
+                padding: "8px 33px",
+              }}
+              color="error"
+            >
+              {t("users.cancel")}
+            </Button>
+            <Button
+              onClick={handleDeleteMonitorHistory}
+              variant="contained"
+              sx={{
+                width: 107,
+                fontSize: 14,
+                fontWeight: 500,
+                height: "40px",
+                padding: "8px 33px",
+              }}
+              color="error"
+              disabled={isClearHistoryFormBeingProcessed}
+            >
+              {t("dashboard.delete")}
+            </Button>
+          </Stack>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

@@ -240,6 +240,8 @@
       "somethingWentWrongPleaseTryAgain": "문제가 발생했습니다. 다시 시도해주세요"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "모든 통계를 삭제하시겠습니까?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "이 작업은 되돌릴 수 없음을 주의하세요",
       "historyRetentionPeriodSavedSuccessfully": "기록 보존 기간이 성공적으로 저장되었습니다",
       "monitorHistoryHasBeenRemovedSuccessfully": "모니터 기록이 성공적으로 제거되었습니다"
     }

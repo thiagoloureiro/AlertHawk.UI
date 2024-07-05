@@ -240,6 +240,8 @@
       "somethingWentWrongPleaseTryAgain": "問題が発生しました。もう一度お試しください"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "本当にすべての統計を削除しますか?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "この操作は元に戻せませんのでご注意ください",
       "historyRetentionPeriodSavedSuccessfully": "履歴の保持期間が正常に保存されました",
       "monitorHistoryHasBeenRemovedSuccessfully": "モニター履歴が正常に削除されました"
     }

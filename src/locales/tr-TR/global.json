@@ -240,6 +240,8 @@
       "somethingWentWrongPleaseTryAgain": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Tüm istatistikleri silmek istediğinizden emin misiniz?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Lütfen bu işlemin geri alınamayacağını dikkate alın",
       "historyRetentionPeriodSavedSuccessfully": "Monitör geçmişi saklama süresi başarıyla güncellendi",
       "monitorHistoryHasBeenRemovedSuccessfully": "Monitör geçmişi başarıyla silindi"
     }

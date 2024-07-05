@@ -240,6 +240,8 @@
       "somethingWentWrongPleaseTryAgain": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Sind Sie sicher, dass Sie alle Statistiken löschen wollen?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Bitte beachten Sie, dass dieser Vorgang nicht rückgängig gemacht werden kann",
       "historyRetentionPeriodSavedSuccessfully": "Aufbewahrungszeitraum der Historie erfolgreich gespeichert",
       "monitorHistoryHasBeenRemovedSuccessfully": "Überwachungshistorie wurde erfolgreich entfernt"
     }

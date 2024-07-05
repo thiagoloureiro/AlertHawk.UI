@@ -236,6 +236,8 @@
       "somethingWentWrongPleaseTryAgain": "❌🔄"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "🗂️❌❓",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "❗❌🔄",
       "historyRetentionPeriodSavedSuccessfully": "🗂️✅",
       "monitorHistoryHasBeenRemovedSuccessfully": "🗑️✅"
     }

@@ -241,6 +241,8 @@
       "somethingWentWrongPleaseTryAgain": "Something went wrong. Please try again"
     },
     "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Are you sure you want to delete all statistics?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Please be aware that this operation cannot be undone",
       "historyRetentionPeriodSavedSuccessfully": "History retention period saved successfully",
       "monitorHistoryHasBeenRemovedSuccessfully": "Monitor history has been removed successfully"
     }
