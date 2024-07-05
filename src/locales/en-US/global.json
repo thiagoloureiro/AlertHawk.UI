@@ -229,11 +229,20 @@
       "validEmail": "Email is invalid"
     }
   },
-  "admin":{
+  "admin": {
     "monitorHistory": "Monitor History",
     "numberOfDaysTheMonitorDataWillBeKeptFor": "Number of days the monitor data will be kept for",
     "setToZeroForInfiniteRetention": "Set to 0 for infinite retention",
     "save": "Save",
     "clearAllStatistics": "Clear All Statistics"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Something went wrong. Please try again"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "History retention period saved successfully",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Monitor history has been removed successfully"
+    }
   }
 }

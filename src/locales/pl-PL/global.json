@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "Ustaw 0 dla nieograniczonego przechowywania",
     "save": "Zapisz",
     "clearAllStatistics": "Wyczyść wszystkie statystyki"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Wystąpił problem. Spróbuj ponownie"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "Okres przechowywania historii został pomyślnie zapisany",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Historia monitorowania została pomyślnie usunięta"
+    }
   }
 }

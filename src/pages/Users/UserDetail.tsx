@@ -100,7 +100,10 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
       showSnackbar(t("users.monitorConfirmation"), "success");
       setOriginalAssignedMonitorGroups([...assignedMonitorGroups]);
     } catch (error) {
-      showSnackbar("Something went wrong. Please try again later", "error");
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
       logging.error(error);
     } finally {
       setIsButtonDisabled(false);

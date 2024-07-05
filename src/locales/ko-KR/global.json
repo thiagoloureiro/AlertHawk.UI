@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "무제한으로 설정하려면 0 입력",
     "save": "저장",
     "clearAllStatistics": "모든 통계 지우기"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "문제가 발생했습니다. 다시 시도해주세요"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "기록 보존 기간이 성공적으로 저장되었습니다",
+      "monitorHistoryHasBeenRemovedSuccessfully": "모니터 기록이 성공적으로 제거되었습니다"
+    }
   }
 }

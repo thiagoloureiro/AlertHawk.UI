@@ -64,11 +64,17 @@ const UsersTableRow: FC<IUsersTableRowProps> = ({
       if (res === Status.Success) {
         showSnackbar("User role has been updated", "success");
       } else {
-        showSnackbar("Something went wrong. Please try again.", "error");
+        showSnackbar(
+          t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+          "error"
+        );
       }
     } catch (error) {
       logging.error(error);
-      showSnackbar("Something went wrong. Please try again.", "error");
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
     } finally {
       setIsUpdating(false);
     }
@@ -86,11 +92,17 @@ const UsersTableRow: FC<IUsersTableRowProps> = ({
       if (res === Status.Success) {
         showSnackbar(t("users.userDeleteDialogSuccessConfirmation"), "success");
       } else {
-        showSnackbar("Something went wrong. Please try again.", "error");
+        showSnackbar(
+          t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+          "error"
+        );
       }
     } catch (error) {
       logging.error(error);
-      showSnackbar("Something went wrong. Please try again.", "error");
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
     } finally {
       handleUserSelection(null);
       setOpenUserDialog(false);

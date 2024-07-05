@@ -18,6 +18,7 @@ import { IUserLogin } from "../../interfaces/requests/user/IUserLogin";
 import UserService from "../../services/UserService";
 import { ELoginType } from "../../enums/Enums";
 import { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 
 interface IFormProps {
   description?: string;
@@ -32,6 +33,7 @@ const LoginForm: FC<IFormProps> = ({ description }) => {
   } = useForm<IUserLogin>();
   const [step, setStep] = useState<number>(1);
   const { instance } = useMsal();
+  const { t } = useTranslation("global");
 
   const handleFormSubmit = (data: IUserLogin) => {
     if (step === 1) {
@@ -52,7 +54,9 @@ const LoginForm: FC<IFormProps> = ({ description }) => {
       setStep(1);
       // navigate("/", { replace: true });
     } catch (error) {
-      const defaultErrorMessage = "Something went wrong. Please try again.";
+      const defaultErrorMessage = t(
+        "snackbar.general.somethingWentWrongPleaseTryAgain"
+      );
 
       if (error instanceof AxiosError && error.response?.status === 400) {
         const errorMessage = error.response.data.content || defaultErrorMessage;
@@ -71,7 +75,10 @@ const LoginForm: FC<IFormProps> = ({ description }) => {
     window.dispatchEvent(new Event("storage"));
     instance.loginRedirect(loginRequest).catch((error) => {
       logging.error(error);
-      showSnackbar("Something went wrong. Please try again.", "error");
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
       localStorage.clear();
     });
   };

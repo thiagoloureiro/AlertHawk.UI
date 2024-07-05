@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "अनंत अवधि के लिए 0 सेट करें",
     "save": "सहेजें",
     "clearAllStatistics": "सभी आंकड़े साफ़ करें"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "कुछ गलत हो गया। कृपया पुनः प्रयास करें"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "इतिहास संरक्षण अवधि सफलतापूर्वक सहेजी गई",
+      "monitorHistoryHasBeenRemovedSuccessfully": "मॉनिटर इतिहास सफलतापूर्वक हटा दिया गया है"
+    }
   }
 }

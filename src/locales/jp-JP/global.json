@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "無期限に保持するには0に設定します",
     "save": "保存",
     "clearAllStatistics": "すべての統計をクリア"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "問題が発生しました。もう一度お試しください"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "履歴の保持期間が正常に保存されました",
+      "monitorHistoryHasBeenRemovedSuccessfully": "モニター履歴が正常に削除されました"
+    }
   }
 }

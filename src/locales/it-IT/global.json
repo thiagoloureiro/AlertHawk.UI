@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "Imposta a 0 per la conservazione infinita",
     "save": "Salva",
     "clearAllStatistics": "Cancella Tutte le Statistiche"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Qualcosa è andato storto. Per favore riprova"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "Il periodo di conservazione della cronologia è stato salvato con successo",
+      "monitorHistoryHasBeenRemovedSuccessfully": "La cronologia di monitoraggio è stata rimossa con successo"
+    }
   }
 }

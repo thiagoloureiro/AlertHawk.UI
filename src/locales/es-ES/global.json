@@ -228,11 +228,20 @@
       "validEmail": "El correo electrónico no es válido"
     }
   },
-  "admin":{
+  "admin": {
     "monitorHistory": "Monitorear Historial",
     "numberOfDaysTheMonitorDataWillBeKeptFor": "Número de días durante los cuales se conservarán los datos del monitor",
     "setToZeroForInfiniteRetention": "Establecido en 0 para retención infinita",
     "save": "Guardar",
     "clearAllStatistics": "Borrar todas las estadísticas"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Algo salió mal. Por favor, inténtelo de nuevo"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "El período de retención del historial se ha guardado con éxito",
+      "monitorHistoryHasBeenRemovedSuccessfully": "El historial de monitoreo se ha eliminado con éxito"
+    }
   }
 }

@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "Sınırsız saklama için 0 olarak ayarlayın",
     "save": "Kaydet",
     "clearAllStatistics": "Tüm İstatistikleri Temizle"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "Monitör geçmişi saklama süresi başarıyla güncellendi",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Monitör geçmişi başarıyla silindi"
+    }
   }
 }

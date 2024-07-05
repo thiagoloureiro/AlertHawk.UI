@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "设置为0表示无限保留",
     "save": "保存",
     "clearAllStatistics": "清除所有统计数据"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "出现问题，请重试"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "历史保留期已成功保存",
+      "monitorHistoryHasBeenRemovedSuccessfully": "监控历史已成功移除"
+    }
   }
 }

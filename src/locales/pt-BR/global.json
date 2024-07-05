@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "Defina como 0 para retenção infinita",
     "save": "Salvar",
     "clearAllStatistics": "Limpar Todas as Estatísticas"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Algo deu errado. Por favor, tente novamente"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "Período de retenção do histórico salvo com sucesso",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Histórico de monitoramento removido com sucesso"
+    }
   }
 }

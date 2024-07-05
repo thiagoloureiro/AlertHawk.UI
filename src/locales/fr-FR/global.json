@@ -228,11 +228,20 @@
       "validEmail": "L'email est invalide"
     }
   },
-  "admin":{
-    "monitorHistory" : "Historique du moniteur",
-    "numberOfDaysTheMonitorDataWillBeKeptFor" : "Nombre de jours pendant lesquels les données du moniteur seront conservées",
-    "setToZeroForInfiniteRetention" : "Fixé à 0 pour une rétention infinie",
-    "save" : "Enregistrer",
-    "clearAllStatistics" : "Effacer toutes les statistiques"
+  "admin": {
+    "monitorHistory": "Historique du moniteur",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Nombre de jours pendant lesquels les données du moniteur seront conservées",
+    "setToZeroForInfiniteRetention": "Fixé à 0 pour une rétention infinie",
+    "save": "Enregistrer",
+    "clearAllStatistics": "Effacer toutes les statistiques"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Quelque chose a mal tourné. Veuillez réessayer"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "La période de conservation de l'historique a été enregistrée avec succès",
+      "monitorHistoryHasBeenRemovedSuccessfully": "L'historique de surveillance a été supprimé avec succès"
+    }
   }
 }

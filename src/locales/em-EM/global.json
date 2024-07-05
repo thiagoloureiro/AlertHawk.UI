@@ -230,5 +230,14 @@
     "setToZeroForInfiniteRetention": "🔄",
     "save": "💾",
     "clearAllStatistics": "🗑️"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "❌🔄"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "🗂️✅",
+      "monitorHistoryHasBeenRemovedSuccessfully": "🗑️✅"
+    }
   }
 }

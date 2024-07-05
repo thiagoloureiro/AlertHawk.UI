@@ -234,5 +234,14 @@
     "setToZeroForInfiniteRetention": "Встановити 0 для нескінченного зберігання",
     "save": "Зберегти",
     "clearAllStatistics": "Очистити всю статистику"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Щось пішло не так. Будь ласка, спробуйте ще раз"
+    },
+    "monitorHistory": {
+      "historyRetentionPeriodSavedSuccessfully": "Період збереження історії успішно збережено",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Історія моніторингу успішно видалена"
+    }
   }
 }

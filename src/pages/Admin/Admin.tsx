@@ -16,6 +16,11 @@ import { useStoreActions, useStoreState } from "../../hooks";
 import { Status } from "../../enums/Enums";
 import { showSnackbar } from "../../utils/snackbarHelper";
 import { red } from "@mui/material/colors";
+import { useForm, Controller } from "react-hook-form";
+
+interface FormValues {
+  retentionInDays: number;
+}
 
 const Admin: FC<{}> = ({}) => {
   const { t } = useTranslation("global");
@@ -25,10 +30,14 @@ const Admin: FC<{}> = ({}) => {
     thunkSetMonitorHistoryRetention,
     thunkDeleteMonitorHistory,
   } = useStoreActions((action) => action.monitorHistory);
-  const [retentionInDaysFormValue, setRetentionInDaysFormValue] =
-    useState<number>(retentionInDays);
+
+  const { control, handleSubmit, setValue, reset } = useForm<FormValues>({
+    defaultValues: { retentionInDays },
+  });
+
   const [isRetentionFormBeingProcessed, setIsRetentionFormBeingProcessed] =
     useState<boolean>(false);
+
   const [
     isClearHistoryFormBeingProcessed,
     setIsClearHistoryFormBeingProcessed,
@@ -36,58 +45,52 @@ const Admin: FC<{}> = ({}) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await thunkGetMonitorHistoryRetention();
-
-      if (response === Status.Success) {
-        setRetentionInDaysFormValue(retentionInDays);
-      } else {
-        showSnackbar("History retention could not be retrieved.", "error");
-      }
+      await thunkGetMonitorHistoryRetention();
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    reset({ retentionInDays });
   }, [retentionInDays]);
 
-  const handleRetentionPeriodChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    let value = event.target.value;
-    if (value) {
-      value = String(Number(value));
-      const parsedValue = parseInt(value, 10);
-      if (parsedValue >= 0) {
-        setRetentionInDaysFormValue(parsedValue);
-      } else {
-        setRetentionInDaysFormValue(0);
-      }
-    }
-  };
-
-  const handleSaveClick = async () => {
+  const onSubmit = async (data: FormValues) => {
     setIsRetentionFormBeingProcessed(true);
 
     const response = await thunkSetMonitorHistoryRetention({
-      historyDaysRetention: retentionInDaysFormValue,
+      historyDaysRetention: Number(data.retentionInDays),
     });
-    if (response === Status.Success) {
-      showSnackbar("History retention period saved successfully.", "success");
-    } else {
-      showSnackbar("Something went wrong. Please try again.", "error");
-    }
 
+    if (response === Status.Success) {
+      showSnackbar(
+        t("snackbar.monitorHistory.historyRetentionPeriodSavedSuccessfully"),
+        "success"
+      );
+      reset({ retentionInDays: data.retentionInDays });
+    } else {
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
+    }
     setIsRetentionFormBeingProcessed(false);
   };
 
   const handleDeleteMonitorHistory = async () => {
     setIsClearHistoryFormBeingProcessed(true);
-
     const response = await thunkDeleteMonitorHistory();
     if (response === Status.Success) {
-      showSnackbar("Monitor history has been removed successfully.", "success");
+      showSnackbar(
+        t("snackbar.monitorHistory.monitorHistoryHasBeenRemovedSuccessfully"),
+        "success"
+      );
     } else {
-      showSnackbar("Something went wrong. Please try again.", "error");
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
     }
-
     setIsClearHistoryFormBeingProcessed(false);
   };
 
@@ -118,26 +121,30 @@ const Admin: FC<{}> = ({}) => {
                     {t("admin.numberOfDaysTheMonitorDataWillBeKeptFor")}. (
                     {t("admin.setToZeroForInfiniteRetention")})
                   </Typography>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 2,
-                    }}
-                  >
-                    <TextField
-                      sx={{ flex: 3 }}
-                      id="retention-period"
-                      type="number"
-                      value={retentionInDaysFormValue}
-                      onChange={handleRetentionPeriodChange}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                      inputProps={{ min: 0 }}
-                      size="small"
-                      variant="outlined"
-                      hiddenLabel
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                    <Controller
+                      name="retentionInDays"
+                      control={control}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          sx={{ flex: 3 }}
+                          id="retention-period"
+                          type="number"
+                          InputLabelProps={{
+                            shrink: true,
+                          }}
+                          onBlur={() => {
+                            if (!field.value) {
+                              setValue("retentionInDays", 0);
+                            }
+                          }}
+                          inputProps={{ min: 0 }}
+                          size="small"
+                          variant="outlined"
+                          hiddenLabel
+                        />
+                      )}
                     />
                     <Button
                       variant="contained"
@@ -150,7 +157,7 @@ const Admin: FC<{}> = ({}) => {
                         maxWidth: "250px",
                       }}
                       disabled={isRetentionFormBeingProcessed}
-                      onClick={handleSaveClick}
+                      onClick={handleSubmit(onSubmit)}
                     >
                       {t("admin.save")}
                     </Button>
