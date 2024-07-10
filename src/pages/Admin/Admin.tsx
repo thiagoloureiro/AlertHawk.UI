@@ -11,6 +11,7 @@ import {
   Grid,
   IconButton,
   Stack,
+  styled,
   TextField,
   Typography,
 } from "@mui/material";
@@ -32,6 +33,18 @@ interface FormValues {
   retentionInDays: number;
 }
 
+const VisuallyHiddenInput = styled("input")({
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: 1,
+});
+
 const Admin: FC<{}> = ({}) => {
   const { t } = useTranslation("global");
   const { retentionInDays } = useStoreState((state) => state.monitorHistory);
@@ -51,6 +64,8 @@ const Admin: FC<{}> = ({}) => {
 
   const [isBackupDownloadBeingProcessed, setIsBackupDownloadBeingProcessed] =
     useState<boolean>(false);
+
+  const [isUploading, setIsUploading] = useState<boolean>(false);
 
   const [openClearHistoryDialog, setOpenClearHistoryDialog] =
     useState<boolean>(false);
@@ -134,6 +149,54 @@ const Admin: FC<{}> = ({}) => {
       );
     } finally {
       setIsBackupDownloadBeingProcessed(false);
+    }
+  };
+
+  const handleFileInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+
+    if (!file) {
+      return;
+    }
+
+    const validExtensions = ["json"];
+    const extension = file.name.split(".").pop()?.toLowerCase();
+
+    if (!extension || !validExtensions.includes(extension)) {
+      showSnackbar(
+        t("admin.invalidFileFormatOnlyJSONFormatIsAllowed"),
+        "error"
+      );
+      return;
+    }
+
+    handleUpload(file);
+  };
+
+  const handleUpload = async (file: File) => {
+    setIsUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const headers = {
+        "Content-Type": "multipart/form-data",
+      };
+
+      await MonitorService.uploadMonitorJsonBackup(formData, headers);
+
+      showSnackbar(t("admin.backupFileHasBeenUploaded"), "success");
+    } catch (error) {
+      logging.error(error);
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -280,6 +343,7 @@ const Admin: FC<{}> = ({}) => {
                   </Typography>
 
                   <Button
+                    component="label"
                     variant="contained"
                     color="success"
                     startIcon={
@@ -293,8 +357,14 @@ const Admin: FC<{}> = ({}) => {
                       fontWeight: 700,
                       maxWidth: "150px",
                     }}
+                    disabled={isUploading}
                   >
                     {t("admin.upload")}
+                    <VisuallyHiddenInput
+                      id="upload-backup"
+                      type="file"
+                      onChange={handleFileInputChange}
+                    />
                   </Button>
                 </Box>
               </Box>

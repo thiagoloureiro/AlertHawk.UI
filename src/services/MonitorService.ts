@@ -107,6 +107,15 @@ const MonitorService = {
       appendOptionalHeaders(headers),
       { responseType: "blob" }
     ),
+  uploadMonitorJsonBackup: async (
+    formData: FormData,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      "monitor/uploadMonitorJsonBackup",
+      formData,
+      appendOptionalHeaders(headers)
+    ),
   addMonitorNotification: async (
     monitorNotification: any,
     headers?: AxiosHeaders
