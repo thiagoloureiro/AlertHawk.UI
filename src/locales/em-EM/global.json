@@ -229,7 +229,13 @@
     "numberOfDaysTheMonitorDataWillBeKeptFor": "📅",
     "setToZeroForInfiniteRetention": "🔄",
     "save": "💾",
-    "clearAllStatistics": "🗑️"
+    "clearAllStatistics": "🗑️",
+    "backup": "💾",
+    "exportBackup": "📤",
+    "youCanBackupAllMonitorsIntoAJSONFile": "💾",
+    "importBackup": "📥",
+    "youCanImportYourJSONBackupFile": "📥",
+    "upload": "📁"
   },
   "snackbar": {
     "general": {

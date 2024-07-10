@@ -233,7 +233,13 @@
     "numberOfDaysTheMonitorDataWillBeKeptFor": "Количество дней, в течение которых будут храниться данные мониторинга",
     "setToZeroForInfiniteRetention": "Установите 0 для бесконечного хранения",
     "save": "Сохранить",
-    "clearAllStatistics": "Очистить все статистические данные"
+    "clearAllStatistics": "Очистить все статистические данные",
+    "backup": "Резервное копирование",
+    "exportBackup": "Экспорт резервной копии",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Вы можете создать резервную копию всех мониторов в файле JSON",
+    "importBackup": "Импорт резервной копии",
+    "youCanImportYourJSONBackupFile": "Вы можете импортировать свой файл резервной копии JSON",
+    "upload": "Загрузить"
   },
   "snackbar": {
     "general": {

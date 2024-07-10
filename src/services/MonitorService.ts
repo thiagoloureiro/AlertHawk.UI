@@ -16,8 +16,10 @@ import { IMonitorStats } from "../interfaces/IMonitorStats";
 const responseBody = (response: AxiosResponse) => response.data;
 
 const requests = {
-  get: (url: string, headers?: AxiosHeaders) =>
-    axiosInstance.monitoring.get(url, { headers }).then(responseBody),
+  get: (url: string, headers?: AxiosHeaders, config?: Object) =>
+    axiosInstance.monitoring
+      .get(url, { headers, ...config })
+      .then(responseBody),
   post: (url: string, body?: Object, headers?: AxiosHeaders, config?: Object) =>
     axiosInstance.monitoring
       .post(url, body, { headers, ...config })
@@ -99,12 +101,19 @@ const MonitorService = {
       `MonitorNotification/monitorNotifications/${id}`,
       appendOptionalHeaders(headers)
     ),
+  getMonitorJsonBackup: async (headers?: AxiosHeaders): Promise<Blob> =>
+    await requests.get(
+      "monitor/getMonitorJsonBackup",
+      appendOptionalHeaders(headers),
+      { responseType: "blob" }
+    ),
   addMonitorNotification: async (
     monitorNotification: any,
     headers?: AxiosHeaders
   ): Promise<[]> =>
     await requests.post(
-      `MonitorNotification/addMonitorNotification`, monitorNotification,
+      `MonitorNotification/addMonitorNotification`,
+      monitorNotification,
       appendOptionalHeaders(headers)
     ),
   removeMonitorNotification: async (
@@ -112,7 +121,8 @@ const MonitorService = {
     headers?: AxiosHeaders
   ): Promise<[]> =>
     await requests.post(
-      `MonitorNotification/removeMonitorNotification`, monitorNotification,
+      `MonitorNotification/removeMonitorNotification`,
+      monitorNotification,
       appendOptionalHeaders(headers)
     ),
   pauseMonitor: async (

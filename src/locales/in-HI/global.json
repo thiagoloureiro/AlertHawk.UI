@@ -233,7 +233,13 @@
     "numberOfDaysTheMonitorDataWillBeKeptFor": "मॉनिटर डेटा कितने दिनों तक रखा जाएगा",
     "setToZeroForInfiniteRetention": "अनंत अवधि के लिए 0 सेट करें",
     "save": "सहेजें",
-    "clearAllStatistics": "सभी आंकड़े साफ़ करें"
+    "clearAllStatistics": "सभी आंकड़े साफ़ करें",
+    "backup": "बैकअप",
+    "exportBackup": "बैकअप निर्यात करें",
+    "youCanBackupAllMonitorsIntoAJSONFile": "आप सभी मॉनिटर्स को एक JSON फ़ाइल में बैकअप कर सकते हैं",
+    "importBackup": "बैकअप आयात करें",
+    "youCanImportYourJSONBackupFile": "आप अपनी JSON बैकअप फ़ाइल आयात कर सकते हैं",
+    "upload": "अपलोड करें"
   },
   "snackbar": {
     "general": {

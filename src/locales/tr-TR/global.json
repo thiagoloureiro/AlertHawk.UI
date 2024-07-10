@@ -233,7 +233,13 @@
     "numberOfDaysTheMonitorDataWillBeKeptFor": "Monitör verilerinin saklanacağı gün sayısı",
     "setToZeroForInfiniteRetention": "Sınırsız saklama için 0 olarak ayarlayın",
     "save": "Kaydet",
-    "clearAllStatistics": "Tüm İstatistikleri Temizle"
+    "clearAllStatistics": "Tüm İstatistikleri Temizle",
+    "backup": "Yedekleme",
+    "exportBackup": "Yedeği Dışa Aktar",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Tüm monitörlerinizi tek bir JSON dosyasına yedekleyebilirsiniz",
+    "importBackup": "Yedeği İçe Aktar",
+    "youCanImportYourJSONBackupFile": "JSON yedek dosyanızı buradan yükleyebilirsiniz",
+    "upload": "Yükle"
   },
   "snackbar": {
     "general": {

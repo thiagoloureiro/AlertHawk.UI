@@ -234,7 +234,13 @@
     "numberOfDaysTheMonitorDataWillBeKeptFor": "Number of days the monitor data will be kept for",
     "setToZeroForInfiniteRetention": "Set to 0 for infinite retention",
     "save": "Save",
-    "clearAllStatistics": "Clear All Statistics"
+    "clearAllStatistics": "Clear All Statistics",
+    "backup": "Backup",
+    "exportBackup": "Export Backup",
+    "youCanBackupAllMonitorsIntoAJSONFile": "You can backup all monitors into a JSON file",
+    "importBackup": "Import Backup",
+    "youCanImportYourJSONBackupFile": "You can import your JSON backup file",
+    "upload": "Upload"
   },
   "snackbar": {
     "general": {

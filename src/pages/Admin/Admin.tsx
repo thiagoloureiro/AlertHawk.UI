@@ -23,6 +23,10 @@ import { showSnackbar } from "../../utils/snackbarHelper";
 import { red } from "@mui/material/colors";
 import { useForm, Controller } from "react-hook-form";
 import CloseIcon from "@mui/icons-material/Close";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import MonitorService from "../../services/MonitorService";
+import logging from "../../utils/logging";
+import { downloadJsonFile } from "../../utils/downloadJsonFile";
 
 interface FormValues {
   retentionInDays: number;
@@ -36,12 +40,16 @@ const Admin: FC<{}> = ({}) => {
     thunkSetMonitorHistoryRetention,
     thunkDeleteMonitorHistory,
   } = useStoreActions((action) => action.monitorHistory);
+  const { isDarkMode } = useStoreState((state) => state.app);
 
   const { control, handleSubmit, setValue, reset } = useForm<FormValues>({
     defaultValues: { retentionInDays },
   });
 
   const [isRetentionFormBeingProcessed, setIsRetentionFormBeingProcessed] =
+    useState<boolean>(false);
+
+  const [isBackupDownloadBeingProcessed, setIsBackupDownloadBeingProcessed] =
     useState<boolean>(false);
 
   const [openClearHistoryDialog, setOpenClearHistoryDialog] =
@@ -112,6 +120,23 @@ const Admin: FC<{}> = ({}) => {
     setIsClearHistoryFormBeingProcessed(false);
   };
 
+  const handleBackupDownload = async () => {
+    setIsBackupDownloadBeingProcessed(true);
+
+    try {
+      const backupData = await MonitorService.getMonitorJsonBackup();
+      downloadJsonFile(backupData, "backup.json");
+    } catch (error) {
+      logging.error(error);
+      showSnackbar(
+        t("snackbar.general.somethingWentWrongPleaseTryAgain"),
+        "error"
+      );
+    } finally {
+      setIsBackupDownloadBeingProcessed(false);
+    }
+  };
+
   return (
     <>
       <HelmetProvider>
@@ -121,93 +146,160 @@ const Admin: FC<{}> = ({}) => {
       </HelmetProvider>
       <Grid container spacing={4}>
         <Grid item xs={12} lg={6}>
-          <Stack direction="column" justifyContent="space-between" gap={2}>
-            <Card>
-              <CardContent sx={{ p: 3 }}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent sx={{ p: 3 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 2,
+                  marginBottom: "16px",
+                }}
+              >
+                <Typography component="div" variant="h5">
+                  {t("admin.monitorHistory")}
+                </Typography>
+                <Typography variant="body2">
+                  {t("admin.numberOfDaysTheMonitorDataWillBeKeptFor")}. (
+                  {t("admin.setToZeroForInfiniteRetention")})
+                </Typography>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                  <Controller
+                    name="retentionInDays"
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        sx={{ flex: 3 }}
+                        id="retention-period"
+                        type="number"
+                        InputLabelProps={{
+                          shrink: true,
+                        }}
+                        onBlur={() => {
+                          const value = field.value;
+                          setValue("retentionInDays", Math.max(0, value));
+                        }}
+                        inputProps={{ min: 0 }}
+                        size="small"
+                        variant="outlined"
+                        hiddenLabel
+                      />
+                    )}
+                  />
+                  <Button
+                    variant="contained"
+                    color="success"
+                    sx={{
+                      flex: 1,
+                      color: "white",
+                      fontWeight: 700,
+                      position: "relative",
+                      maxWidth: "150px",
+                    }}
+                    disabled={isRetentionFormBeingProcessed}
+                    onClick={handleSubmit(onSubmit)}
+                  >
+                    {t("admin.save")}
+                  </Button>
+                </Box>
+                <Divider sx={{ my: 2 }} />
+                <Button
+                  variant="outlined"
+                  color="error"
+                  sx={{
+                    minWidth: "250px",
+                    height: "42px",
+                    color: red[400],
+                    fontWeight: 700,
+                    position: "relative",
+                    alignSelf: "flex-end",
+                  }}
+                  onClick={handleClearHistoryOpen}
+                >
+                  {t("admin.clearAllStatistics")}
+                </Button>
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} lg={6}>
+          <Card sx={{ height: "100%" }}>
+            <CardContent>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Typography component="div" variant="h5">
+                  {t("admin.backup")}
+                </Typography>
+                <Divider sx={{ my: 2 }} />
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "column",
                     gap: 2,
-                    marginBottom: "16px",
                   }}
                 >
-                  <Typography component="div" variant="h5">
-                    {t("admin.monitorHistory")}
+                  <Typography component="div" variant="h6">
+                    {t("admin.exportBackup")}
                   </Typography>
                   <Typography variant="body2">
-                    {t("admin.numberOfDaysTheMonitorDataWillBeKeptFor")}. (
-                    {t("admin.setToZeroForInfiniteRetention")})
+                    {t("admin.youCanBackupAllMonitorsIntoAJSONFile")}.
                   </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <Controller
-                      name="retentionInDays"
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          {...field}
-                          sx={{ flex: 3 }}
-                          id="retention-period"
-                          type="number"
-                          InputLabelProps={{
-                            shrink: true,
-                          }}
-                          onBlur={() => {
-                            const value = field.value;
-                            setValue("retentionInDays", Math.max(0, value));
-                          }}
-                          inputProps={{ min: 0 }}
-                          size="small"
-                          variant="outlined"
-                          hiddenLabel
-                        />
-                      )}
-                    />
-                    <Button
-                      variant="contained"
-                      color="success"
-                      sx={{
-                        flex: 1,
-                        color: "white",
-                        fontWeight: 700,
-                        position: "relative",
-                        maxWidth: "250px",
-                      }}
-                      disabled={isRetentionFormBeingProcessed}
-                      onClick={handleSubmit(onSubmit)}
-                    >
-                      {t("admin.save")}
-                    </Button>
-                  </Box>
-                  <Divider sx={{ my: 2 }} />
                   <Button
-                    variant="outlined"
-                    color="error"
+                    variant="contained"
+                    color="success"
                     sx={{
-                      minWidth: "250px",
-                      height: "42px",
-                      color: red[400],
+                      flex: 1,
+                      color: "white",
                       fontWeight: 700,
-                      position: "relative",
-                      alignSelf: "flex-end",
+                      maxWidth: "150px",
                     }}
-                    onClick={handleClearHistoryOpen}
+                    disabled={isBackupDownloadBeingProcessed}
+                    onClick={handleBackupDownload}
                   >
-                    {t("admin.clearAllStatistics")}
+                    {t("admin.backup")}
                   </Button>
                 </Box>
-              </CardContent>
-            </Card>
-            {/* <Card>
-              <CardContent>
-                <Box>
-                  <Typography component="div" variant="h5">
-                    Backup
+                <Divider sx={{ my: 2 }} />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 2,
+                  }}
+                >
+                  <Typography component="div" variant="h6">
+                    {t("admin.importBackup")}
                   </Typography>
+                  <Typography variant="body2">
+                    {t("admin.youCanImportYourJSONBackupFile")}.
+                  </Typography>
+
+                  <Button
+                    variant="contained"
+                    color="success"
+                    startIcon={
+                      <CloudUploadIcon
+                        sx={{ color: isDarkMode ? "inherit" : "#fff" }}
+                      />
+                    }
+                    sx={{
+                      flex: 1,
+                      color: "white",
+                      fontWeight: 700,
+                      maxWidth: "150px",
+                    }}
+                  >
+                    {t("admin.upload")}
+                  </Button>
                 </Box>
-              </CardContent>
-            </Card> */}
-          </Stack>
+              </Box>
+            </CardContent>
+          </Card>
         </Grid>
       </Grid>
       <Dialog

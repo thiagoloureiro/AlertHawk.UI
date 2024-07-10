@@ -233,7 +233,13 @@
     "numberOfDaysTheMonitorDataWillBeKeptFor": "モニターデータを保持する日数",
     "setToZeroForInfiniteRetention": "無期限に保持するには0に設定します",
     "save": "保存",
-    "clearAllStatistics": "すべての統計をクリア"
+    "clearAllStatistics": "すべての統計をクリア",
+    "backup": "バックアップ",
+    "exportBackup": "エクスポートバックアップ",
+    "youCanBackupAllMonitorsIntoAJSONFile": "すべてのモニターをJSONファイルにバックアップできます",
+    "importBackup": "インポートバックアップ",
+    "youCanImportYourJSONBackupFile": "JSONバックアップファイルをインポートできます",
+    "upload": "アップロード"
   },
   "snackbar": {
     "general": {

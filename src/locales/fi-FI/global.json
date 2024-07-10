@@ -233,7 +233,13 @@
     "numberOfDaysTheMonitorDataWillBeKeptFor": "Monitoritietoja säilytetään päivien lukumäärä",
     "setToZeroForInfiniteRetention": "Aseta 0 äärettömälle säilyttämiselle",
     "save": "Tallenna",
-    "clearAllStatistics": "Tyhjennä kaikki tilastot"
+    "clearAllStatistics": "Tyhjennä kaikki tilastot",
+    "backup": "Varmuuskopio",
+    "exportBackup": "Vie varmuuskopio",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Voit varmuuskopioida kaikki valvontakohdat JSON-tiedostoon",
+    "importBackup": "Tuo varmuuskopio",
+    "youCanImportYourJSONBackupFile": "Voit tuoda JSON-varmuuskopiotiedostosi",
+    "upload": "Lataa ylös"
   },
   "snackbar": {
     "general": {
