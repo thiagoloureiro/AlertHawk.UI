@@ -239,7 +239,7 @@
     "exportBackup": "Yedeği Dışa Aktar",
     "youCanBackupAllMonitorsIntoAJSONFile": "Tüm monitörlerinizi tek bir JSON dosyasına yedekleyebilirsiniz",
     "importBackup": "Yedeği İçe Aktar",
-    "youCanImportYourJSONBackupFile": "JSON yedek dosyanızı buradan yükleyebilirsiniz",
+    "youCanImportYourJSONBackupFile": "JSON yedek dosyanızı buradan yükleyebilirsiniz - TÜM MEVCUT VERİLER KAYBOLACAK!",
     "upload": "Yükle",
     "invalidFileFormatOnlyJSONFormatIsAllowed": "Geçersiz dosya formatı. Yalnızca JSON formatında bir dosya yükleyebilirsiniz",
     "backupFileHasBeenUploaded": "Yedek dosya başarıyla yüklendi"

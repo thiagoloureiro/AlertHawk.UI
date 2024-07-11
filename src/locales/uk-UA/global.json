@@ -239,7 +239,7 @@
     "exportBackup": "Експорт резервної копії",
     "youCanBackupAllMonitorsIntoAJSONFile": "Ви можете зробити резервне копіювання всіх моніторів у JSON файл",
     "importBackup": "Імпорт резервної копії",
-    "youCanImportYourJSONBackupFile": "Ви можете імпортувати ваш файл резервної копії JSON",
+    "youCanImportYourJSONBackupFile": "Ви можете імпортувати ваш файл резервної копії JSON - УСІ ІСНУЮЧІ ДАНІ БУДУТЬ ВТРАЧЕНІ!",
     "upload": "Завантажити",
     "invalidFileFormatOnlyJSONFormatIsAllowed": "Недійсний формат файлу. Дозволений лише формат JSON",
     "backupFileHasBeenUploaded": "Файл резервної копії успішно завантажено"

@@ -239,7 +239,7 @@
     "exportBackup": "Esporta Backup",
     "youCanBackupAllMonitorsIntoAJSONFile": "Puoi esportare tutti i monitor in un file JSON",
     "importBackup": "Importa Backup",
-    "youCanImportYourJSONBackupFile": "Puoi importare il tuo file di backup JSON",
+    "youCanImportYourJSONBackupFile": "Puoi importare il tuo file di backup JSON - TUTTI I DATI ESISTENTI SARANNO PERDUTI!",
     "upload": "Carica",
     "invalidFileFormatOnlyJSONFormatIsAllowed": "Formato file non valido. È consentito solo il formato JSON",
     "backupFileHasBeenUploaded": "Il file di backup è stato caricato con successo"

@@ -239,7 +239,7 @@
     "exportBackup": "エクスポートバックアップ",
     "youCanBackupAllMonitorsIntoAJSONFile": "すべてのモニターをJSONファイルにバックアップできます",
     "importBackup": "インポートバックアップ",
-    "youCanImportYourJSONBackupFile": "JSONバックアップファイルをインポートできます",
+    "youCanImportYourJSONBackupFile": "JSONバックアップファイルをインポートできます - 既存のデータはすべて失われます。",
     "upload": "アップロード",
     "invalidFileFormatOnlyJSONFormatIsAllowed": "無効なファイル形式です。JSON形式のみ許可されています",
     "backupFileHasBeenUploaded": "バックアップファイルが正常にアップロードされました"
