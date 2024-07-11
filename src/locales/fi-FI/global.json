@@ -239,7 +239,7 @@
     "exportBackup": "Vie varmuuskopio",
     "youCanBackupAllMonitorsIntoAJSONFile": "Voit varmuuskopioida kaikki valvontakohdat JSON-tiedostoon",
     "importBackup": "Tuo varmuuskopio",
-    "youCanImportYourJSONBackupFile": "Voit tuoda JSON-varmuuskopiotiedostosi",
+    "youCanImportYourJSONBackupFile": "Voit tuoda JSON-varmuuskopiotiedostosi - KAIKKI OLEMASSA OLEVAT TIEDOT MENETETÄÄN!",
     "upload": "Lataa ylös",
     "invalidFileFormatOnlyJSONFormatIsAllowed": "Virheellinen tiedostomuoto. Vain JSON-muoto on sallittu",
     "backupFileHasBeenUploaded": "Varmuuskopiotiedosto on ladattu onnistuneesti"

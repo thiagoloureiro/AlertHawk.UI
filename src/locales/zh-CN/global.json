@@ -239,7 +239,7 @@
     "exportBackup": "导出备份",
     "youCanBackupAllMonitorsIntoAJSONFile": "您可以将所有监视器备份为JSON文件",
     "importBackup": "导入备份",
-    "youCanImportYourJSONBackupFile": "您可以导入您的JSON备份文件",
+    "youCanImportYourJSONBackupFile": "您可以导入您的JSON备份文件 - 所有現有資料都將遺失！",
     "upload": "上传",
     "invalidFileFormatOnlyJSONFormatIsAllowed": "无效的文件格式。只允许使用 JSON 格式",
     "backupFileHasBeenUploaded": "备份文件已成功上传"
