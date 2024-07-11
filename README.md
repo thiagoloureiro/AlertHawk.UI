@@ -1,4 +1,5 @@
 # Project Title
+[![codebeat badge](https://codebeat.co/badges/16165262-7c4e-4707-b5d6-4353baaf2605)](https://codebeat.co/projects/github-com-thiagoloureiro-alerthawk-ui-main)
 
 [![Contributors](https://img.shields.io/github/contributors/thiagoloureiro/AlertHawk.UI.svg)](https://github.com/thiagoloureiro/AlertHawk.UI/graphs/contributors)
 [![Forks](https://img.shields.io/github/forks/thiagoloureiro/AlertHawk.UI.svg?style=social)](https://github.com/thiagoloureiro/AlertHawk.UI/network/members)
