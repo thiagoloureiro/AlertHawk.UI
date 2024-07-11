@@ -239,7 +239,9 @@
     "youCanBackupAllMonitorsIntoAJSONFile": "आप सभी मॉनिटर्स को एक JSON फ़ाइल में बैकअप कर सकते हैं",
     "importBackup": "बैकअप आयात करें",
     "youCanImportYourJSONBackupFile": "आप अपनी JSON बैकअप फ़ाइल आयात कर सकते हैं",
-    "upload": "अपलोड करें"
+    "upload": "अपलोड करें",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "अवैध फ़ाइल प्रारूप। केवल JSON प्रारूप की अनुमति है",
+    "backupFileHasBeenUploaded": "बैकअप फ़ाइल सफलतापूर्वक अपलोड हो गई है"
   },
   "snackbar": {
     "general": {

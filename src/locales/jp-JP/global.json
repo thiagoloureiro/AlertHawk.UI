@@ -239,7 +239,9 @@
     "youCanBackupAllMonitorsIntoAJSONFile": "すべてのモニターをJSONファイルにバックアップできます",
     "importBackup": "インポートバックアップ",
     "youCanImportYourJSONBackupFile": "JSONバックアップファイルをインポートできます",
-    "upload": "アップロード"
+    "upload": "アップロード",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "無効なファイル形式です。JSON形式のみ許可されています",
+    "backupFileHasBeenUploaded": "バックアップファイルが正常にアップロードされました"
   },
   "snackbar": {
     "general": {
