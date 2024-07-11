@@ -124,7 +124,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   const handleSslCheckBtn = () => {
     if (
       selectedMonitorItem === null ||
-      selectedMonitorItem.urlToCheck === null
+      selectedMonitorItem.urlToCheck === undefined
     ) {
       return;
     }
@@ -344,8 +344,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   {t("notifications.title")}
                 </Button>
               )}
-              {selectedMonitorItem !== null &&
-                selectedMonitorItem.urlToCheck !== null && (
+              {
+              selectedMonitorItem !== null &&
+                selectedMonitorItem.urlToCheck !== undefined && (
                   <Button
                     aria-label=""
                     startIcon={<HttpsIcon />}
