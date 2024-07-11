@@ -216,7 +216,6 @@ const Admin: FC<{}> = ({}) => {
                   display: "flex",
                   flexDirection: "column",
                   gap: 2,
-                  marginBottom: "16px",
                 }}
               >
                 <Typography component="div" variant="h5">
@@ -258,7 +257,8 @@ const Admin: FC<{}> = ({}) => {
                       color: "white",
                       fontWeight: 700,
                       position: "relative",
-                      maxWidth: "150px",
+                      minWidth: "150px",
+                      alignSelf: "flex-start",
                     }}
                     disabled={isRetentionFormBeingProcessed}
                     onClick={handleSubmit(onSubmit)}
@@ -288,7 +288,7 @@ const Admin: FC<{}> = ({}) => {
         </Grid>
         <Grid item xs={12} lg={6}>
           <Card sx={{ height: "100%" }}>
-            <CardContent>
+            <CardContent sx={{ p: 3 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -319,7 +319,8 @@ const Admin: FC<{}> = ({}) => {
                       flex: 1,
                       color: "white",
                       fontWeight: 700,
-                      maxWidth: "150px",
+                      minWidth: "150px",
+                      alignSelf: "flex-start",
                     }}
                     disabled={isBackupDownloadBeingProcessed}
                     onClick={handleBackupDownload}
@@ -355,7 +356,8 @@ const Admin: FC<{}> = ({}) => {
                       flex: 1,
                       color: "white",
                       fontWeight: 700,
-                      maxWidth: "150px",
+                      minWidth: "150px",
+                      alignSelf: "flex-start",
                     }}
                     disabled={isUploading}
                   >
