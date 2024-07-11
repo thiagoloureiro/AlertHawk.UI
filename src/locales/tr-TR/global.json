@@ -239,7 +239,9 @@
     "youCanBackupAllMonitorsIntoAJSONFile": "Tüm monitörlerinizi tek bir JSON dosyasına yedekleyebilirsiniz",
     "importBackup": "Yedeği İçe Aktar",
     "youCanImportYourJSONBackupFile": "JSON yedek dosyanızı buradan yükleyebilirsiniz",
-    "upload": "Yükle"
+    "upload": "Yükle",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "Geçersiz dosya formatı. Yalnızca JSON formatında bir dosya yükleyebilirsiniz",
+    "backupFileHasBeenUploaded": "Yedek dosya başarıyla yüklendi"
   },
   "snackbar": {
     "general": {

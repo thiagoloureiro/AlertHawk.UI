@@ -239,7 +239,9 @@
     "youCanBackupAllMonitorsIntoAJSONFile": "Puoi esportare tutti i monitor in un file JSON",
     "importBackup": "Importa Backup",
     "youCanImportYourJSONBackupFile": "Puoi importare il tuo file di backup JSON",
-    "upload": "Carica"
+    "upload": "Carica",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "Formato file non valido. È consentito solo il formato JSON",
+    "backupFileHasBeenUploaded": "Il file di backup è stato caricato con successo"
   },
   "snackbar": {
     "general": {

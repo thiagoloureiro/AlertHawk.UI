@@ -239,7 +239,9 @@
     "youCanBackupAllMonitorsIntoAJSONFile": "Ви можете зробити резервне копіювання всіх моніторів у JSON файл",
     "importBackup": "Імпорт резервної копії",
     "youCanImportYourJSONBackupFile": "Ви можете імпортувати ваш файл резервної копії JSON",
-    "upload": "Завантажити"
+    "upload": "Завантажити",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "Недійсний формат файлу. Дозволений лише формат JSON",
+    "backupFileHasBeenUploaded": "Файл резервної копії успішно завантажено"
   },
   "snackbar": {
     "general": {

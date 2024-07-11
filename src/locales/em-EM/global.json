@@ -235,7 +235,9 @@
     "youCanBackupAllMonitorsIntoAJSONFile": "💾",
     "importBackup": "📥",
     "youCanImportYourJSONBackupFile": "📥",
-    "upload": "📁"
+    "upload": "📁",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "🚫📄❗📄✅",
+    "backupFileHasBeenUploaded": "📁⬆️✅"
   },
   "snackbar": {
     "general": {

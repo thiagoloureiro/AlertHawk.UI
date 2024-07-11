@@ -239,7 +239,9 @@
     "youCanBackupAllMonitorsIntoAJSONFile": "Voit varmuuskopioida kaikki valvontakohdat JSON-tiedostoon",
     "importBackup": "Tuo varmuuskopio",
     "youCanImportYourJSONBackupFile": "Voit tuoda JSON-varmuuskopiotiedostosi",
-    "upload": "Lataa ylös"
+    "upload": "Lataa ylös",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "Virheellinen tiedostomuoto. Vain JSON-muoto on sallittu",
+    "backupFileHasBeenUploaded": "Varmuuskopiotiedosto on ladattu onnistuneesti"
   },
   "snackbar": {
     "general": {
