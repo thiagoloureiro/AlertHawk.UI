@@ -32,6 +32,7 @@ import Chart from "../../../components/Charts/Chart";
 import { showSnackbar } from "../../../utils/snackbarHelper";
 import EditMonitor from "../Forms/EditMonitor";
 import NotificationsListDialog from "../../../components/Dialogs/NotificationsListDialog";
+import HttpsIcon from "@mui/icons-material/Https";
 
 interface ISelectedMonitorDetailsProps {
   selectedMonitorGroup: IMonitorGroupListByUser | null;
@@ -119,6 +120,21 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       }
     }
   });
+
+  const handleSslCheckBtn = () => {
+    if (
+      selectedMonitorItem === null ||
+      selectedMonitorItem.urlToCheck === null
+    ) {
+      return;
+    }
+
+    window.open(
+      `https://www.ssllabs.com/ssltest/analyze.html?d=${selectedMonitorItem.urlToCheck}`,
+      "_blank"
+    );
+  };
+
   const handleNotificationBtn = () => {
     setOpenNotificationDialog(true);
   };
@@ -328,6 +344,16 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   {t("notifications.title")}
                 </Button>
               )}
+              {selectedMonitorItem !== null &&
+                selectedMonitorItem.urlToCheck !== null && (
+                  <Button
+                    aria-label=""
+                    startIcon={<HttpsIcon />}
+                    onClick={handleSslCheckBtn}
+                  >
+                    {t("dashboard.sslCheck")}
+                  </Button>
+                )}
               {selectedMonitorItem !== null && (
                 <Button
                   aria-label="delete"

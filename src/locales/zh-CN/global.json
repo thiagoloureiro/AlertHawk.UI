@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "证书即将过期",
     "environment": "环境",
     "alarm": "警报",
+    "sslCheck": "SSL检查",
     "pauseConfirmation": "监视器已更新！",
     "status": "现状",
     "up": "在线",

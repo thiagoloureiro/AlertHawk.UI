@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "Certificate is about to expire for",
     "environment": "Environment",
     "alarm": "Alerts",
+    "sslCheck": "SSL Check",
     "pauseConfirmation": "Monitor has been updated!",
     "status": "Status",
     "up": "Online",

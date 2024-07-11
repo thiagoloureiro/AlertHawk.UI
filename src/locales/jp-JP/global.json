@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "証明書の有効期限が切れる",
     "environment": "環境 ",
     "alarm": "アラート",
+    "sslCheck": "SSLチェック",
     "pauseConfirmation": "モニターが更新されました！",
     "status": "ステータス",
     "up": "オンライン",

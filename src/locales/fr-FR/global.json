@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "Le certificat est sur le point d'expirer pour",
     "environment": "Environnement",
     "alarm": "Alertes",
+    "sslCheck": "Vérification SSL",
     "pauseConfirmation": "Le moniteur a été mis à jour !",
     "status": "Tila",
     "up": "En ligne",

@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "다음에 대한 인증서가 곧 만료됩니다",
     "environment": "환경",
     "alarm": "알림",
+    "sslCheck": "SSL 확인",
     "pauseConfirmation": "모니터가 업데이트되었습니다!",
     "status": "상태",
     "up": "온라인",

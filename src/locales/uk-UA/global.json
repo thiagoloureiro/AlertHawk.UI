@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "Сертифікат незабаром закінчиться для",
     "environment": "Середовище",
     "alarm": "Сповіщення",
+    "sslCheck": "Перевірка SSL",
     "pauseConfirmation": "Монітор був оновлений!",
     "status": "Статус",
     "up": "Онлайн",
