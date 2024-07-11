@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "प्रमाणपत्र समाप्त होने वाला है",
     "environment": "पर्यावरण",
     "alarm": "अलर्ट",
+    "sslCheck": "SSL जाँच",
     "pauseConfirmation": "मॉनिटर को अपडेट किया गया है!",
     "status": "स्थिति",
     "up": "ऑनलाइन",

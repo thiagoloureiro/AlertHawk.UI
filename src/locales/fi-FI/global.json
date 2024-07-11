@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "Sertifikaatti on vanhenemassa",
     "environment": "Ympäristö",
     "alarm": "Hälytykset",
+    "sslCheck": "SSL-tarkistus",
     "pauseConfirmation": "Valvontaa on päivitetty!",
     "status": "Tila",
     "up": "Verkossa",

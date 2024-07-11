@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "Sertifika süresi dolmak üzere",
     "environment": "Çevre",
     "alarm": "Uyarılar",
+    "sslCheck": "SSL Kontrolü",
     "pauseConfirmation": "Monitör güncellendi!",
     "status": "Durum",
     "up": "Çevrimiçi",

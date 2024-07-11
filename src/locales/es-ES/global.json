@@ -37,6 +37,7 @@
     "certificateIsAboutToExpireFor": "El certificado está a punto de expirar para",
     "environment": "Ambiente",
     "alarm": "Alertas",
+    "sslCheck": "Verificación SSL",
     "pauseConfirmation": "¡El monitor ha sido actualizado!",
     "status": "Estado",
     "up": "En línea",
