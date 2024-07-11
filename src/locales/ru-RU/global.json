@@ -227,5 +227,29 @@
       "url": "URL недействителен",
       "validEmail": "Электронная почта недействительна"
     }
+  },
+  "admin": {
+    "monitorHistory": "История мониторинга",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Количество дней, в течение которых будут храниться данные мониторинга",
+    "setToZeroForInfiniteRetention": "Установите 0 для бесконечного хранения",
+    "save": "Сохранить",
+    "clearAllStatistics": "Очистить все статистические данные",
+    "backup": "Резервное копирование",
+    "exportBackup": "Экспорт резервной копии",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Вы можете создать резервную копию всех мониторов в файле JSON",
+    "importBackup": "Импорт резервной копии",
+    "youCanImportYourJSONBackupFile": "Вы можете импортировать свой файл резервной копии JSON",
+    "upload": "Загрузить"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Что-то пошло не так. Пожалуйста, попробуйте снова"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Вы уверены, что хотите удалить все статистические данные?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Пожалуйста, будьте внимательны, эта операция не может быть отменена",
+      "historyRetentionPeriodSavedSuccessfully": "Период хранения истории успешно сохранен",
+      "monitorHistoryHasBeenRemovedSuccessfully": "История мониторинга успешно удалена"
+    }
   }
 }

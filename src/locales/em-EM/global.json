@@ -223,5 +223,29 @@
       "url": "🌐❌",
       "validEmail": "📧❌"
     }
+  },
+  "admin": {
+    "monitorHistory": "📊",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "📅",
+    "setToZeroForInfiniteRetention": "🔄",
+    "save": "💾",
+    "clearAllStatistics": "🗑️",
+    "backup": "💾",
+    "exportBackup": "📤",
+    "youCanBackupAllMonitorsIntoAJSONFile": "💾",
+    "importBackup": "📥",
+    "youCanImportYourJSONBackupFile": "📥",
+    "upload": "📁"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "❌🔄"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "🗂️❌❓",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "❗❌🔄",
+      "historyRetentionPeriodSavedSuccessfully": "🗂️✅",
+      "monitorHistoryHasBeenRemovedSuccessfully": "🗑️✅"
+    }
   }
 }

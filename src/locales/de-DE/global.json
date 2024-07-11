@@ -227,5 +227,29 @@
       "url": "URL ist ungültig",
       "validEmail": "E-Mail ist ungültig"
     }
+  },
+  "admin": {
+    "monitorHistory": "Monitorverlauf",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Anzahl der Tage, für die die Monitordaten aufbewahrt werden",
+    "setToZeroForInfiniteRetention": "Auf 0 setzen für unbegrenzte Aufbewahrung",
+    "save": "Speichern",
+    "clearAllStatistics": "Alle Statistiken löschen",
+    "backup": "Sicherung",
+    "exportBackup": "Sicherung exportieren",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Sie können alle Monitore in einer JSON-Datei sichern",
+    "importBackup": "Sicherung importieren",
+    "youCanImportYourJSONBackupFile": "Sie können Ihre JSON-Sicherungsdatei importieren",
+    "upload": "Hochladen"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Sind Sie sicher, dass Sie alle Statistiken löschen wollen?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Bitte beachten Sie, dass dieser Vorgang nicht rückgängig gemacht werden kann",
+      "historyRetentionPeriodSavedSuccessfully": "Aufbewahrungszeitraum der Historie erfolgreich gespeichert",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Überwachungshistorie wurde erfolgreich entfernt"
+    }
   }
 }

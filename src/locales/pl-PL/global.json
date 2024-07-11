@@ -227,5 +227,29 @@
       "url": "URL jest nieprawidłowy",
       "validEmail": "Adres e-mail jest nieprawidłowy"
     }
+  },
+  "admin": {
+    "monitorHistory": "Historia monitorowania",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Liczba dni przechowywania danych monitorowania",
+    "setToZeroForInfiniteRetention": "Ustaw 0 dla nieograniczonego przechowywania",
+    "save": "Zapisz",
+    "clearAllStatistics": "Wyczyść wszystkie statystyki",
+    "backup": "Kopia zapasowa",
+    "exportBackup": "Eksportuj kopię zapasową",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Możesz wyeksportować wszystkie monitory do pliku JSON",
+    "importBackup": "Importuj kopię zapasową",
+    "youCanImportYourJSONBackupFile": "Możesz zaimportować plik kopii zapasowej w formacie JSON",
+    "upload": "Prześlij"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Wystąpił problem. Spróbuj ponownie"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Czy na pewno chcesz usunąć wszystkie statystyki?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Proszę mieć świadomość, że tej operacji nie można cofnąć.",
+      "historyRetentionPeriodSavedSuccessfully": "Okres przechowywania historii został pomyślnie zapisany",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Historia monitorowania została pomyślnie usunięta"
+    }
   }
 }

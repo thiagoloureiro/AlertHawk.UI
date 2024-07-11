@@ -14,6 +14,7 @@ import { IUserRegister } from "../../interfaces/requests/user/IUserRegister";
 import UserService from "../../services/UserService";
 import { showSnackbar } from "../../utils/snackbarHelper";
 import { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
 
 const RegisterForm: FC<{}> = () => {
   const {
@@ -23,6 +24,7 @@ const RegisterForm: FC<{}> = () => {
     watch,
   } = useForm<IUserRegister>();
   const navigate = useNavigate();
+  const { t } = useTranslation("global");
 
   const onSubmit: SubmitHandler<IUserRegister> = async (userData) => {
     try {
@@ -33,7 +35,9 @@ const RegisterForm: FC<{}> = () => {
         "success"
       );
     } catch (error) {
-      const defaultErrorMessage = "Something went wrong. Please try again.";
+      const defaultErrorMessage = t(
+        "snackbar.general.somethingWentWrongPleaseTryAgain"
+      );
 
       if (error instanceof AxiosError && error.response?.status === 400) {
         const errorMessage = error.response.data.content || defaultErrorMessage;

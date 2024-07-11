@@ -227,5 +227,29 @@
       "url": "URL on virheellinen",
       "validEmail": "Sähköposti on virheellinen"
     }
+  },
+  "admin": {
+    "monitorHistory": "Seuraa historiaa",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Monitoritietoja säilytetään päivien lukumäärä",
+    "setToZeroForInfiniteRetention": "Aseta 0 äärettömälle säilyttämiselle",
+    "save": "Tallenna",
+    "clearAllStatistics": "Tyhjennä kaikki tilastot",
+    "backup": "Varmuuskopio",
+    "exportBackup": "Vie varmuuskopio",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Voit varmuuskopioida kaikki valvontakohdat JSON-tiedostoon",
+    "importBackup": "Tuo varmuuskopio",
+    "youCanImportYourJSONBackupFile": "Voit tuoda JSON-varmuuskopiotiedostosi",
+    "upload": "Lataa ylös"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Jotain meni pieleen. Yritä uudelleen"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Oletko varma, että haluat poistaa kaikki tilastot?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Huomioi, että tätä toimintoa ei voi peruuttaa",
+      "historyRetentionPeriodSavedSuccessfully": "Historian säilytysaika tallennettu onnistuneesti",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Valvontahistoria on poistettu onnistuneesti"
+    }
   }
 }

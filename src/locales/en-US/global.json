@@ -228,5 +228,31 @@
       "url": "Url is invalid",
       "validEmail": "Email is invalid"
     }
+  },
+  "admin": {
+    "monitorHistory": "Monitor History",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Number of days the monitor data will be kept for",
+    "setToZeroForInfiniteRetention": "Set to 0 for infinite retention",
+    "save": "Save",
+    "clearAllStatistics": "Clear All Statistics",
+    "backup": "Backup",
+    "exportBackup": "Export Backup",
+    "youCanBackupAllMonitorsIntoAJSONFile": "You can backup all monitors into a JSON file",
+    "importBackup": "Import Backup",
+    "youCanImportYourJSONBackupFile": "You can import your JSON backup file",
+    "upload": "Upload",
+    "invalidFileFormatOnlyJSONFormatIsAllowed": "Invalid file format. Only JSON format is allowed",
+    "backupFileHasBeenUploaded": "Backup file has been uploaded successfully"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Something went wrong. Please try again"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "Are you sure you want to delete all statistics?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Please be aware that this operation cannot be undone",
+      "historyRetentionPeriodSavedSuccessfully": "History retention period saved successfully",
+      "monitorHistoryHasBeenRemovedSuccessfully": "Monitor history has been removed successfully"
+    }
   }
 }

@@ -227,5 +227,29 @@
       "url": "La URL no es válida",
       "validEmail": "El correo electrónico no es válido"
     }
+  },
+  "admin": {
+    "monitorHistory": "Monitorear Historial",
+    "numberOfDaysTheMonitorDataWillBeKeptFor": "Número de días durante los cuales se conservarán los datos del monitor",
+    "setToZeroForInfiniteRetention": "Establecido en 0 para retención infinita",
+    "save": "Guardar",
+    "clearAllStatistics": "Borrar todas las estadísticas",
+    "backup": "Respaldo",
+    "exportBackup": "Exportar Respaldo",
+    "youCanBackupAllMonitorsIntoAJSONFile": "Puedes respaldar todos los monitores en un archivo JSON",
+    "importBackup": "Importar Respaldo",
+    "youCanImportYourJSONBackupFile": "Puedes importar tu archivo de respaldo JSON",
+    "upload": "Subir"
+  },
+  "snackbar": {
+    "general": {
+      "somethingWentWrongPleaseTryAgain": "Algo salió mal. Por favor, inténtelo de nuevo"
+    },
+    "monitorHistory": {
+      "areYouSureYouWantToDeleteAllStatistics": "¿Está seguro de que desea eliminar todas las estadísticas?",
+      "pleaseBeAwareThatThisOperationCannotBeUndone": "Tenga en cuenta que esta operación no se puede deshacer",
+      "historyRetentionPeriodSavedSuccessfully": "El período de retención del historial se ha guardado con éxito",
+      "monitorHistoryHasBeenRemovedSuccessfully": "El historial de monitoreo se ha eliminado con éxito"
+    }
   }
 }
