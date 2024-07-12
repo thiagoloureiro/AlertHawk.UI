@@ -105,7 +105,7 @@ const LoginForm: FC<IFormProps> = ({ description }) => {
             rules={{
               required: "Username is required",
               minLength: {
-                value: 6,
+                value: 3,
                 message: "Username must be at least 6 characters",
               },
             }}
