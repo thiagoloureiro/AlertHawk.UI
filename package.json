@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@azure/msal-browser": "^3.18.0",
+    "@azure/msal-browser": "^3.19.0",
     "@azure/msal-react": "^2.0.20",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
@@ -32,10 +32,10 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
-    "react-hook-form": "^7.52.0",
+    "react-hook-form": "^7.52.1",
     "react-i18next": "^14.1.2",
     "react-input-mask": "^2.0.4",
-    "react-router-dom": "^6.24.0",
+    "react-router-dom": "^6.24.1",
     "react-spinners": "^0.14.1",
     "recharts": "^2.12.7"
   },
@@ -44,12 +44,12 @@
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@types/react-input-mask": "^3.0.5",
-    "@typescript-eslint/eslint-plugin": "^7.13.1",
-    "@typescript-eslint/parser": "^7.13.1",
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.7",
+    "eslint-plugin-react-refresh": "^0.4.8",
     "typescript": "^5.5.3",
     "vite": "^5.3.3",
     "vite-plugin-svgr": "^4.2.0"
