@@ -553,10 +553,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (7 {t("dashboard.days")})
                       </Typography>
                       <Typography variant="subtitle1">
-                        {selectedMonitorGroup.avgUptime7Days
-                          ? selectedMonitorGroup.avgUptime7Days.toFixed(2) +
-                            " %"
-                          : "N/A"}
+                    {selectedMonitorGroup.avgUptime7Days !== null && selectedMonitorGroup.avgUptime7Days !== undefined && selectedMonitorGroup.avgUptime7Days >= 0
+                      ? selectedMonitorGroup.avgUptime7Days.toFixed(2) + " %"
+                      : "N/A"}
                       </Typography>
                     </Box>
                     <Box
@@ -574,10 +573,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (30 {t("dashboard.days")})
                       </Typography>
                       <Typography variant="subtitle1">
-                        {selectedMonitorGroup.avgUptime30Days
-                          ? selectedMonitorGroup.avgUptime30Days.toFixed(2) +
-                            " %"
-                          : "N/A"}
+                      {selectedMonitorGroup.avgUptime30Days !== null && selectedMonitorGroup.avgUptime30Days !== undefined && selectedMonitorGroup.avgUptime30Days >= 0
+                        ? selectedMonitorGroup.avgUptime30Days.toFixed(2) + " %"
+                        : "N/A"}
                       </Typography>
                     </Box>
                     <Box
@@ -595,10 +593,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (3 {t("dashboard.months")})
                       </Typography>
                       <Typography variant="subtitle1">
-                        {selectedMonitorGroup.avgUptime3Months
-                          ? selectedMonitorGroup.avgUptime3Months.toFixed(2) +
-                            " %"
-                          : "N/A"}
+                      {selectedMonitorGroup.avgUptime3Months !== null && selectedMonitorGroup.avgUptime3Months !== undefined && selectedMonitorGroup.avgUptime3Months >= 0
+                        ? selectedMonitorGroup.avgUptime3Months.toFixed(2) + " %"
+                        : "N/A"}
                       </Typography>
                     </Box>
                     <Box
@@ -616,10 +613,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (6 {t("dashboard.months")})
                       </Typography>
                       <Typography variant="subtitle1">
-                        {selectedMonitorGroup.avgUptime6Months
-                          ? selectedMonitorGroup.avgUptime6Months.toFixed(2) +
-                            " %"
-                          : "N/A"}
+                      {selectedMonitorGroup.avgUptime6Months !== null && selectedMonitorGroup.avgUptime6Months !== undefined && selectedMonitorGroup.avgUptime6Months >= 0
+                        ? selectedMonitorGroup.avgUptime6Months.toFixed(2) + " %"
+                        : "N/A"}
                       </Typography>
                     </Box>
                   </Box>
