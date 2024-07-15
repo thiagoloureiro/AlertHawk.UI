@@ -114,6 +114,11 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
   ));
   const regionEntries = Object.entries(Region);
 
+  const sortedFilteredRegions = filteredRegions.sort((a, b) => {
+    const nameA = regionEntries.find(([, value]) => value === a)?.[0] || "";
+    const nameB = regionEntries.find(([, value]) => value === b)?.[0] || "";
+    return nameA.localeCompare(nameB);
+  });
   const fillMonitorAgentList = async () => {
     const response = await MonitorService.getMonitorAgents();
     setMonitorAgents(response);
@@ -265,7 +270,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   label={t("dashboard.addHttpFrom.monitorRegion")}
                   error={!!errors.monitorRegion}
                 >
-                  {filteredRegions.map(region => (
+                  {sortedFilteredRegions.map(region => (
                     <MenuItem key={region} value={region}>
                       {regionEntries.find(([, value]) => value === region)?.[0]}
                       </MenuItem>

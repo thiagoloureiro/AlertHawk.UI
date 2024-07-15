@@ -88,7 +88,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   >([]);
   const [dataToEdit, setDataToEdit] = useState(null);
   useEffect(() => {
-    if(monitorAgents.length === 0) {
+    if (monitorAgents.length === 0) {
       fillMonitorAgentList();
     }
     if (monitorGroupList.length === 0) {
@@ -123,13 +123,18 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       .filter(region => Object.values(Region).includes(region))
   ));
 
+  const regionEntries = Object.entries(Region);
 
-const regionEntries = Object.entries(Region);
+  const sortedFilteredRegions = filteredRegions.sort((a, b) => {
+    const nameA = regionEntries.find(([, value]) => value === a)?.[0] || "";
+    const nameB = regionEntries.find(([, value]) => value === b)?.[0] || "";
+    return nameA.localeCompare(nameB);
+  });
 
-const fillMonitorAgentList = async () => {
-  const response = await MonitorService.getMonitorAgents();
-  setMonitorAgents(response);
-};
+  const fillMonitorAgentList = async () => {
+    const response = await MonitorService.getMonitorAgents();
+    setMonitorAgents(response);
+  };
   const handleAddHeader = () => {
     const lastHeader = headers[headers.length - 1];
     if (
@@ -250,7 +255,7 @@ const fillMonitorAgentList = async () => {
               defaultValue={monitorGroupToBeEdited?.id}
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
-              // disabled={editMode}
+            // disabled={editMode}
             >
               {monitorGroupList.length > 0 &&
                 monitorGroupList
@@ -352,7 +357,7 @@ const fillMonitorAgentList = async () => {
                   error={!!errors.monitorRegion}
                   defaultValue={monitorItemToBeEdited?.monitorRegion}
                 >
-                   {filteredRegions.map(region => (
+                  {sortedFilteredRegions.map(region => (
                     <MenuItem key={region} value={region}>
                       {regionEntries.find(([, value]) => value === region)?.[0]}
                     </MenuItem>
