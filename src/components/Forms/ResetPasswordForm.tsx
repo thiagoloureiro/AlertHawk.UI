@@ -14,6 +14,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import logging from "../../utils/logging";
 
 const ResetPasswordForm: FC<{}> = () => {
   const {
@@ -33,12 +34,21 @@ const ResetPasswordForm: FC<{}> = () => {
         "success"
       );
     } catch (error) {
+      logging.error(error);
       const defaultErrorMessage = t(
         "snackbar.general.somethingWentWrongPleaseTryAgain"
       );
 
       if (error instanceof AxiosError && error.response?.status === 400) {
-        const errorMessage = error.response.data.content || defaultErrorMessage;
+        let errorMessage;
+
+        if (typeof error.response.data === "string") {
+          errorMessage = error.response.data;
+        } else if (error.response.data && error.response.data.content) {
+          errorMessage = error.response.data.content;
+        } else {
+          errorMessage = defaultErrorMessage;
+        }
         showSnackbar(errorMessage, "error");
       } else {
         console.error("Password reset failed:", error);
