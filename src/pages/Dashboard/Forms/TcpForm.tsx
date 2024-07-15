@@ -10,7 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useStoreActions, useStoreState } from "../../../hooks";
-import { Environment, Region } from "../../../enums/Enums";
+import {  Region } from "../../../enums/Enums";
 import { useForm } from "react-hook-form";
 import MonitorService from "../../../services/MonitorService";
 import { showSnackbar } from "../../../utils/snackbarHelper";
@@ -19,6 +19,7 @@ import {
   IMonitorGroupListByUser,
   IMonitorGroupListByUserItem,
 } from "../../../interfaces/IMonitorGroupListByUser";
+import { IAgent } from "../../../interfaces/IAgent";
 
 interface IAddTcpMonitorProps {
   monitorTypeId: number;
@@ -73,9 +74,15 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     IMonitorGroupListByUser[]
   >([]);
 
+  const [monitorAgents, setMonitorAgents] = useState<IAgent[]>([]);
+
+
   const [dataToEdit, setDataToEdit] = useState(null);
 
   useEffect(() => {
+    if(monitorAgents.length === 0) {
+      fillMonitorAgentList();
+    }
     if (monitorGroupList.length === 0) {
       fillMonitorGroupList();
     }
@@ -98,6 +105,16 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     await MonitorService.getMonitorGroupListByUserToken().then((response) => {
       setMonitorGroupList(response);
     });
+  };
+  const filteredRegions = monitorAgents
+    .map(agent => agent.monitorRegion)
+    .filter(region => Object.values(Region).includes(region));
+
+  const regionEntries = Object.entries(Region);
+
+  const fillMonitorAgentList = async () => {
+    const response = await MonitorService.getMonitorAgents();
+    setMonitorAgents(response);
   };
 
   const handleMonitorGroupChange = (event: any) => {
@@ -183,7 +200,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
               defaultValue={monitorGroupToBeEdited?.id}
-              // disabled={editMode}
+            // disabled={editMode}
             >
               {monitorGroupList
                 .sort((a, b) => a.name.localeCompare(b.name))
@@ -246,13 +263,11 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   label={t("dashboard.addHttpFrom.monitorRegion")}
                   error={!!errors.monitorRegion}
                 >
-                  {(Object.keys(Region) as Array<keyof typeof Region>)
-                    .filter((key) => !isNaN(Number(Region[key])))
-                    .map((key) => (
-                      <MenuItem key={Region[key]} value={Region[key]}>
-                        {key}
-                      </MenuItem>
-                    ))}
+                  {filteredRegions.map(region => (
+                    <MenuItem key={region} value={region}>
+                      {Object.keys(Region).find(key => Region[key as keyof typeof Region] === region)}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Box>
@@ -277,13 +292,11 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   label={t("dashboard.addHttpForm.monitorEnvironment")}
                   error={!!errors.monitorEnvironment}
                 >
-                  {(Object.keys(Environment) as Array<keyof typeof Environment>)
-                    .filter((key) => !isNaN(Number(Environment[key])))
-                    .map((key) => (
-                      <MenuItem key={Environment[key]} value={Environment[key]}>
-                        {key}
-                      </MenuItem>
-                    ))}
+                  {filteredRegions.map(region => (
+                    <MenuItem key={region} value={region}>
+                      {regionEntries.find(([, value]) => value === region)?.[0]}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Box>

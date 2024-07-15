@@ -22,6 +22,7 @@ import {
   IMonitorGroupListByUserItem,
 } from "../../../interfaces/IMonitorGroupListByUser";
 import logging from "../../../utils/logging";
+import { IAgent } from "../../../interfaces/IAgent";
 
 interface IAddHttpMonitorProps {
   monitorTypeId: number;
@@ -80,11 +81,16 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   const [hasGroupSelected, setHasGroupSelected] = useState(
     monitorGroupToBeEdited?.id ? true : false
   );
+  const [monitorAgents, setMonitorAgents] = useState<IAgent[]>([]);
+
   const [monitorGroupList, setMonitorGroupList] = useState<
     IMonitorGroupListByUser[]
   >([]);
   const [dataToEdit, setDataToEdit] = useState(null);
   useEffect(() => {
+    if(monitorAgents.length === 0) {
+      fillMonitorAgentList();
+    }
     if (monitorGroupList.length === 0) {
       fillMonitorGroupList();
     }
@@ -111,7 +117,16 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       setMonitorGroupList(response);
     });
   };
+  const filteredRegions = monitorAgents
+  .map(agent => agent.monitorRegion)
+  .filter(region => Object.values(Region).includes(region));
 
+const regionEntries = Object.entries(Region);
+
+const fillMonitorAgentList = async () => {
+  const response = await MonitorService.getMonitorAgents();
+  setMonitorAgents(response);
+};
   const handleAddHeader = () => {
     const lastHeader = headers[headers.length - 1];
     if (
@@ -334,14 +349,11 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   error={!!errors.monitorRegion}
                   defaultValue={monitorItemToBeEdited?.monitorRegion}
                 >
-                  {(Object.keys(Region) as Array<keyof typeof Region>)
-                    .sort((a, b) => a.localeCompare(b))
-                    .filter((key) => !isNaN(Number(Region[key])))
-                    .map((key) => (
-                      <MenuItem key={Region[key]} value={Region[key]}>
-                        {key}
-                      </MenuItem>
-                    ))}
+                   {filteredRegions.map(region => (
+                    <MenuItem key={region} value={region}>
+                      {regionEntries.find(([, value]) => value === region)?.[0]}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Box>
