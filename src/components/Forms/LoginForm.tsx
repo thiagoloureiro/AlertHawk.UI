@@ -5,6 +5,7 @@ import {
   Button,
   CircularProgress,
   TextField,
+  Box,
 } from "@mui/material";
 import MicrosoftLogoPath from "./microsoft-windows-logo.svg";
 import { loginRequest } from "../../config/authConfig";
@@ -178,18 +179,39 @@ const LoginForm: FC<IFormProps> = ({ description }) => {
           {step === 1 ? "Next Step" : "Sign In"}
         </Button>
 
-        <Typography variant="body2" sx={{ textAlign: "center", mb: 2 }}>
-          Not have an account yet?{" "}
-          <Link
-            to="/register"
-            style={{
-              color: getTheme("light").palette.primary.light,
-              fontWeight: 700,
-            }}
-          >
-            Register
-          </Link>
-        </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            px: 1,
+            my: 1,
+          }}
+        >
+          <Typography variant="body2">
+            Not have an account yet?{" "}
+            <Link
+              to="/register"
+              style={{
+                color: getTheme("light").palette.primary.light,
+                fontWeight: 700,
+              }}
+            >
+              Register
+            </Link>
+          </Typography>
+          <Typography variant="body2">
+            <Link
+              to="/reset-password"
+              style={{
+                color: getTheme("light").palette.primary.light,
+                fontWeight: 700,
+              }}
+            >
+              Forgot Password?
+            </Link>
+          </Typography>
+        </Box>
       </form>
       <div
         style={{

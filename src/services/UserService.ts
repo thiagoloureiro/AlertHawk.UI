@@ -69,6 +69,8 @@ const UserService = {
     await requests.put("User/update", request, appendOptionalHeaders(headers)),
   deleteUser: async (id: string, headers?: AxiosHeaders): Promise<void> =>
     await requests.delete(`User/delete/${id}`, appendOptionalHeaders(headers)),
+  resetPassword: async (email: string): Promise<void> =>
+    await requests.customPost(`${authApiBaseUrl}/user/resetpassword/${email}`),
 };
 
 export default UserService;
