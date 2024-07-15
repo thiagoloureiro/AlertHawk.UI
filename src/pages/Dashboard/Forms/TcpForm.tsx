@@ -10,7 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useStoreActions, useStoreState } from "../../../hooks";
-import {  Region } from "../../../enums/Enums";
+import {  Environment, Region } from "../../../enums/Enums";
 import { useForm } from "react-hook-form";
 import MonitorService from "../../../services/MonitorService";
 import { showSnackbar } from "../../../utils/snackbarHelper";
@@ -106,10 +106,12 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
       setMonitorGroupList(response);
     });
   };
-  const filteredRegions = monitorAgents
-    .map(agent => agent.monitorRegion)
-    .filter(region => Object.values(Region).includes(region));
 
+  const filteredRegions = Array.from(new Set(
+    monitorAgents
+      .map(agent => agent.monitorRegion)
+      .filter(region => Object.values(Region).includes(region))
+  ));
   const regionEntries = Object.entries(Region);
 
   const fillMonitorAgentList = async () => {
@@ -265,8 +267,8 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                 >
                   {filteredRegions.map(region => (
                     <MenuItem key={region} value={region}>
-                      {Object.keys(Region).find(key => Region[key as keyof typeof Region] === region)}
-                    </MenuItem>
+                      {regionEntries.find(([, value]) => value === region)?.[0]}
+                      </MenuItem>
                   ))}
                 </Select>
               </FormControl>
@@ -292,11 +294,14 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   label={t("dashboard.addHttpForm.monitorEnvironment")}
                   error={!!errors.monitorEnvironment}
                 >
-                  {filteredRegions.map(region => (
-                    <MenuItem key={region} value={region}>
-                      {regionEntries.find(([, value]) => value === region)?.[0]}
-                    </MenuItem>
-                  ))}
+                  {(Object.keys(Environment) as Array<keyof typeof Environment>)
+                    .sort((a, b) => a.localeCompare(b))
+                    .filter((key) => !isNaN(Number(Environment[key])))
+                    .map((key) => (
+                      <MenuItem key={Environment[key]} value={Environment[key]}>
+                        {key}
+                      </MenuItem>
+                    ))}
                 </Select>
               </FormControl>
             </Box>

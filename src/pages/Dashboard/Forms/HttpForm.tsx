@@ -117,9 +117,12 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       setMonitorGroupList(response);
     });
   };
-  const filteredRegions = monitorAgents
-  .map(agent => agent.monitorRegion)
-  .filter(region => Object.values(Region).includes(region));
+  const filteredRegions = Array.from(new Set(
+    monitorAgents
+      .map(agent => agent.monitorRegion)
+      .filter(region => Object.values(Region).includes(region))
+  ));
+
 
 const regionEntries = Object.entries(Region);
 
