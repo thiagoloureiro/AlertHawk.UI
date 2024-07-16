@@ -3,9 +3,9 @@ import { FC, useState } from "react";
 import TabPanel from "./TabPanel";
 import General from "./TabItems/General/General";
 import About from "./TabItems/About/About";
+import Account from "./TabItems/Account/Account";
 import { useTranslation } from "react-i18next";
 import { useStoreState } from "../../hooks";
-import Account from "./TabItems/Account/Account";
 import { useIsAuthenticated as useMsalIsAuthenticated } from "@azure/msal-react";
 
 interface IVerticalTabs {}
@@ -20,7 +20,6 @@ function a11yProps(index: number) {
 const VerticalTabs: FC<IVerticalTabs> = () => {
   const { isSmallScreen } = useStoreState((state) => state.app);
   const isMsalAuthenticated = useMsalIsAuthenticated();
-
   const { t } = useTranslation("global");
   const [value, setValue] = useState<number>(0);
 
@@ -29,65 +28,51 @@ const VerticalTabs: FC<IVerticalTabs> = () => {
     setValue(newValue);
   };
 
-  return (
-    <>
-      {!isSmallScreen ? (
-        <Box
-          sx={{
-            flexGrow: 1,
-            display: "flex",
-            height: "100%",
-          }}
-        >
-          <Tabs
-            orientation={"vertical"}
-            variant="scrollable"
-            value={value}
-            onChange={handleChange}
-            sx={{ width: "200px" }}
-          >
-            <Tab label={t("settings.general.text")} {...a11yProps(0)} />
-            {!isMsalAuthenticated && (
-              <Tab label={t("account.text")} {...a11yProps(1)} />
-            )}
-            <Tab label={t("about.text")} {...a11yProps(2)} />
-          </Tabs>
-          <TabPanel value={value} index={0}>
-            <General />
-          </TabPanel>
-          {!isMsalAuthenticated && (
-            <TabPanel value={value} index={1}>
-              <Account />
-            </TabPanel>
-          )}
-          <TabPanel value={value} index={2}>
-            <About />
-          </TabPanel>
-        </Box>
-      ) : (
-        <Box sx={{ width: "100%" }}>
-          <Tabs value={value} onChange={handleChange}>
-            <Tab label={t("settings.general.text")} {...a11yProps(0)} />
-            {!isMsalAuthenticated && (
-              <Tab label={t("account.text")} {...a11yProps(1)} />
-            )}
-            <Tab label={t("about.text")} {...a11yProps(2)} />
-          </Tabs>
+  // Adjust index numbers based on authentication status
+  const getIndexForTab = (index: number) => {
+    if (isMsalAuthenticated) {
+      if (index === 1)
+        return 2; // Shift Account tab index to 2 if authenticated
+      else if (index > 1) return index - 1; // Shift other tab indexes accordingly
+    }
+    return index; // Return original index for non-affected tabs
+  };
 
-          <TabPanel value={value} index={0}>
-            <General />
-          </TabPanel>
+  return (
+    <Box sx={{ flexGrow: 1, display: "flex", height: "100%" }}>
+      {!isSmallScreen && (
+        <Tabs
+          orientation="vertical"
+          variant="scrollable"
+          value={value}
+          onChange={handleChange}
+          sx={{ width: "200px" }}
+        >
+          <Tab
+            label={t("settings.general.text")}
+            {...a11yProps(getIndexForTab(0))}
+          />
           {!isMsalAuthenticated && (
-            <TabPanel value={value} index={1}>
-              <Account />
-            </TabPanel>
+            <Tab label={t("account.text")} {...a11yProps(getIndexForTab(1))} />
           )}
-          <TabPanel value={value} index={2}>
-            <About />
-          </TabPanel>
-        </Box>
+          <Tab label={t("about.text")} {...a11yProps(getIndexForTab(2))} />
+        </Tabs>
       )}
-    </>
+
+      <Box sx={{ width: "100%", marginLeft: isSmallScreen ? "0" : "16px" }}>
+        <TabPanel value={value} index={getIndexForTab(0)}>
+          <General />
+        </TabPanel>
+        {!isMsalAuthenticated && (
+          <TabPanel value={value} index={getIndexForTab(1)}>
+            <Account />
+          </TabPanel>
+        )}
+        <TabPanel value={value} index={getIndexForTab(2)}>
+          <About />
+        </TabPanel>
+      </Box>
+    </Box>
   );
 };
 
