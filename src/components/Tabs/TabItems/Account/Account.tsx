@@ -91,7 +91,7 @@ const Account: FC<{}> = () => {
           spacing={0.5}
           direction="column"
           alignItems="start"
-          style={!isMediumScreen ? { width: "50%" } : { width: "100%" }}
+          style={!isMediumScreen ? { width: "75%" } : { width: "100%" }}
         >
           <Grid container item spacing={1}>
             <Grid item xs={12} md={6}>
