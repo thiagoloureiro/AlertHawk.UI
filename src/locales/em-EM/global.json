@@ -250,5 +250,18 @@
       "historyRetentionPeriodSavedSuccessfully": "🗂️✅",
       "monitorHistoryHasBeenRemovedSuccessfully": "🗑️✅"
     }
+  },
+  "account": {
+    "text": "👤",
+    "changePassword": "🔑",
+    "currentPassword": "🔒",
+    "currentPasswordIsRequired": "❗",
+    "newPassword": "🆕",
+    "passwordIsRequired": "🔐",
+    "passwordMustBeAtLeast6Characters": "6️⃣",
+    "repeatPassword": "🔁",
+    "pleaseRepeatThePassword": "🔄",
+    "thePasswordsDoNotMatch": "❌",
+    "passwordHasBeenUpdatedSuccessfully": "✅"
   }
 }

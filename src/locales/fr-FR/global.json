@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "La période de conservation de l'historique a été enregistrée avec succès",
       "monitorHistoryHasBeenRemovedSuccessfully": "L'historique de surveillance a été supprimé avec succès"
     }
+  },
+  "account": {
+    "text": "Compte",
+    "changePassword": "Changer le Mot de Passe",
+    "currentPassword": "Mot de Passe Actuel",
+    "currentPasswordIsRequired": "Le mot de passe actuel est requis",
+    "newPassword": "Nouveau Mot de Passe",
+    "passwordIsRequired": "Le mot de passe est requis",
+    "passwordMustBeAtLeast6Characters": "Le mot de passe doit contenir au moins 6 caractères",
+    "repeatPassword": "Répéter le Mot de Passe",
+    "pleaseRepeatThePassword": "Veuillez répéter le mot de passe",
+    "thePasswordsDoNotMatch": "Les mots de passe ne correspondent pas",
+    "passwordHasBeenUpdatedSuccessfully": "Le mot de passe a été mis à jour avec succès"
   }
 }

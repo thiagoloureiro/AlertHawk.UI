@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "Monitör geçmişi saklama süresi başarıyla güncellendi",
       "monitorHistoryHasBeenRemovedSuccessfully": "Monitör geçmişi başarıyla silindi"
     }
+  },
+  "account": {
+    "text": "Hesap",
+    "changePassword": "Şifre Değiştir",
+    "currentPassword": "Mevcut Şifre",
+    "currentPasswordIsRequired": "Mevcut şifre gerekli",
+    "newPassword": "Yeni Şifre",
+    "passwordIsRequired": "Şifre gerekli",
+    "passwordMustBeAtLeast6Characters": "Şifre en az 6 karakterden oluşmalıdır",
+    "repeatPassword": "Şifreyi Tekrarla",
+    "pleaseRepeatThePassword": "Lütfen şifreyi tekrar giriniz",
+    "thePasswordsDoNotMatch": "Şifreler eşleşmiyor",
+    "passwordHasBeenUpdatedSuccessfully": "Şifreniz başarıyla güncellendi"
   }
 }

@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "Період збереження історії успішно збережено",
       "monitorHistoryHasBeenRemovedSuccessfully": "Історія моніторингу успішно видалена"
     }
+  },
+  "account": {
+    "text": "Обліковий запис",
+    "changePassword": "Змінити пароль",
+    "currentPassword": "Поточний пароль",
+    "currentPasswordIsRequired": "Потрібен поточний пароль",
+    "newPassword": "Новий пароль",
+    "passwordIsRequired": "Пароль є обов'язковим",
+    "passwordMustBeAtLeast6Characters": "Пароль повинен містити принаймні 6 символів",
+    "repeatPassword": "Повторити пароль",
+    "pleaseRepeatThePassword": "Будь ласка, повторіть пароль",
+    "thePasswordsDoNotMatch": "Паролі не співпадають",
+    "passwordHasBeenUpdatedSuccessfully": "Пароль успішно оновлено"
   }
 }

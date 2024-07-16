@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "Период хранения истории успешно сохранен",
       "monitorHistoryHasBeenRemovedSuccessfully": "История мониторинга успешно удалена"
     }
+  },
+  "account": {
+    "text": "Аккаунт",
+    "changePassword": "Изменить пароль",
+    "currentPassword": "Текущий пароль",
+    "currentPasswordIsRequired": "Требуется текущий пароль",
+    "newPassword": "Новый пароль",
+    "passwordIsRequired": "Требуется пароль",
+    "passwordMustBeAtLeast6Characters": "Пароль должен содержать не менее 6 символов",
+    "repeatPassword": "Повторите пароль",
+    "pleaseRepeatThePassword": "Пожалуйста, повторите пароль",
+    "thePasswordsDoNotMatch": "Пароли не совпадают",
+    "passwordHasBeenUpdatedSuccessfully": "Пароль успешно обновлен"
   }
 }

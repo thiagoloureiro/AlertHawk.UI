@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "इतिहास रिटेंशन अवधि सफलतापूर्वक सहेजी गई",
       "monitorHistoryHasBeenRemovedSuccessfully": "मॉनिटर इतिहास सफलतापूर्वक हटा दिया गया है"
     }
+  },
+  "account": {
+    "text": "खाता",
+    "changePassword": "पासवर्ड बदलें",
+    "currentPassword": "वर्तमान पासवर्ड",
+    "currentPasswordIsRequired": "वर्तमान पासवर्ड आवश्यक है",
+    "newPassword": "नया पासवर्ड",
+    "passwordIsRequired": "पासवर्ड आवश्यक है",
+    "passwordMustBeAtLeast6Characters": "पासवर्ड कम से कम 6 वर्णों का होना चाहिए",
+    "repeatPassword": "पासवर्ड दोहराएं",
+    "pleaseRepeatThePassword": "कृपया पासवर्ड दोहराएं",
+    "thePasswordsDoNotMatch": "पासवर्ड मेल नहीं खाते",
+    "passwordHasBeenUpdatedSuccessfully": "पासवर्ड सफलतापूर्वक अपडेट कर दिया गया है"
   }
 }
