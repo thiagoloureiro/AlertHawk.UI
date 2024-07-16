@@ -5,12 +5,9 @@ import {
   Stack,
   TextField,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import getTheme from "../../../../theme";
-import { useStoreState } from "../../../../hooks";
 import { IUpdatePassword } from "../../../../interfaces/requests/user/IUpdatePassword";
 import { SubmitHandler, useForm } from "react-hook-form";
 import UserService from "../../../../services/UserService";
@@ -25,9 +22,6 @@ interface IUpdatePasswordForm {
 
 const Account: FC<{}> = () => {
   const { t } = useTranslation("global");
-  const { isDarkMode } = useStoreState((state) => state.app);
-  const theme = getTheme(isDarkMode ? "dark" : "light");
-  const isMediumScreen = useMediaQuery(theme.breakpoints.down("lg"));
 
   const {
     register,
@@ -85,15 +79,15 @@ const Account: FC<{}> = () => {
       <Typography variant="body2" fontWeight={500} fontSize={16}>
         {t("account.changePassword")}
       </Typography>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} style={{ marginTop: "24px" }}>
         <Grid
           container
-          spacing={0.5}
+          spacing={2}
           direction="column"
           alignItems="start"
-          style={!isMediumScreen ? { width: "75%" } : { width: "100%" }}
+          style={{ width: "100%" }}
         >
-          <Grid container item spacing={1}>
+          <Grid container item spacing={2}>
             <Grid item xs={12} md={6}>
               <TextField
                 {...register("currentPassword", {
@@ -101,7 +95,6 @@ const Account: FC<{}> = () => {
                 })}
                 fullWidth
                 type="password"
-                margin="normal"
                 label={t("account.currentPassword")}
                 variant="outlined"
                 autoComplete="off"
@@ -109,12 +102,11 @@ const Account: FC<{}> = () => {
                 helperText={
                   errors.currentPassword ? errors.currentPassword.message : null
                 }
-                size="small"
               />
             </Grid>
           </Grid>
 
-          <Grid container item spacing={1}>
+          <Grid container item spacing={2}>
             <Grid item xs={12} md={6}>
               <TextField
                 id="newPassword"
@@ -127,7 +119,6 @@ const Account: FC<{}> = () => {
                 })}
                 fullWidth
                 type="password"
-                margin="normal"
                 label={t("account.newPassword")}
                 variant="outlined"
                 autoComplete="off"
@@ -135,7 +126,6 @@ const Account: FC<{}> = () => {
                 helperText={
                   errors.newPassword ? errors.newPassword.message : null
                 }
-                size="small"
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -149,14 +139,12 @@ const Account: FC<{}> = () => {
                 fullWidth
                 label={t("account.repeatPassword")}
                 type="password"
-                margin="normal"
                 variant="outlined"
                 autoComplete="off"
                 error={!!errors.repeatPassword}
                 helperText={
                   errors.repeatPassword ? errors.repeatPassword.message : null
                 }
-                size="small"
               />
             </Grid>
             <Grid item xs={12}>
@@ -166,7 +154,7 @@ const Account: FC<{}> = () => {
                 variant="contained"
                 size="large"
                 sx={{
-                  my: 2,
+                  my: 1,
                   color: "white",
                   fontWeight: 700,
                   position: "relative",
