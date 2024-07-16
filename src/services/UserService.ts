@@ -7,6 +7,7 @@ import { IUserMonitorGroup } from "../interfaces/IUserMonitorGroup";
 import { IUserRegister } from "../interfaces/requests/user/IUserRegister";
 import { IUserLogin } from "../interfaces/requests/user/IUserLogin";
 import { IToken } from "../interfaces/responses/user/IToken";
+import { IUpdatePassword } from "../interfaces/requests/user/IUpdatePassword";
 
 const authApiBaseUrl = import.meta.env.VITE_APP_AUTH_API_URL;
 const responseBody = (response: AxiosResponse) => response.data;
@@ -71,6 +72,15 @@ const UserService = {
     await requests.delete(`User/delete/${id}`, appendOptionalHeaders(headers)),
   resetPassword: async (email: string): Promise<void> =>
     await requests.customPost(`${authApiBaseUrl}/user/resetpassword/${email}`),
+  updatePassword: async (
+    request: IUpdatePassword,
+    headers?: AxiosHeaders
+  ): Promise<void> =>
+    await requests.post(
+      "User/updatePassword",
+      request,
+      appendOptionalHeaders(headers)
+    ),
 };
 
 export default UserService;

@@ -34,7 +34,7 @@
     "months": "月",
     "certificateexpiration": "证书到期",
     "response": "响应（平均）",
-    "certificateIsAboutToExpireFor": "证书即将过期",
+    "certificateIsAboutToExpirceFor": "证书即将过期",
     "environment": "环境",
     "alarm": "警报",
     "sslCheck": "SSL检查",
@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "历史保留期已成功保存",
       "monitorHistoryHasBeenRemovedSuccessfully": "监控历史已成功移除"
     }
+  },
+  "account": {
+    "text": "账户",
+    "changePassword": "修改密码",
+    "currentPassword": "当前密码",
+    "currentPasswordIsRequired": "当前密码必填",
+    "newPassword": "新密码",
+    "passwordIsRequired": "密码必填",
+    "passwordMustBeAtLeast6Characters": "密码必须至少6个字符长",
+    "repeatPassword": "重复密码",
+    "pleaseRepeatThePassword": "请重复输入密码",
+    "thePasswordsDoNotMatch": "两次输入的密码不一致",
+    "passwordHasBeenUpdatedSuccessfully": "密码已成功更新"
   }
 }

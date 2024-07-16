@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "履歴の保持期間が正常に保存されました",
       "monitorHistoryHasBeenRemovedSuccessfully": "モニター履歴が正常に削除されました"
     }
+  },
+  "account": {
+    "text": "アカウント",
+    "changePassword": "パスワードを変更する",
+    "currentPassword": "現在のパスワード",
+    "currentPasswordIsRequired": "現在のパスワードが必要です",
+    "newPassword": "新しいパスワード",
+    "passwordIsRequired": "パスワードが必要です",
+    "passwordMustBeAtLeast6Characters": "パスワードは6文字以上でなければなりません",
+    "repeatPassword": "パスワードを再入力",
+    "pleaseRepeatThePassword": "パスワードを再入力してください",
+    "thePasswordsDoNotMatch": "パスワードが一致しません",
+    "passwordHasBeenUpdatedSuccessfully": "パスワードが正常に更新されました"
   }
 }

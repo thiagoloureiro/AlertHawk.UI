@@ -255,5 +255,18 @@
       "historyRetentionPeriodSavedSuccessfully": "History retention period saved successfully",
       "monitorHistoryHasBeenRemovedSuccessfully": "Monitor history has been removed successfully"
     }
+  },
+  "account": {
+    "text": "Account",
+    "changePassword": "Change Password",
+    "currentPassword": "Current Password",
+    "currentPasswordIsRequired": "Current password is required",
+    "newPassword": "New Password",
+    "passwordIsRequired": "Password is required",
+    "passwordMustBeAtLeast6Characters": "Password must be at least 6 characters",
+    "repeatPassword": "Repeat Password",
+    "pleaseRepeatThePassword": "Please repeat the password",
+    "thePasswordsDoNotMatch": "The passwords do not match",
+    "passwordHasBeenUpdatedSuccessfully": "Password has been updated successfully"
   }
 }

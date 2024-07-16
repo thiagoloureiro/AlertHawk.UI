@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "Aufbewahrungszeitraum der Historie erfolgreich gespeichert",
       "monitorHistoryHasBeenRemovedSuccessfully": "Überwachungshistorie wurde erfolgreich entfernt"
     }
+  },
+  "account": {
+    "text": "Konto",
+    "changePassword": "Passwort ändern",
+    "currentPassword": "Aktuelles Passwort",
+    "currentPasswordIsRequired": "Aktuelles Passwort ist erforderlich",
+    "newPassword": "Neues Passwort",
+    "passwordIsRequired": "Passwort ist erforderlich",
+    "passwordMustBeAtLeast6Characters": "Passwort muss mindestens 6 Zeichen lang sein",
+    "repeatPassword": "Passwort wiederholen",
+    "pleaseRepeatThePassword": "Bitte wiederholen Sie das Passwort",
+    "thePasswordsDoNotMatch": "Die Passwörter stimmen nicht überein",
+    "passwordHasBeenUpdatedSuccessfully": "Passwort wurde erfolgreich aktualisiert"
   }
 }

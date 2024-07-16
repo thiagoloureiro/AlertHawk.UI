@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "El período de retención del historial se ha guardado con éxito",
       "monitorHistoryHasBeenRemovedSuccessfully": "El historial de monitoreo se ha eliminado con éxito"
     }
+  },
+  "account": {
+    "text": "Cuenta",
+    "changePassword": "Cambiar Contraseña",
+    "currentPassword": "Contraseña Actual",
+    "currentPasswordIsRequired": "La contraseña actual es requerida",
+    "newPassword": "Nueva Contraseña",
+    "passwordIsRequired": "La contraseña es requerida",
+    "passwordMustBeAtLeast6Characters": "La contraseña debe tener al menos 6 caracteres",
+    "repeatPassword": "Repetir Contraseña",
+    "pleaseRepeatThePassword": "Por favor repita la contraseña",
+    "thePasswordsDoNotMatch": "Las contraseñas no coinciden",
+    "passwordHasBeenUpdatedSuccessfully": "La contraseña se ha actualizado con éxito"
   }
 }

@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "Historian säilytysaika tallennettu onnistuneesti",
       "monitorHistoryHasBeenRemovedSuccessfully": "Valvontahistoria on poistettu onnistuneesti"
     }
+  },
+  "account": {
+    "text": "Tili",
+    "changePassword": "Vaihda Salasana",
+    "currentPassword": "Nykyinen Salasana",
+    "currentPasswordIsRequired": "Nykyinen salasana on pakollinen",
+    "newPassword": "Uusi Salasana",
+    "passwordIsRequired": "Salasana on pakollinen",
+    "passwordMustBeAtLeast6Characters": "Salasanan on oltava vähintään 6 merkkiä pitkä",
+    "repeatPassword": "Toista Salasana",
+    "pleaseRepeatThePassword": "Ole hyvä ja toista salasana",
+    "thePasswordsDoNotMatch": "Salasanat eivät täsmää",
+    "passwordHasBeenUpdatedSuccessfully": "Salasana on päivitetty onnistuneesti"
   }
 }

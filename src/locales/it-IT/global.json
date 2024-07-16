@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "Il periodo di conservazione della cronologia è stato salvato con successo",
       "monitorHistoryHasBeenRemovedSuccessfully": "La cronologia di monitoraggio è stata rimossa con successo"
     }
+  },
+  "account": {
+    "text": "Account",
+    "changePassword": "Cambia Password",
+    "currentPassword": "Password Attuale",
+    "currentPasswordIsRequired": "La password attuale è richiesta",
+    "newPassword": "Nuova Password",
+    "passwordIsRequired": "La password è richiesta",
+    "passwordMustBeAtLeast6Characters": "La password deve essere di almeno 6 caratteri",
+    "repeatPassword": "Ripeti Password",
+    "pleaseRepeatThePassword": "Si prega di ripetere la password",
+    "thePasswordsDoNotMatch": "Le password non corrispondono",
+    "passwordHasBeenUpdatedSuccessfully": "La password è stata aggiornata con successo"
   }
 }

@@ -5,6 +5,7 @@ import General from "./TabItems/General/General";
 import About from "./TabItems/About/About";
 import { useTranslation } from "react-i18next";
 import { useStoreState } from "../../hooks";
+import Account from "./TabItems/Account/Account";
 
 interface IVerticalTabs {}
 
@@ -44,12 +45,16 @@ const VerticalTabs: FC<IVerticalTabs> = () => {
             sx={{ width: "200px" }}
           >
             <Tab label={t("settings.general.text")} {...a11yProps(0)} />
-            <Tab label={t("about.text")} {...a11yProps(1)} />
+            <Tab label={t("account.text")} {...a11yProps(1)} />
+            <Tab label={t("about.text")} {...a11yProps(2)} />
           </Tabs>
           <TabPanel value={value} index={0}>
             <General />
           </TabPanel>
           <TabPanel value={value} index={1}>
+            <Account />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
             <About />
           </TabPanel>
         </Box>
@@ -57,13 +62,17 @@ const VerticalTabs: FC<IVerticalTabs> = () => {
         <Box sx={{ width: "100%" }}>
           <Tabs value={value} onChange={handleChange}>
             <Tab label={t("settings.general.text")} {...a11yProps(0)} />
-            <Tab label={t("about.text")} {...a11yProps(1)} />
+            <Tab label={t("account.text")} {...a11yProps(1)} />
+            <Tab label={t("about.text")} {...a11yProps(2)} />
           </Tabs>
 
           <TabPanel value={value} index={0}>
             <General />
           </TabPanel>
           <TabPanel value={value} index={1}>
+            <Account />
+          </TabPanel>
+          <TabPanel value={value} index={2}>
             <About />
           </TabPanel>
         </Box>

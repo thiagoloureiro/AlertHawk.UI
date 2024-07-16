@@ -254,5 +254,18 @@
       "historyRetentionPeriodSavedSuccessfully": "Okres przechowywania historii został pomyślnie zapisany",
       "monitorHistoryHasBeenRemovedSuccessfully": "Historia monitorowania została pomyślnie usunięta"
     }
+  },
+  "account": {
+    "text": "Konto",
+    "changePassword": "Zmień Hasło",
+    "currentPassword": "Aktualne Hasło",
+    "currentPasswordIsRequired": "Wymagane jest aktualne hasło",
+    "newPassword": "Nowe Hasło",
+    "passwordIsRequired": "Wymagane jest hasło",
+    "passwordMustBeAtLeast6Characters": "Hasło musi mieć co najmniej 6 znaków",
+    "repeatPassword": "Powtórz Hasło",
+    "pleaseRepeatThePassword": "Proszę powtórz hasło",
+    "thePasswordsDoNotMatch": "Hasła nie pasują do siebie",
+    "passwordHasBeenUpdatedSuccessfully": "Hasło zostało pomyślnie zaktualizowane"
   }
 }
