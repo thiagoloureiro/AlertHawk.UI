@@ -168,7 +168,7 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
                   cursor: "pointer",
                 }}
               >
-                <Continents
+                <Continents 
                   onSelect={(e) => {
                     if (e === "Australia and Oceania") {
                       setSelectedContinent("Oceania");
@@ -179,6 +179,7 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
                   hoverColor="#FFFF00"
                   mapColor={"#00bcd4"}
                   size={containerWidth}
+                  type="select-single"
                 />
               </Box>
             </CardContent>
