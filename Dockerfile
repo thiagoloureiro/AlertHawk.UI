@@ -3,6 +3,9 @@ FROM node:22-alpine as react-build
 WORKDIR /app
 COPY . ./
 RUN npm install
+# Remove version information from Moment.js
+RUN sed -i '/^\/\/! version : [0-9]\+\.[0-9]\+\.[0-9]\+$/d' node_modules/moment/moment.js
+RUN cat node_modules/moment/moment.js
 RUN npm run build
 
 # Stage 2 - the production environment
