@@ -197,7 +197,15 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
                 }}
               >
                 {isLoading ? (
-                  <CircularProgress color="success" />
+                  <CircularProgress
+                    color="success"
+                    sx={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "50%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
                 ) : (
                   <MonitorAlertsTable
                     monitorAlerts={monitorAlerts}
