@@ -7,6 +7,7 @@ import {
   Stack,
   OutlinedInput,
   Button,
+  CircularProgress,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { FC, useEffect, useState } from "react";
@@ -18,13 +19,14 @@ import FromNotifications from "./Forms/FromNotifications";
 import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
 import MonitorService from "../../services/MonitorService";
 
-interface INotificationsProps { }
+interface INotificationsProps {}
 
 const Notifications: FC<INotificationsProps> = () => {
   const { t } = useTranslation("global");
   const [searchText, setSearchText] = useState<string>("");
   const [notifications, setNotifications] = useState<INotification[]>([]);
   const [dataFetched, setDataFetched] = useState<boolean>(false); // New state to track data fetching
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const [notificationTypes, setNotificationTypes] = useState<
     INotificationType[]
@@ -68,147 +70,160 @@ const Notifications: FC<INotificationsProps> = () => {
     });
   };
   const handleAddNew = () => {
-        setAddPanel(false);
+    setAddPanel(false);
     setSelectedNotification(null);
     setAddPanel(true);
   };
   const fetchData = async () => {
-      var notificationResponse = await NotificationService.getAll();
-      if (notificationResponse != null) {
-        var notificationTypeResponse =
-          await NotificationService.getNotificationTypes();
-        setNotificationTypes(notificationTypeResponse);
-        notificationResponse.forEach((notification: INotification) => {
-          notification.notificationType = notificationTypeResponse.find(
-            (notificationType: INotificationType) =>
-              notificationType.id == notification.notificationTypeId
-          )!;
-        });
-      }
-      notificationResponse = notificationResponse.slice().sort((a, b) => {
-        if (a.name! < b.name!) {
-          return -1;
-        }
-        if (a.name! > b.name!) {
-          return 1;
-        }
-        return 0;
+    var notificationResponse = await NotificationService.getAll();
+    if (notificationResponse != null) {
+      var notificationTypeResponse =
+        await NotificationService.getNotificationTypes();
+      setNotificationTypes(notificationTypeResponse);
+      notificationResponse.forEach((notification: INotification) => {
+        notification.notificationType = notificationTypeResponse.find(
+          (notificationType: INotificationType) =>
+            notificationType.id == notification.notificationTypeId
+        )!;
       });
-      setNotifications(notificationResponse);
-      setDataFetched(true); // Set the data fetched flag to true
+    }
+    notificationResponse = notificationResponse.slice().sort((a, b) => {
+      if (a.name! < b.name!) {
+        return -1;
+      }
+      if (a.name! > b.name!) {
+        return 1;
+      }
+      return 0;
+    });
+    setNotifications(notificationResponse);
+    setDataFetched(true);
+    setIsLoading(false);
   };
   useEffect(() => {
-    if (notifications.length == 0 && !dataFetched) { // Include the dataFetched check here
-        fetchData();
+    if (notifications.length == 0 && !dataFetched) {
+      fetchData();
     }
   }, [notifications, dataFetched]);
 
   return (
-        <>
-          <HelmetProvider>
-            <Helmet>
-              <title>AlertHawk | {t("notifications.title")}</title>
-            </Helmet>
-          </HelmetProvider>
-          <Grid container spacing={4}>
-            <Grid item xs={12} lg={5}>
-              <Card>
-                <CardContent>
-                  <Stack
-                    direction="row"
-                    justifyContent="space-between"
-                    alignItems="center"
-                    marginBottom={4}
-                  >
-                    <div style={{ width: "75%", minWidth: "200px" }}>
-                      <FormControl fullWidth>
-                        <OutlinedInput
-                          size="small"
-                          startAdornment={<SearchOutlinedIcon />}
-                          value={searchText}
-                          onChange={handleSearchInputChange}
-                          placeholder={t("notifications.search")}
-                        />
-                      </FormControl>
-                    </div>
-                    <div>
-                      <FormControl fullWidth>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="success"
-                          sx={{
-                            mb: 2,
-                            mt: 2,
-                            ml: 2,
-                            color: "white",
-                            minWidth: "110px",
-                            fontWeight: 700,
-                            position: "relative",
-                          }}
-                          disabled={monitorGroupList.length === 0}
-                          onClick={handleAddNew}
-                        >
-                          {t("notifications.addNew")}
-                        </Button>
-                      </FormControl>
-                    </div>
-                  </Stack>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      cursor: "pointer",
-                    }}
-                  >
-                    <NotificationsTable
-                      handleNotificationSelection={handleNotificationSelection}
-                      notifications={notifications}
-                      selectedNotification={selectedNotification}
-                      searchText={searchText}
+    <>
+      <HelmetProvider>
+        <Helmet>
+          <title>AlertHawk | {t("notifications.title")}</title>
+        </Helmet>
+      </HelmetProvider>
+      <Grid container spacing={4}>
+        <Grid item xs={12} lg={5}>
+          <Card>
+            <CardContent>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                marginBottom={4}
+              >
+                <div style={{ width: "75%", minWidth: "200px" }}>
+                  <FormControl fullWidth>
+                    <OutlinedInput
+                      size="small"
+                      startAdornment={<SearchOutlinedIcon />}
+                      value={searchText}
+                      onChange={handleSearchInputChange}
+                      placeholder={t("notifications.search")}
                     />
-                  </Box>
-                </CardContent>
-              </Card>
-            </Grid>
-            <Grid item xs={12} lg={7}>
-              {addPanel && (
-                <Card>
-                  <CardContent>
-                    <Box
+                  </FormControl>
+                </div>
+                <div>
+                  <FormControl fullWidth>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="success"
                       sx={{
-                        overflowY: "auto",
-                        maxHeight: "calc(100vh - 210px)",
-                        paddingRight: "16px",
-                        "&::-webkit-scrollbar": {
-                          width: "0.4em",
-                        },
-                        "&::-webkit-scrollbar-track": {
-                          boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-                          webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-                        },
-                        "&::-webkit-scrollbar-thumb": {
-                          backgroundColor: "secondary.main",
-                          outline: "1px solid secondary.main",
-                          borderRadius: "30px",
-                        },
+                        mb: 2,
+                        mt: 2,
+                        ml: 2,
+                        color: "white",
+                        minWidth: "110px",
+                        fontWeight: 700,
+                        position: "relative",
                       }}
+                      disabled={monitorGroupList.length === 0}
+                      onClick={handleAddNew}
                     >
-                      <FromNotifications
-                        selectedNotification={selectedNotification}
-                        setAddPanel={setAddPanel}
-                        notificationTypes={notificationTypes}
-                        monitorGroupList={monitorGroupList}
-                      />
-                    </Box>
-                  </CardContent>
-                </Card>
-              )}
-            </Grid>
-          </Grid>
-        </>
-      )}
-
+                      {t("notifications.addNew")}
+                    </Button>
+                  </FormControl>
+                </div>
+              </Stack>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }}
+              >
+                {isLoading ? (
+                  <CircularProgress
+                    color="success"
+                    sx={{
+                      position: "absolute",
+                      top: "50%",
+                      right: "50%",
+                      transform: "translate(-50%, -50%)",
+                    }}
+                  />
+                ) : (
+                  <NotificationsTable
+                    handleNotificationSelection={handleNotificationSelection}
+                    notifications={notifications}
+                    selectedNotification={selectedNotification}
+                    searchText={searchText}
+                  />
+                )}
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item xs={12} lg={7}>
+          {addPanel && (
+            <Card>
+              <CardContent>
+                <Box
+                  sx={{
+                    overflowY: "auto",
+                    maxHeight: "calc(100vh - 210px)",
+                    paddingRight: "16px",
+                    "&::-webkit-scrollbar": {
+                      width: "0.4em",
+                    },
+                    "&::-webkit-scrollbar-track": {
+                      boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                      webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
+                    },
+                    "&::-webkit-scrollbar-thumb": {
+                      backgroundColor: "secondary.main",
+                      outline: "1px solid secondary.main",
+                      borderRadius: "30px",
+                    },
+                  }}
+                >
+                  <FromNotifications
+                    selectedNotification={selectedNotification}
+                    setAddPanel={setAddPanel}
+                    notificationTypes={notificationTypes}
+                    monitorGroupList={monitorGroupList}
+                  />
+                </Box>
+              </CardContent>
+            </Card>
+          )}
+        </Grid>
+      </Grid>
+    </>
+  );
+};
 
 export default Notifications;

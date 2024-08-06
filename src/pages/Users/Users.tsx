@@ -10,6 +10,7 @@ import {
   Select,
   InputLabel,
   SelectChangeEvent,
+  CircularProgress,
 } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,6 +30,7 @@ const Users: FC<IUsersProps> = () => {
   const { thunkGetAllUsers } = useStoreActions((action) => action.user);
   const [selectedUser, setSelectedUser] = useState<IUser | null>(null);
   const [searchText, setSearchText] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const handleSearchInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -43,6 +45,7 @@ const Users: FC<IUsersProps> = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       await thunkGetAllUsers();
+      setIsLoading(false);
     };
 
     if (user?.isAdmin) {
@@ -118,13 +121,25 @@ const Users: FC<IUsersProps> = () => {
                       cursor: "pointer",
                     }}
                   >
-                    <UsersTable
-                      users={users}
-                      searchText={searchText}
-                      selectedRole={selectedRole}
-                      selectedUser={selectedUser}
-                      handleUserSelection={handleUserSelection}
-                    />
+                    {isLoading ? (
+                      <CircularProgress
+                        color="success"
+                        sx={{
+                          position: "absolute",
+                          top: "50%",
+                          right: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                      />
+                    ) : (
+                      <UsersTable
+                        users={users}
+                        searchText={searchText}
+                        selectedRole={selectedRole}
+                        selectedUser={selectedUser}
+                        handleUserSelection={handleUserSelection}
+                      />
+                    )}
                   </Box>
                 </CardContent>
               </Card>
