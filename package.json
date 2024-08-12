@@ -15,8 +15,8 @@
     "@emotion/styled": "^11.13.0",
     "@fontsource-variable/roboto-mono": "^5.0.19",
     "@fontsource/poppins": "^5.0.14",
-    "@mui/icons-material": "^5.16.6",
-    "@mui/material": "^5.16.6",
+    "@mui/icons-material": "^5.16.7",
+    "@mui/material": "^5.16.7",
     "@react-map/continents": "1.0.5",
     "@types/react-helmet": "^6.1.11",
     "axios": "^1.7.3",
@@ -33,7 +33,7 @@
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.52.2",
-    "react-i18next": "^15.0.0",
+    "react-i18next": "^15.0.1",
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.26.0",
     "react-spinners": "^0.14.1",
@@ -51,7 +51,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.9",
     "typescript": "^5.5.4",
-    "vite": "^5.3.5",
+    "vite": "^5.4.0",
     "vite-plugin-svgr": "^4.2.0"
   }
 }
