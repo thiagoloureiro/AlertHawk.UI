@@ -81,13 +81,7 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
       label: t("monitorAlerts.message"),
       sortable: true,
       width: "20%",
-    },
-    {
-      id: "screenshot",
-      label: t("monitorAlerts.screenshot"),
-      width: "20%",
-      sortable: true,
-    },
+    }
   ];
 
   const handleChangePage = (_: ChangeEvent<unknown>, page: number) => {
