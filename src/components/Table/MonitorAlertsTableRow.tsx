@@ -117,21 +117,6 @@ const MonitorAlertsTableRow: FC<IMonitorAlertsTableRowProps> = ({
                 gap: 1,
               }}
             >
-              <Typography variant="body1" fontWeight={500}>
-                {monitorAlert.screenShotUrl != null ? (
-                  <a
-                    href={monitorAlert.screenShotUrl}
-                    style={{
-                      textDecoration: "none",
-                      color: "unset",
-                    }}
-                  >
-                    Download
-                  </a>
-                ) : (
-                  "N/A"
-                )}
-              </Typography>
             </Box>
           </Box>
         </TableCell>

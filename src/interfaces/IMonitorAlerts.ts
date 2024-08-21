@@ -5,7 +5,6 @@ export interface IMonitorAlerts {
     timeStamp: Date
     status: boolean;
     message: string;
-    screenShotUrl: string;
     environment: number;
   }
   
