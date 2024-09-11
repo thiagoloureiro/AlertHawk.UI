@@ -48,7 +48,6 @@ const MonitorAlerts: FC<IMonitorAlertsProps> = () => {
           : await MonitorAlertService.get(monitorId, selectedDays);
 
         setMonitorAlerts(response);
-        console.log(response);
         setIsLoading(false);
       } catch (error) {
         logging.error(error);

@@ -95,7 +95,6 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     await MonitorService.getMonitorTcpByMonitorId(
       monitorItemToBeEdited?.id
     ).then((response: any) => {
-      // console.log(response);
       setDataToEdit(response);
       reset(response);
     });
