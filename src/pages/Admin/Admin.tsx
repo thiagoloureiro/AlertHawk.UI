@@ -29,6 +29,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import MonitorService from "../../services/MonitorService";
 import logging from "../../utils/logging";
 import { downloadJsonFile } from "../../utils/downloadJsonFile";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   retentionInDays: number;
@@ -47,6 +48,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const Admin: FC<{}> = ({}) => {
+  const navigate = useNavigate();
   const { t } = useTranslation("global");
   const { retentionInDays } = useStoreState((state) => state.monitorHistory);
   const {
@@ -174,6 +176,7 @@ const Admin: FC<{}> = ({}) => {
     }
 
     handleUpload(file);
+    event.target.value = "";
   };
 
   const handleUpload = async (file: File) => {
@@ -190,6 +193,7 @@ const Admin: FC<{}> = ({}) => {
       await MonitorService.uploadMonitorJsonBackup(formData, headers);
 
       showSnackbar(t("admin.backupFileHasBeenUploaded"), "success");
+      navigate("/");
     } catch (error) {
       logging.error(error);
       showSnackbar(
