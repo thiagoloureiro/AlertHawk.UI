@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   CardContent,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
@@ -28,6 +29,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import MonitorService from "../../services/MonitorService";
 import logging from "../../utils/logging";
 import { downloadJsonFile } from "../../utils/downloadJsonFile";
+import { useNavigate } from "react-router-dom";
 
 interface FormValues {
   retentionInDays: number;
@@ -46,6 +48,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 const Admin: FC<{}> = ({}) => {
+  const navigate = useNavigate();
   const { t } = useTranslation("global");
   const { retentionInDays } = useStoreState((state) => state.monitorHistory);
   const {
@@ -173,6 +176,7 @@ const Admin: FC<{}> = ({}) => {
     }
 
     handleUpload(file);
+    event.target.value = "";
   };
 
   const handleUpload = async (file: File) => {
@@ -189,6 +193,7 @@ const Admin: FC<{}> = ({}) => {
       await MonitorService.uploadMonitorJsonBackup(formData, headers);
 
       showSnackbar(t("admin.backupFileHasBeenUploaded"), "success");
+      navigate("/");
     } catch (error) {
       logging.error(error);
       showSnackbar(
@@ -202,6 +207,33 @@ const Admin: FC<{}> = ({}) => {
 
   return (
     <>
+      {isUploading && (
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            // backdropFilter: "blur(1px)",
+            zIndex: 9999,
+          }}
+        >
+          <CircularProgress
+            color="success"
+            sx={{
+              position: "absolute",
+              top: "calc(50% - 80px)",
+              right: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+          />
+        </Box>
+      )}
       <HelmetProvider>
         <Helmet>
           <title>AlertHawk | {t("users.isAdmin")}</title>
