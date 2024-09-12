@@ -223,7 +223,7 @@ const Admin: FC<{}> = ({}) => {
             color="success"
             sx={{
               position: "absolute",
-              top: "50%",
+              top: "calc(50% - 80px)",
               right: "50%",
               transform: "translate(-50%, -50%)",
             }}
