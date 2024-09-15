@@ -13,8 +13,8 @@
     "@azure/msal-react": "^2.0.22",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
-    "@fontsource-variable/roboto-mono": "^5.0.21",
-    "@fontsource/poppins": "^5.0.16",
+    "@fontsource-variable/roboto-mono": "^5.1.0",
+    "@fontsource/poppins": "^5.1.0",
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.0",
     "@react-map/continents": "1.0.5",
@@ -33,14 +33,14 @@
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.53.0",
-    "react-i18next": "^15.0.1",
+    "react-i18next": "^15.0.2",
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.26.2",
     "react-spinners": "^0.14.1",
     "recharts": "^2.12.7"
   },
   "devDependencies": {
-    "@faker-js/faker": "^9.0.0",
+    "@faker-js/faker": "^9.0.1",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@types/react-input-mask": "^3.0.5",
@@ -49,9 +49,9 @@
     "@vitejs/plugin-react": "^4.3.1",
     "eslint": "8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
-    "eslint-plugin-react-refresh": "^0.4.11",
+    "eslint-plugin-react-refresh": "^0.4.12",
     "typescript": "^5.6.2",
-    "vite": "^5.4.4",
+    "vite": "^5.4.5",
     "vite-plugin-svgr": "^4.2.0"
   }
 }
