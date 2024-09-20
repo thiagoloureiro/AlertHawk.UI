@@ -9,7 +9,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { useStoreState } from "../../hooks";
+import { useStoreActions, useStoreState } from "../../hooks";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 import { IMonitorGroupListByUser } from "../../interfaces/IMonitorGroupListByUser";
@@ -32,6 +32,11 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
     IMonitorGroupListByUser[]
   >([]);
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
+  const { user: currentUser } = useStoreState((state) => state.user);
+  const { selectedEnvironment } = useStoreState((state) => state.app);
+  const { thunkGetMonitorGroupListByUser } = useStoreActions(
+    (actions) => actions.monitor
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -98,6 +103,15 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
       await UserService.updateMonitorGroup(convertedAssignedMonitorGroups);
 
       showSnackbar(t("users.monitorConfirmation"), "success");
+
+      const isCurrentUserGroupChanged = convertedAssignedMonitorGroups.some(
+        (group) => group.userId === currentUser?.id
+      );
+
+      if (isCurrentUserGroupChanged) {
+        await thunkGetMonitorGroupListByUser(selectedEnvironment);
+      }
+
       setOriginalAssignedMonitorGroups([...assignedMonitorGroups]);
     } catch (error) {
       showSnackbar(

@@ -25,15 +25,22 @@ import {
 } from "../../interfaces/IMonitorGroupListByUser";
 import { Environment } from "../../enums/Enums";
 import AddNewMonitor from "./Forms/AddNewMonitor";
+import { useLocation } from "react-router-dom";
+import logging from "../../utils/logging";
 
 interface IDashboardProps {}
 
 const Dashboard: FC<IDashboardProps> = ({}) => {
   const { t } = useTranslation("global");
+  const location = useLocation();
+
   const { isSidebarOpen, selectedEnvironment, isSmallScreen } = useStoreState(
     (state) => state.app
   );
   const { monitorGroupListByUser } = useStoreState((state) => state.monitor);
+  const { thunkGetMonitorGroupListByUser } = useStoreActions(
+    (actions) => actions.monitor
+  );
   const { setSelectedEnvironment } = useStoreActions((action) => action.app);
   const [addMonitorPanel, setAddMonitorPanel] = useState<boolean>(false);
   const [editMonitorPanel, setEditMonitorPanel] = useState<boolean>(false);
@@ -124,6 +131,20 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
         : null
     );
   }, [selectedChildRowIndex, monitorGroupListByUser]);
+
+  useEffect(() => {
+    if (location.state?.triggerApiCall) {
+      const fetchData = async () => {
+        try {
+          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        } catch (err) {
+          logging.error(err);
+        }
+      };
+
+      fetchData();
+    }
+  }, [location.state]);
 
   function handleAddNew(): void {
     setSelectedMonitorItem(null);
