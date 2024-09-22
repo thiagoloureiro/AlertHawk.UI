@@ -193,7 +193,7 @@ const Admin: FC<{}> = ({}) => {
       await MonitorService.uploadMonitorJsonBackup(formData, headers);
 
       showSnackbar(t("admin.backupFileHasBeenUploaded"), "success");
-      navigate("/");
+      navigate("/", { state: { triggerApiCall: true } });
     } catch (error) {
       logging.error(error);
       showSnackbar(
