@@ -56,7 +56,12 @@ const Admin: FC<{}> = ({}) => {
     thunkSetMonitorHistoryRetention,
     thunkDeleteMonitorHistory,
   } = useStoreActions((action) => action.monitorHistory);
-  const { isDarkMode } = useStoreState((state) => state.app);
+  const { isDarkMode, selectedEnvironment } = useStoreState(
+    (state) => state.app
+  );
+  const { thunkGetMonitorStats } = useStoreActions(
+    (actions) => actions.monitor
+  );
 
   const { control, handleSubmit, setValue, reset } = useForm<FormValues>({
     defaultValues: { retentionInDays },
@@ -191,6 +196,7 @@ const Admin: FC<{}> = ({}) => {
       };
 
       await MonitorService.uploadMonitorJsonBackup(formData, headers);
+      await thunkGetMonitorStats(selectedEnvironment);
 
       showSnackbar(t("admin.backupFileHasBeenUploaded"), "success");
       navigate("/", { state: { triggerApiCall: true } });

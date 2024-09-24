@@ -34,9 +34,8 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
   const [isButtonDisabled, setIsButtonDisabled] = useState<boolean>(false);
   const { user: currentUser } = useStoreState((state) => state.user);
   const { selectedEnvironment } = useStoreState((state) => state.app);
-  const { thunkGetMonitorGroupListByUser } = useStoreActions(
-    (actions) => actions.monitor
-  );
+  const { thunkGetMonitorGroupListByUser, thunkGetMonitorStats } =
+    useStoreActions((actions) => actions.monitor);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -110,6 +109,7 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
 
       if (isCurrentUserGroupChanged) {
         await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        await thunkGetMonitorStats(selectedEnvironment);
       }
 
       setOriginalAssignedMonitorGroups([...assignedMonitorGroups]);
