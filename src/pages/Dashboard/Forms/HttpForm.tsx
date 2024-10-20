@@ -74,9 +74,9 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   const [headers, setHeaders] = useState<{ name: string; value: string }[]>([]);
 
   const { selectedEnvironment } = useStoreState((state) => state.app);
-  const { thunkGetMonitorGroupListByUser } = useStoreActions(
-    (actions) => actions.monitor
-  );
+  const { thunkGetMonitorGroupListByUser, thunkGetMonitorStats } =
+    useStoreActions((actions) => actions.monitor);
+    
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [hasGroupSelected, setHasGroupSelected] = useState(
     monitorGroupToBeEdited?.id ? true : false
@@ -226,6 +226,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
             setAddMonitorPanel(false);
             showSnackbar(t("dashboard.addHttpForm.success"), "success");
             await thunkGetMonitorGroupListByUser(selectedEnvironment);
+            await thunkGetMonitorStats(selectedEnvironment);
           });
         }
       );
