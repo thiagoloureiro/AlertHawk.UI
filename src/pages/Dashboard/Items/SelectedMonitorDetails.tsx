@@ -59,9 +59,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   const { isDarkMode } = useStoreState((state) => state.app);
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const navigate = useNavigate();
-  const { thunkGetMonitorGroupListByUser } = useStoreActions(
-    (actions) => actions.monitor
-  );
+  const { thunkGetMonitorGroupListByUser, thunkGetMonitorStats } =
+  useStoreActions((actions) => actions.monitor);
+
   const { selectedEnvironment } = useStoreState((state) => state.app);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [openNotificationDialog, setOpenNotificationDialog] = useState(false);
@@ -83,6 +83,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
       await MonitorService.deleteMonitor(selectedMonitorItem.id).then(
         async () => {
           await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          await thunkGetMonitorStats(selectedEnvironment);
           showSnackbar(t("dashboard.deleteConfirmation"), "success");
         }
       );
