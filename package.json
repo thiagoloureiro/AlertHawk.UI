@@ -15,9 +15,9 @@
     "@emotion/styled": "^11.13.0",
     "@fontsource-variable/roboto-mono": "^5.1.0",
     "@fontsource/poppins": "^5.1.0",
-    "@mui/icons-material": "^6.1.5",
-    "@mui/material": "^6.1.5",
-    "@react-map/continents": "1.0.5",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/material": "^6.1.6",
+    "@react-map/continents": "1.0.9",
     "@types/react-helmet": "^6.1.11",
     "axios": "^1.7.7",
     "axios-retry": "^4.5.0",
@@ -37,21 +37,21 @@
     "react-input-mask": "^2.0.4",
     "react-router-dom": "^6.27.0",
     "react-spinners": "^0.14.1",
-    "recharts": "^2.13.0"
+    "recharts": "^2.13.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.1.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@types/react-input-mask": "^3.0.5",
-    "@typescript-eslint/eslint-plugin": "^8.12.1",
-    "@typescript-eslint/parser": "^8.12.1",
+    "@typescript-eslint/eslint-plugin": "^8.12.2",
+    "@typescript-eslint/parser": "^8.12.2",
     "@vitejs/plugin-react": "^4.3.3",
-    "eslint": "9.13.0",
+    "eslint": "9.14.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
     "typescript": "^5.6.3",
     "vite": "^5.4.10",
-    "vite-plugin-svgr": "^4.2.0"
+    "vite-plugin-svgr": "^4.3.0"
   }
 }
