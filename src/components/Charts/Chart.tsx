@@ -6,6 +6,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Dot,
 } from "recharts";
 import { IHistoryData } from "../../interfaces/IHistoryData";
 import moment from "moment-timezone";
@@ -34,6 +35,7 @@ const Chart: FC<IChartProps> = ({ data }) => {
                 .tz(selectedDisplayTimezone)
                 .format("YYYY-MM-DD HH:mm:ss"),
               responseTime: dataPoint.responseTime,
+              status: dataPoint.status,
             }))
             .reverse()
         );
@@ -67,6 +69,15 @@ const Chart: FC<IChartProps> = ({ data }) => {
     }))
     .reverse();
 
+  const CustomizedDot = (props: any) => {
+    const { payload } = props;
+
+    const status: boolean = payload.status;
+    const color = status ? "#26c6da" : "red";
+
+    return <Dot {...props} stroke={color} />;
+  };
+
   return (
     <div
       ref={chartContainerRef}
@@ -86,7 +97,7 @@ const Chart: FC<IChartProps> = ({ data }) => {
           dataKey="responseTime"
           stroke={chartData.length > 0 ? "#26c6da" : "transparent"}
           strokeWidth={3}
-          dot={chartData.length > 0 ? true : false}
+          dot={<CustomizedDot />}
         />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis
