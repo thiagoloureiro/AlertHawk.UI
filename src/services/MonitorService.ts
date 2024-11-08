@@ -37,13 +37,16 @@ const MonitorService = {
       appendOptionalHeaders(headers)
     ),
   getMonitorGroupListByUser: async (
-    id: Environment,
+    environment: number,
+    metric?: string,
     headers?: AxiosHeaders
   ): Promise<IMonitorGroupListByUser[]> =>
-    await requests.get(
-      `MonitorGroup/monitorDashboardGroupListByUser/${id}`,
-      appendOptionalHeaders(headers)
-    ),
+    await axiosInstance.monitoring(
+      `MonitorGroup/monitorDashboardGroupListByUser/${environment}/${
+        metric ?? "uptime1Hr"
+      }`,
+      { headers }
+    ).then(responseBody),
   getMonitorGroupListByUserToken: async (
     headers?: AxiosHeaders
   ): Promise<IMonitorGroupListByUser[]> =>
@@ -69,7 +72,6 @@ const MonitorService = {
       `Monitor/monitorStatusDashboard/${id}`,
       appendOptionalHeaders(headers)
     ),
-  // getMonitorHttpByMonitorId
   getMonitorHttpByMonitorId: async (
     id: number | undefined,
     headers?: AxiosHeaders

@@ -11,12 +11,16 @@ import {
 import { IHistoryData } from "../../interfaces/IHistoryData";
 import moment from "moment-timezone";
 import { useStoreState } from "../../hooks";
+import { useNavigate } from "react-router-dom";
 
 interface IChartProps {
+  monitorId: number;
   data: IHistoryData[];
 }
 
-const Chart: FC<IChartProps> = ({ data }) => {
+const Chart: FC<IChartProps> = ({ monitorId, data }) => {
+  const navigate = useNavigate();
+
   const { selectedDisplayTimezone, isDarkMode } = useStoreState(
     (state) => state.app
   );
@@ -71,11 +75,16 @@ const Chart: FC<IChartProps> = ({ data }) => {
 
   const CustomizedDot = (props: any) => {
     const { payload } = props;
-
     const status: boolean = payload.status;
     const color = status ? "#26c6da" : "red";
 
     return <Dot {...props} stroke={color} />;
+  };
+
+  const goToAlert = (props: any) => {
+    const { payload } = props;
+    const status: boolean = payload.status;
+    if (status == false) navigate(`/monitor-alert/${monitorId}`);
   };
 
   return (
@@ -97,6 +106,12 @@ const Chart: FC<IChartProps> = ({ data }) => {
           dataKey="responseTime"
           stroke={chartData.length > 0 ? "#26c6da" : "transparent"}
           strokeWidth={3}
+          activeDot={{
+            onClick: (evt, props) => {
+              console.log(evt);
+              goToAlert(props);
+            },
+          }}
           dot={<CustomizedDot />}
         />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />

@@ -60,7 +60,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
   const [isPaused, setIsPaused] = useState<boolean>(false);
   const navigate = useNavigate();
   const { thunkGetMonitorGroupListByUser, thunkGetMonitorStats } =
-  useStoreActions((actions) => actions.monitor);
+    useStoreActions((actions) => actions.monitor);
 
   const { selectedEnvironment } = useStoreState((state) => state.app);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
@@ -82,7 +82,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
     if (selectedMonitorItem !== null) {
       await MonitorService.deleteMonitor(selectedMonitorItem.id).then(
         async () => {
-          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          await thunkGetMonitorGroupListByUser({
+            environment: selectedEnvironment,
+          });
           await thunkGetMonitorStats(selectedEnvironment);
           showSnackbar(t("dashboard.deleteConfirmation"), "success");
         }
@@ -102,7 +104,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
         !isPaused
       );
     }
-    await thunkGetMonitorGroupListByUser(selectedEnvironment);
+    await thunkGetMonitorGroupListByUser({
+      environment: selectedEnvironment,
+    });
     setIsPaused(!isPaused);
     showSnackbar(t("dashboard.pauseConfirmation"), "success");
   };
@@ -153,6 +157,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
     if (status) {
       const greenEndIndex = Math.floor((greenBoxes + redBoxes) / 2);
+
       for (let i = 0; i < greenBoxes; i++) {
         boxes.push(
           <Box
@@ -255,7 +260,9 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      await thunkGetMonitorGroupListByUser(selectedEnvironment);
+      await thunkGetMonitorGroupListByUser({
+        environment: selectedEnvironment,
+      });
     };
 
     fetchData();
@@ -345,8 +352,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                   {t("notifications.title")}
                 </Button>
               )}
-              {
-              selectedMonitorItem !== null &&
+              {selectedMonitorItem !== null &&
                 selectedMonitorItem.urlToCheck !== undefined && (
                   <Button
                     aria-label=""
@@ -554,9 +560,12 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (7 {t("dashboard.days")})
                       </Typography>
                       <Typography variant="subtitle1">
-                    {selectedMonitorGroup.avgUptime7Days !== null && selectedMonitorGroup.avgUptime7Days !== undefined && selectedMonitorGroup.avgUptime7Days >= 0
-                      ? selectedMonitorGroup.avgUptime7Days.toFixed(2) + " %"
-                      : "N/A"}
+                        {selectedMonitorGroup.avgUptime7Days !== null &&
+                        selectedMonitorGroup.avgUptime7Days !== undefined &&
+                        selectedMonitorGroup.avgUptime7Days >= 0
+                          ? selectedMonitorGroup.avgUptime7Days.toFixed(2) +
+                            " %"
+                          : "N/A"}
                       </Typography>
                     </Box>
                     <Box
@@ -574,9 +583,12 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (30 {t("dashboard.days")})
                       </Typography>
                       <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime30Days !== null && selectedMonitorGroup.avgUptime30Days !== undefined && selectedMonitorGroup.avgUptime30Days >= 0
-                        ? selectedMonitorGroup.avgUptime30Days.toFixed(2) + " %"
-                        : "N/A"}
+                        {selectedMonitorGroup.avgUptime30Days !== null &&
+                        selectedMonitorGroup.avgUptime30Days !== undefined &&
+                        selectedMonitorGroup.avgUptime30Days >= 0
+                          ? selectedMonitorGroup.avgUptime30Days.toFixed(2) +
+                            " %"
+                          : "N/A"}
                       </Typography>
                     </Box>
                     <Box
@@ -594,9 +606,12 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (3 {t("dashboard.months")})
                       </Typography>
                       <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime3Months !== null && selectedMonitorGroup.avgUptime3Months !== undefined && selectedMonitorGroup.avgUptime3Months >= 0
-                        ? selectedMonitorGroup.avgUptime3Months.toFixed(2) + " %"
-                        : "N/A"}
+                        {selectedMonitorGroup.avgUptime3Months !== null &&
+                        selectedMonitorGroup.avgUptime3Months !== undefined &&
+                        selectedMonitorGroup.avgUptime3Months >= 0
+                          ? selectedMonitorGroup.avgUptime3Months.toFixed(2) +
+                            " %"
+                          : "N/A"}
                       </Typography>
                     </Box>
                     <Box
@@ -614,9 +629,12 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
                         (6 {t("dashboard.months")})
                       </Typography>
                       <Typography variant="subtitle1">
-                      {selectedMonitorGroup.avgUptime6Months !== null && selectedMonitorGroup.avgUptime6Months !== undefined && selectedMonitorGroup.avgUptime6Months >= 0
-                        ? selectedMonitorGroup.avgUptime6Months.toFixed(2) + " %"
-                        : "N/A"}
+                        {selectedMonitorGroup.avgUptime6Months !== null &&
+                        selectedMonitorGroup.avgUptime6Months !== undefined &&
+                        selectedMonitorGroup.avgUptime6Months >= 0
+                          ? selectedMonitorGroup.avgUptime6Months.toFixed(2) +
+                            " %"
+                          : "N/A"}
                       </Typography>
                     </Box>
                   </Box>
@@ -923,6 +941,7 @@ const SelectedMonitorDetails: FC<ISelectedMonitorDetailsProps> = ({
               <Card>
                 <CardContent>
                   <Chart
+                    monitorId={selectedMonitorItem.id}
                     data={
                       selectedMonitorItem.monitorStatusDashboard.historyData
                     }

@@ -56,7 +56,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     | "uptime30Days"
     | "uptime3Months"
     | "uptime6Months"
-  >("uptime24Hrs");
+  >("uptime1Hr");
 
   const [monitorStatus, setMonitorStatus] = useState<string>("all");
 
@@ -68,11 +68,12 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     setAddMonitorPanel(false);
     setEditMonitorPanel(false);
   }, []);
+
   const handleEnvironmentChange = (event: SelectChangeEvent<number>) => {
     setSelectedEnvironment(event.target.value as number);
   };
 
-  const handleMetricChange = (event: SelectChangeEvent<string>) => {
+  const handleMetricChange = async (event: SelectChangeEvent<string>) => {
     setSelectedMetric(
       event.target.value as
         | "uptime24Hrs"
@@ -81,6 +82,11 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
         | "uptime3Months"
         | "uptime6Months"
     );
+
+    await thunkGetMonitorGroupListByUser({
+      environment: selectedEnvironment,
+      metric: event.target.value,
+    });
   };
 
   const [selectedMonitorGroup, setSelectedMonitorGroup] =
@@ -136,7 +142,10 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
     if (location.state?.triggerApiCall) {
       const fetchData = async () => {
         try {
-          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          await thunkGetMonitorGroupListByUser({
+            environment: selectedEnvironment,
+            metric: selectedMetric,
+          });
         } catch (err) {
           logging.error(err);
         }
@@ -144,7 +153,7 @@ const Dashboard: FC<IDashboardProps> = ({}) => {
 
       fetchData();
     }
-  }, [location.state]);
+  }, [location.state, selectedMetric]);
 
   function handleAddNew(): void {
     setSelectedMonitorItem(null);
