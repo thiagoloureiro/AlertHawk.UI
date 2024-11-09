@@ -7,6 +7,7 @@ import MonitorService from "../services/MonitorService";
 import { IAgent } from "../interfaces/IAgent";
 import { Environment, Status } from "../enums/Enums";
 import { IMonitorStats } from "../interfaces/IMonitorStats";
+import { IGetMonitorGroup } from "../interfaces/IGetMonitorGroup";
 
 export interface IMonitorModel {
   monitorGroupListByUser: IMonitorGroupListByUser[];
@@ -18,7 +19,7 @@ export interface IMonitorModel {
   setResetMonitor: Action<IMonitorModel>;
   thunkGetMonitorGroupListByUser: Thunk<
     IMonitorModel,
-    Environment,
+    IGetMonitorGroup,
     any,
     StoreModel,
     Promise<Status>
@@ -42,20 +43,24 @@ const monitor: IMonitorModel = {
   }),
 
   thunkGetMonitorGroupListByUser: thunk(
-    async (actions, id: Environment, { getStoreActions }) => {
+    async (actions, request: IGetMonitorGroup, { getStoreActions }) => {
       try {
         getStoreActions().app.setIsLoading(true);
-        
+
         // Start both asynchronous operations in parallel
-        const [userMonitorGroupList, generalMonitorGroupList] = await Promise.all([
-          MonitorService.getMonitorGroupListByUser(id),
-          MonitorService.getMonitorGroupList()
-        ]);
-        
+        const [userMonitorGroupList, generalMonitorGroupList] =
+          await Promise.all([
+            MonitorService.getMonitorGroupListByUser(
+              request.environment,
+              request?.metric
+            ),
+            MonitorService.getMonitorGroupList(),
+          ]);
+
         // Now that both promises have resolved, update the state with the results
         actions.setMonitorGroupListByUser(userMonitorGroupList);
         actions.setMonitorGroupList(generalMonitorGroupList);
-        
+
         return Status.Success;
       } catch (err: any) {
         logging.error(err);
@@ -66,7 +71,7 @@ const monitor: IMonitorModel = {
         getStoreActions().app.setIsLoading(false);
       }
     }
-  ),    
+  ),
   agents: [],
   setAgents: action((state, payload) => {
     state.agents = payload;
