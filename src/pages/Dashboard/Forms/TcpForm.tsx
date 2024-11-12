@@ -10,7 +10,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useStoreActions, useStoreState } from "../../../hooks";
-import {  Environment, Region } from "../../../enums/Enums";
+import { Environment, Region } from "../../../enums/Enums";
 import { useForm } from "react-hook-form";
 import MonitorService from "../../../services/MonitorService";
 import { showSnackbar } from "../../../utils/snackbarHelper";
@@ -76,11 +76,10 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
 
   const [monitorAgents, setMonitorAgents] = useState<IAgent[]>([]);
 
-
   const [dataToEdit, setDataToEdit] = useState(null);
 
   useEffect(() => {
-    if(monitorAgents.length === 0) {
+    if (monitorAgents.length === 0) {
       fillMonitorAgentList();
     }
     if (monitorGroupList.length === 0) {
@@ -106,11 +105,13 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
     });
   };
 
-  const filteredRegions = Array.from(new Set(
-    monitorAgents
-      .map(agent => agent.monitorRegion)
-      .filter(region => Object.values(Region).includes(region))
-  ));
+  const filteredRegions = Array.from(
+    new Set(
+      monitorAgents
+        .map((agent) => agent.monitorRegion)
+        .filter((region) => Object.values(Region).includes(region))
+    )
+  );
   const regionEntries = Object.entries(Region);
 
   const sortedFilteredRegions = filteredRegions.sort((a, b) => {
@@ -157,13 +158,17 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
             setIsButtonDisabled(false);
             setAddMonitorPanel(false);
             showSnackbar(t("dashboard.addHttpForm.success"), "success");
-            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+            await thunkGetMonitorGroupListByUser({
+              environment: selectedEnvironment,
+            });
           });
         } else {
           setIsButtonDisabled(false);
           setAddMonitorPanel(false);
           showSnackbar(t("dashboard.addHttpForm.success"), "success");
-          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          await thunkGetMonitorGroupListByUser({
+            environment: selectedEnvironment,
+          });
         }
       });
     } else {
@@ -176,7 +181,9 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
             setIsButtonDisabled(false);
             setAddMonitorPanel(false);
             showSnackbar(t("dashboard.addHttpForm.success"), "success");
-            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+            await thunkGetMonitorGroupListByUser({
+              environment: selectedEnvironment,
+            });
           });
         }
       );
@@ -206,7 +213,7 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
               defaultValue={monitorGroupToBeEdited?.id}
-            // disabled={editMode}
+              // disabled={editMode}
             >
               {monitorGroupList
                 .sort((a, b) => a.name.localeCompare(b.name))
@@ -244,7 +251,6 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   autoComplete="off"
                   error={!!errors.name}
                   inputProps={{ maxLength: 100 }}
-
                 />
               </FormControl>
             </Box>
@@ -269,10 +275,10 @@ const TcpForm: React.FC<IAddTcpMonitorProps> = ({
                   label={t("dashboard.addHttpFrom.monitorRegion")}
                   error={!!errors.monitorRegion}
                 >
-                  {sortedFilteredRegions.map(region => (
+                  {sortedFilteredRegions.map((region) => (
                     <MenuItem key={region} value={region}>
                       {regionEntries.find(([, value]) => value === region)?.[0]}
-                      </MenuItem>
+                    </MenuItem>
                   ))}
                 </Select>
               </FormControl>

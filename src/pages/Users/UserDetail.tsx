@@ -108,7 +108,9 @@ const UserDetail: FC<IUserDetailProps> = ({ user, handleUserSelection }) => {
       );
 
       if (isCurrentUserGroupChanged) {
-        await thunkGetMonitorGroupListByUser(selectedEnvironment);
+        await thunkGetMonitorGroupListByUser({
+          environment: selectedEnvironment,
+        });
         await thunkGetMonitorStats(selectedEnvironment);
       }
 

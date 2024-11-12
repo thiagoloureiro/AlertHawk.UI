@@ -76,7 +76,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
   const { selectedEnvironment } = useStoreState((state) => state.app);
   const { thunkGetMonitorGroupListByUser, thunkGetMonitorStats } =
     useStoreActions((actions) => actions.monitor);
-    
+
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const [hasGroupSelected, setHasGroupSelected] = useState(
     monitorGroupToBeEdited?.id ? true : false
@@ -117,11 +117,13 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
       setMonitorGroupList(response);
     });
   };
-  const filteredRegions = Array.from(new Set(
-    monitorAgents
-      .map(agent => agent.monitorRegion)
-      .filter(region => Object.values(Region).includes(region))
-  ));
+  const filteredRegions = Array.from(
+    new Set(
+      monitorAgents
+        .map((agent) => agent.monitorRegion)
+        .filter((region) => Object.values(Region).includes(region))
+    )
+  );
 
   const regionEntries = Object.entries(Region);
 
@@ -206,13 +208,17 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
             setIsButtonDisabled(false);
             setAddMonitorPanel(false);
             showSnackbar(t("dashboard.updateHttpForm.success"), "success");
-            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+            await thunkGetMonitorGroupListByUser({
+              environment: selectedEnvironment,
+            });
           });
         } else {
           setIsButtonDisabled(false);
           setAddMonitorPanel(false);
           showSnackbar(t("dashboard.updateHttpForm.success"), "success");
-          await thunkGetMonitorGroupListByUser(selectedEnvironment);
+          await thunkGetMonitorGroupListByUser({
+            environment: selectedEnvironment,
+          });
         }
       });
     } else {
@@ -225,7 +231,9 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
             setIsButtonDisabled(false);
             setAddMonitorPanel(false);
             showSnackbar(t("dashboard.addHttpForm.success"), "success");
-            await thunkGetMonitorGroupListByUser(selectedEnvironment);
+            await thunkGetMonitorGroupListByUser({
+              environment: selectedEnvironment,
+            });
             await thunkGetMonitorStats(selectedEnvironment);
           });
         }
@@ -256,7 +264,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
               defaultValue={monitorGroupToBeEdited?.id}
               onChange={handleMonitorGroupChange}
               label={t("dashboard.addHttpForm.monitorGroup")}
-            // disabled={editMode}
+              // disabled={editMode}
             >
               {monitorGroupList.length > 0 &&
                 monitorGroupList
@@ -358,7 +366,7 @@ const HttpForm: React.FC<IAddHttpMonitorProps> = ({
                   error={!!errors.monitorRegion}
                   defaultValue={monitorItemToBeEdited?.monitorRegion}
                 >
-                  {sortedFilteredRegions.map(region => (
+                  {sortedFilteredRegions.map((region) => (
                     <MenuItem key={region} value={region}>
                       {regionEntries.find(([, value]) => value === region)?.[0]}
                     </MenuItem>

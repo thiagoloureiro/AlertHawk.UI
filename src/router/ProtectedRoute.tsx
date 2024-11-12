@@ -153,7 +153,9 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
         setIsMonitorLoading(true);
         await Promise.all([
           thunkGetMonitorStats(selectedEnvironment),
-          thunkGetMonitorGroupListByUser(selectedEnvironment),
+          thunkGetMonitorGroupListByUser({
+            environment: selectedEnvironment,
+          }),
           thunkGetMonitorAgents(),
         ]);
       } catch (error) {
@@ -175,7 +177,9 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ children }) => {
       try {
         await Promise.all([
           thunkGetMonitorStats(selectedEnvironment),
-          thunkGetMonitorGroupListByUser(selectedEnvironment),
+          thunkGetMonitorGroupListByUser({
+            environment: selectedEnvironment,
+          }),
           thunkGetMonitorAgents(),
         ]);
       } catch (error) {
