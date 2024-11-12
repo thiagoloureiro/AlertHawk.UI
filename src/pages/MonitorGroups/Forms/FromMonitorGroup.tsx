@@ -1,28 +1,13 @@
-import { useForm } from "react-hook-form";
+import { useForm } from 'react-hook-form';
 import logging from "../../../utils/logging";
 import { useTranslation } from "react-i18next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import DeleteIcon from "@mui/icons-material/Delete";
 import { showSnackbar } from "../../../utils/snackbarHelper";
-import MonitorService from "../../../services/MonitorService";
-import { useStoreActions, useStoreState } from "../../../hooks";
-import { IMonitorGroupListByUser } from "../../../interfaces/IMonitorGroupListByUser";
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  FormControl,
-  TextField,
-  Button,
-  CircularProgress,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  Stack,
-} from "@mui/material";
+import MonitorService from '../../../services/MonitorService';
+import { useStoreActions, useStoreState } from '../../../hooks';
+import { IMonitorGroupListByUser } from '../../../interfaces/IMonitorGroupListByUser';
+import { Box, Typography, Card, CardContent, FormControl, TextField, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack } from '@mui/material';
 
 interface IFromMonitorGroupProps {
   setAddMonitorPanel: (val: boolean) => void;
@@ -30,11 +15,7 @@ interface IFromMonitorGroupProps {
   reloadData: () => void;
 }
 
-const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({
-  setAddMonitorPanel,
-  selectedMonitorGroup,
-  reloadData,
-}) => {
+const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({ setAddMonitorPanel, selectedMonitorGroup, reloadData }) => {
   const { t } = useTranslation("global");
   const { isDarkMode } = useStoreState((state) => state.app);
   const { selectedEnvironment } = useStoreState((state) => state.app);
@@ -50,7 +31,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({
     handleSubmit,
     setValue,
     formState: { errors },
-    watch,
+    watch
   } = useForm({
     defaultValues: {
       name: "",
@@ -78,20 +59,18 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({
   const handleDeleteConfirm = async () => {
     setOpenDeleteDialog(false);
     if (selectedMonitorGroup !== null) {
-      await MonitorService.deleteGroupMonitor(selectedMonitorGroup.id)
-        .then(async () => {
-          await thunkGetMonitorGroupListByUser({
-            environment: selectedEnvironment,
-          });
+      await MonitorService.deleteGroupMonitor(selectedMonitorGroup.id).then(
+        async () => {
+          await thunkGetMonitorGroupListByUser(selectedEnvironment);
           showSnackbar(t("monitorGroups.deleteConfirmation"), "success");
           reloadData();
           setOpenDeleteDialog(false);
           setAddMonitorPanel(false);
-        })
-        .catch((err) => {
-          logging.error(err);
-          showSnackbar(t(err.response.data), "error");
-        });
+        }
+      ).catch((err) => {
+        logging.error(err);
+        showSnackbar(t(err.response.data), "error");
+      });
     }
   };
 
@@ -101,9 +80,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({
     if (selectedMonitorGroup) {
       data.id = selectedMonitorGroup.id;
       await MonitorService.editMonitorGroup(data).then(async () => {
-        await thunkGetMonitorGroupListByUser({
-          environment: selectedEnvironment,
-        });
+        await thunkGetMonitorGroupListByUser(selectedEnvironment);
         reloadData();
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
@@ -111,9 +88,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({
       });
     } else {
       await MonitorService.createMonitorGroup(data).then(async () => {
-        await thunkGetMonitorGroupListByUser({
-          environment: selectedEnvironment,
-        });
+        await thunkGetMonitorGroupListByUser(selectedEnvironment);
         reloadData();
         setIsButtonDisabled(false);
         setAddMonitorPanel(false);
@@ -139,21 +114,17 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({
             <div style={{ width: "75%", minWidth: "200px" }}>
               <FormControl fullWidth>
                 <Typography variant="h5" px={2} sx={{ marginBottom: "-15px" }}>
-                  {!selectedMonitorGroup
-                    ? t("monitorGroups.addMonitorGroup")
-                    : t("monitorGroups.editMonitorGroup")}
+                  {(!selectedMonitorGroup) ? (t("monitorGroups.addMonitorGroup")) : t("monitorGroups.editMonitorGroup")}
                 </Typography>
               </FormControl>
             </div>
             <div>
-              {selectedMonitorGroup !== null && (
+              {(selectedMonitorGroup !== null) && (
                 <FormControl fullWidth>
                   <Button
                     aria-label="delete"
                     startIcon={
-                      <DeleteIcon
-                        sx={{ color: isDarkMode ? "inherit" : "#fff" }}
-                      />
+                      <DeleteIcon sx={{ color: isDarkMode ? "inherit" : "#fff" }} />
                     }
                     color="error"
                     onClick={handleDeleteBtn}
@@ -187,7 +158,7 @@ const FromMonitorGroup: React.FC<IFromMonitorGroupProps> = ({
                     error={!!errors.name}
                     value={watchName}
                     inputProps={{ maxLength: 100 }}
-                  />
+                    />
                 </FormControl>
               </Box>
               <Box

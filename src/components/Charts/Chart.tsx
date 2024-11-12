@@ -6,21 +6,16 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Dot,
 } from "recharts";
 import { IHistoryData } from "../../interfaces/IHistoryData";
 import moment from "moment-timezone";
 import { useStoreState } from "../../hooks";
-import { useNavigate } from "react-router-dom";
 
 interface IChartProps {
-  monitorId: number;
   data: IHistoryData[];
 }
 
-const Chart: FC<IChartProps> = ({ monitorId, data }) => {
-  const navigate = useNavigate();
-
+const Chart: FC<IChartProps> = ({ data }) => {
   const { selectedDisplayTimezone, isDarkMode } = useStoreState(
     (state) => state.app
   );
@@ -39,7 +34,6 @@ const Chart: FC<IChartProps> = ({ monitorId, data }) => {
                 .tz(selectedDisplayTimezone)
                 .format("YYYY-MM-DD HH:mm:ss"),
               responseTime: dataPoint.responseTime,
-              status: dataPoint.status,
             }))
             .reverse()
         );
@@ -73,20 +67,6 @@ const Chart: FC<IChartProps> = ({ monitorId, data }) => {
     }))
     .reverse();
 
-  const CustomizedDot = (props: any) => {
-    const { payload } = props;
-    const status: boolean = payload.status;
-    const color = status ? "#26c6da" : "red";
-
-    return <Dot {...props} stroke={color} />;
-  };
-
-  const goToAlert = (props: any) => {
-    const { payload } = props;
-    const status: boolean = payload.status;
-    if (status == false) navigate(`/monitor-alert/${monitorId}`);
-  };
-
   return (
     <div
       ref={chartContainerRef}
@@ -106,13 +86,7 @@ const Chart: FC<IChartProps> = ({ monitorId, data }) => {
           dataKey="responseTime"
           stroke={chartData.length > 0 ? "#26c6da" : "transparent"}
           strokeWidth={3}
-          activeDot={{
-            onClick: (evt, props) => {
-              console.log(evt);
-              goToAlert(props);
-            },
-          }}
-          dot={<CustomizedDot />}
+          dot={chartData.length > 0 ? true : false}
         />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis
