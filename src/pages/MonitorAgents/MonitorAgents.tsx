@@ -81,7 +81,9 @@ const MonitorAgents: FC<IMonitorAgentsProps> = () => {
   }, [agents, selectedContinent]);
 
   useEffect(() => {
-    const svg = document.getElementById("svg2-r0");
+    //const svg = document.getElementById("svg2-r0");
+    const svgElements = document.querySelectorAll('[id^="svg2-"]');
+    const svg = svgElements[0] as SVGSVGElement;
 
     if (svg) {
       const regionTasksMap: { [key: string]: number } = {};
