@@ -17,7 +17,7 @@
     "@fontsource/poppins": "^5.1.0",
     "@mui/icons-material": "^6.1.8",
     "@mui/material": "^6.1.8",
-    "@react-map/continents": "1.0.5",
+    "@react-map/continents": "1.0.9",
     "@types/react-helmet": "^6.1.11",
     "axios": "^1.7.7",
     "axios-retry": "^4.5.0",
