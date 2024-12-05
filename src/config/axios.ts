@@ -19,18 +19,10 @@ const createAxiosInstance = (baseUrl: string) => {
       return retryCount * 1000;
     },
     retryCondition: (error) => {
-      if (
-        error.response?.status === 400 ||
-        error.response?.status === 401 ||
-        error.response?.status === 403 ||
-        error.response?.status === 404 ||
-        error.response?.status === 500
-      ) {
-        // Do not retry on 400, 401, 403, 404 or 500
-        return false;
-      }
-
-      return true;
+      const statusCode = error.response?.status;
+      // Do not retry on 400, 401, 403, 404 or 500
+      const codes = [400, 401, 403, 404, 500];
+      return !codes.some(code => code === statusCode);
     },
   });
 
