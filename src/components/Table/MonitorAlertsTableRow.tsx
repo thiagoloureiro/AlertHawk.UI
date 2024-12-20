@@ -40,7 +40,7 @@ const MonitorAlertsTableRow: FC<IMonitorAlertsTableRowProps> = ({
                   moment
                     .utc(monitorAlert.timeStamp)
                     .tz(selectedDisplayTimezone)
-                    .format("DD/MM/YYYY HH:mm:ss")
+                    .format("DD/MMM/YYYY HH:mm:ss")
                 }
               </Typography>
             </Box>
