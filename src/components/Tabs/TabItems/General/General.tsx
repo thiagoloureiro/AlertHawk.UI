@@ -50,13 +50,21 @@ const languageOptions = [
   { code: "em-EM", text: "😀📅👌🔡👁️‍🗨️" }
 ];
 
+const dateTimeFormatOptions = [
+  { value: "YYYY-MM-DD HH:mm", label: "2024-03-21 15:30" },
+  { value: "DD/MM/YYYY HH:mm", label: "21/03/2024 15:30" },
+  { value: "MM/DD/YYYY hh:mm A", label: "03/21/2024 03:30 PM" },
+  { value: "DD.MM.YYYY HH:mm", label: "21.03.2024 15:30" },
+  { value: "MMMM DD, YYYY HH:mm", label: "March 21, 2024 15:30" },
+];
+
 const General: FC<IGeneralProps> = () => {
   const { t, i18n } = useTranslation("global");
 
-  const { isDarkMode, selectedDisplayTimezone } = useStoreState(
+  const { isDarkMode, selectedDisplayTimezone, dateTimeFormat } = useStoreState(
     (state) => state.app
   );
-  const { setSelectedDisplayTimezone, setIsDarkMode } = useStoreActions(
+  const { setSelectedDisplayTimezone, setIsDarkMode, setDateTimeFormat } = useStoreActions(
     (action) => action.app
   );
 
@@ -124,6 +132,15 @@ const General: FC<IGeneralProps> = () => {
     );
   };
 
+  const handleDateFormatChange = (event: SelectChangeEvent<string>) => {
+    const format = event.target.value;
+    setDateTimeFormat(format);
+    showSnackbar(
+      t("settings.general.dateFormatHasBeenChanged"),
+      "success"
+    );
+  };
+
   return (
     <Stack
       direction="column"
@@ -160,6 +177,26 @@ const General: FC<IGeneralProps> = () => {
             ))}
           </Select>
         </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel id="date-format-selection">
+            {t("settings.general.dateTimeFormat")}
+          </InputLabel>
+          <Select
+            labelId="date-format-selection"
+            id="date-format-selection"
+            value={dateTimeFormat || dateTimeFormatOptions[0].value}
+            label={t("settings.general.dateTimeFormat")}
+            onChange={handleDateFormatChange}
+          >
+            {dateTimeFormatOptions.map((format, key) => (
+              <MenuItem value={format.value} key={key}>
+                {format.label}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
         <Autocomplete
           disableClearable
           fullWidth
@@ -179,6 +216,7 @@ const General: FC<IGeneralProps> = () => {
             />
           )}
         />
+
         <Box sx={{ width: "100%" }}>
           <Typography
             variant="body1"

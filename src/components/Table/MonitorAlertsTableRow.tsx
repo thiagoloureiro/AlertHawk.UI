@@ -12,7 +12,7 @@ const MonitorAlertsTableRow: FC<IMonitorAlertsTableRowProps> = ({
   monitorAlert,
 }) => {
 
-  const { selectedDisplayTimezone } = useStoreState((state) => state.app);
+  const { selectedDisplayTimezone, dateTimeFormat } = useStoreState((state) => state.app);
 
   return (
     <Fragment>
@@ -36,12 +36,10 @@ const MonitorAlertsTableRow: FC<IMonitorAlertsTableRowProps> = ({
               }}
             >
               <Typography variant="body1" fontWeight={500}>
-                {
-                  moment
-                    .utc(monitorAlert.timeStamp)
-                    .tz(selectedDisplayTimezone)
-                    .format("DD/MMM/YYYY HH:mm:ss")
-                }
+                {moment
+                  .utc(monitorAlert.timeStamp)
+                  .tz(selectedDisplayTimezone)
+                  .format(dateTimeFormat || "DD/MMM/YYYY HH:mm:ss")}
               </Typography>
             </Box>
           </Box>
