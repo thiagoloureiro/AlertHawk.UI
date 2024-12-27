@@ -127,7 +127,9 @@
       "light": "Vaalea",
       "lightThemeHasBeenEnabled": "Vaalea teema on otettu käyttöön",
       "dark": "Tumma",
-      "darkThemeHasBeenEnabled": "Tumma teema on otettu käyttöön"
+      "darkThemeHasBeenEnabled": "Tumma teema on otettu käyttöön",
+      "dateTimeFormat": "Päivämäärä/aika-muoto",
+      "dateFormatHasBeenChanged": "Päivämäärän muotoa on muutettu"
     }
   },
   "about": {

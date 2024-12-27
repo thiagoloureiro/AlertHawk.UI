@@ -127,7 +127,9 @@
       "light": "Светлая",
       "lightThemeHasBeenEnabled": "Светлая тема включена",
       "dark": "Темная",
-      "darkThemeHasBeenEnabled": "Темная тема включена"
+      "darkThemeHasBeenEnabled": "Темная тема включена",
+      "dateTimeFormat": "Формат даты/времени",
+      "dateFormatHasBeenChanged": "Формат даты был изменен"
     }
   },
   "about": {

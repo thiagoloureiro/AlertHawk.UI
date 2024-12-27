@@ -127,7 +127,9 @@
       "light": "Açık",
       "lightThemeHasBeenEnabled": "Açık tema aktifleştirildi",
       "dark": "Koyu",
-      "darkThemeHasBeenEnabled": "Koyu tema aktifleştirildi"
+      "darkThemeHasBeenEnabled": "Koyu tema aktifleştirildi",
+      "dateTimeFormat": "Tarih/saat biçimi",
+      "dateFormatHasBeenChanged": "Tarih biçimi değiştirildi"
     }
   },
   "about": {
