@@ -20,6 +20,7 @@ RUN apk update && apk upgrade
 
 USER nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY privacy.html /usr/share/nginx/html
 
 COPY --from=react-build /app/dist /usr/share/nginx/html
 EXPOSE 80
