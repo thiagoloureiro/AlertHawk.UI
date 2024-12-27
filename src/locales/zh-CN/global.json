@@ -127,7 +127,9 @@
       "light": "明亮",
       "lightThemeHasBeenEnabled": "已启用明亮主题",
       "dark": "暗黑",
-      "darkThemeHasBeenEnabled": "已启用暗黑主题"
+      "darkThemeHasBeenEnabled": "已启用暗黑主题",
+      "dateTimeFormat": "日期/时间格式",
+      "dateFormatHasBeenChanged": "日期格式已更改"
     }
   },
   "about": {

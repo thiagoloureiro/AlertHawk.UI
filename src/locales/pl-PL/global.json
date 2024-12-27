@@ -127,7 +127,9 @@
       "light": "Jasny",
       "lightThemeHasBeenEnabled": "Motyw jasny został włączony",
       "dark": "Ciemny",
-      "darkThemeHasBeenEnabled": "Motyw ciemny został włączony"
+      "darkThemeHasBeenEnabled": "Motyw ciemny został włączony",
+      "dateTimeFormat": "Format daty/czasu",
+      "dateFormatHasBeenChanged": "Format daty został zmieniony"
     }
   },
   "about": {

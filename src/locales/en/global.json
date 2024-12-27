@@ -1,0 +1,8 @@
+{
+  "settings": {
+    "general": {
+      "dateTimeFormat": "Date/time format",
+      "dateFormatHasBeenChanged": "Date format has been changed"
+    }
+  }
+} 

@@ -123,7 +123,9 @@
       "light": "💡",
       "lightThemeHasBeenEnabled": "💡🎨🔄️",
       "dark": "🌑",
-      "darkThemeHasBeenEnabled": "🌑🎨🔄️"
+      "darkThemeHasBeenEnabled": "🌑🎨🔄️",
+      "dateTimeFormat": "📅⌚️",
+      "dateFormatHasBeenChanged": "📅✅"
     }
   },
   "about": {

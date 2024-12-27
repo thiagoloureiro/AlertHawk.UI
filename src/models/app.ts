@@ -22,6 +22,8 @@ export interface IAppModel {
   setSelectedEnvironment: Action<IAppModel, Environment>;
   refreshRate: string | number;
   setRefreshRate: Action<IAppModel, string | number>;
+  dateTimeFormat: string;
+  setDateTimeFormat: Action<IAppModel, string>;
 }
 
 const defaultAppState = {
@@ -34,6 +36,7 @@ const defaultAppState = {
   selectedDisplayTimezone: momentTZ.tz.guess(),
   selectedEnvironment: Environment.Production,
   refreshRate: "",
+  dateTimeFormat: localStorage.getItem("dateTimeFormat") || "YYYY-MM-DD HH:mm",
 };
 
 const app: IAppModel = {
@@ -75,6 +78,11 @@ const app: IAppModel = {
   refreshRate: defaultAppState.refreshRate,
   setRefreshRate: action((state, payload) => {
     state.refreshRate = payload;
+  }),
+  dateTimeFormat: defaultAppState.dateTimeFormat,
+  setDateTimeFormat: action((state, payload) => {
+    localStorage.setItem("dateTimeFormat", payload);
+    state.dateTimeFormat = payload;
   }),
 };
 

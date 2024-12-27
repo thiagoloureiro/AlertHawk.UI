@@ -127,7 +127,9 @@
       "light": "라이트",
       "lightThemeHasBeenEnabled": "라이트 테마가 활성화되었습니다",
       "dark": "다크",
-      "darkThemeHasBeenEnabled": "다크 테마가 활성화되었습니다"
+      "darkThemeHasBeenEnabled": "다크 테마가 활성화되었습니다",
+      "dateTimeFormat": "날짜/시간 형식",
+      "dateFormatHasBeenChanged": "날짜 형식이 변경되었습니다"
     }
   },
   "about": {

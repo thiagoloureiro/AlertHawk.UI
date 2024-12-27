@@ -127,7 +127,9 @@
       "light": "Hell",
       "lightThemeHasBeenEnabled": "Das Erscheinungsbild Hell wurde aktiviert",
       "dark": "Dunkel",
-      "darkThemeHasBeenEnabled": "Das Erscheinungsbild Dunkel wurde aktiviert"
+      "darkThemeHasBeenEnabled": "Das Erscheinungsbild Dunkel wurde aktiviert",
+      "dateTimeFormat": "Datum/Uhrzeit-Format",
+      "dateFormatHasBeenChanged": "Datumsformat wurde geändert"
     }
   },
   "about": {

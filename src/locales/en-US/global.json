@@ -128,7 +128,9 @@
       "light": "Light",
       "lightThemeHasBeenEnabled": "Light theme has been enabled",
       "dark": "Dark",
-      "darkThemeHasBeenEnabled": "Dark theme has been enabled"
+      "darkThemeHasBeenEnabled": "Dark theme has been enabled",
+      "dateTimeFormat": "Date/time format",
+      "dateFormatHasBeenChanged": "Date format has been changed"
     }
   },
   "about": {

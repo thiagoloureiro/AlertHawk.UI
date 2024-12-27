@@ -127,7 +127,9 @@
       "light": "Світла",
       "lightThemeHasBeenEnabled": "Світла тема увімкнена",
       "dark": "Темна",
-      "darkThemeHasBeenEnabled": "Темна тема увімкнена"
+      "darkThemeHasBeenEnabled": "Темна тема увімкнена",
+      "dateTimeFormat": "Формат дати/часу",
+      "dateFormatHasBeenChanged": "Формат дати було змінено"
     }
   },
   "about": {

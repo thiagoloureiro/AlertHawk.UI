@@ -127,7 +127,9 @@
       "light": "प्रकाश",
       "lightThemeHasBeenEnabled": "प्रकाशमान थीम सक्रिय की गई है",
       "dark": "अंधेरा",
-      "darkThemeHasBeenEnabled": "डार्क थीम सक्रिय की गई है"
+      "darkThemeHasBeenEnabled": "डार्क थीम सक्रिय की गई है",
+      "dateTimeFormat": "दिनांक/समय प्रारूप",
+      "dateFormatHasBeenChanged": "दिनांक प्रारूप बदल दिया गया है"
     }
   },
   "about": {

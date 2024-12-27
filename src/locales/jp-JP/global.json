@@ -127,7 +127,9 @@
       "light": "ライト",
       "lightThemeHasBeenEnabled": "ライトテーマが有効になりました",
       "dark": "ダーク",
-      "darkThemeHasBeenEnabled": "ダークテーマが有効になりました"
+      "darkThemeHasBeenEnabled": "ダークテーマが有効になりました",
+      "dateTimeFormat": "日付/時刻形式",
+      "dateFormatHasBeenChanged": "日付形式が変更されました"
     }
   },
   "about": {
