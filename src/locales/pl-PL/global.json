@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "Proszę powtórz hasło",
     "thePasswordsDoNotMatch": "Hasła nie pasują do siebie",
     "passwordHasBeenUpdatedSuccessfully": "Hasło zostało pomyślnie zaktualizowane"
+  },
+  "monitorCharts": {
+    "text": "Wykresy",
+    "uptime": "Czas działania",
+    "downtime": "Czas przestoju",
+    "allGroups": "Wszystkie grupy",
+    "group": "Grupa"
   }
 }

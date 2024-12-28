@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "パスワードを再入力してください",
     "thePasswordsDoNotMatch": "パスワードが一致しません",
     "passwordHasBeenUpdatedSuccessfully": "パスワードが正常に更新されました"
+  },
+  "monitorCharts": {
+    "text": "チャート",
+    "uptime": "稼働時間",
+    "downtime": "停止時間",
+    "allGroups": "すべてのグループ",
+    "group": "グループ"
   }
 }

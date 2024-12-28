@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "Пожалуйста, повторите пароль",
     "thePasswordsDoNotMatch": "Пароли не совпадают",
     "passwordHasBeenUpdatedSuccessfully": "Пароль успешно обновлен"
+  },
+  "monitorCharts": {
+    "text": "Графики",
+    "uptime": "Время работы",
+    "downtime": "Время простоя",
+    "allGroups": "Все группы",
+    "group": "Группа"
   }
 }

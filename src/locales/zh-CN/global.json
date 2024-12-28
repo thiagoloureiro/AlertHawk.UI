@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "请重复输入密码",
     "thePasswordsDoNotMatch": "两次输入的密码不一致",
     "passwordHasBeenUpdatedSuccessfully": "密码已成功更新"
+  },
+  "monitorCharts": {
+    "text": "图表",
+    "uptime": "正常运行时间",
+    "downtime": "停机时间",
+    "allGroups": "所有组",
+    "group": "组"
   }
 }
