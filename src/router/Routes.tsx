@@ -8,6 +8,8 @@ import ProtectedRoute from "./ProtectedRoute";
 import MonitorGroups from "../pages/MonitorGroups/MonitorGroups";
 import Notifications from "../pages/Notifications/Notifications";
 import Admin from "../pages/Admin/Admin";
+import MonitorCharts from "../pages/MonitorCharts/MonitorCharts";
+import MonitorChartsList from "../pages/MonitorCharts/MonitorChartsList";
 
 const appRoutes: IRoute[] = [
   {
@@ -79,6 +81,22 @@ const appRoutes: IRoute[] = [
     element: (
       <ProtectedRoute>
         <Admin />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/monitor-charts",
+    element: (
+      <ProtectedRoute>
+        <MonitorChartsList />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/monitor-charts/:monitorId",
+    element: (
+      <ProtectedRoute>
+        <MonitorCharts />
       </ProtectedRoute>
     ),
   },

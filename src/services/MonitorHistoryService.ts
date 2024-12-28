@@ -3,6 +3,7 @@ import axiosInstance from "../config/axios";
 import appendOptionalHeaders from "../utils/axiosHelper";
 import { AxiosHeaders } from "../interfaces/axios/IAxiosHeaders";
 import { IHistoryRetentionInDays } from "../interfaces/responses/monitorHistory/IHistoryRetentionInDays";
+import { IHistoryData } from "../interfaces/IHistoryData";
 
 const responseBody = (response: AxiosResponse) => response.data;
 const requests = {
@@ -15,6 +16,7 @@ const requests = {
   delete: (url: string, headers?: AxiosHeaders) =>
     axiosInstance.monitoring.delete(url, { headers }).then(responseBody),
 };
+
 const MonitorHistoryService = {
   getMonitorHistoryCount: async (headers?: AxiosHeaders): Promise<number> =>
     await requests.get(
@@ -39,6 +41,15 @@ const MonitorHistoryService = {
     ),
   deleteMonitorHistory: async (headers?: AxiosHeaders): Promise<void> =>
     await requests.delete(`MonitorHistory`, appendOptionalHeaders(headers)),
+  getHistoryByDays: async (
+    monitorId: number,
+    days: number = 30,
+    headers?: AxiosHeaders
+  ): Promise<IHistoryData[]> =>
+    await requests.get(
+      `MonitorHistory/MonitorHistoryByIdDays/${monitorId}/${days}`,
+      appendOptionalHeaders(headers)
+    ),
 };
 
 export default MonitorHistoryService;

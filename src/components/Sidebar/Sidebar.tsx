@@ -20,6 +20,7 @@ import {
   AddAlertOutlined as AddAlertOutlinedIcon,
   ErrorOutlineOutlined as ErrorOutlineOutlinedIcon,
   AdminPanelSettingsOutlined as AdminPanelSettingsOutlinedIcon,
+  PieChartOutlined as PieChartOutlinedIcon,
 } from "@mui/icons-material";
 import { styled, Theme, CSSObject } from "@mui/material/styles";
 import { useStoreState } from "../../hooks";
@@ -129,6 +130,11 @@ const Sidebar: FC<ISidebarProps> = ({ isOpen, onToggle }) => {
       text: t("sidebar.monitorAlert"),
       pathname: "/monitor-alert",
       icon: <ErrorOutlineOutlinedIcon />,
+    },
+    {
+      text: t("sidebar.monitorCharts"),
+      pathname: "/monitor-charts",
+      icon: <PieChartOutlinedIcon />,
     },
     {
       text: t("sidebar.notificationManagement"),
