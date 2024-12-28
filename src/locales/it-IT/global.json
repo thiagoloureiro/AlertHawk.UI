@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "Si prega di ripetere la password",
     "thePasswordsDoNotMatch": "Le password non corrispondono",
     "passwordHasBeenUpdatedSuccessfully": "La password è stata aggiornata con successo"
+  },
+  "monitorCharts": {
+    "text": "Grafici",
+    "uptime": "Tempo di attività",
+    "downtime": "Tempo di inattività",
+    "allGroups": "Tutti i gruppi",
+    "group": "Gruppo"
   }
 }

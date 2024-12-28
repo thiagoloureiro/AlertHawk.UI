@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "Lütfen şifreyi tekrar giriniz",
     "thePasswordsDoNotMatch": "Şifreler eşleşmiyor",
     "passwordHasBeenUpdatedSuccessfully": "Şifreniz başarıyla güncellendi"
+  },
+  "monitorCharts": {
+    "text": "Grafikler",
+    "uptime": "Çalışma süresi",
+    "downtime": "Kesinti süresi",
+    "allGroups": "Tüm gruplar",
+    "group": "Grup"
   }
 }

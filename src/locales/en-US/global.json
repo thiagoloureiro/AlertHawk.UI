@@ -15,7 +15,8 @@
     "monitorAlert": "Monitor Alert",
     "users": "Users",
     "settings": "Settings",
-    "monitorGroups": "Monitor Groups"
+    "monitorGroups": "Monitor Groups",
+    "monitorCharts": "Monitor Charts"
   },
   "dashboard": {
     "text": "Dashboard",
@@ -270,5 +271,12 @@
     "pleaseRepeatThePassword": "Please repeat the password",
     "thePasswordsDoNotMatch": "The passwords do not match",
     "passwordHasBeenUpdatedSuccessfully": "Password has been updated successfully"
+  },
+  "monitorCharts": {
+    "text": "Charts",
+    "uptime": "Uptime",
+    "downtime": "Downtime",
+    "allGroups": "All Groups",
+    "group": "Group"
   }
 }

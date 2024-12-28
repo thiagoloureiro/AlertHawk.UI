@@ -6,6 +6,7 @@ import {
   XAxis,
   YAxis,
   Tooltip,
+  Dot,
 } from "recharts";
 import { IHistoryData } from "../../interfaces/IHistoryData";
 import moment from "moment-timezone";
@@ -33,7 +34,8 @@ const Chart: FC<IChartProps> = ({ data }) => {
                 .utc(dataPoint.timeStamp)
                 .tz(selectedDisplayTimezone)
                 .format("YYYY-MM-DD HH:mm:ss"),
-              responseTime: dataPoint.responseTime,
+              responseTime: dataPoint.status ? dataPoint.responseTime : 0,
+              status: dataPoint.status,
             }))
             .reverse()
         );
@@ -49,9 +51,13 @@ const Chart: FC<IChartProps> = ({ data }) => {
     };
   }, [data, selectedDisplayTimezone]);
 
-  const formatTooltip = (value: any, name: any, _: any) => {
+  const formatTooltip = (value: any, name: any, props: any) => {
     if (name === "responseTime") {
-      return [value + " ms"];
+      return [
+        props.payload.status ? 
+          `${value} ms` : 
+          <span style={{ color: '#ff0000' }}>Failed</span>
+      ];
     }
     return [name, value];
   };
@@ -60,10 +66,25 @@ const Chart: FC<IChartProps> = ({ data }) => {
     return moment(tick).format("HH:mm");
   };
 
+  // Custom dot component to show different colors based on status
+  const CustomDot = (props: any) => {
+    const { cx, cy, payload } = props;
+    return (
+      <Dot
+        cx={cx}
+        cy={cy}
+        r={4}
+        fill={payload.status ? "#26c6da" : "#ff0000"}
+        stroke={payload.status ? "#26c6da" : "#ff0000"}
+      />
+    );
+  };
+
   const placeholderData = Array.from({ length: 60 })
     .map((_, index) => ({
       name: moment().subtract(index, "minutes").format("YYYY-MM-DD HH:mm:ss"),
       responseTime: 0,
+      status: true,
     }))
     .reverse();
 
@@ -86,7 +107,8 @@ const Chart: FC<IChartProps> = ({ data }) => {
           dataKey="responseTime"
           stroke={chartData.length > 0 ? "#26c6da" : "transparent"}
           strokeWidth={3}
-          dot={chartData.length > 0 ? true : false}
+          dot={chartData.length > 0 ? CustomDot : false}
+          connectNulls
         />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
         <XAxis
@@ -101,6 +123,7 @@ const Chart: FC<IChartProps> = ({ data }) => {
             formatter={formatTooltip}
             contentStyle={{ backgroundColor: "rgba(255,255,255,0.8)" }}
             labelStyle={{ color: "black" }}
+            allowEscapeViewBox={{ x: false, y: true }}
           />
         )}
       </LineChart>

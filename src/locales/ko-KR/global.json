@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "비밀번호를 다시 입력하세요",
     "thePasswordsDoNotMatch": "비밀번호가 일치하지 않습니다",
     "passwordHasBeenUpdatedSuccessfully": "비밀번호가 성공적으로 업데이트되었습니다"
+  },
+  "monitorCharts": {
+    "text": "차트",
+    "uptime": "가동 시간",
+    "downtime": "중단 시간",
+    "allGroups": "모든 그룹",
+    "group": "그룹"
   }
 }

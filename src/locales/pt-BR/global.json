@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "Por favor, repita a senha",
     "thePasswordsDoNotMatch": "As senhas não coincidem",
     "passwordHasBeenUpdatedSuccessfully": "A senha foi atualizada com sucesso"
+  },
+  "monitorCharts": {
+    "text": "Gráficos",
+    "uptime": "Tempo ativo",
+    "downtime": "Tempo inativo",
+    "allGroups": "Todos os grupos",
+    "group": "Grupo"
   }
 }

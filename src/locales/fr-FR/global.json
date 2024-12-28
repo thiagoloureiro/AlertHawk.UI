@@ -269,5 +269,12 @@
     "pleaseRepeatThePassword": "Veuillez répéter le mot de passe",
     "thePasswordsDoNotMatch": "Les mots de passe ne correspondent pas",
     "passwordHasBeenUpdatedSuccessfully": "Le mot de passe a été mis à jour avec succès"
+  },
+  "monitorCharts": {
+    "text": "Graphiques",
+    "uptime": "Disponibilité",
+    "downtime": "Indisponibilité",
+    "allGroups": "Tous les groupes",
+    "group": "Groupe"
   }
 }
