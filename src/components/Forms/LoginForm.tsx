@@ -104,7 +104,7 @@ const LoginForm: FC<IFormProps> = ({ description }) => {
             control={control}
             defaultValue=""
             rules={{
-              required: "Username is required",
+              required: "E-mail is required",
               minLength: {
                 value: 3,
                 message: "Username must be at least 6 characters",
@@ -114,7 +114,7 @@ const LoginForm: FC<IFormProps> = ({ description }) => {
               <TextField
                 {...field}
                 fullWidth
-                label="Username"
+                label="E-mail"
                 margin="normal"
                 variant="outlined"
                 autoFocus

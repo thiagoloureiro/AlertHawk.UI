@@ -60,19 +60,36 @@ const RegisterForm: FC<{}> = () => {
           Create an account
         </Typography>
         <Box sx={{ display: "flex", flexDirection: "column" }}>
-          <TextField
-            {...register("username", {
-              required: "Username is required",
-              minLength: {
-                value: 3,
-                message: "Username must be at least 3 characters",
+        <TextField
+            {...register("userEmail", {
+              required: "Email is required",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "Please enter a valid email",
               },
             })}
             fullWidth
-            label="Username"
+            label="E-mail address"
             margin="normal"
             variant="outlined"
             autoFocus
+            autoComplete="off"
+            error={!!errors.userEmail}
+            helperText={errors.userEmail ? errors.userEmail.message : null}
+            sx={{ mb: 0 }}
+          />  
+          <TextField
+            {...register("username", {
+              required: "Name is required",
+              minLength: {
+                value: 3,
+                message: "Name must be at least 3 characters",
+              },
+            })}
+            fullWidth
+            label="Name"
+            margin="normal"
+            variant="outlined"
             autoComplete="off"
             error={!!errors.username}
             helperText={errors.username ? errors.username.message : null}
@@ -117,23 +134,7 @@ const RegisterForm: FC<{}> = () => {
             sx={{ mb: 0 }}
           />
 
-          <TextField
-            {...register("userEmail", {
-              required: "Email is required",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Please enter a valid email",
-              },
-            })}
-            fullWidth
-            label="E-mail address"
-            margin="normal"
-            variant="outlined"
-            autoComplete="off"
-            error={!!errors.userEmail}
-            helperText={errors.userEmail ? errors.userEmail.message : null}
-            sx={{ mb: 0 }}
-          />
+     
         </Box>
 
         <Button
