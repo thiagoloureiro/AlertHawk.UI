@@ -148,9 +148,7 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register, headers,
                     marginTop: "16px",
                 }}
             >
-                <Button onClick={handleAddHeader} variant="contained">
-                    {t("notifications.addHeaders")}
-                </Button>
+        
             </Box>
             <Box
                 sx={{
