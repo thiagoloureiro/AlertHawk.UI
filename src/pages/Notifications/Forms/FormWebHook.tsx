@@ -1,8 +1,6 @@
 import React from 'react';
 import { useTranslation } from "react-i18next";
-import { DeleteForever } from '@mui/icons-material';
-import { showSnackbar } from '../../../utils/snackbarHelper';
-import { Box, Button, FormControl, TextField } from '@mui/material';
+import { Box,FormControl, TextField } from '@mui/material';
 interface IFormTelegramProps {
     register: any;
     errors: any;
@@ -12,22 +10,7 @@ interface IFormTelegramProps {
 
 const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register, headers, setHeaders }) => {
     const { t } = useTranslation("global");
-    const handleAddHeader = () => {
-        const lastHeader = headers[headers.length - 1];
-        if (
-            !lastHeader ||
-            (lastHeader.name.trim() !== "" && lastHeader.value.trim() !== "")
-        ) {
-            setHeaders([...headers, { name: "", value: "" }]);
-        } else {
-            showSnackbar(t("notifications.fillThePreviusHeader"), "error");
-        }
-    };
-    const handleRemoveHeader = (index: number) => {
-        const updatedHeaders = [...headers];
-        updatedHeaders.splice(index, 1);
-        setHeaders(updatedHeaders);
-    };
+
 
     return (
         <>
@@ -201,15 +184,7 @@ const FormTelegram: React.FC<IFormTelegramProps> = ({ errors, register, headers,
                                         display: "flex",
                                         minWidth: "20%",
                                     }}
-                                >
-                                    <Button
-                                        variant="contained"
-                                        sx={{ width: "100%" }}
-                                        color="error"
-                                        onClick={() => handleRemoveHeader(index)}
-                                    >
-                                        <DeleteForever />
-                                    </Button>
+                                >             
                                 </Box>
                             </Box>
                         ))}
