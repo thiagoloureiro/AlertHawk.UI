@@ -10,6 +10,7 @@ import Notifications from "../pages/Notifications/Notifications";
 import Admin from "../pages/Admin/Admin";
 import MonitorCharts from "../pages/MonitorCharts/MonitorCharts";
 import MonitorChartsList from "../pages/MonitorCharts/MonitorChartsList";
+import DeleteAccount from "../pages/DeleteAccount/DeleteAccount";
 
 const appRoutes: IRoute[] = [
   {
@@ -97,6 +98,14 @@ const appRoutes: IRoute[] = [
     element: (
       <ProtectedRoute>
         <MonitorCharts />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/delete-account",
+    element: (
+      <ProtectedRoute>
+        <DeleteAccount />
       </ProtectedRoute>
     ),
   },
