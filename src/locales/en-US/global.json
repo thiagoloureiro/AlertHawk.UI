@@ -278,5 +278,13 @@
     "downtime": "Downtime",
     "allGroups": "All Groups",
     "group": "Group"
+  },
+  "deleteAccount": {
+    "title": "Delete Account",
+    "info": "This action is irreversible and all your data will be deleted.",
+    "email": "Email Address",
+    "deleteButton": "Delete My Account",
+    "successMessage": "Your account has been successfully deleted.",
+    "errorMessage": "There was an error deleting your account. Please try again."
   }
 }
