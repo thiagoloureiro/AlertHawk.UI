@@ -30,7 +30,7 @@ const DeleteAccount: React.FC = () => {
       setMessage(t('deleteAccount.successMessage'));
       // Log out the user
       localStorage.removeItem('jwtToken');
-      navigate('/login'); // Redirect to login or home page
+      navigate('/'); // Redirect to login or home page
     } catch (error) {
       setMessage(t('deleteAccount.errorMessage'));
       console.error('Error deleting account:', error);
