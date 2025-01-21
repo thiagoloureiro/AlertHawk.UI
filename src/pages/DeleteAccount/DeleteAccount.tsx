@@ -10,7 +10,7 @@ const DeleteAccount: React.FC = () => {
   const [message, setMessage] = useState('');
 
   const handleDeleteAccount = async () => {
-    const apiUrl = `${import.meta.env.VITE_APP_AUTH_API_URL}/user/`;
+    const apiUrl = `${import.meta.env.VITE_APP_AUTH_API_URL}/user/delete`;
     const jwtToken = localStorage.getItem('jwtToken');
 
     try {
