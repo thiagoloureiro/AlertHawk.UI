@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Button, Typography } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,13 @@ const DeleteAccount: React.FC = () => {
   const { t } = useTranslation('global');
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    const jwtToken = localStorage.getItem('jwtToken');
+    if (!jwtToken) {
+      navigate('/'); // Redirect to login if not authenticated
+    }
+  }, [navigate]);
 
   const handleDeleteAccount = async () => {
     const apiUrl = `${import.meta.env.VITE_APP_AUTH_API_URL}/user/delete`;
@@ -21,7 +28,7 @@ const DeleteAccount: React.FC = () => {
         },
       });
       setMessage(t('deleteAccount.successMessage'));
-      // Log out the user (you can implement your logout logic here)
+      // Log out the user
       localStorage.removeItem('jwtToken');
       navigate('/login'); // Redirect to login or home page
     } catch (error) {

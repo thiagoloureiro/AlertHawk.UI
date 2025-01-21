@@ -103,11 +103,7 @@ const appRoutes: IRoute[] = [
   },
   {
     path: "/delete-account",
-    element: (
-      <ProtectedRoute>
-        <DeleteAccount />
-      </ProtectedRoute>
-    ),
+    element: <DeleteAccount />,
   },
 ];
 
