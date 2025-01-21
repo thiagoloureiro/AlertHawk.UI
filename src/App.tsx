@@ -13,6 +13,7 @@ import Register from "./pages/Register/Register";
 import NotFound from "./pages/NotFound/NotFound";
 import useCustomIsAuthenticated from "./hooks/useCustomIsAuthenticated";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import DeleteAccount from "./pages/DeleteAccount/DeleteAccount";
 
 function AuthenticatedTemplate({
   children,
@@ -90,6 +91,7 @@ const App: FC<{}> = () => {
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/delete-account" element={<DeleteAccount />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </UnauthenticatedTemplate>
