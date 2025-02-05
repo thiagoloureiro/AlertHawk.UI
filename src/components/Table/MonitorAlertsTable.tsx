@@ -81,6 +81,12 @@ const MonitorAlertsTable: FC<IMonitorAlertsTableTableProps> = ({
       label: t("monitorAlerts.message"),
       sortable: true,
       width: "20%",
+    },
+    {
+      id: "monitorPeriodOffline",
+      label: t("monitorAlerts.periodOffline"),
+      sortable: true,
+      width: "20%",
     }
   ];
 

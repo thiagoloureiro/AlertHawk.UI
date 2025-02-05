@@ -106,6 +106,31 @@ const MonitorAlertsTableRow: FC<IMonitorAlertsTableRowProps> = ({
         <TableCell
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+                justifyContent: "center",
+                gap: 1,
+              }}
+            >
+           <Typography variant="body1" fontWeight={500}>
+              {`${Math.floor(monitorAlert.periodOffline / 60)
+                .toString()
+                .padStart(2, '0')}:${(monitorAlert.periodOffline % 60)
+                .toString()
+                .padStart(2, '0')}`}m
+            </Typography>
+
+              
+            </Box>
+          </Box>
+        </TableCell>
+        <TableCell
+        >
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <Box
               sx={{
                 display: "flex",
