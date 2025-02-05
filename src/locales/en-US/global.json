@@ -165,7 +165,8 @@
     "monitorName": "Monitor Name",
     "message": "Message",
     "screenshot": "Screenshot",
-    "export": "Export"
+    "export": "Export",
+    "periodOffline": "Offline period"
   },
   "monitorGroups": {
     "name": "Name",
