@@ -35,7 +35,7 @@
     "react-hook-form": "^7.54.1",
     "react-i18next": "^15.2.0",
     "react-input-mask": "^2.0.4",
-    "react-router-dom": "^7.0.2",
+    "react-router-dom": "^7.1.3",
     "react-spinners": "^0.15.0",
     "recharts": "^2.15.0"
   },
