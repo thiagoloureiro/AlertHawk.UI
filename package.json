@@ -8,11 +8,6 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
-  "overrides": {
-      "@azure/msal-react": {
-          "react": "^16.8.0 || ^17 || ^18 || ^19"
-      }
-  },
   "dependencies": {
     "@azure/msal-browser": "^4.2.0",
     "@azure/msal-react": "^3.0.4",
@@ -34,8 +29,8 @@
     "moment-timezone": "^0.5.47",
     "notistack": "^3.0.2",
     "path": "^0.12.7",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
     "react-hook-form": "^7.54.2",
     "react-i18next": "^15.4.0",
@@ -46,8 +41,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^9.4.0",
-    "@types/react": "^19.0.8",
-    "@types/react-dom": "^19.0.3",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@types/react-input-mask": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "^8.23.0",
     "@typescript-eslint/parser": "^8.23.0",
